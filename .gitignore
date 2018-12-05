@@ -1,0 +1,10 @@
+bin
+obj
+/packages
+Debug
+Release
+*.suo
+*.orig
+*.user
+/.vs
+*.nupkg
