@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:shapes="clr-namespace:Oxard.XControls.Shapes;assembly=Oxard.XControls"
+    xmlns:graphics="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls"
+    x:Class="Oxard.TestApp.Views.ShapeView">
+
+    <Grid>
+        <shapes:Rectangle
+            Margin="10"
+            Stroke="Black"
+            StrokeThickness="2"
+            Fill="{x:Static graphics:Brushes.Aqua}"/>
+    </Grid>
+</ContentView>
