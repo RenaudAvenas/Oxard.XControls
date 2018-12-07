@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
+    xmlns:graphics="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls"
+    xmlns:shapes="clr-namespace:Oxard.XControls.Shapes;assembly=Oxard.XControls"
+    x:Class="Oxard.TestApp.Views.ContentControlView">
+    <ContentView.Resources>
+        <Style
+            TargetType="components:ContentControl">
+            <Setter
+                Property="Background"
+                Value="{x:Static graphics:Brushes.AliceBlue}" />
+            <Setter
+                Property="BorderThickness"
+                Value="1" />
+            <Setter
+                Property="BorderColor"
+                Value="Black" />
+            <Setter
+                Property="ControlTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid>
+                            <shapes:Rectangle
+                                Fill="{TemplateBinding Background}"
+                                StrokeThickness="{TemplateBinding BorderThickness}"
+                                Stroke="{TemplateBinding BorderColor}" />
+                            <ContentPresenter
+                                HorizontalOptions="{TemplateBinding HorizontalContentOptions}"
+                                VerticalOptions="{TemplateBinding VerticalContentOptions}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ContentView.Resources>
+
+    <components:ContentControl
+        HorizontalContentOptions="Center"
+        VerticalContentOptions="Center">
+        <Label
+            Text="Test" />
+    </components:ContentControl>
+</ContentView>
