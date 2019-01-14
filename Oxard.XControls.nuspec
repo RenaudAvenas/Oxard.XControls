@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Oxard.XControls</id>
+    <version>1.0.0.0</version>
+    <authors>Renaud AVENAS</authors>
+    <owners>Renaud AVENAS</owners>
+    <projectUrl>https://github.com/RenaudAvenas/Oxard.XControls</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Xamarin forms extendable and customizable controls</description>
+    <releaseNotes>Adding brushes, shapes framework, and content control</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>Xamarin Forms controls</tags>
+    <dependencies>
+      <dependency id="Xamarin.Forms" version="3.1.0.697729" />
+    </dependencies>
+  </metadata>
+  <files>
+	<file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="lib\netstandard2"/>
+	
+	<file src="Oxard.XControls.Android\bin\Release\Oxard.XControls.Android.dll" target="lib\MonoAndroid81"/>
+	<file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="lib\MonoAndroid81"/>
+	
+	<file src="Oxard.XControls.UWP\bin\x86\Release\Oxard.XControls.UWP.dll" target="runtimes\win10-x86\lib\uap10.0"/>
+	<file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="runtimes\win10-x86\lib\uap10.0"/>
+	<file src="Oxard.XControls.UWP\bin\x64\Release\Oxard.XControls.UWP.dll" target="runtimes\win10-x64\lib\uap10.0"/>
+	<file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="runtimes\win10-x64\lib\uap10.0"/>
+	<file src="Oxard.XControls.UWP\bin\ARM\Release\Oxard.XControls.UWP.dll" target="runtimes\win10-arm\lib\uap10.0"/>
+	<file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="runtimes\win10-arm\lib\uap10.0"/>
+  </files>
+</package>

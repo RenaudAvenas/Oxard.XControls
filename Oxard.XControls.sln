@@ -32,6 +32,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReadMe", "ReadMe", "{79F5EC
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{9BAD7EF2-8CA1-4FA4-881F-752213611CAC}"
+	ProjectSection(SolutionItems) = preProject
+		generateNugetPackage.bat = generateNugetPackage.bat
+		Oxard.XControls.nuspec = Oxard.XControls.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
