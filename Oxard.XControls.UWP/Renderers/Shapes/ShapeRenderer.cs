@@ -101,7 +101,7 @@ namespace Oxard.XControls.UWP.Renderers.Shapes
             var reader = source.Geometry.GetReader();
 
             var geometry = new PathGeometry();
-            var figure = new PathFigure { IsFilled = true, IsClosed = true, StartPoint = reader.FromPoint.ToPoint() };
+            var figure = new PathFigure { IsClosed = true, StartPoint = reader.FromPoint.ToPoint() };
 
             var segment = reader.GetNext();
             while (segment != null)

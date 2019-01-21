@@ -7,10 +7,14 @@
     x:Class="Oxard.TestApp.Views.ShapeView">
 
     <Grid>
+        <BoxView
+            Margin="10"
+            BackgroundColor="CornflowerBlue"/>
         <shapes:Rectangle
+            CornerRadius="20"
             Margin="10"
             Stroke="Black"
-            StrokeThickness="2"
+            StrokeThickness="4"
             Fill="{x:Static graphics:Brushes.Aqua}"/>
     </Grid>
 </ContentView>

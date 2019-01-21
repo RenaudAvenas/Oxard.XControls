@@ -5,13 +5,16 @@ namespace Oxard.XControls.Shapes
 {
     public class Rectangle : Shape
     {
-        public static readonly BindableProperty TopLeftCornerRadiusProperty = BindableProperty.Create(nameof(TopLeftCornerRadius), typeof(CornerRadius), typeof(Rectangle), null);
-        public static readonly BindableProperty TopRightCornerRadiusProperty = BindableProperty.Create(nameof(TopRightCornerRadius), typeof(CornerRadius), typeof(Rectangle), null);
-        public static readonly BindableProperty BottomRightCornerRadiusProperty = BindableProperty.Create(nameof(BottomRightCornerRadius), typeof(CornerRadius), typeof(Rectangle), null);
-        public static readonly BindableProperty BottomLeftCornerRadiusProperty = BindableProperty.Create(nameof(BottomLeftCornerRadius), typeof(CornerRadius), typeof(Rectangle), null);
-        public static readonly BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(string), typeof(Rectangle), null, propertyChanged: CornerRadiusPropertyChanged);
+        public static readonly BindableProperty TopLeftCornerRadiusProperty = BindableProperty.Create(nameof(TopLeftCornerRadius), typeof(CornerRadius), typeof(Rectangle), propertyChanged: SpecificCornerRadiusPropertyChanged);
+        public static readonly BindableProperty TopRightCornerRadiusProperty = BindableProperty.Create(nameof(TopRightCornerRadius), typeof(CornerRadius), typeof(Rectangle), propertyChanged: SpecificCornerRadiusPropertyChanged);
+        public static readonly BindableProperty BottomRightCornerRadiusProperty = BindableProperty.Create(nameof(BottomRightCornerRadius), typeof(CornerRadius), typeof(Rectangle), propertyChanged: SpecificCornerRadiusPropertyChanged);
+        public static readonly BindableProperty BottomLeftCornerRadiusProperty = BindableProperty.Create(nameof(BottomLeftCornerRadius), typeof(CornerRadius), typeof(Rectangle), propertyChanged: SpecificCornerRadiusPropertyChanged);
+        public static readonly BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(string), typeof(Rectangle), propertyChanged: CornerRadiusPropertyChanged);
 
         private Geometry actualGeometry;
+        // Used for opimization when using CornerRadiusProperty
+        private bool calculationInProgress;
+        private bool isLoaded;
 
         public CornerRadius TopLeftCornerRadius
         {
@@ -47,16 +50,21 @@ namespace Oxard.XControls.Shapes
 
         protected override void OnSizeAllocated(double width, double height)
         {
+            this.isLoaded = true;
             this.CalculateGeometry();
         }
 
         private void CalculateGeometry()
         {
-            var geometry = new Geometry();
+            if (calculationInProgress || !this.isLoaded)
+                return;
+
+            var geometry = new Geometry(this.Width, this.Height, this.StrokeThickness);
 
             if (this.TopLeftCornerRadius != null)
             {
-                geometry.StartAt(new Point(0, this.TopLeftCornerRadius.RadiusY))
+                geometry
+                    .StartAt(new Point(0, this.TopLeftCornerRadius.RadiusY))
                     .CornerTo(new Point(this.TopLeftCornerRadius.RadiusX, 0), SweepDirection.Clockwise);
             }
             else
@@ -64,7 +72,8 @@ namespace Oxard.XControls.Shapes
 
             if (this.TopRightCornerRadius != null)
             {
-                geometry.LineTo(new Point(this.Width - this.TopRightCornerRadius.RadiusX, 0))
+                geometry
+                    .LineTo(new Point(this.Width - this.TopRightCornerRadius.RadiusX, 0))
                     .CornerTo(new Point(this.Width, this.TopRightCornerRadius.RadiusY), SweepDirection.Clockwise);
             }
             else
@@ -72,7 +81,8 @@ namespace Oxard.XControls.Shapes
 
             if (this.BottomRightCornerRadius != null)
             {
-                geometry.LineTo(new Point(this.Width, this.Height - this.BottomRightCornerRadius.RadiusY))
+                geometry
+                    .LineTo(new Point(this.Width, this.Height - this.BottomRightCornerRadius.RadiusY))
                     .CornerTo(new Point(this.Width - this.BottomRightCornerRadius.RadiusX, this.Height), SweepDirection.Clockwise);
             }
             else
@@ -80,15 +90,23 @@ namespace Oxard.XControls.Shapes
 
             if (this.BottomLeftCornerRadius != null)
             {
-                geometry.LineTo(new Point(this.BottomLeftCornerRadius.RadiusX, this.Height))
+                geometry
+                    .LineTo(new Point(this.BottomLeftCornerRadius.RadiusX, this.Height))
                     .CornerTo(new Point(0, this.Height - this.BottomLeftCornerRadius.RadiusY), SweepDirection.Clockwise);
             }
             else
                 geometry.LineTo(0, this.Height);
 
             geometry.ClosePath();
+
             this.actualGeometry = geometry;
             this.InvalidateGeometry();
+        }
+
+        private static void SpecificCornerRadiusPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            Rectangle rect = bindable as Rectangle;
+            rect?.SpecificCornerRadiusChanged();
         }
 
         private static void CornerRadiusPropertyChanged(BindableObject bindable, object oldValue, object newValue)
@@ -100,10 +118,21 @@ namespace Oxard.XControls.Shapes
         private void CornerRadiusChanged()
         {
             var expression = new CornerRadiusExpression(this.CornerRadius);
+            calculationInProgress = true;
+
             this.TopLeftCornerRadius = expression.TopLeft;
             this.TopRightCornerRadius = expression.TopRight;
             this.BottomLeftCornerRadius = expression.BottomLeft;
             this.BottomRightCornerRadius = expression.BottomRight;
+
+            calculationInProgress = false;
+
+            this.CalculateGeometry();
+        }
+
+        private void SpecificCornerRadiusChanged()
+        {
+            this.CalculateGeometry();
         }
     }
 }

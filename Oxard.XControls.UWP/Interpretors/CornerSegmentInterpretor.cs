@@ -12,8 +12,8 @@ namespace Oxard.XControls.UWP.Interpretors
         public PathSegment ToNativeSegment(GeometrySegment segment, Point fromPoint)
         {
             var cornerSegment = (CornerSegment)segment;
-            var rx = Math.Abs(segment.EndPoint.X - fromPoint.X) / 2d;
-            var ry = Math.Abs(segment.EndPoint.Y - fromPoint.Y) / 2d;
+            var rx = Math.Abs(segment.EndPoint.X - fromPoint.X);
+            var ry = Math.Abs(segment.EndPoint.Y - fromPoint.Y);
 
             if (rx.DoubleIsEquals(0) || ry.DoubleIsEquals(0))
                 return new Windows.UI.Xaml.Media.LineSegment { Point = segment.EndPoint.ToPoint() };
