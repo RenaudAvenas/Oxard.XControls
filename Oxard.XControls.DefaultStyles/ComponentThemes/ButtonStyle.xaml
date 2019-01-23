@@ -1,0 +1,44 @@
+﻿<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
+    xmlns:shapes="clr-namespace:Oxard.XControls.Shapes;assembly=Oxard.XControls"
+    xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes"
+    x:Class="Oxard.XControls.DefaultStyles.ComponentThemes.ButtonStyle">
+    <ResourceDictionary.MergedDictionaries>
+        <componentthemes:Colors />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <Style
+        x:Key="ButtonDefaultStyle"
+        TargetType="components:Button">
+        <Style.Triggers>
+            <Trigger
+                TargetType="components:Button"
+                Property="IsPressed"
+                Value="True">
+                <Setter
+                    Property="Background"
+                    Value="{StaticResource ButtonPressedBackgroundBrush}" />
+            </Trigger>
+        </Style.Triggers>
+        <Setter
+            Property="Background"
+            Value="{StaticResource ButtonBackgroundBrush}" />
+        <Setter Property="ControlTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <shapes:Rectangle
+                            CornerRadius="2"
+                            Fill="{TemplateBinding Background}" />
+                        <ContentPresenter
+                            Margin="10,5"
+                            VerticalOptions="{TemplateBinding VerticalContentOptions}"
+                            HorizontalOptions="{TemplateBinding HorizontalContentOptions}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

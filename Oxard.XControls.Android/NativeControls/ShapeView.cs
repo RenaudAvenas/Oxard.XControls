@@ -39,7 +39,7 @@ namespace Oxard.XControls.Droid.NativeControls
 
             var path = this.GetPath(width, height);
 
-            if (!this.Source.Fill.Equals(Brushes.Transparent))
+            if (this.Source.Fill != null && !this.Source.Fill.Equals(Brushes.Transparent))
             {
                 ShapeDrawable drawable = new ShapeDrawable(new PathShape(path, width, height));
                 this.Source.Fill.ToBackground(drawable.Paint, width, height);
