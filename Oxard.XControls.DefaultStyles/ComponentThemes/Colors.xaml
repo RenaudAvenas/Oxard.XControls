@@ -5,15 +5,20 @@
     xmlns:graphics="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls"
     x:Class="Oxard.XControls.DefaultStyles.ComponentThemes.Colors">
     
-    <graphics:SolidColorBrush
-        x:Key="ButtonBackgroundBrush"
-        Color="#686868" />
-
-    <graphics:SolidColorBrush
-        x:Key="ButtonPressedBackgroundBrush"
-        Color="#9E9E9E" />
 
     <Color
         x:Key="ContentBackgroundColor">#1E1E1E</Color>
+    <Color
+        x:Key="ButtonBackgroundColor">#686868</Color>
+    <Color
+        x:Key="ButtonPressedBackgroundColor">#9E9E9E</Color>
+    
+    <graphics:SolidColorBrush
+        x:Key="ButtonBackgroundBrush"
+        Color="{StaticResource ButtonBackgroundColor}" />
+
+    <graphics:SolidColorBrush
+        x:Key="ButtonPressedBackgroundBrush"
+        Color="{StaticResource ButtonPressedBackgroundColor}" />
 
 </ResourceDictionary>

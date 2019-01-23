@@ -11,6 +11,9 @@ This is a way to control touches on a control without gesture but directly via t
 - Button
 
 You can now have customizable buttons which inherits from ContentControl. Button is a good example of how to use TouchManager
+- CheckBox
+
+This control has been added in this version
 
 ## v1.0.0.0
 - Basics

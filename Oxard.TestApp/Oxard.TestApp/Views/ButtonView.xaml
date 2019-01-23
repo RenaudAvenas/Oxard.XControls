@@ -5,7 +5,6 @@
     xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
     xmlns:components="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
     xmlns:defaultstyles="clr-namespace:Oxard.XControls.DefaultStyles;assembly=Oxard.XControls.DefaultStyles"
-    xmlns:graphics="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls"
     BackgroundColor="{StaticResource Key={x:Static defaultstyles:ColorKeys.ContentBackgroundColor}}"
     x:Class="Oxard.TestApp.Views.ButtonView">
     <ContentView.Resources>
@@ -13,15 +12,71 @@
             <ResourceDictionary.MergedDictionaries>
                 <componentthemes:Colors />
                 <componentthemes:ButtonStyle />
+                <componentthemes:CheckBoxStyle />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <components:Button
-        Style="{StaticResource ButtonDefaultStyle}"
-        VerticalOptions="Center"
-        HorizontalOptions="Center">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
         <Label
-            Text="Click me!" />
-    </components:Button>
+            VerticalOptions="Center"
+            HorizontalOptions="End"
+            TextColor="White"
+            Text="Button :" />
+        <components:Button
+            Grid.Column="1"
+            Style="{StaticResource ButtonDefaultStyle}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
+            <Label
+                TextColor="White"
+                Text="Click me!" />
+        </components:Button>
+
+        <Label
+            VerticalOptions="Center"
+            TextColor="White"
+            Grid.Row="1"
+            Text="CheckBox :"
+            HorizontalOptions="End" />
+        <StackLayout
+            HorizontalOptions="Center"
+            Grid.Row="1"
+            Grid.Column="1"
+            Spacing="30"
+            Orientation="Horizontal">
+            <components:CheckBox
+                Grid.Column="1"
+                Style="{StaticResource CheckBoxDefaultStyle}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <Label
+                    TextColor="White"
+                    Text="Check me!" />
+            </components:CheckBox>
+            <components:CheckBox
+                Grid.Column="1"
+                Style="{StaticResource CheckBoxDefaultStyle}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <Label
+                    TextColor="White"
+                    Text="Check me!" />
+            </components:CheckBox>
+        </StackLayout>
+    </Grid>
 </ContentView>

@@ -1,0 +1,59 @@
+﻿<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
+    xmlns:shapes="clr-namespace:Oxard.XControls.Shapes;assembly=Oxard.XControls"
+    xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes"
+    x:Class="Oxard.XControls.DefaultStyles.ComponentThemes.CheckBoxStyle">
+    <ResourceDictionary.MergedDictionaries>
+        <componentthemes:Colors />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <Style
+        x:Key="CheckBoxDefaultStyle"
+        TargetType="components:CheckBox">
+        <Style.Triggers>
+            <Trigger
+                TargetType="components:CheckBox"
+                Property="IsChecked"
+                Value="True">
+                <Setter
+                    Property="Background"
+                    Value="{StaticResource ButtonPressedBackgroundBrush}" />
+                <Setter
+                    Property="BorderColor"
+                    Value="{StaticResource ButtonPressedBackgroundColor}" />
+            </Trigger>
+        </Style.Triggers>
+        <Setter
+            Property="BorderThickness"
+            Value="1" />
+        <Setter
+            Property="BorderColor"
+            Value="{StaticResource ButtonBackgroundColor}" />
+        <Setter
+            Property="HorizontalContentOptions"
+            Value="Start" />
+        <Setter Property="ControlTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackLayout
+                        Orientation="Horizontal"
+                        Spacing="10">
+                        <shapes:Rectangle
+                            HeightRequest="20"
+                            WidthRequest="20"
+                            VerticalOptions="Center"
+                            CornerRadius="2"
+                            Stroke="{TemplateBinding BorderColor}"
+                            StrokeThickness="{TemplateBinding BorderThickness}"
+                            Fill="{TemplateBinding Background}" />
+                        <ContentPresenter
+                            VerticalOptions="{TemplateBinding VerticalContentOptions}"
+                            HorizontalOptions="{TemplateBinding HorizontalContentOptions}" />
+                    </StackLayout>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

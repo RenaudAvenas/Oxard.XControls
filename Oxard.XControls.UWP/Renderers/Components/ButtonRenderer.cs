@@ -1,9 +1,9 @@
 ﻿using Oxard.XControls.Components;
 using Oxard.XControls.UWP.Events;
-using System.ComponentModel;
 using Xamarin.Forms.Platform.UWP;
 
 [assembly: ExportRenderer(typeof(Button), typeof(Oxard.XControls.UWP.Renderers.Components.ButtonRenderer))]
+[assembly: ExportRenderer(typeof(CheckBox), typeof(Oxard.XControls.UWP.Renderers.Components.ButtonRenderer))]
 
 namespace Oxard.XControls.UWP.Renderers.Components
 {

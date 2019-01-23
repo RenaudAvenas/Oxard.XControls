@@ -1,11 +1,13 @@
 ﻿using Android.Content;
 using Android.Views;
+using Oxard.XControls.Components;
 using Oxard.XControls.Droid.Events;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Button = Oxard.XControls.Components.Button;
 
 [assembly: ExportRenderer(typeof(Button), typeof(Oxard.XControls.Droid.Renderers.Components.ButtonRenderer))]
+[assembly: ExportRenderer(typeof(CheckBox), typeof(Oxard.XControls.Droid.Renderers.Components.ButtonRenderer))]
 
 namespace Oxard.XControls.Droid.Renderers.Components
 {
