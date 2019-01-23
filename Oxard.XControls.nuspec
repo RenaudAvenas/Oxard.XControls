@@ -11,6 +11,7 @@
     <releaseNotes>Adding brushes, shapes framework, and content control</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>Xamarin Forms controls</tags>
+	<license type="expression">GPL-3.0-only</license>
     <dependencies>
       <dependency id="Xamarin.Forms" version="3.1.0.697729" />
     </dependencies>

@@ -1,6 +1,8 @@
 # Oxard.XControls
+Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
+
 ## Comming soon
-Nuget package will be generated soon
+Customizable buttons like Button, RadioButton, CheckBox...
 
 ## v1.0.0.0
 - Basics
