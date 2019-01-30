@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(Oxard.XControls.Shapes.Rectangle), typeof(ShapeRenderer))]
+[assembly: ExportRenderer(typeof(Ellipse), typeof(ShapeRenderer))]
 
 namespace Oxard.XControls.Droid.Renderers.Shapes
 {

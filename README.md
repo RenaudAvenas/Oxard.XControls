@@ -3,6 +3,7 @@ Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nu
 
 ## Comming soon
 Customizable buttons like Button, RadioButton, CheckBox...
+Adding Ellipse shape
 
 ## v1.0.1.0
 - Events - TouchManager

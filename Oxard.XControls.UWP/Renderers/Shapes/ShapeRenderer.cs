@@ -11,8 +11,10 @@ using Windows.UI.Xaml.Shapes;
 using Xamarin.Forms.Platform.UWP;
 using Shape = Oxard.XControls.Shapes.Shape;
 using Rectangle = Oxard.XControls.Shapes.Rectangle;
+using Ellipse = Oxard.XControls.Shapes.Ellipse;
 
 [assembly: ExportRenderer(typeof(Rectangle), typeof(ShapeRenderer))]
+[assembly: ExportRenderer(typeof(Ellipse), typeof(ShapeRenderer))]
 
 namespace Oxard.XControls.UWP.Renderers.Shapes
 {

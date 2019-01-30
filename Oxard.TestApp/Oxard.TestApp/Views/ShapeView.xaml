@@ -16,5 +16,13 @@
             Stroke="Black"
             StrokeThickness="4"
             Fill="{x:Static graphics:Brushes.Aqua}"/>
+        <shapes:Ellipse
+            Fill="{x:Static graphics:Brushes.Brown}"
+            Stroke="Beige"
+            StrokeThickness="3"
+            WidthRequest="100"
+            HeightRequest="50"
+            VerticalOptions="Center"
+            HorizontalOptions="Center" />
     </Grid>
 </ContentView>
