@@ -4,8 +4,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:shapes="clr-namespace:Oxard.XControls.Shapes;assembly=Oxard.XControls"
     xmlns:graphics="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls"
+    xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
+    xmlns:defaultstyles="clr-namespace:Oxard.XControls.DefaultStyles;assembly=Oxard.XControls.DefaultStyles"
+    BackgroundColor="{StaticResource Key={x:Static defaultstyles:ColorKeys.ContentBackgroundColor}}"
     x:Class="Oxard.TestApp.Views.ShapeView">
-
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <componentthemes:Colors />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
     <Grid>
         <BoxView
             Margin="10"

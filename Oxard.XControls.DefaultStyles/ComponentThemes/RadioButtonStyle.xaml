@@ -4,17 +4,17 @@
     xmlns:components="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
     xmlns:shapes="clr-namespace:Oxard.XControls.Shapes;assembly=Oxard.XControls"
     xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes"
-    x:Class="Oxard.XControls.DefaultStyles.ComponentThemes.CheckBoxStyle">
+    x:Class="Oxard.XControls.DefaultStyles.ComponentThemes.RadioButtonStyle">
     <ResourceDictionary.MergedDictionaries>
         <componentthemes:Colors />
     </ResourceDictionary.MergedDictionaries>
     
     <Style
-        x:Key="CheckBoxDefaultStyle"
-        TargetType="components:CheckBox">
+        x:Key="RadioButtonDefaultStyle"
+        TargetType="components:RadioButton">
         <Style.Triggers>
             <Trigger
-                TargetType="components:CheckBox"
+                TargetType="components:RadioButton"
                 Property="IsChecked"
                 Value="True">
                 <Setter
@@ -40,11 +40,10 @@
                     <StackLayout
                         Orientation="Horizontal"
                         Spacing="10">
-                        <shapes:Rectangle
+                        <shapes:Ellipse
                             HeightRequest="20"
                             WidthRequest="20"
                             VerticalOptions="Center"
-                            CornerRadius="2"
                             Stroke="{TemplateBinding BorderColor}"
                             StrokeThickness="{TemplateBinding BorderThickness}"
                             Fill="{TemplateBinding Background}" />

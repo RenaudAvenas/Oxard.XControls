@@ -2,19 +2,22 @@
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
 ## Comming soon
-Customizable buttons like Button, RadioButton, CheckBox...
-Adding Ellipse shape
+Next project is to include an ItemsControl
 
 ## v1.0.1.0
 - Events - TouchManager
 
-This is a way to control touches on a control without gesture but directly via touches points.
-- Button
+This is a way to control touches on a control without gesture but directly via touches points (multitouch is not managed yet).
+- Buttons
 
-You can now have customizable buttons which inherits from ContentControl. Button is a good example of how to use TouchManager
-- CheckBox
+You can now have customizable buttons which inherits from ContentControl. Button is a good example of how to use TouchManager.
+CheckBox and RadioButton have been added and inherit from Button class.
+- Shapes
 
-This control has been added in this version
+Ellipse is added.
+- Extensions
+
+Extensions to navigate in Xamarin "VisualTree".
 
 ## v1.0.0.0
 - Basics

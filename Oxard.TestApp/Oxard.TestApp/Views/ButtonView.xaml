@@ -13,12 +13,20 @@
                 <componentthemes:Colors />
                 <componentthemes:ButtonStyle />
                 <componentthemes:CheckBoxStyle />
+                <componentthemes:RadioButtonStyle />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <Grid Margin="10">
+    <Grid
+        RowSpacing="30"
+        ColumnSpacing="30"
+        Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
             <RowDefinition
                 Height="Auto" />
             <RowDefinition
@@ -41,7 +49,7 @@
             Grid.Column="1"
             Style="{StaticResource ButtonDefaultStyle}"
             VerticalOptions="Center"
-            HorizontalOptions="Center">
+            HorizontalOptions="Start">
             <Label
                 TextColor="White"
                 Text="Click me!" />
@@ -54,13 +62,11 @@
             Text="CheckBox :"
             HorizontalOptions="End" />
         <StackLayout
-            HorizontalOptions="Center"
             Grid.Row="1"
             Grid.Column="1"
             Spacing="30"
             Orientation="Horizontal">
             <components:CheckBox
-                Grid.Column="1"
                 Style="{StaticResource CheckBoxDefaultStyle}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center">
@@ -69,7 +75,6 @@
                     Text="Check me!" />
             </components:CheckBox>
             <components:CheckBox
-                Grid.Column="1"
                 Style="{StaticResource CheckBoxDefaultStyle}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center">
@@ -77,6 +82,96 @@
                     TextColor="White"
                     Text="Check me!" />
             </components:CheckBox>
+        </StackLayout>
+
+        <Label
+            VerticalOptions="Center"
+            TextColor="White"
+            Grid.Row="2"
+            WidthRequest="100"
+            Text="RadioButton (without group name) :"
+            HorizontalOptions="End" />
+        <StackLayout
+            Grid.Row="2"
+            Grid.Column="1"
+            Spacing="30"
+            Orientation="Horizontal">
+            <components:RadioButton
+                Style="{StaticResource RadioButtonDefaultStyle}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <Label
+                    TextColor="White"
+                    Text="Choice 1" />
+            </components:RadioButton>
+            <ContentView>
+                <components:RadioButton
+                    Style="{StaticResource RadioButtonDefaultStyle}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center">
+                    <Label
+                        TextColor="White"
+                        Text="Choice 2" />
+                </components:RadioButton>
+            </ContentView>
+        </StackLayout>
+        
+        <Label
+            VerticalOptions="Center"
+            TextColor="White"
+            Grid.Row="3"
+            WidthRequest="100"
+            Text="RadioButton (uncheckable and with group name) :"
+            HorizontalOptions="End" />
+        <StackLayout
+            Grid.Row="3"
+            Grid.Column="1"
+            Spacing="30"
+            Orientation="Horizontal">
+            <StackLayout>
+                <components:RadioButton
+                    IsUncheckable="True"
+                    GroupeName="GroupName"
+                    Style="{StaticResource RadioButtonDefaultStyle}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center">
+                    <Label
+                        TextColor="White"
+                        Text="Choice 1" />
+                </components:RadioButton>
+                <components:RadioButton
+                    GroupeName="GroupName"
+                    IsUncheckable="True"
+                    Style="{StaticResource RadioButtonDefaultStyle}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center">
+                    <Label
+                        TextColor="White"
+                        Text="Choice 2" />
+                </components:RadioButton>
+            </StackLayout>
+            <StackLayout>
+                <components:RadioButton
+                    GroupeName="GroupName"
+                    IsUncheckable="True"
+                    Style="{StaticResource RadioButtonDefaultStyle}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center">
+                    <Label
+                        TextColor="White"
+                        Text="Choice 3" />
+                </components:RadioButton>
+                <components:RadioButton
+                    GroupeName="GroupName"
+                    IsUncheckable="True"
+                    Style="{StaticResource RadioButtonDefaultStyle}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center">
+                    <Label
+                        TextColor="White"
+                        Text="Choice 4" />
+                </components:RadioButton>
+            </StackLayout>
         </StackLayout>
     </Grid>
 </ContentView>
