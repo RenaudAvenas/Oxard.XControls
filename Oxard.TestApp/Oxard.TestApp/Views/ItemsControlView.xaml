@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
+    xmlns:defaultstyles="clr-namespace:Oxard.XControls.DefaultStyles;assembly=Oxard.XControls.DefaultStyles"
+    xmlns:components="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
+    x:Class="Oxard.TestApp.Views.ItemsControlView"
+    BackgroundColor="{StaticResource Key={x:Static defaultstyles:ColorKeys.ContentBackgroundColor}}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <componentthemes:Colors />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <components:ItemsControl
+        ItemsSource="{Binding Path=Source}">
+        <components:ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Label
+                    TextColor="White"
+                    Text="{Binding .}" />
+            </DataTemplate>
+        </components:ItemsControl.ItemTemplate>
+    </components:ItemsControl>
+</ContentView>
