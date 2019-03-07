@@ -15,14 +15,48 @@
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <components:ItemsControl
-        ItemsSource="{Binding Path=Source}">
-        <components:ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <Label
-                    TextColor="White"
-                    Text="{Binding .}" />
-            </DataTemplate>
-        </components:ItemsControl.ItemTemplate>
-    </components:ItemsControl>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition
+                Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <components:ItemsControl
+            ItemsSource="{Binding Path=Source}">
+            <components:ItemsControl.ItemsPanel>
+                <StackLayout
+                    Orientation="Horizontal" />
+            </components:ItemsControl.ItemsPanel>
+            <components:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Label
+                        TextColor="White"
+                        Text="{Binding .}" />
+                </DataTemplate>
+            </components:ItemsControl.ItemTemplate>
+        </components:ItemsControl>
+
+        <StackLayout
+            Spacing="10"
+            Orientation="Horizontal"
+            Grid.Row="1">
+            <Button
+                TextColor="White"
+                Clicked="AddButtonClicked"
+                Text="Add" />
+            <Button
+                TextColor="White"
+                Clicked="InsertButtonClicked"
+                Text="Insert" />
+            <Button
+                TextColor="White"
+                Clicked="RemoveButtonClicked"
+                Text="Remove" />
+            <Button
+                TextColor="White"
+                Clicked="RemoveEndButtonClicked"
+                Text="RemoveEnd" />
+        </StackLayout>
+    </Grid>
 </ContentView>

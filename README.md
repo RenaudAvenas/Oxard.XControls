@@ -2,7 +2,13 @@
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
 ## Comming soon
-Next project is to include an ItemsControl
+Next project is to add a long pressed button.
+
+## v1.0.2.0
+- ItemsControl
+
+This new component allow you to use an items source on a specific panel. All items can be templated by ItemTemplate or ItemTemplateSelector.
+ItemsControl is designed to be extended with possibilities to inherited from IsItemItsOwnContainerOverride and GetContainerForItemOverride.
 
 ## v1.0.1.0
 - Events - TouchManager

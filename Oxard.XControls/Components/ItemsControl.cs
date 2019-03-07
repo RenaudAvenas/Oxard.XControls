@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace Oxard.XControls.Components
@@ -16,10 +18,11 @@ namespace Oxard.XControls.Components
         private bool isLoaded;
         private IList<View> items;
         private Layout<View> itemsPanel;
+        private Dictionary<object, View> generatedItems = new Dictionary<object, View>();
 
         public Layout<View> ItemsPanel
         {
-            get => itemsPanel;
+            get => this.itemsPanel;
             set => this.ChangeLayout(value);
         }
 
@@ -67,24 +70,96 @@ namespace Oxard.XControls.Components
             throw new NotSupportedException("item must be a view");
         }
 
-        protected override void OnSizeAllocated(double width, double height)
+        protected virtual bool IsItemItsOwnContainerOverride(object item) => true;
+
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (!this.isLoaded)
+            if (propertyName == "Renderer")
             {
-                this.isLoaded = true;
-                if (this.ItemsPanel == null)
-                    this.ItemsPanel = new StackLayout();
+                if (!this.isLoaded)
+                {
+                    this.isLoaded = true;
+                    if (this.ItemsPanel == null)
+                        this.ItemsPanel = new StackLayout();
+                    else
+                        this.RecreateAllItems();
+                }
                 else
-                    RecreateAllItems();
+                {
+                    this.isLoaded = false;
+                    this.Unload();
+                }
             }
 
-            base.OnSizeAllocated(width, height);
+            base.OnPropertyChanged(propertyName);
         }
 
-        protected virtual bool IsItemItsOwnContainerOverride(object item) => true;
+        protected virtual void UnloadOverride()
+        {
+        }
 
         private static void ItemsSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
+            (bindable as ItemsControl)?.OnItemsSourceChanged(oldValue as IEnumerable);
+        }
+
+        private void Unload()
+        {
+            if (this.ItemsSource != null && this.ItemsSource is INotifyCollectionChanged notifyCollectionChanged)
+                notifyCollectionChanged.CollectionChanged -= this.ItemsSourceOnCollectionChanged;
+
+            this.UnloadOverride();
+        }
+
+        private void OnItemsSourceChanged(IEnumerable oldItemsSource)
+        {
+            if (oldItemsSource != null && oldItemsSource is INotifyCollectionChanged oldNotifyCollectionChanged)
+                oldNotifyCollectionChanged.CollectionChanged -= this.ItemsSourceOnCollectionChanged;
+
+            if (this.ItemsSource != null && this.ItemsSource is INotifyCollectionChanged notifyCollectionChanged)
+                notifyCollectionChanged.CollectionChanged += this.ItemsSourceOnCollectionChanged;
+
+            if (this.ItemsPanel == null)
+                return;
+
+            this.RecreateAllItems();
+        }
+
+        private void ItemsSourceOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (!this.isLoaded)
+                return;
+
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    int index = e.NewStartingIndex;
+                    bool isToAdd = index < 0 || index >= this.ItemsPanel.Children.Count;
+                    foreach (object item in e.NewItems)
+                    {
+                        if (isToAdd)
+                            this.CreateAndAddItemFor(item);
+                        else
+                        {
+                            this.CreateAndInsertItemFor(item, index);
+                            index++;
+                        }
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    this.RecreateAllItems();
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (object item in e.OldItems)
+                        this.RemoveItemFor(item);
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    this.RecreateAllItems();
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    this.RecreateAllItems();
+                    break;
+            }
         }
 
         private static void ItemTemplatePropertyChanged(BindableObject bindable, object oldValue, object newValue)
@@ -98,7 +173,7 @@ namespace Oxard.XControls.Components
 
         private void ChangeLayout(Layout<View> newLayout)
         {
-            if (!this.isLoaded || newLayout == this.itemsPanel)
+            if (newLayout == this.itemsPanel)
                 return;
 
             this.itemsPanel = newLayout;
@@ -109,18 +184,26 @@ namespace Oxard.XControls.Components
 
         private View GetContainerForItem(object item)
         {
+            if (this.IsItemItsOwnContainer(item))
+            {
+                this.generatedItems[item] = (View)item;
+                return (View)item;
+            }
+
             var templatedView = item;
 
             if (this.ItemTemplateSelector != null)
                 templatedView = this.ItemTemplateSelector.SelectTemplate(item, this).CreateContent();
-            else if(this.ItemTemplate != null)
+            else if (this.ItemTemplate != null)
                 templatedView = this.ItemTemplate.CreateContent();
 
             var view = templatedView as View;
-            if(!this.IsItemItsOwnContainer(templatedView))
-                 view = this.GetContainerForItemOverride(templatedView);
-            
+            if (!this.IsItemItsOwnContainer(templatedView))
+                view = this.GetContainerForItemOverride(templatedView);
+
             view.BindingContext = item;
+
+            this.generatedItems[item] = view;
             return view;
         }
 
@@ -129,12 +212,31 @@ namespace Oxard.XControls.Components
             if (this.ItemsPanel == null || !this.isLoaded)
                 return;
 
+            this.ItemsPanel.Children.Clear();
+
+            if (this.ItemsSource == null)
+                return;
+
             foreach (var item in this.ItemsSource)
+                this.CreateAndAddItemFor(item);
+        }
+
+        private void CreateAndAddItemFor(object item)
+        {
+            this.ItemsPanel.Children.Add(this.GetContainerForItem(item));
+        }
+
+        private void CreateAndInsertItemFor(object item, int index)
+        {
+            this.ItemsPanel.Children.Insert(index, this.GetContainerForItem(item));
+        }
+
+        private void RemoveItemFor(object item)
+        {
+            if (this.generatedItems.TryGetValue(item, out View generatedItem))
             {
-                if (this.IsItemItsOwnContainer(item))
-                    this.ItemsPanel.Children.Add((View)item);
-                else
-                    this.ItemsPanel.Children.Add(GetContainerForItem(item));
+                this.generatedItems.Remove(item);
+                this.ItemsPanel.Children.Remove(generatedItem);
             }
         }
     }
