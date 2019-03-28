@@ -1,8 +1,9 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
-## Comming soon
-Next project is to add a long pressed button.
+## v1.0.3.0
+- LongPressButton
+New control which allowed you to manage a simple button or a long press on button with two commands and events.
 
 ## v1.0.2.0
 - ItemsControl

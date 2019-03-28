@@ -13,6 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="ComponentThemes\LongPressButtonStyle.xaml.cs">
+      <DependentUpon>LongPressButtonStyle.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ComponentThemes\RadioButtonStyle.xaml.cs">
       <DependentUpon>RadioButtonStyle.xaml</DependentUpon>
     </Compile>
