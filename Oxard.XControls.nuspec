@@ -2,13 +2,13 @@
 <package >
   <metadata>
     <id>Oxard.XControls</id>
-    <version>1.0.3.0</version>
+    <version>1.0.4.1</version>
     <authors>Renaud AVENAS</authors>
     <owners>Renaud AVENAS</owners>
     <projectUrl>https://github.com/RenaudAvenas/Oxard.XControls</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Xamarin forms extendable and customizable controls</description>
-    <releaseNotes>LongPressButton created</releaseNotes>
+    <releaseNotes>Correction when adding package on UWP</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>Xamarin Forms controls</tags>
 	<license type="expression">GPL-3.0-only</license>
@@ -17,16 +17,19 @@
     </dependencies>
   </metadata>
   <files>
-	<file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="lib\netstandard2"/>
+    <file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="lib\netstandard2"/>
 	
-	<file src="Oxard.XControls.Android\bin\Release\Oxard.XControls.Android.dll" target="lib\MonoAndroid81"/>
-	<file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="lib\MonoAndroid81"/>
+    <file src="Oxard.XControls.Android\bin\Release\Oxard.XControls.Android.dll" target="lib\MonoAndroid81"/>
+    <file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="lib\MonoAndroid81"/>
 	
-	<file src="Oxard.XControls.UWP\bin\x86\Release\Oxard.XControls.UWP.dll" target="runtimes\win10-x86\lib\uap10.0"/>
-	<file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="runtimes\win10-x86\lib\uap10.0"/>
-	<file src="Oxard.XControls.UWP\bin\x64\Release\Oxard.XControls.UWP.dll" target="runtimes\win10-x64\lib\uap10.0"/>
-	<file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="runtimes\win10-x64\lib\uap10.0"/>
-	<file src="Oxard.XControls.UWP\bin\ARM\Release\Oxard.XControls.UWP.dll" target="runtimes\win10-arm\lib\uap10.0"/>
-	<file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="runtimes\win10-arm\lib\uap10.0"/>
+    <file src="Oxard.XControls.UWP\bin\x86\Release\Oxard.XControls.UWP.dll" target="runtimes\win10-x86\lib\uap10.0"/>
+    <file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="runtimes\win10-x86\lib\uap10.0"/>
+    <file src="Oxard.XControls.UWP\bin\x64\Release\Oxard.XControls.UWP.dll" target="runtimes\win10-x64\lib\uap10.0"/>
+    <file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="runtimes\win10-x64\lib\uap10.0"/>
+    <file src="Oxard.XControls.UWP\bin\ARM\Release\Oxard.XControls.UWP.dll" target="runtimes\win10-arm\lib\uap10.0"/>
+    <file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="runtimes\win10-arm\lib\uap10.0"/>
+
+    <file src="Oxard.XControls.UWP\bin\Release\Oxard.XControls.UWP.dll" target="ref\uap10.0"/>
+    <file src="Oxard.XControls.UWP\bin\Release\Oxard.XControls.UWP.pri" target="ref\uap10.0"/>
   </files>
 </package>
