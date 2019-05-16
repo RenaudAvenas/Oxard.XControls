@@ -2,6 +2,9 @@
 using Oxard.XControls.Interpretors;
 using Oxard.XControls.UWP.Interpretors;
 using System;
+using System.Threading.Tasks;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Shapes;
 using Xamarin.Forms;
 
 namespace Oxard.XControls.UWP.Extensions
@@ -18,27 +21,30 @@ namespace Oxard.XControls.UWP.Extensions
             return Windows.UI.Color.FromArgb((byte)Math.Round(color.A * 255), (byte)Math.Round(color.R * 255), (byte)Math.Round(color.G * 255), (byte)Math.Round(color.B * 255));
         }
 
-        public static Windows.UI.Xaml.Media.Brush ToBrush(this Brush brush)
+        public static Windows.UI.Xaml.Media.Brush ToBrush(this Graphics.Brush brush)
         {
-            if (brush is SolidColorBrush solid)
+            if (brush is Graphics.SolidColorBrush solid)
                 return solid.Color.ToBrush();
 
-            if (brush is LinearGradientBrush linear)
+            if (brush is Graphics.LinearGradientBrush linear)
                 return ToLinearGradientBrush(linear);
 
             if (brush is RadialGradientBrush radial)
                 return ToRadialGradientBrush(radial);
 
+            if (brush is DrawingBrush drawingBrush)
+                return ToDrawingBrush(drawingBrush);
+
             return null;
         }
 
-        public static void FillGradientBrush(GradientBrush gradient, Windows.UI.Xaml.Media.GradientBrush nativeGradient)
+        public static void FillGradientBrush(Graphics.GradientBrush gradient, Windows.UI.Xaml.Media.GradientBrush nativeGradient)
         {
             foreach (var gradientStop in gradient.GradientStops)
                 nativeGradient.GradientStops.Add(new Windows.UI.Xaml.Media.GradientStop { Color = gradientStop.Color.ToColor(), Offset = gradientStop.Offset });
         }
 
-        private static Windows.UI.Xaml.Media.Brush ToLinearGradientBrush(LinearGradientBrush linear)
+        private static Windows.UI.Xaml.Media.Brush ToLinearGradientBrush(Graphics.LinearGradientBrush linear)
         {
             Windows.UI.Xaml.Media.LinearGradientBrush nativeGradient = new Windows.UI.Xaml.Media.LinearGradientBrush();
             nativeGradient.StartPoint = linear.StartPoint.ToPoint();
@@ -56,6 +62,15 @@ namespace Oxard.XControls.UWP.Extensions
                 return interpretor.RadialToBrush(radial);
 
             throw new NotSupportedException("Radial brush is not supported by UWP, register an interpretor of type IBrushInterpretor in InterpretorManager or remove RadialGradientBrush");
+        }
+
+        private static Windows.UI.Xaml.Media.Brush ToDrawingBrush(DrawingBrush drawingBrush)
+        {
+            var interpretor = InterpretorManager.Get<IBrushInterpretor>();
+            if (interpretor != null)
+                return interpretor.DrawingToBrush(drawingBrush);
+
+            throw new NotSupportedException("Drawing brush is not supported by UWP, register an interpretor of type IBrushInterpretor in InterpretorManager or remove DrawingBrush");
         }
     }
 }

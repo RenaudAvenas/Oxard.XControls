@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using Oxard.TestApp.UWP.Interpretors;
+using Oxard.XControls.Interpretors;
+using Oxard.XControls.UWP.Interpretors;
+using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace Oxard.TestApp.UWP
@@ -28,6 +21,7 @@ namespace Oxard.TestApp.UWP
         /// </summary>
         public App()
         {
+            InterpretorManager.RegisterForType(typeof(IBrushInterpretor), new BrushInterpretor());
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
@@ -39,8 +33,6 @@ namespace Oxard.TestApp.UWP
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
-
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,

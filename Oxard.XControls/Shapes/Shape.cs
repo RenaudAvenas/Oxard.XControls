@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace Oxard.XControls.Shapes
 {
-    public abstract class Shape : View
+    public abstract class Shape : View, IDrawable
     {
         public static readonly BindableProperty FillProperty = BindableProperty.Create("Fill", typeof(Brush), typeof(Shape), Brushes.Transparent);
         public static readonly BindableProperty StrokeProperty = BindableProperty.Create("Stroke", typeof(Color), typeof(Shape), Color.Transparent);

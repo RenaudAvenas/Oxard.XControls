@@ -63,8 +63,11 @@
     <Compile Include="..\Oxard.XControls\Properties\AssemblyInfoShared.cs">
       <Link>Properties\AssemblyInfoShared.cs</Link>
     </Compile>
+    <Compile Include="Effects\BackgroundEffect.cs" />
     <Compile Include="Events\TouchHelper.cs" />
     <Compile Include="Extensions\BrushExtensions.cs" />
+    <Compile Include="Graphics\DrawableAdapter.cs" />
+    <Compile Include="Extensions\GeometryExtensions.cs" />
     <Compile Include="Interpretors\CornerSegmentInterpretor.cs" />
     <Compile Include="Interpretors\ISegmentInterpretor.cs" />
     <Compile Include="Interpretors\LineSegmentInterpretor.cs" />

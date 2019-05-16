@@ -12,6 +12,8 @@
             this.RadiusY = radiusY;
         }
 
+        public static CornerRadius Zero { get; } = new CornerRadius();
+
         public double RadiusX { get; set; }
 
         public double RadiusY { get; set; }

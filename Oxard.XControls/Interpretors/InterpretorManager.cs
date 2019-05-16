@@ -38,6 +38,14 @@ namespace Oxard.XControls.Interpretors
             Interpretors[type] = interpretor;
         }
 
+        public static void RegisterForTypeIfNotExists(Type type, IInterpretor interpretor)
+        {
+            if (Interpretors.ContainsKey(type))
+                return;
+
+            Interpretors[type] = interpretor;
+        }
+
         public static bool HasInterpretor<TInterpretor>() => Interpretors.ContainsKey(typeof(TInterpretor));
 
         public static bool HasInterpretorForType(Type type) => Interpretors.ContainsKey(type);

@@ -20,16 +20,10 @@ namespace Oxard.XControls.UWP.Renderers.Shapes
 {
     public class ShapeRenderer : ViewRenderer<Shape, Path>
     {
-        private static bool defaultInterpretorsAreRegistred;
-
-        public ShapeRenderer()
+        static ShapeRenderer()
         {
-            if (!defaultInterpretorsAreRegistred)
-            {
-                defaultInterpretorsAreRegistred = true;
-                InterpretorManager.RegisterForType(typeof(Graphics.LineSegment), new LineSegmentInterpretor());
-                InterpretorManager.RegisterForType(typeof(CornerSegment), new CornerSegmentInterpretor());
-            }
+            InterpretorManager.RegisterForTypeIfNotExists(typeof(Graphics.LineSegment), new LineSegmentInterpretor());
+            InterpretorManager.RegisterForTypeIfNotExists(typeof(CornerSegment), new CornerSegmentInterpretor());
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<Shape> e)
@@ -52,6 +46,12 @@ namespace Oxard.XControls.UWP.Renderers.Shapes
             }
 
             this.UpdatePath(this.Element);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            this.Element.GeometryChanged -= this.ElementOnGeometryChanged;
+            base.Dispose(disposing);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)

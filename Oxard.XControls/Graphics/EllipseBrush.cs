@@ -1,8 +1,6 @@
-﻿using Oxard.XControls.Graphics;
-
-namespace Oxard.XControls.Shapes
+﻿namespace Oxard.XControls.Graphics
 {
-    public class Ellipse : Shape
+    public class EllipseBrush : DrawingBrush
     {
         private Geometry actualGeometry;
 

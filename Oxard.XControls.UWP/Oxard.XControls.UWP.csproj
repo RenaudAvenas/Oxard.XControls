@@ -106,6 +106,7 @@
     <Compile Include="..\Oxard.XControls\Properties\AssemblyInfoShared.cs">
       <Link>Properties\AssemblyInfoShared.cs</Link>
     </Compile>
+    <Compile Include="Effects\BackgroundEffect.cs" />
     <Compile Include="Events\TouchHelper.cs" />
     <Compile Include="Extensions\BrushExtensions.cs" />
     <Compile Include="Extensions\PointExtensions.cs" />

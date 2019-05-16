@@ -1,8 +1,21 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## v1.0.4.0
+- Background effect
+
+You can now use Brush to set background on native Xamarin controls with the BackgroundEffect.
+
+- DrawingBrush
+
+This is a new Brush that can be defined like a shape. Very helpful to draw a cornered rectangle as background!
+Unfortunately, this type of brush can be used only on Android now because UWP does not support other brush than LinearGradient or SolidColor brushes.
+So you have to register an IBrushInterpretor in InterpretorManager to translate DrawingBrush into one of brushes above or use ControlTemplate with Shape.
+
+
 ## v1.0.3.0
 - LongPressButton
+
 New control which allowed you to manage a simple button or a long press on button with two commands and events.
 
 ## v1.0.2.0
