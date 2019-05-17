@@ -1,4 +1,4 @@
-﻿using Android.Content;
+using Android.Content;
 using Oxard.XControls.Droid.NativeControls;
 using Oxard.XControls.Droid.Renderers.Shapes;
 using Oxard.XControls.Shapes;
@@ -49,6 +49,12 @@ namespace Oxard.XControls.Droid.Renderers.Shapes
         protected virtual List<string> GetInvalidateDrawProperties()
         {
             return new List<string> { nameof(this.Element.Fill), nameof(this.Element.Stroke), nameof(this.Element.StrokeThickness), nameof(this.Element.Stretch), nameof(this.Element.StrokeDashArray) };
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            this.Element.GeometryChanged -= this.ElementOnGeometryChanged;
+            base.Dispose(disposing);
         }
 
         private void ElementOnGeometryChanged(object sender, EventArgs eventArgs)
