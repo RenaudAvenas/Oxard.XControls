@@ -1,6 +1,11 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## v1.0.4.4
+- ObjectDisposedException bug
+
+Some access to native control caused ObjectDisposedException in ShapeRenderer.
+
 ## v1.0.4.0
 - Background effect
 
