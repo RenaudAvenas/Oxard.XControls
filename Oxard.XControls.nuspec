@@ -8,7 +8,7 @@
     <projectUrl>https://github.com/RenaudAvenas/Oxard.XControls</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Xamarin forms extendable and customizable controls</description>
-    <releaseNotes>Correction when adding package on UWP</releaseNotes>
+    <releaseNotes>Correction on ShapeRenderer that can access to a disposed object</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>Xamarin Forms controls</tags>
 	<license type="expression">GPL-3.0-only</license>
