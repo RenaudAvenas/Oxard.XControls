@@ -1,6 +1,14 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## v1.1.5.4
+- RadioButton
+
+Property GroupeName is replaced by GroupName.
+- Button
+
+Command property was not called when we click on the button. That is fixed.
+
 ## v1.0.4.4
 - ObjectDisposedException bug
 

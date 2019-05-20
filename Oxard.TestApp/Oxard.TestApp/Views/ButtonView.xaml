@@ -5,6 +5,7 @@
     xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
     xmlns:components="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
     xmlns:defaultstyles="clr-namespace:Oxard.XControls.DefaultStyles;assembly=Oxard.XControls.DefaultStyles"
+    xmlns:usercontrols="clr-namespace:Oxard.TestApp.UserControls"
     BackgroundColor="{StaticResource Key={x:Static defaultstyles:ColorKeys.ContentBackgroundColor}}"
     x:Class="Oxard.TestApp.Views.ButtonView">
     <ContentView.Resources>
@@ -48,6 +49,8 @@
             HorizontalOptions="End"
             TextColor="White"
             Text="Button :" />
+        <!--<usercontrols:PropertyListControl
+            Grid.Column="1">-->
         <components:Button
             Grid.Column="1"
             Style="{StaticResource ButtonDefaultStyle}"
@@ -57,6 +60,7 @@
                 TextColor="White"
                 Text="Click me!" />
         </components:Button>
+        <!--</usercontrols:PropertyListControl>-->
 
         <Label
             VerticalOptions="Center"
@@ -74,7 +78,7 @@
                     Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            
+
             <components:LongPressButton
                 VerticalContentOptions="Center"
                 Style="{StaticResource LongPressButtonDefaultStyle}"
