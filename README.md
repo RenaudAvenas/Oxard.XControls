@@ -9,6 +9,8 @@ Property GroupeName is replaced by GroupName.
 
 Command property was not called when we click on the button. That is fixed.
 
+On UWP, Pointer are captured by clickable controls when touching down and release when touching up.
+
 ## v1.0.4.4
 - ObjectDisposedException bug
 
