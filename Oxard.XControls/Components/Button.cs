@@ -23,31 +23,51 @@ namespace Oxard.XControls.Components
             this.TouchManager.Clicked += this.TouchManagerOnClicked;
         }
 
+        /// <summary>
+        /// Get event that is invoked when Button is clicked
+        /// </summary>
         public event EventHandler Clicked;
 
+        /// <summary>
+        /// Get or set a command for this button. Command will be executed when button is clicked
+        /// </summary>
         public ICommand Command
         {
             get { return (ICommand)this.GetValue(CommandProperty); }
             set { this.SetValue(CommandProperty, value); }
         }
 
+        /// <summary>
+        /// Get or set the command parameter to use with the <see cref="Command"/>
+        /// </summary>
         public object CommandParameter
         {
             get { return (object)this.GetValue(CommandParameterProperty); }
             set { this.SetValue(CommandParameterProperty, value); }
         }
 
+        /// <summary>
+        /// Get the press state of the button
+        /// </summary>
         public bool IsPressed
         {
             get { return (bool)this.GetValue(IsPressedProperty); }
             private set { this.SetValue(IsPressedPropertyKey, value); }
         }
 
+        /// <summary>
+        /// Get the <see cref="TouchManager"/> used by the button to detect events
+        /// </summary>
         public TouchManager TouchManager { get; }
 
+        /// <summary>
+        /// Invoke <see cref="Clicked"/> event and call Execute method of <see cref="Command"/> property
+        /// </summary>
         protected virtual void OnClicked()
         {
             this.Clicked?.Invoke(this, EventArgs.Empty);
+            if (this.Command?.CanExecute(this.CommandParameter) == true)
+                this.Command.Execute(this.CommandParameter);
         }
 
         private static void CommandPropertyChanged(BindableObject bindable, object oldValue, object newValue)

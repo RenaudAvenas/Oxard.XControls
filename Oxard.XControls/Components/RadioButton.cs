@@ -9,19 +9,19 @@ namespace Oxard.XControls.Components
     public class RadioButton : CheckBox
     {
         private static readonly Dictionary<string, List<WeakReference<RadioButton>>> GroupNamedRadioButtons = new Dictionary<string, List<WeakReference<RadioButton>>>();
-        private string groupeName;
+        private string groupName;
 
         public bool IsUncheckable { get; set; }
 
-        public string GroupeName
+        public string GroupName
         {
-            get => this.groupeName;
+            get => this.groupName;
             set
             {
-                if (this.groupeName != null)
+                if (this.groupName != null)
                     throw new InvalidOperationException("GroupName property is already initialized");
 
-                this.groupeName = value;
+                this.groupName = value;
                 RegisterInGroupName(this);
             }
         }
@@ -39,12 +39,12 @@ namespace Oxard.XControls.Components
 
         private static void RegisterInGroupName(RadioButton button)
         {
-            if (!GroupNamedRadioButtons.ContainsKey(button.GroupeName))
-                GroupNamedRadioButtons.Add(button.GroupeName, new List<WeakReference<RadioButton>> { new WeakReference<RadioButton>(button) });
+            if (!GroupNamedRadioButtons.ContainsKey(button.GroupName))
+                GroupNamedRadioButtons.Add(button.GroupName, new List<WeakReference<RadioButton>> { new WeakReference<RadioButton>(button) });
             else
             {
-                CleanGroupName(button.GroupeName);
-                GroupNamedRadioButtons[button.GroupeName].Add(new WeakReference<RadioButton>(button));
+                CleanGroupName(button.GroupName);
+                GroupNamedRadioButtons[button.GroupName].Add(new WeakReference<RadioButton>(button));
             }
         }
 
@@ -73,13 +73,13 @@ namespace Oxard.XControls.Components
         {
             IEnumerable<RadioButton> radioButtons;
 
-            if(this.groupeName == null)
+            if(this.groupName == null)
             {
                 var panel = this.FindParent<Layout<View>>();
                 radioButtons = panel.FindChildren<RadioButton>().Where(c => c != this);
             }
             else
-                radioButtons = GetRadioButtonForGroupName(this.groupeName).Where(c => c != this);
+                radioButtons = GetRadioButtonForGroupName(this.groupName).Where(c => c != this);
 
             foreach (var radioButton in radioButtons)
                 radioButton.IsChecked = false;
