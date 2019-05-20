@@ -27,6 +27,7 @@ namespace Oxard.XControls.UWP.Events
         private void ControlOnPointerPressed(object sender, PointerRoutedEventArgs e)
         {
             this.touchManager.OnTouchDown(new TouchEventArgs(e.GetCurrentPoint(this.control).Position.ToXamarinPoint()));
+            this.control.CapturePointer(e.Pointer);
         }
 
         private void ControlOnPointerMoved(object sender, PointerRoutedEventArgs e)
@@ -37,11 +38,13 @@ namespace Oxard.XControls.UWP.Events
         private void ControlOnPointerReleased(object sender, PointerRoutedEventArgs e)
         {
             this.touchManager.OnTouchUp(new TouchEventArgs(e.GetCurrentPoint(this.control).Position.ToXamarinPoint()));
+            this.control.ReleasePointerCapture(e.Pointer);
         }
 
         private void ControlOnPointerCanceled(object sender, PointerRoutedEventArgs e)
         {
             this.touchManager.OnTouchCancel(new TouchEventArgs(e.GetCurrentPoint(this.control).Position.ToXamarinPoint()));
+            this.control.ReleasePointerCapture(e.Pointer);
         }
 
         private void ControlOnPointerExited(object sender, PointerRoutedEventArgs e)

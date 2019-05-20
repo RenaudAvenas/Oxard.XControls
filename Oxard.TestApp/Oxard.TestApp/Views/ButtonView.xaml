@@ -168,7 +168,7 @@
             <StackLayout>
                 <components:RadioButton
                     IsUncheckable="True"
-                    GroupeName="GroupName"
+                    GroupName="GroupName"
                     Style="{StaticResource RadioButtonDefaultStyle}"
                     VerticalOptions="Center"
                     HorizontalOptions="Center">
@@ -177,7 +177,7 @@
                         Text="Choice 1" />
                 </components:RadioButton>
                 <components:RadioButton
-                    GroupeName="GroupName"
+                    GroupName="GroupName"
                     IsUncheckable="True"
                     Style="{StaticResource RadioButtonDefaultStyle}"
                     VerticalOptions="Center"
@@ -189,7 +189,7 @@
             </StackLayout>
             <StackLayout>
                 <components:RadioButton
-                    GroupeName="GroupName"
+                    GroupName="GroupName"
                     IsUncheckable="True"
                     Style="{StaticResource RadioButtonDefaultStyle}"
                     VerticalOptions="Center"
@@ -199,7 +199,7 @@
                         Text="Choice 3" />
                 </components:RadioButton>
                 <components:RadioButton
-                    GroupeName="GroupName"
+                    GroupName="GroupName"
                     IsUncheckable="True"
                     Style="{StaticResource RadioButtonDefaultStyle}"
                     VerticalOptions="Center"
