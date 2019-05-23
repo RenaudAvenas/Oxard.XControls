@@ -1,6 +1,15 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## v1.1.5.5
+- Button
+
+Fix bug : IsPressed is not set to True when Button is disable.
+
+- Geometry
+
+Constants are created in geometry ratio to fix a bug with strokeThickness inferior than 1 which causes stroke to be clipped
+
 ## v1.1.5.4
 - RadioButton
 

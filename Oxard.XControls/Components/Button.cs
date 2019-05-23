@@ -108,7 +108,10 @@ namespace Oxard.XControls.Components
         private void TouchManagerOnTouchDown(object sender, TouchEventArgs args)
         {
             if (!this.IsEnabled)
+            {
                 this.TouchManager.DisableCurrentTouch();
+                return;
+            }
 
             this.IsPressed = true;
         }

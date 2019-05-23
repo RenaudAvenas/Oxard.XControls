@@ -18,20 +18,28 @@
     
     <Grid>
         <BoxView
+            BackgroundColor="#608FE0" />
+        <BoxView
             Margin="10"
             BackgroundColor="CornflowerBlue"/>
         <shapes:Rectangle
             CornerRadius="20"
             Margin="10"
             Stroke="Black"
-            StrokeThickness="4"
+            StrokeThickness="1"
             Fill="{x:Static graphics:Brushes.Aqua}"/>
+        <BoxView
+            WidthRequest="40"
+            HeightRequest="40"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            BackgroundColor="CornflowerBlue" />
         <shapes:Ellipse
             Fill="{x:Static graphics:Brushes.Brown}"
             Stroke="Beige"
-            StrokeThickness="3"
-            WidthRequest="100"
-            HeightRequest="50"
+            StrokeThickness="1"
+            WidthRequest="40"
+            HeightRequest="40"
             VerticalOptions="Center"
             HorizontalOptions="Center" />
     </Grid>

@@ -52,12 +52,14 @@
         <!--<usercontrols:PropertyListControl
             Grid.Column="1">-->
         <components:Button
+            x:Name="Button"
+            IsEnabled="False"
             Grid.Column="1"
             Style="{StaticResource ButtonDefaultStyle}"
             VerticalOptions="Center"
             HorizontalOptions="Start">
             <Label
-                TextColor="White"
+                TextColor="{Binding Path=Foreground, Source={x:Reference Button}}"
                 Text="Click me!" />
         </components:Button>
         <!--</usercontrols:PropertyListControl>-->

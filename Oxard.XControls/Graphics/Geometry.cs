@@ -134,13 +134,15 @@ namespace Oxard.XControls.Graphics
                 var realWidth = width - strokeThickness;
                 var realHeight = height - strokeThickness;
 
-                this.widthRatio = realWidth / width;
-                this.heightRatio = realHeight / height;
+                // Adding 1 to width and height manage imprecision of width and height ratio due to rounded measures
+                this.widthRatio = realWidth / (width + 1);
+                this.heightRatio = realHeight / (height + 1);
             }
 
             public Point ProjectPoint(double x, double y)
             {
-                return new Point(Math.Round(x * this.widthRatio + this.halfStrokeThickness, 1), Math.Round(y * this.heightRatio + this.halfStrokeThickness));
+                // Adding 0.1 to x and y to manage imprecision of width and height ratio due to rounded measures
+                return new Point(Math.Round(x * this.widthRatio + 0.1 + this.halfStrokeThickness), Math.Round(y * this.heightRatio + 0.1 + this.halfStrokeThickness));
             }
 
             public Point ProjectPoint(Point toTransform) => this.ProjectPoint(toTransform.X, toTransform.Y);

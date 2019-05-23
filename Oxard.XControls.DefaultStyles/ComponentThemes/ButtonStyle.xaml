@@ -8,7 +8,7 @@
     <ResourceDictionary.MergedDictionaries>
         <componentthemes:Colors />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <Style
         x:Key="ButtonDefaultStyle"
         TargetType="components:Button">
@@ -21,11 +21,26 @@
                     Property="Background"
                     Value="{StaticResource ButtonPressedBackgroundBrush}" />
             </Trigger>
+            <Trigger
+                TargetType="components:Button"
+                Property="IsEnabled"
+                Value="False">
+                <Setter
+                    Property="Background"
+                    Value="{StaticResource ButtonDisableBackgroundBrush}" />
+                <Setter
+                    Property="Foreground"
+                    Value="{StaticResource ButtonDisableForegroundColor}" />
+            </Trigger>
         </Style.Triggers>
+        <Setter
+            Property="Foreground"
+            Value="{StaticResource ButtonForegroundColor}" />
         <Setter
             Property="Background"
             Value="{StaticResource ButtonBackgroundBrush}" />
-        <Setter Property="ControlTemplate">
+        <Setter
+            Property="ControlTemplate">
             <Setter.Value>
                 <ControlTemplate>
                     <Grid>
