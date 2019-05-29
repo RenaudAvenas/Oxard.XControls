@@ -1,4 +1,5 @@
-﻿using Oxard.XControls.Shapes;
+﻿using Oxard.XControls.Extensions;
+using Oxard.XControls.Shapes;
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -126,23 +127,51 @@ namespace Oxard.XControls.Graphics
             private readonly double halfStrokeThickness;
             private readonly double widthRatio;
             private readonly double heightRatio;
+            private readonly double strokeThickness;
+            private readonly double width;
+            private readonly double height;
 
             public ProjectionDefinition(double width, double height, double strokeThickness)
             {
-                this.halfStrokeThickness = strokeThickness / 2d;
+                this.strokeThickness = strokeThickness;
+                this.width = width;
+                this.height = height;
 
-                var realWidth = width - strokeThickness;
-                var realHeight = height - strokeThickness;
+                if (strokeThickness.DoubleIsEquals(0))
+                {
+                    this.halfStrokeThickness = 0;
+                    this.widthRatio = 1;
+                    this.heightRatio = 1;
+                }
+                else
+                {
+                    this.halfStrokeThickness = strokeThickness / 2d;
+                    
+                    var realWidth = width - strokeThickness;
+                    var realHeight = height - strokeThickness;
 
-                // Adding 1 to width and height manage imprecision of width and height ratio due to rounded measures
-                this.widthRatio = realWidth / (width + 1);
-                this.heightRatio = realHeight / (height + 1);
+                    this.widthRatio = realWidth / width;
+                    this.heightRatio = realHeight / height;
+                }
             }
 
             public Point ProjectPoint(double x, double y)
             {
-                // Adding 0.1 to x and y to manage imprecision of width and height ratio due to rounded measures
-                return new Point(Math.Round(x * this.widthRatio + 0.1 + this.halfStrokeThickness), Math.Round(y * this.heightRatio + 0.1 + this.halfStrokeThickness));
+                var projectedX = Math.Round(x * this.widthRatio + this.halfStrokeThickness);
+                var projectedY = Math.Round(y * this.heightRatio + this.halfStrokeThickness);
+
+                if (projectedX < this.strokeThickness)
+                    projectedX = this.strokeThickness;
+                else if (projectedX > this.width - this.strokeThickness)
+                    projectedX = this.width - this.strokeThickness;
+
+                if (projectedY < this.strokeThickness)
+                    projectedY = this.strokeThickness;
+                else if(projectedY > this.height - this.strokeThickness)
+                    projectedY = this.height - this.strokeThickness;
+
+
+                return new Point(projectedX, projectedY);
             }
 
             public Point ProjectPoint(Point toTransform) => this.ProjectPoint(toTransform.X, toTransform.Y);

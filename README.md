@@ -1,6 +1,12 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## v1.1.5.6
+
+- Geometry
+
+Better fix for the bug due to precision loss which causes stroke to be clipped.
+
 ## v1.1.5.5
 - Button
 
