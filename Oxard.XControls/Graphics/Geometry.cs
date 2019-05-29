@@ -125,15 +125,14 @@ namespace Oxard.XControls.Graphics
         private class ProjectionDefinition
         {
             private readonly double halfStrokeThickness;
+            private readonly double ceilingHalfStrokeThickness;
             private readonly double widthRatio;
             private readonly double heightRatio;
-            private readonly double strokeThickness;
             private readonly double width;
             private readonly double height;
 
             public ProjectionDefinition(double width, double height, double strokeThickness)
             {
-                this.strokeThickness = strokeThickness;
                 this.width = width;
                 this.height = height;
 
@@ -146,7 +145,8 @@ namespace Oxard.XControls.Graphics
                 else
                 {
                     this.halfStrokeThickness = strokeThickness / 2d;
-                    
+                    this.ceilingHalfStrokeThickness = Math.Ceiling(this.halfStrokeThickness);
+
                     var realWidth = width - strokeThickness;
                     var realHeight = height - strokeThickness;
 
@@ -160,15 +160,15 @@ namespace Oxard.XControls.Graphics
                 var projectedX = Math.Round(x * this.widthRatio + this.halfStrokeThickness);
                 var projectedY = Math.Round(y * this.heightRatio + this.halfStrokeThickness);
 
-                if (projectedX < this.strokeThickness)
-                    projectedX = this.strokeThickness;
-                else if (projectedX > this.width - this.strokeThickness)
-                    projectedX = this.width - this.strokeThickness;
+                if (projectedX < this.ceilingHalfStrokeThickness)
+                    projectedX = this.ceilingHalfStrokeThickness;
+                else if (projectedX > this.width - this.ceilingHalfStrokeThickness)
+                    projectedX = this.width - this.ceilingHalfStrokeThickness;
 
-                if (projectedY < this.strokeThickness)
-                    projectedY = this.strokeThickness;
-                else if(projectedY > this.height - this.strokeThickness)
-                    projectedY = this.height - this.strokeThickness;
+                if (projectedY < this.ceilingHalfStrokeThickness)
+                    projectedY = this.ceilingHalfStrokeThickness;
+                else if(projectedY > this.height - this.ceilingHalfStrokeThickness)
+                    projectedY = this.height - this.ceilingHalfStrokeThickness;
 
 
                 return new Point(projectedX, projectedY);

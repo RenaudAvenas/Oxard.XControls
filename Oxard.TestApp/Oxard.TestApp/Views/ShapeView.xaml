@@ -6,6 +6,7 @@
     xmlns:graphics="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls"
     xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
     xmlns:defaultstyles="clr-namespace:Oxard.XControls.DefaultStyles;assembly=Oxard.XControls.DefaultStyles"
+    xmlns:testapp="clr-namespace:Oxard.TestApp"
     BackgroundColor="{StaticResource Key={x:Static defaultstyles:ColorKeys.ContentBackgroundColor}}"
     x:Class="Oxard.TestApp.Views.ShapeView">
     <ContentView.Resources>
@@ -15,19 +16,29 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
-    
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition
+                Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition
+                Width="Auto" />
+        </Grid.ColumnDefinitions>
+        
         <BoxView
             BackgroundColor="#608FE0" />
         <BoxView
             Margin="10"
-            BackgroundColor="CornflowerBlue"/>
+            BackgroundColor="CornflowerBlue" />
         <shapes:Rectangle
             CornerRadius="20"
-            Margin="10"
             Stroke="Black"
-            StrokeThickness="1"
-            Fill="{x:Static graphics:Brushes.Aqua}"/>
+            StrokeThickness="0"
+            Fill="{x:Static graphics:Brushes.Aqua}" />
         <BoxView
             WidthRequest="40"
             HeightRequest="40"
@@ -42,5 +53,13 @@
             HeightRequest="40"
             VerticalOptions="Center"
             HorizontalOptions="Center" />
+
+        <testapp:RandomShape
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalOptions="Center"
+            HeightRequest="100"
+            WidthRequest="200"
+            Fill="{x:Static graphics:Brushes.Beige}" />
     </Grid>
 </ContentView>

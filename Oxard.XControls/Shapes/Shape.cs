@@ -1,4 +1,5 @@
 ﻿using Oxard.XControls.Graphics;
+using Oxard.XControls.Helpers;
 using System;
 using Xamarin.Forms;
 
@@ -45,6 +46,8 @@ namespace Oxard.XControls.Shapes
         }
 
         public abstract Geometry Geometry { get; }
+
+        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint) => this.GetStandardMeasure(widthConstraint, heightConstraint);
 
         protected void InvalidateGeometry()
         {

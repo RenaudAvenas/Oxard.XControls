@@ -1,6 +1,20 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## v1.1.6.7
+
+- MeasureExtensions
+
+Adding a class of extensions on Xamarin Forms View to help standard measurement of components.
+
+- Shape
+
+Take care about measures from base shape. Override OnMeasure if you want to come back to Xamarin Forms basic measures or reimplement it tu customize your shape size.
+
+- Geometry
+
+Again a bug on pixel delay when StrokeThickness is greater than 1.
+
 ## v1.1.5.6
 
 - Geometry
