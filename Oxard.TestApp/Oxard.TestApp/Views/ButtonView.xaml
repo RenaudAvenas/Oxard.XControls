@@ -62,7 +62,7 @@
         </components:Button>
         <!--</usercontrols:PropertyListControl>-->
 
-        <Label
+        <!--<Label
             VerticalOptions="Center"
             TextColor="White"
             Grid.Row="1"
@@ -213,6 +213,6 @@
                         Text="Choice 4" />
                 </components:RadioButton>
             </StackLayout>
-        </StackLayout>
+        </StackLayout>-->
     </Grid>
 </ContentView>

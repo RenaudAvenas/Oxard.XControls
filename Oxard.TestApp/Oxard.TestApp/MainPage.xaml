@@ -5,5 +5,20 @@
     xmlns:views="clr-namespace:Oxard.TestApp.Views"
     x:Class="Oxard.TestApp.MainPage">
 
-    <views:ShapeView />
+    <Grid
+        x:Name="Grid">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition
+                Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <views:ButtonView
+            x:Name="CurrentView" />
+
+        <Button
+            Grid.Row="1"
+            Text="Destruction test"
+            Clicked="ButtonOnClicked" />
+    </Grid>
 </ContentPage>

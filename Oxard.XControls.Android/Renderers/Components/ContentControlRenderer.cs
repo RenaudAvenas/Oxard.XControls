@@ -15,15 +15,24 @@ namespace Oxard.XControls.Droid.Renderers.Components
     {
         private BackgroundHelper backgroundHelper;
 
-        public ContentControlRenderer(Context context) 
+        public ContentControlRenderer(Context context)
             : base(context)
         {
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<T> e)
         {
+            this.backgroundHelper?.Dispose();
+
             base.OnElementChanged(e);
+
             this.ApplyIsBackgroundManagedByStyle();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            this.backgroundHelper?.Dispose();
+            base.Dispose(disposing);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)

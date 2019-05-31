@@ -7,7 +7,6 @@ using System;
 using Xamarin.Forms.Platform.Android;
 using Android.Graphics.Drawables.Shapes;
 using System.Collections.Generic;
-using Oxard.XControls.Droid.Extensions;
 using Oxard.XControls.Interpretors;
 using Oxard.XControls.Droid.Interpretors;
 
@@ -24,7 +23,7 @@ namespace Oxard.XControls.Droid.Extensions
             var width = androidContext.ToPixels(drawable.Width.TranslateIfNegative());
             var height = androidContext.ToPixels(drawable.Height.TranslateIfNegative());
 
-            var path = GetPath(drawable, width, height, androidContext);
+            var path = GetPath(drawable, androidContext);
 
             if (drawable.Fill != null && !drawable.Fill.Equals(Brushes.Transparent))
             {
@@ -58,9 +57,12 @@ namespace Oxard.XControls.Droid.Extensions
             return new LayerDrawable(drawables.ToArray());
         }
 
-        private static Path GetPath(IDrawable drawable, float width, float height, Context androidContext)
+        private static Path GetPath(IDrawable drawable, Context androidContext)
         {
             var path = new Path();
+
+            if (drawable.Geometry == null)
+                return path;
 
             var reader = drawable.Geometry.GetReader();
             var segment = reader.GetNext();

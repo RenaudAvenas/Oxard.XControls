@@ -1,6 +1,14 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## v1.2.6.8
+
+- Android ContentControlRenderer
+
+Fix a bug when OnElementChanged called but renderer already disposed.
+
+Fix a bug with background changement which didn't take care about Xamarin Forms Element size.
+
 ## v1.2.6.7
 
 - MeasureExtensions
