@@ -11,7 +11,7 @@ using Button = Oxard.XControls.Components.Button;
 
 namespace Oxard.XControls.Droid.Renderers.Components
 {
-    public class ButtonRenderer : VisualElementRenderer<Button>
+    public class ButtonRenderer : ContentControlRenderer<Button>
     {
         private TouchHelper touchHelper;
 

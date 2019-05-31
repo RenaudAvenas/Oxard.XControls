@@ -10,17 +10,15 @@ namespace Oxard.XControls.Droid.NativeControls
 {
     public class ShapeView : View
     {
-        private static bool defaultInterpretorsAreRegistred;
+        static ShapeView()
+        {
+            InterpretorManager.RegisterForTypeIfNotExists(typeof(LineSegment), new LineSegmentInterpretor());
+            InterpretorManager.RegisterForTypeIfNotExists(typeof(CornerSegment), new CornerSegmentInterpretor());
+        }
 
         public ShapeView(Context context)
             : base(context)
         {
-            if (!defaultInterpretorsAreRegistred)
-            {
-                defaultInterpretorsAreRegistred = true;
-                InterpretorManager.RegisterForType(typeof(LineSegment), new LineSegmentInterpretor());
-                InterpretorManager.RegisterForType(typeof(CornerSegment), new CornerSegmentInterpretor());
-            }
         }
 
         internal Shapes.Shape Source { get; set; }

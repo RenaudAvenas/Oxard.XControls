@@ -68,12 +68,14 @@
     <Compile Include="Extensions\BrushExtensions.cs" />
     <Compile Include="Graphics\DrawableAdapter.cs" />
     <Compile Include="Extensions\GeometryExtensions.cs" />
+    <Compile Include="Events\BackgroundHelper.cs" />
     <Compile Include="Interpretors\CornerSegmentInterpretor.cs" />
     <Compile Include="Interpretors\ISegmentInterpretor.cs" />
     <Compile Include="Interpretors\LineSegmentInterpretor.cs" />
     <Compile Include="NativeControls\ShapeView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\Components\ButtonRenderer.cs" />
+    <Compile Include="Renderers\Components\ContentControlRenderer.cs" />
     <Compile Include="Renderers\Shapes\ShapeRenderer.cs" />
   </ItemGroup>
   <ItemGroup>

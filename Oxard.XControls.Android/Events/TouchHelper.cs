@@ -68,7 +68,6 @@ namespace Oxard.XControls.Droid.Events
                 default:
                     return false;
             }
-
         }
     }
 }

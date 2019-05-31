@@ -115,8 +115,10 @@
     <Compile Include="Interpretors\IBrushInterpretor.cs" />
     <Compile Include="Interpretors\ISegmentInterpretor.cs" />
     <Compile Include="Interpretors\LineSegmentInterpretor.cs" />
+    <Compile Include="NativeControls\DrawingPath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\Components\ButtonRenderer.cs" />
+    <Compile Include="Renderers\Components\ContentControlRenderer.cs" />
     <Compile Include="Renderers\Shapes\ShapeRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -129,7 +131,6 @@
       <Name>Oxard.XControls</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

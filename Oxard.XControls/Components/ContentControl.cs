@@ -13,6 +13,7 @@ namespace Oxard.XControls.Components
         public static readonly BindableProperty BorderColorProperty = BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(ContentControl), Color.Transparent);
         public static readonly BindableProperty HorizontalContentOptionsProperty = BindableProperty.Create(nameof(HorizontalContentOptions), typeof(LayoutOptions), typeof(ContentControl), LayoutOptions.Fill);
         public static readonly BindableProperty VerticalContentOptionsProperty = BindableProperty.Create(nameof(VerticalContentOptions), typeof(LayoutOptions), typeof(ContentControl), LayoutOptions.Fill);
+        public static readonly BindableProperty IsBackgroundManagedByStyleProperty = BindableProperty.Create(nameof(IsBackgroundManagedByStyle), typeof(bool), typeof(ContentControl), false);
 
         public DataTemplate ContentTemplate
         {
@@ -60,6 +61,12 @@ namespace Oxard.XControls.Components
         {
             get => (LayoutOptions)this.GetValue(VerticalContentOptionsProperty);
             set => this.SetValue(VerticalContentOptionsProperty, value);
+        }
+
+        public bool IsBackgroundManagedByStyle
+        {
+            get => (bool)this.GetValue(IsBackgroundManagedByStyleProperty);
+            set => this.SetValue(IsBackgroundManagedByStyleProperty, value);
         }
 
         private static void OnContentTemplatePropertyChanged(BindableObject bindable, object oldValue, object newValue)

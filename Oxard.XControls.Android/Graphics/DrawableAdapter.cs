@@ -1,4 +1,5 @@
-﻿using Oxard.XControls.Graphics;
+﻿using System;
+using Oxard.XControls.Graphics;
 using Oxard.XControls.Shapes;
 using Xamarin.Forms;
 
@@ -13,6 +14,8 @@ namespace Oxard.XControls.Droid.Graphics
             this.Fill = brush;
             this.Geometry = GeometryHelper.GetRectangle(element.Width, element.Height, 0, CornerRadius.Zero, CornerRadius.Zero, CornerRadius.Zero, CornerRadius.Zero);
         }
+
+        public event EventHandler GeometryChanged;
 
         public double Height { get; }
 

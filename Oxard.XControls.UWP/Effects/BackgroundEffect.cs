@@ -35,7 +35,6 @@ namespace Oxard.XControls.UWP.Effects
                     throw new NotSupportedException("BackgroundEffect can be affect on VisualElement only");
 
                 visualElement.SizeChanged += this.VisualElementOnSizeChanged;
-                drawingBrush.SetSize(((VisualElement)this.Element).Width, ((VisualElement)this.Element).Height);
                 drawingBrush.GeometryChanged += this.DrawingBrushOnGeometryChanged;
             }
 
@@ -45,11 +44,6 @@ namespace Oxard.XControls.UWP.Effects
         private void DrawingBrushOnGeometryChanged(object sender, EventArgs e)
         {
             this.ApplyBackground();
-        }
-
-        private void VisualElementOnSizeChanged(object sender, EventArgs e)
-        {
-            ((DrawingBrush)this.originalEffect.Background).SetSize(((VisualElement)this.Element).Width, ((VisualElement)this.Element).Height);
         }
 
         protected override void OnDetached()
@@ -62,6 +56,15 @@ namespace Oxard.XControls.UWP.Effects
             }
 
             this.originalEffect = null;
+        }
+
+        private void VisualElementOnSizeChanged(object sender, EventArgs e)
+        {
+            if (this.originalEffect.Background is DrawingBrush drawingBrush)
+            {
+                var visualElement = this.Element as VisualElement;
+                drawingBrush.SetSize(visualElement.Width, visualElement.Height);
+            }
         }
 
         private void ApplyBackground()

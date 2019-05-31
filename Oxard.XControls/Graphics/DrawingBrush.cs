@@ -46,6 +46,8 @@ namespace Oxard.XControls.Graphics
         {
             this.Width = width;
             this.Height = height;
+            this.OnPropertyChanged(nameof(this.Width));
+            this.OnPropertyChanged(nameof(this.Height));
             this.OnSizeAllocated(width, height);
         }
 

@@ -29,6 +29,9 @@
             Property="BorderThickness"
             Value="2" />
         <Setter
+            Property="IsBackgroundManagedByStyle"
+            Value="True" />
+        <Setter
             Property="BorderColor"
             Value="{StaticResource ButtonBackgroundColor}" />
         <Setter

@@ -1,7 +1,7 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
-## v1.1.6.7
+## v1.2.6.7
 
 - MeasureExtensions
 
@@ -14,6 +14,11 @@ Take care about measures from base shape. Override OnMeasure if you want to come
 - Geometry
 
 Again a bug on pixel delay when StrokeThickness is greater than 1.
+
+- ContentControl
+
+There is a new Renderer for ContentControl which allows to manage Background property without defining a ControlTemplate with a Shape.
+UWP support DrawingBrush in ContentControl inherited classes. Use IsBackgroundManagedByStyle property to enable or disable this feature (default value is False).
 
 ## v1.1.5.6
 
