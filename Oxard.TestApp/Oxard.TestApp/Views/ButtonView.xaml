@@ -5,7 +5,6 @@
     xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
     xmlns:components="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
     xmlns:defaultstyles="clr-namespace:Oxard.XControls.DefaultStyles;assembly=Oxard.XControls.DefaultStyles"
-    xmlns:usercontrols="clr-namespace:Oxard.TestApp.UserControls"
     BackgroundColor="{StaticResource Key={x:Static defaultstyles:ColorKeys.ContentBackgroundColor}}"
     x:Class="Oxard.TestApp.Views.ButtonView">
     <ContentView.Resources>
@@ -80,7 +79,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <!--<components:LongPressButton
+            <components:LongPressButton
                 VerticalContentOptions="Center"
                 Style="{StaticResource LongPressButtonDefaultStyle}"
                 Clicked="LongPressButton_Clicked"
@@ -88,7 +87,7 @@
                 <Label
                     TextColor="White"
                     Text="Click me or long press!" />
-            </components:LongPressButton>-->
+            </components:LongPressButton>
 
             <Label
                 Grid.Column="1"
@@ -97,7 +96,7 @@
                 TextColor="White" />
         </Grid>
 
-        <!--<Label
+        <Label
             VerticalOptions="Center"
             TextColor="White"
             Grid.Row="2"
@@ -214,6 +213,6 @@
                         Text="Choice 4" />
                 </components:RadioButton>
             </StackLayout>
-        </StackLayout>-->
+        </StackLayout>
     </Grid>
 </ContentView>

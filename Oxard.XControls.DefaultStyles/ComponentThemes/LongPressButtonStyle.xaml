@@ -2,13 +2,13 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:components="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
-    xmlns:shapes="clr-namespace:Oxard.XControls.Shapes;assembly=Oxard.XControls"
     xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes"
+    xmlns:graphics="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls"
     x:Class="Oxard.XControls.DefaultStyles.ComponentThemes.LongPressButtonStyle">
     <ResourceDictionary.MergedDictionaries>
         <componentthemes:Colors />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <Style
         x:Key="LongPressButtonDefaultStyle"
         TargetType="components:LongPressButton">
@@ -18,25 +18,50 @@
                 Property="IsPressed"
                 Value="True">
                 <Setter
-                    Property="Background"
-                    Value="{StaticResource ButtonPressedBackgroundBrush}" />
+                    Property="Background">
+                    <Setter.Value>
+                        <graphics:RectangleBrush
+                            CornerRadius="2"
+                            Fill="{StaticResource ButtonPressedBackgroundBrush}" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger
+                TargetType="components:LongPressButton"
+                Property="IsEnabled"
+                Value="False">
+                <Setter
+                    Property="Background">
+                    <Setter.Value>
+                        <graphics:RectangleBrush
+                            CornerRadius="2"
+                            Fill="{StaticResource ButtonDisableBackgroundBrush}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter
+                    Property="Foreground"
+                    Value="{StaticResource ButtonDisableForegroundColor}" />
             </Trigger>
         </Style.Triggers>
         <Setter
-            Property="Background"
-            Value="{StaticResource ButtonBackgroundBrush}" />
-        <Setter Property="ControlTemplate">
+            Property="Foreground"
+            Value="{StaticResource ButtonForegroundColor}" />
+        <Setter
+            Property="Background">
+            <Setter.Value>
+                <graphics:RectangleBrush
+                    CornerRadius="2"
+                    Fill="{StaticResource ButtonBackgroundBrush}" />
+            </Setter.Value>
+        </Setter>
+        <Setter
+            Property="ControlTemplate">
             <Setter.Value>
                 <ControlTemplate>
-                    <Grid>
-                        <shapes:Rectangle
-                            CornerRadius="2"
-                            Fill="{TemplateBinding Background}" />
-                        <ContentPresenter
-                            Margin="10,5"
-                            VerticalOptions="{TemplateBinding VerticalContentOptions}"
-                            HorizontalOptions="{TemplateBinding HorizontalContentOptions}" />
-                    </Grid>
+                    <ContentPresenter
+                        Margin="10,5"
+                        VerticalOptions="{TemplateBinding VerticalContentOptions}"
+                        HorizontalOptions="{TemplateBinding HorizontalContentOptions}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

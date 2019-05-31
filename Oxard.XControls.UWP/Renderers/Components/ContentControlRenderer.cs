@@ -50,7 +50,10 @@ namespace Oxard.XControls.UWP.Renderers.Components
         private void ElementOnSizeChanged(object sender, System.EventArgs e)
         {
             if (this.Element.Background is DrawingBrush drawable)
+            {
                 drawable.SetSize(this.Element.Width, this.Element.Height);
+                this.drawingPath.RefreshDrawable();
+            }
         }
 
         private void ApplyIsBackgroundManagedByStyle()

@@ -1,6 +1,7 @@
 ﻿using Oxard.XControls.Graphics;
 using Oxard.XControls.Helpers;
 using System;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace Oxard.XControls.Shapes

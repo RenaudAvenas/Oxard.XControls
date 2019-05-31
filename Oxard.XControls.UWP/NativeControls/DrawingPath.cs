@@ -31,6 +31,11 @@ namespace Oxard.XControls.UWP.NativeControls
             set { SetValue(DrawableProperty, value); }
         }
 
+        public void RefreshDrawable()
+        {
+            this.UpdatePath();
+        }
+
         private static void OnDrawablePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             (d as DrawingPath)?.OnDrawableChanged(e.OldValue as IDrawable);
@@ -56,7 +61,7 @@ namespace Oxard.XControls.UWP.NativeControls
 
             this.Drawable.GeometryChanged += this.DrawableOnGeometryChanged;
             if (this.Drawable is INotifyPropertyChanged notifier)
-                notifier.PropertyChanged -= this.NotifierPropertyChanged;
+                notifier.PropertyChanged += this.NotifierPropertyChanged;
         }
 
         private void NotifierPropertyChanged(object sender, PropertyChangedEventArgs e)

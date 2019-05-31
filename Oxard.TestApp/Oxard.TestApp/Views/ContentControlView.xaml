@@ -14,36 +14,36 @@
             <ResourceDictionary.MergedDictionaries>
                 <componentthemes:Colors />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style
+                TargetType="components:ContentControl">
+                <Setter
+                    Property="Background"
+                    Value="{x:Static graphics:Brushes.AliceBlue}" />
+                <Setter
+                    Property="BorderThickness"
+                    Value="1" />
+                <Setter
+                    Property="BorderColor"
+                    Value="Black" />
+                <Setter
+                    Property="ControlTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Grid>
+                                <shapes:Rectangle
+                                    Fill="{TemplateBinding Background}"
+                                    StrokeThickness="{TemplateBinding BorderThickness}"
+                                    Stroke="{TemplateBinding BorderColor}" />
+                                <ContentPresenter
+                                    HorizontalOptions="{TemplateBinding HorizontalContentOptions}"
+                                    VerticalOptions="{TemplateBinding VerticalContentOptions}" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
-        
-        <Style
-            TargetType="components:ContentControl">
-            <Setter
-                Property="Background"
-                Value="{x:Static graphics:Brushes.AliceBlue}" />
-            <Setter
-                Property="BorderThickness"
-                Value="1" />
-            <Setter
-                Property="BorderColor"
-                Value="Black" />
-            <Setter
-                Property="ControlTemplate">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Grid>
-                            <shapes:Rectangle
-                                Fill="{TemplateBinding Background}"
-                                StrokeThickness="{TemplateBinding BorderThickness}"
-                                Stroke="{TemplateBinding BorderColor}" />
-                            <ContentPresenter
-                                HorizontalOptions="{TemplateBinding HorizontalContentOptions}"
-                                VerticalOptions="{TemplateBinding VerticalContentOptions}" />
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </ContentView.Resources>
 
     <components:ContentControl
