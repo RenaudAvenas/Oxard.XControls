@@ -48,7 +48,7 @@ namespace Oxard.XControls.Droid.Renderers.Shapes
 
         protected virtual List<string> GetInvalidateDrawProperties()
         {
-            return new List<string> { nameof(this.Element.Fill), nameof(this.Element.Stroke), nameof(this.Element.StrokeThickness), nameof(this.Element.Stretch), nameof(this.Element.StrokeDashArray) };
+            return new List<string> { nameof(this.Element.Fill), nameof(this.Element.Stroke), nameof(this.Element.Stretch), nameof(this.Element.StrokeDashArray) };
         }
 
         protected override void Dispose(bool disposing)

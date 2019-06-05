@@ -145,16 +145,14 @@
                     TextColor="White"
                     Text="Choice 1" />
             </components:RadioButton>
-            <ContentView>
-                <components:RadioButton
-                    Style="{StaticResource RadioButtonDefaultStyle}"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center">
-                    <Label
-                        TextColor="White"
-                        Text="Choice 2" />
-                </components:RadioButton>
-            </ContentView>
+            <components:RadioButton
+                Style="{StaticResource RadioButtonDefaultStyle}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <Label
+                    TextColor="White"
+                    Text="Choice 2" />
+            </components:RadioButton>
         </StackLayout>
 
         <Label

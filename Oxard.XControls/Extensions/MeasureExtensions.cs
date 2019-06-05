@@ -20,18 +20,14 @@ namespace Oxard.XControls.Helpers
         /// <returns>A SizeRequest with correct sizes for measure pass</returns>
         public static SizeRequest GetStandardMeasure(this View view, double widthConstraint, double heightConstraint, double defaultValue = 0d)
         {
-            double widthConsideredConstraint = widthConstraint;
-            double heightConsideredConstraint = heightConstraint;
+            double widthConsideredConstraint = view.HorizontalOptions.Expands ? widthConstraint : defaultValue;
+            double heightConsideredConstraint = view.VerticalOptions.Expands ? heightConstraint : defaultValue;
 
             if (view.WidthRequest >= 0d)
                 widthConsideredConstraint = view.WidthRequest;
-            else if (!double.IsInfinity(widthConstraint) && !view.HorizontalOptions.Expands && view.HorizontalOptions.Alignment != LayoutAlignment.Fill)
-                widthConsideredConstraint = defaultValue;
 
             if (view.HeightRequest >= 0d)
                 heightConsideredConstraint = view.HeightRequest;
-            else if (!double.IsInfinity(heightConstraint) && !view.VerticalOptions.Expands && view.VerticalOptions.Alignment != LayoutAlignment.Fill)
-                heightConsideredConstraint = defaultValue;
 
             return new SizeRequest(new Size(widthConsideredConstraint.TranslateIfInfinity(defaultValue), heightConsideredConstraint.TranslateIfInfinity(defaultValue)));
         }
