@@ -1,7 +1,7 @@
 ﻿using System;
 using Oxard.XControls.Graphics;
-using Oxard.XControls.Shapes;
 using Xamarin.Forms;
+using CornerRadius = Oxard.XControls.Shapes.CornerRadius;
 
 namespace Oxard.XControls.Droid.Graphics
 {

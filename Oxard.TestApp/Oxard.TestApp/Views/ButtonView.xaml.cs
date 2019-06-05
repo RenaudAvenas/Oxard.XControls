@@ -12,24 +12,24 @@ namespace Oxard.TestApp.Views
             InitializeComponent();
         }
 
-        //private void LongPressButton_Clicked(object sender, EventArgs e)
-        //{
-        //    this.ClickOrLongPressedInfoLabel.Text = "Clicked!";
-        //    this.AnimateLongPressedInfoLabel();
-        //}
+        private void LongPressButton_Clicked(object sender, EventArgs e)
+        {
+            this.ClickOrLongPressedInfoLabel.Text = "Clicked!";
+            this.AnimateLongPressedInfoLabel();
+        }
 
-        //private void LongPressButton_LongPressed(object sender, EventArgs e)
-        //{
+        private void LongPressButton_LongPressed(object sender, EventArgs e)
+        {
 
-        //    this.ClickOrLongPressedInfoLabel.Text = "LongPressed!";
-        //    this.AnimateLongPressedInfoLabel();
-        //}
+            this.ClickOrLongPressedInfoLabel.Text = "LongPressed!";
+            this.AnimateLongPressedInfoLabel();
+        }
 
-        //private void AnimateLongPressedInfoLabel()
-        //{
-        //    ViewExtensions.CancelAnimations(this.ClickOrLongPressedInfoLabel);
-        //    this.ClickOrLongPressedInfoLabel.Opacity = 1;
-        //    this.ClickOrLongPressedInfoLabel.FadeTo(0);
-        //}
+        private void AnimateLongPressedInfoLabel()
+        {
+            ViewExtensions.CancelAnimations(this.ClickOrLongPressedInfoLabel);
+            this.ClickOrLongPressedInfoLabel.Opacity = 1;
+            this.ClickOrLongPressedInfoLabel.FadeTo(0);
+        }
     }
 }

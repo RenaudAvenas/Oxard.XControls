@@ -1,6 +1,12 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## v2.2.6.8
+
+- Xamarin.Forms
+
+The package and solution now reference Xamarin.Forms 4.0.0.425677
+
 ## v1.2.6.8
 
 - Android ContentControlRenderer
