@@ -15,6 +15,8 @@ Oxard controls are now under a XmlnsDefinition : https://github.com/RenaudAvenas
 
 Measurement of shapes are updated to match with new measurement of Xamarin 4. StrokeThickness now update the geometry.
 
+Property IsClosed was added to Geometry class to specify if your shape is closed or not.
+
 ## v1.2.6.8
 
 - Android ContentControlRenderer

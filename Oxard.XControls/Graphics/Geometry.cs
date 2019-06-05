@@ -28,6 +28,11 @@ namespace Oxard.XControls.Graphics
             this.startPoint = this.projectionDefinition.ProjectPoint(0d, 0d);
         }
 
+        /// <summary>
+        /// Get or set a value that indicate if the geometry path is closed or not
+        /// </summary>
+        public bool IsClosed { get; set; }
+
         public Geometry StartAt(Point position)
         {
             this.startPoint = this.ProjectPoint(position);
@@ -117,9 +122,15 @@ namespace Oxard.XControls.Graphics
             return new GeometryReader(this.startPoint, this.segments);
         }
 
-        public void ClosePath()
+        /// <summary>
+        /// Return to the start point with a line and set the <see cref="IsClosed"/> property to true
+        /// </summary>
+        /// <returns>The current geometry</returns>
+        public Geometry ClosePath()
         {
             this.segments.Add(new LineSegment(this.startPoint));
+            this.IsClosed = true;
+            return this;
         }
 
         private class ProjectionDefinition

@@ -112,7 +112,7 @@ namespace Oxard.XControls.UWP.NativeControls
             var reader = this.Drawable.Geometry.GetReader();
 
             var geometry = new PathGeometry();
-            var figure = new PathFigure { IsClosed = true, StartPoint = reader.FromPoint.ToPoint() };
+            var figure = new PathFigure { IsClosed = this.Drawable.Geometry.IsClosed, StartPoint = reader.FromPoint.ToPoint() };
 
             var segment = reader.GetNext();
             while (segment != null)

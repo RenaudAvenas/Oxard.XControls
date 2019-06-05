@@ -67,6 +67,7 @@ namespace Oxard.XControls.Droid.Extensions
             var reader = drawable.Geometry.GetReader();
             var segment = reader.GetNext();
             path.MoveTo(androidContext.ToPixels(reader.FromPoint.X), androidContext.ToPixels(reader.FromPoint.Y));
+            
             while (segment != null)
             {
                 var interpretor = InterpretorManager.GetForType(segment.GetType());
@@ -81,6 +82,9 @@ namespace Oxard.XControls.Droid.Extensions
 
                 segment = reader.GetNext();
             }
+
+            if (drawable.Geometry.IsClosed)
+                path.Close();
 
             return path;
         }

@@ -46,10 +46,7 @@ namespace Oxard.XControls.Graphics
             else
                 geometry.LineTo(0, height);
 
-            geometry.ClosePath();
-
-            return geometry;
-
+            return geometry.ClosePath();
         }
 
         public static Geometry GetEllipse(double width, double height, double strokeThickness)
@@ -64,7 +61,8 @@ namespace Oxard.XControls.Graphics
                  .CornerTo(radiusX, 0, SweepDirection.Clockwise)
                  .CornerTo(width, radiusY, SweepDirection.Clockwise)
                  .CornerTo(radiusX, height, SweepDirection.Clockwise)
-                 .CornerTo(0, radiusY, SweepDirection.Clockwise);
+                 .CornerTo(0, radiusY, SweepDirection.Clockwise)
+                 .ClosePath();
         }
     }
 }
