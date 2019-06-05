@@ -7,6 +7,14 @@ Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nu
 
 The package and solution now reference Xamarin.Forms 4.0.0.425677
 
+- XmlnsDefinition
+
+Oxard controls are now under a XmlnsDefinition : https://github.com/RenaudAvenas/Oxard.XControls
+
+- Shapes
+
+Measurement of shapes are updated to match with new measurement of Xamarin 4. StrokeThickness now update the geometry.
+
 ## v1.2.6.8
 
 - Android ContentControlRenderer
