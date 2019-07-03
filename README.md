@@ -1,6 +1,12 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## v2.2.6.9
+
+- TouchManager
+
+There was a bug on long press when tapping many times before long press time that causes simple tap considered as long press tap.
+
 ## v2.2.6.8
 
 - Xamarin.Forms

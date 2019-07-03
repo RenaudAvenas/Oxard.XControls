@@ -13,7 +13,7 @@
                 Height="Auto" />
         </Grid.RowDefinitions>
 
-        <views:ShapeView
+        <views:ButtonView
             x:Name="CurrentView" />
 
         <Button

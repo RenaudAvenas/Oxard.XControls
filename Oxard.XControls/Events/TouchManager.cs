@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -11,6 +12,8 @@ namespace Oxard.XControls.Events
         private const double moveTolerance = 10;
         private StartTouch currentStartTouch;
         private bool currentTouchDisabled;
+        private Task longPressDelayTask;
+        private CancellationTokenSource cancellationTokenSource;
 
         public TouchManager()
         {
@@ -39,7 +42,7 @@ namespace Oxard.XControls.Events
         /// Get a value that indicates if a click is in progress.
         /// </summary>
         public bool IsClicking { get; private set; }
-        
+
         public void OnTouchCancel(TouchEventArgs touchEventArgs)
         {
             if (this.currentTouchDisabled)
@@ -57,16 +60,25 @@ namespace Oxard.XControls.Events
         {
             this.currentStartTouch = new StartTouch(touchEventArgs.Position);
             this.IsClicking = true;
-            Task.Delay(this.LongPressTime).ContinueWith(t =>
-            {
-                if (this.currentStartTouch == null)
-                    return;
 
+            if (this.cancellationTokenSource != null)
+            {
+                this.cancellationTokenSource.Cancel();
+                this.cancellationTokenSource = null;
+            }
+
+            this.cancellationTokenSource = new CancellationTokenSource();
+
+            this.longPressDelayTask = Task.Delay(this.LongPressTime, cancellationTokenSource.Token);
+            this.longPressDelayTask.ContinueWith(t =>
+            {
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    if (this.currentStartTouch == null)
-                        return;
+                    this.cancellationTokenSource = null;
 
+                    if (this.currentStartTouch == null || t.IsCanceled)
+                        return;
+                    
                     if (this.LongPressCancelClick)
                         this.IsClicking = false;
 
@@ -120,6 +132,13 @@ namespace Oxard.XControls.Events
                 this.Clicked?.Invoke(this, EventArgs.Empty);
 
             this.IsClicking = false;
+
+            if (this.cancellationTokenSource != null)
+            {
+                this.cancellationTokenSource.Cancel();
+                this.cancellationTokenSource = null;
+            }
+
             this.TouchUp?.Invoke(this, touchEventArgs);
         }
 
@@ -129,7 +148,7 @@ namespace Oxard.XControls.Events
             this.currentStartTouch = null;
             this.currentTouchDisabled = true;
         }
-        
+
         private class StartTouch
         {
             public StartTouch(Point position)
