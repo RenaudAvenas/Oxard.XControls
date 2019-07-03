@@ -1,24 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
+<MasterDetailPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:Oxard.TestApp.Views"
     x:Class="Oxard.TestApp.MainPage">
+    <MasterDetailPage.Master>
+        <ContentPage
+            Title="Views">
+            <ListView
+                ItemSelected="ListViewItemSelected"
+                ItemsSource="{Binding Path=PageModels}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label
+                                Text="{Binding Path=Name}" />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ContentPage>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <ContentPage>
+            <Grid
+                x:Name="Grid">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition
+                        Height="Auto" />
+                </Grid.RowDefinitions>
 
-    <Grid
-        x:Name="Grid">
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition
-                Height="Auto" />
-        </Grid.RowDefinitions>
+                <ContentView
+                    x:Name="CurrentView" />
 
-        <views:ButtonView
-            x:Name="CurrentView" />
-
-        <Button
-            Grid.Row="1"
-            Text="Destruction test"
-            Clicked="ButtonOnClicked" />
-    </Grid>
-</ContentPage>
+                <Button
+                    Grid.Row="1"
+                    Text="Destruction test"
+                    Clicked="ButtonOnClicked" />
+            </Grid>
+        </ContentPage>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>
