@@ -1,31 +1,35 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView
+<TemplatedView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="https://github.com/RenaudAvenas/Oxard.XControls"
     x:Class="Oxard.TestApp.UserControls.PropertyListControl">
-    <ContentView.ControlTemplate>
+    <TemplatedView.ControlTemplate>
         <ControlTemplate>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                        Width="Auto" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition
-                        Height="Auto" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
+            <ScrollView
+                Grid.Row="1">
+                <controls:ItemsControl
+                    ItemsSource="{TemplateBinding Path=Properties}">
+                    <controls:ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition
+                                        Width="100" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
 
-                <Label
-                    Text="Property to change : " />
-                <Entry
-                    Text="{TemplateBinding PropertyValue}"
-                    Grid.Column="1" />
-                <ContentPresenter
-                    Grid.Row="1"
-                    Grid.ColumnSpan="2" />
-            </Grid>
+                                <Label
+                                    TextColor="White"
+                                    Text="{Binding Path=Property.Name}" />
+                                <Entry
+                                    Text="{Binding Value}"
+                                    Grid.Column="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </controls:ItemsControl.ItemTemplate>
+                </controls:ItemsControl>
+            </ScrollView>
         </ControlTemplate>
-    </ContentView.ControlTemplate>
-</ContentView>
+    </TemplatedView.ControlTemplate>
+</TemplatedView>

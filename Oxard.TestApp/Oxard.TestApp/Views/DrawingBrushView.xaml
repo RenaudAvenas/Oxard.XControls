@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shapes="clr-namespace:Oxard.XControls.Shapes;assembly=Oxard.XControls"
+    xmlns:graphics="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls"
+    xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
+    xmlns:defaultstyles="clr-namespace:Oxard.XControls.DefaultStyles;assembly=Oxard.XControls.DefaultStyles"
+    xmlns:usercontrols="clr-namespace:Oxard.TestApp.UserControls"
+    mc:Ignorable="d"
+    BackgroundColor="{StaticResource Key={x:Static defaultstyles:ColorKeys.ContentBackgroundColor}}"
+    x:Class="Oxard.TestApp.Views.DrawingBrushView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <componentthemes:Colors />
+                <componentthemes:ButtonStyle />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <shapes:Rectangle
+            HeightRequest="50"
+            x:Name="Control"
+            Stroke="Blue"
+            StrokeThickness="1"
+            Fill="{x:Static graphics:Brushes.White}"
+            Margin="30"
+            HorizontalOptions="Center"
+            WidthRequest="100" />
+
+        <usercontrols:PropertyListControl
+            Grid.Row="1"
+            Instance="{x:Reference Control}" />
+    </Grid>
+</ContentView>
