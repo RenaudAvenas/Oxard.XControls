@@ -2,4 +2,4 @@
 using Oxard.XControls.Droid.Renderers.Shapes;
 using Xamarin.Forms;
 
-[assembly: ExportRenderer(typeof(RandomShape), typeof(ShapeRenderer))]
+[assembly: ExportRenderer(typeof(RandomShape), typeof(FastShapeRenderer))]

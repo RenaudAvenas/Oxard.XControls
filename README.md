@@ -1,6 +1,12 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## v2.2.7.9
+
+- Shape and there renderer
+
+Shapes are treated by fast renderer for Android. The ShapeRenderer already exists but all oxard shapes are managed by FastShapeRenderer.
+
 ## v2.2.6.9
 
 - TouchManager

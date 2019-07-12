@@ -25,6 +25,9 @@ namespace Oxard.XControls.Droid.NativeControls
 
         public override void Draw(Canvas canvas)
         {
+            if (this.Source == null)
+                return;
+
             this.Source.ToDrawable(this.Context).Draw(canvas);
         }
     }

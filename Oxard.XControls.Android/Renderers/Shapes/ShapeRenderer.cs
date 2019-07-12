@@ -1,4 +1,5 @@
 using Android.Content;
+using Android.Views;
 using Oxard.XControls.Droid.NativeControls;
 using Oxard.XControls.Droid.Renderers.Shapes;
 using Oxard.XControls.Shapes;
@@ -8,8 +9,8 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(Oxard.XControls.Shapes.Rectangle), typeof(ShapeRenderer))]
-[assembly: ExportRenderer(typeof(Ellipse), typeof(ShapeRenderer))]
+[assembly: ExportRenderer(typeof(Oxard.XControls.Shapes.Rectangle), typeof(FastShapeRenderer))]
+[assembly: ExportRenderer(typeof(Ellipse), typeof(FastShapeRenderer))]
 
 namespace Oxard.XControls.Droid.Renderers.Shapes
 {
@@ -60,6 +61,73 @@ namespace Oxard.XControls.Droid.Renderers.Shapes
         private void ElementOnGeometryChanged(object sender, EventArgs eventArgs)
         {
             this.Control?.Invalidate();
+        }
+    }
+
+    public class FastShapeRenderer : ShapeView, IVisualElementRenderer
+    {
+        public FastShapeRenderer(Context context) : base(context)
+        {
+            this.Tracker = new VisualElementTracker(this);
+        }
+
+        public Shape Element { get; private set; }
+
+        VisualElement IVisualElementRenderer.Element => this.Element;
+
+        public VisualElementTracker Tracker { get; private set; }
+
+        public ViewGroup ViewGroup => null;
+
+        public Android.Views.View View => this;
+
+        public event EventHandler<VisualElementChangedEventArgs> ElementChanged;
+        public event EventHandler<PropertyChangedEventArgs> ElementPropertyChanged;
+
+        void IDisposable.Dispose()
+        {
+            this.Element.PropertyChanged -= this.ElementOnPropertyChanged;
+            this.Tracker.Dispose();
+            base.Dispose();
+        }
+
+        public SizeRequest GetDesiredSize(int widthConstraint, int heightConstraint)
+        {
+            return new SizeRequest();
+        }
+
+        public void SetElement(VisualElement element)
+        {
+            var oldElement = this.Element;
+            if (oldElement != null)
+                oldElement.PropertyChanged -= ElementOnPropertyChanged;
+            this.Element = (Shape)element;
+            this.Source = this.Element;
+            if (element != null)
+                this.Element.PropertyChanged += ElementOnPropertyChanged;
+
+            this.ElementChanged?.Invoke(this, new VisualElementChangedEventArgs(oldElement, this.Element));
+        }
+
+        protected virtual List<string> GetInvalidateDrawProperties()
+        {
+            return new List<string> { nameof(this.Element.Fill), nameof(this.Element.Stroke), nameof(this.Element.Stretch), nameof(this.Element.StrokeDashArray) };
+        }
+
+        private void ElementOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.ElementPropertyChanged?.Invoke(this, e);
+            if (this.GetInvalidateDrawProperties().Contains(e.PropertyName))
+                this.Invalidate();
+        }
+
+        public void SetLabelFor(int? id)
+        {
+        }
+
+        public void UpdateLayout()
+        {
+            this.Tracker.UpdateLayout();
         }
     }
 }

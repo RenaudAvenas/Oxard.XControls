@@ -35,6 +35,7 @@
             Margin="10"
             BackgroundColor="CornflowerBlue" />
         <shapes:Rectangle
+            Rotation="10"
             CornerRadius="20"
             Stroke="Black"
             StrokeThickness="0"
