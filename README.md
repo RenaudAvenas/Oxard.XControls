@@ -1,6 +1,12 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## v2.2.7.10
+
+- ShapeRenderer
+
+Fixed a bug on FastRenderer for shapes that doesn't override Dispose correctly and add GeometryChanged event subscritpion.
+
 ## v2.2.7.9
 
 - Shape and there renderer
