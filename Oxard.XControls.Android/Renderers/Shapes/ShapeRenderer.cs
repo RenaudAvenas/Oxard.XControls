@@ -84,11 +84,12 @@ namespace Oxard.XControls.Droid.Renderers.Shapes
         public event EventHandler<VisualElementChangedEventArgs> ElementChanged;
         public event EventHandler<PropertyChangedEventArgs> ElementPropertyChanged;
 
-        void IDisposable.Dispose()
+        protected override void Dispose(bool disposing)
         {
+            this.Element.GeometryChanged -= this.ElementOnGeometryChanged;
             this.Element.PropertyChanged -= this.ElementOnPropertyChanged;
             this.Tracker.Dispose();
-            base.Dispose();
+            base.Dispose(disposing);
         }
 
         public SizeRequest GetDesiredSize(int widthConstraint, int heightConstraint)
@@ -100,13 +101,30 @@ namespace Oxard.XControls.Droid.Renderers.Shapes
         {
             var oldElement = this.Element;
             if (oldElement != null)
+            {
                 oldElement.PropertyChanged -= ElementOnPropertyChanged;
+                oldElement.GeometryChanged -= this.ElementOnGeometryChanged;
+            }
+
             this.Element = (Shape)element;
             this.Source = this.Element;
             if (element != null)
+            {
                 this.Element.PropertyChanged += ElementOnPropertyChanged;
+                this.Element.GeometryChanged += ElementOnGeometryChanged;
+                this.Invalidate();
+            }
 
             this.ElementChanged?.Invoke(this, new VisualElementChangedEventArgs(oldElement, this.Element));
+        }
+
+        public void SetLabelFor(int? id)
+        {
+        }
+
+        public void UpdateLayout()
+        {
+            this.Tracker.UpdateLayout();
         }
 
         protected virtual List<string> GetInvalidateDrawProperties()
@@ -121,13 +139,9 @@ namespace Oxard.XControls.Droid.Renderers.Shapes
                 this.Invalidate();
         }
 
-        public void SetLabelFor(int? id)
+        private void ElementOnGeometryChanged(object sender, EventArgs e)
         {
-        }
-
-        public void UpdateLayout()
-        {
-            this.Tracker.UpdateLayout();
+            this.Invalidate();
         }
     }
 }
