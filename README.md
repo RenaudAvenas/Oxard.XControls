@@ -1,6 +1,12 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## v2.2.8.10
+
+- DrawingBrush
+
+Adding attached properties to specified changes on a DrawingBrush without create a new DrawingBrush
+
 ## v2.2.7.10
 
 - ShapeRenderer

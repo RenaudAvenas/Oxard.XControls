@@ -6,13 +6,22 @@ using Xamarin.Forms;
 
 namespace Oxard.XControls.Components
 {
+    /// <summary>
+    /// Inherits from <see cref="CheckBox"/> but check is exclusive foreach other radio button on the same layout or <see cref="GroupName"/>
+    /// </summary>
     public class RadioButton : CheckBox
     {
         private static readonly Dictionary<string, List<WeakReference<RadioButton>>> GroupNamedRadioButtons = new Dictionary<string, List<WeakReference<RadioButton>>>();
         private string groupName;
 
+        /// <summary>
+        /// Get or set a value indicates if the radio button can be unselected by clicking on it when it is already selected
+        /// </summary>
         public bool IsUncheckable { get; set; }
 
+        /// <summary>
+        /// Get or set the group name where the radio button is
+        /// </summary>
         public string GroupName
         {
             get => this.groupName;
@@ -26,6 +35,9 @@ namespace Oxard.XControls.Components
             }
         }
 
+        /// <summary>
+        /// Invoke <see cref="Button.Clicked"/> event and call Execute method of <see cref="Command"/> property if not checked and unselect other radio buttons
+        /// </summary>
         protected override void OnClicked()
         {
             if (this.IsChecked && !this.IsUncheckable)

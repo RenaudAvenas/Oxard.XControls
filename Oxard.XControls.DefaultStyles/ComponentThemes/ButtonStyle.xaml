@@ -19,26 +19,16 @@
                 Property="IsPressed"
                 Value="True">
                 <Setter
-                    Property="Background">
-                    <Setter.Value>
-                        <graphics:RectangleBrush
-                            CornerRadius="2"
-                            Fill="{StaticResource ButtonPressedBackgroundBrush}" />
-                    </Setter.Value>
-                </Setter>
+                    Property="graphics:DrawingBrush.AttachedFill"
+                    Value="{StaticResource ButtonPressedBackgroundBrush}" />
             </Trigger>
             <Trigger
                 TargetType="components:Button"
                 Property="IsEnabled"
                 Value="False">
                 <Setter
-                    Property="Background">
-                    <Setter.Value>
-                        <graphics:RectangleBrush
-                            CornerRadius="2"
-                            Fill="{StaticResource ButtonDisableBackgroundBrush}" />
-                    </Setter.Value>
-                </Setter>
+                    Property="graphics:DrawingBrush.AttachedFill"
+                    Value="{StaticResource ButtonDisableBackgroundBrush}" />
                 <Setter
                     Property="Foreground"
                     Value="{StaticResource ButtonDisableForegroundColor}" />
@@ -51,8 +41,8 @@
             Property="Background">
             <Setter.Value>
                 <graphics:RectangleBrush
-                    CornerRadius="2"
-                    Fill="{StaticResource ButtonBackgroundBrush}" />
+                    Fill="{StaticResource ButtonBackgroundBrush}"
+                    CornerRadius="2" />
             </Setter.Value>
         </Setter>
         <Setter

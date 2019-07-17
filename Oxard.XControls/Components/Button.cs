@@ -5,13 +5,31 @@ using Xamarin.Forms;
 
 namespace Oxard.XControls.Components
 {
+    /// <summary>
+    /// Button class inherits from <see cref="ContentControl"/> and is clickable
+    /// </summary>
     public class Button : ContentControl
     {
+        /// <summary>
+        /// Identifies the Command dependency property.
+        /// </summary>
         public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(Button), propertyChanged: CommandPropertyChanged);
+        /// <summary>
+        /// Identifies the CommandParameter dependency property.
+        /// </summary>
         public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(Button), propertyChanged: CommandParameterPropertyChanged);
+        /// <summary>
+        /// Identifies the IsPressed readonly dependency property.
+        /// </summary>
         public static readonly BindablePropertyKey IsPressedPropertyKey = BindableProperty.CreateReadOnly(nameof(IsPressed), typeof(bool), typeof(Button), false);
+        /// <summary>
+        /// Identifies the IsPressed dependency property.
+        /// </summary>
         public static BindableProperty IsPressedProperty = IsPressedPropertyKey.BindableProperty;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public Button()
         {
             this.TouchManager = new TouchManager();

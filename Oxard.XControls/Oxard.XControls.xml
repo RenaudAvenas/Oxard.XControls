@@ -1,0 +1,650 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Oxard.XControls</name>
+    </assembly>
+    <members>
+        <member name="T:Oxard.XControls.Components.Button">
+            <summary>
+            Button class inherits from <see cref="T:Oxard.XControls.Components.ContentControl"/> and is clickable
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.Button.CommandProperty">
+            <summary>
+            Identifies the Command dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.Button.CommandParameterProperty">
+            <summary>
+            Identifies the CommandParameter dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.Button.IsPressedPropertyKey">
+            <summary>
+            Identifies the IsPressed readonly dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.Button.IsPressedProperty">
+            <summary>
+            Identifies the IsPressed dependency property.
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Components.Button.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="E:Oxard.XControls.Components.Button.Clicked">
+            <summary>
+            Get event that is invoked when Button is clicked
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.Button.Command">
+            <summary>
+            Get or set a command for this button. Command will be executed when button is clicked
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.Button.CommandParameter">
+            <summary>
+            Get or set the command parameter to use with the <see cref="P:Oxard.XControls.Components.Button.Command"/>
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.Button.IsPressed">
+            <summary>
+            Get the press state of the button
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.Button.TouchManager">
+            <summary>
+            Get the <see cref="P:Oxard.XControls.Components.Button.TouchManager"/> used by the button to detect events
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Components.Button.OnClicked">
+            <summary>
+            Invoke <see cref="E:Oxard.XControls.Components.Button.Clicked"/> event and call Execute method of <see cref="P:Oxard.XControls.Components.Button.Command"/> property
+            </summary>
+        </member>
+        <member name="T:Oxard.XControls.Components.CheckBox">
+            <summary>
+            Inherits from button and adding a check feature
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.CheckBox.IsCheckedProperty">
+            <summary>
+            Identifies the IsChecked dependency property.
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.CheckBox.IsChecked">
+            <summary>
+            Get or set if the CheckBox is checked or not
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Components.CheckBox.OnClicked">
+            <summary>
+            Invoke <see cref="E:Oxard.XControls.Components.Button.Clicked"/> event and call Execute method of <see cref="T:Xamarin.Forms.Command"/> property. This method change the state of the CheckBox (see <see cref="P:Oxard.XControls.Components.CheckBox.IsChecked"/> property)
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Components.CheckBox.OnIsCheckedChanged">
+            <summary>
+            Called when <see cref="P:Oxard.XControls.Components.CheckBox.IsChecked"/> property has changed
+            </summary>
+        </member>
+        <member name="T:Oxard.XControls.Components.ContentControl">
+            <summary>
+            Class that manage a content width template or template selector
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.ContentControl.ContentTemplateProperty">
+            <summary>
+            Identifies the ContentTemplate dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.ContentControl.ContentTemplateSelectorProperty">
+            <summary>
+            Identifies the ContentTemplateSelector dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.ContentControl.BackgroundProperty">
+            <summary>
+            Identifies the Background dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.ContentControl.ForegroundProperty">
+            <summary>
+            Identifies the Foreground dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.ContentControl.BorderThicknessProperty">
+            <summary>
+            Identifies the BorderThickness dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.ContentControl.BorderColorProperty">
+            <summary>
+            Identifies the BorderColor dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.ContentControl.HorizontalContentOptionsProperty">
+            <summary>
+            Identifies the HorizontalContentOptions dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.ContentControl.VerticalContentOptionsProperty">
+            <summary>
+            Identifies the VerticalContentOptions dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.ContentControl.IsBackgroundManagedByStyleProperty">
+            <summary>
+            Identifies the IsBackgroundManagedByStyle dependency property.
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.ContentControl.ContentTemplate">
+            <summary>
+            Get or set the data template used to display content
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.ContentControl.ContentTemplateSelector">
+            <summary>
+            Get or set the data template selector used to display content
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.ContentControl.Background">
+            <summary>
+            Get or set the background of the ContentControl
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.ContentControl.Foreground">
+            <summary>
+            Get or set the foreground of the ContentControl
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.ContentControl.BorderThickness">
+            <summary>
+            Get or set the border thickness
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.ContentControl.BorderColor">
+            <summary>
+            Get or set the border color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.ContentControl.HorizontalContentOptions">
+            <summary>
+            Get or set the horizontal layout options used to display the content
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.ContentControl.VerticalContentOptions">
+            <summary>
+            Get or set the vertical layout options used to display the content
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.ContentControl.IsBackgroundManagedByStyle">
+            <summary>
+            Get or set a value that indicates if <see cref="P:Oxard.XControls.Components.ContentControl.Background"/> property is managed in the control template or not.
+            Set false to use a <see cref="T:Oxard.XControls.Effects.BackgroundEffect"/>.
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Components.ContentControl.OnBackgroundChanged(Oxard.XControls.Graphics.Brush)">
+            <summary>
+            Called when Background property changed
+            </summary>
+        </member>
+        <member name="T:Oxard.XControls.Components.LongPressButton">
+            <summary>
+            Inherits from <see cref="T:Oxard.XControls.Components.Button"/>. Manage a long press as a new command
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.LongPressButton.LongPressedCommandProperty">
+            <summary>
+            Identifies the LongPressedCommand dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.LongPressButton.LongPressedCommandParameterProperty">
+            <summary>
+            Identifies the LongPressedCommandParameter dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.LongPressButton.LongPressedTimeProperty">
+            <summary>
+            Identifies the LongPressedTime dependency property.
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Components.LongPressButton.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="E:Oxard.XControls.Components.LongPressButton.LongPressed">
+            <summary>
+            Event launched when a long press is detected.
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.LongPressButton.LongPressedCommand">
+            <summary>
+            Get or set the command to execute on a long press
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.LongPressButton.LongPressedCommandParameter">
+            <summary>
+            Get or set the parameter of <see cref="P:Oxard.XControls.Components.LongPressButton.LongPressedCommand"/>
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.LongPressButton.LongPressedTime">
+            <summary>
+            Get or set the time in millisecond of a long press
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Components.LongPressButton.OnLongPressed">
+            <summary>
+            Invoke the <see cref="E:Oxard.XControls.Components.LongPressButton.LongPressed"/> event.
+            </summary>
+        </member>
+        <member name="T:Oxard.XControls.Components.RadioButton">
+            <summary>
+            Inherits from <see cref="T:Oxard.XControls.Components.CheckBox"/> but check is exclusive foreach other radio button on the same layout or <see cref="P:Oxard.XControls.Components.RadioButton.GroupName"/>
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.RadioButton.IsUncheckable">
+            <summary>
+            Get or set a value indicates if the radio button can be unselected by clicking on it when it is already selected
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.RadioButton.GroupName">
+            <summary>
+            Get or set the group name where the radio button is
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Components.RadioButton.OnClicked">
+            <summary>
+            Invoke <see cref="E:Oxard.XControls.Components.Button.Clicked"/> event and call Execute method of <see cref="T:Xamarin.Forms.Command"/> property if not checked and unselect other radio buttons
+            </summary>
+        </member>
+        <member name="T:Oxard.XControls.Effects.BackgroundEffect">
+            <summary>
+            Add a background effect using a <see cref="T:Oxard.XControls.Graphics.Brush"/> instead of <see cref="T:Xamarin.Forms.Color"/> (BackgroundColor property will be overrided)
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Effects.BackgroundEffect.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Effects.BackgroundEffect.Background">
+            <summary>
+            Get or set the <see cref="T:Oxard.XControls.Graphics.Brush"/> to use as background
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Events.TouchManager.LongPressTime">
+            <summary>
+            Get or set the time in milliseconds when the manager consider a touch as a long press. The default value is 1000
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Events.TouchManager.LongPressCancelClick">
+            <summary>
+            Get or set a value indicates that a long press must cancel a click gesture or not. Default value is false
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Events.TouchManager.IsClicking">
+            <summary>
+            Get a value that indicates if a click is in progress.
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Extensions.VisualTreeExtensions.FindParent``1(Xamarin.Forms.Element)">
+            <summary>
+            Search the first parent of type <typeparamref name="T"/> in Element.Parent
+            </summary>
+            <typeparam name="T">Type of parent</typeparam>
+            <param name="element">Instance</param>
+            <returns>The parent of type <typeparamref name="T"/> if it be found otherwise null</returns>
+        </member>
+        <member name="M:Oxard.XControls.Extensions.VisualTreeExtensions.FindChildren``1(Xamarin.Forms.Element)">
+            <summary>
+            Search all child of type <typeparamref name="T"/> in this parent
+            </summary>
+            <typeparam name="T">Type of child</typeparam>
+            <param name="element">Parent instance</param>
+            <returns>All children of type <typeparamref name="T"/></returns>
+        </member>
+        <member name="M:Oxard.XControls.Helpers.MeasureExtensions.GetStandardMeasure(Xamarin.Forms.View,System.Double,System.Double,System.Double)">
+            <summary>
+            Return a standard SizeRequest based on widthConstraint and heightConstraint or Width and Height requested.
+            </summary>
+            <example>
+            If constraints are infinity and size undefined (equals to -1), this method returns a <see cref="T:Xamarin.Forms.SizeRequest"/> with <see cref="F:Xamarin.Forms.Size.Zero"/> (or <paramref name="defaultValue"/> if it is specified)
+            If constraints are infinity but width is set to 10, the return <see cref="T:Xamarin.Forms.SizeRequest"/> will have a <see cref="P:Xamarin.Forms.SizeRequest.Request"/> set to width = 10 and height = <paramref name="defaultValue"/>
+            If constraints are defined and size undefined but alignements are not stretch, this method returns a <see cref="T:Xamarin.Forms.SizeRequest"/> with <see cref="F:Xamarin.Forms.Size.Zero"/> (or <paramref name="defaultValue"/> if it is specified)
+            </example>
+            <param name="view">Element to measure</param>
+            <param name="widthConstraint">Width which can be infinity</param>
+            <param name="heightConstraint">Height which can be infinity</param>
+            <param name="defaultValue">Value to use if width or height are infinity and request size undefined</param>
+            <returns>A SizeRequest with correct sizes for measure pass</returns>
+        </member>
+        <member name="T:Oxard.XControls.Graphics.DrawingBrush">
+            <summary>
+            Class that can be used to draw a shape as a background via BackgroundEffect or BackgroundProperty
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Graphics.DrawingBrush.FillProperty">
+            <summary>
+            Identifies the Fill dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Graphics.DrawingBrush.StrokeProperty">
+            <summary>
+            Identifies the Stroke dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Graphics.DrawingBrush.StrokeThicknessProperty">
+            <summary>
+            Identifies the StrokeThickness dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Graphics.DrawingBrush.StrokeDashArrayProperty">
+            <summary>
+            Identifies the StrokeDash dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Graphics.DrawingBrush.AttachedFillProperty">
+            <summary>
+            Identifies the AttachedFill dependency property
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Graphics.DrawingBrush.AttachedStrokeProperty">
+            <summary>
+            Identifies the  AttachedStroke dependency property
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Graphics.DrawingBrush.AttachedStrokeThicknessProperty">
+            <summary>
+            Identifies the  AttachedStrokeThickness dependency property
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Graphics.DrawingBrush.AttachedStrokeDashArrayProperty">
+            <summary>
+            Identifies the  AttachedStrokeDashArray dependency property
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.DrawingBrush.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="E:Oxard.XControls.Graphics.DrawingBrush.GeometryChanged">
+            <summary>
+            Event called when shape geometry changed
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.DrawingBrush.Fill">
+            <summary>
+            Get or set the <see cref="T:Oxard.XControls.Graphics.Brush"/> used to fill the shape
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.DrawingBrush.Stroke">
+            <summary>
+            Get or set the <see cref="T:Xamarin.Forms.Color"/> used to draw the outline of the shape
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.DrawingBrush.StrokeThickness">
+            <summary>
+            Get or set the thickness of the stroke
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.DrawingBrush.StrokeDashArray">
+            <summary>
+            Get or set the stroke dash
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.DrawingBrush.Geometry">
+            <summary>
+            Get the geometry of the drawable
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.DrawingBrush.Width">
+            <summary>
+            Get the width of the drawable
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.DrawingBrush.Height">
+            <summary>
+            Get the height of the drawable
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.DrawingBrush.SetSize(System.Double,System.Double)">
+            <summary>
+            Called to define the <see cref="P:Oxard.XControls.Graphics.DrawingBrush.Width"/> and <see cref="P:Oxard.XControls.Graphics.DrawingBrush.Height"/> of the drawable
+            </summary>
+            <param name="width">Width of the drawable</param>
+            <param name="height">Height of the drawable</param>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.DrawingBrush.GetAttachedFill(Xamarin.Forms.BindableObject)">
+            <summary>
+            Get the AttachedFill property value for the specified bindable object
+            </summary>
+            <param name="bindableObject">Object on which we want the value of the property</param>
+            <returns>AttachFill property value for the bindable object</returns>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.DrawingBrush.SetAttachedFill(Xamarin.Forms.BindableObject,Oxard.XControls.Graphics.Brush)">
+            <summary>
+            Set the AttachedFill property value for the specified bindable object
+            </summary>
+            <param name="bindableObject">Object that takes the value</param>
+            <param name="value">The value to affect</param>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.DrawingBrush.GetAttachedStroke(Xamarin.Forms.BindableObject)">
+            <summary>
+            Get the AttachedStroke property value for the specified bindable object
+            </summary>
+            <param name="bindableObject">Object on which we want the value of the property</param>
+            <returns>AttachedStroke property value for the bindable object</returns>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.DrawingBrush.SetAttachedStroke(Xamarin.Forms.BindableObject,Xamarin.Forms.Color)">
+            <summary>
+            Set the AttachedStroke property value for the specified bindable object
+            </summary>
+            <param name="bindableObject">Object that takes the value</param>
+            <param name="value">The value to affect</param>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.DrawingBrush.GetAttachedStrokeDashArray(Xamarin.Forms.BindableObject)">
+            <summary>
+            Get the AttachedStrokeDashArray property value for the specified bindable object
+            </summary>
+            <param name="bindableObject">Object on which we want the value of the property</param>
+            <returns>AttachedStrokeDashArray property value for the bindable object</returns>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.DrawingBrush.SetAttachedStrokeDashArray(Xamarin.Forms.BindableObject,Xamarin.Forms.Point)">
+            <summary>
+            Set the AttachedStrokeDashArray property value for the specified bindable object
+            </summary>
+            <param name="bindableObject">Object that takes the value</param>
+            <param name="value">The value to affect</param>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.DrawingBrush.GetAttachedStrokeThickness(Xamarin.Forms.BindableObject)">
+            <summary>
+            Get the AttachedStrokeThickness property value for the specified bindable object
+            </summary>
+            <param name="bindableObject">Object on which we want the value of the property</param>
+            <returns>AttachedStrokeThickness property value for the bindable object</returns>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.DrawingBrush.SetAttachedStrokeThickness(Xamarin.Forms.BindableObject,System.Double)">
+            <summary>
+            Set the AttachedStrokeThickness property value for the specified bindable object
+            </summary>
+            <param name="bindableObject">Object that takes the value</param>
+            <param name="value">The value to affect</param>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.DrawingBrush.TryFoundAndDoOnDrawingBrush(Xamarin.Forms.BindableObject,System.Action{Oxard.XControls.Graphics.DrawingBrush})">
+            <summary>
+            Try to found the DrawingBrush in the specified <paramref name="bindable"/> (in Background property for <see cref="T:Oxard.XControls.Components.ContentControl"/> otherwise in <see cref="T:Oxard.XControls.Effects.BackgroundEffect"/>) and execute <paramref name="toDo"/> if found.
+            </summary>
+            <param name="bindable">Bindable object where try found drawing brush</param>
+            <param name="toDo">Action to execute if drawing brush found</param>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.DrawingBrush.OnSizeAllocated(System.Double,System.Double)">
+            <summary>
+            Called when instance size changed (Width and Height).
+            </summary>
+            <param name="width">New width</param>
+            <param name="height">New height</param>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.DrawingBrush.InvalidateGeometry">
+            <summary>
+            Launch <see cref="E:Oxard.XControls.Graphics.DrawingBrush.GeometryChanged"/> event. 
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Geometry.IsClosed">
+            <summary>
+            Get or set a value that indicate if the geometry path is closed or not
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.Geometry.AddSegment(Oxard.XControls.Graphics.GeometrySegment)">
+            <summary>
+            Add a segment to the geometry.
+            </summary>
+            <remarks>If your stroke are cropped be careful to use ProjectPoint method to take care of stroke thickness</remarks>
+            <param name="geometrySegment"></param>
+            <returns>Current geometry</returns>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.Geometry.ProjectPoint(Xamarin.Forms.Point)">
+            <summary>
+            Adapt point calculation to size and stroke thickness of the geometry
+            </summary>
+            <remarks>Use good constructor by passing size and stroke thickness to have an effect otherwise the source point will be returned</remarks>
+            <param name="point">Point to project</param>
+            <returns>Projected point</returns>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.Geometry.ProjectPoint(System.Double,System.Double)">
+            <summary>
+            Adapt point calculation to size and stroke thickness of the geometry
+            </summary>
+            <remarks>Use good constructor by passing size and stroke thickness to have an effect otherwise the source point will be returned</remarks>
+            <param name="x">X coordinate of point to transform</param>
+            <param name="y">Y coordinate of point to transform</param>
+            <returns>Projected point</returns>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.Geometry.ClosePath">
+            <summary>
+            Return to the start point with a line and set the <see cref="P:Oxard.XControls.Graphics.Geometry.IsClosed"/> property to true
+            </summary>
+            <returns>The current geometry</returns>
+        </member>
+        <member name="T:Oxard.XControls.Graphics.RectangleBrush">
+            <summary>
+            Class that can be used to draw a rectangle as a background via BackgroundEffect or BackgroundProperty
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Graphics.RectangleBrush.TopLeftCornerRadiusProperty">
+            <summary>
+            Identifies the TopLeftCornerRadius dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Graphics.RectangleBrush.TopRightCornerRadiusProperty">
+            <summary>
+            Identifies the TopRightCornerRadius dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Graphics.RectangleBrush.BottomRightCornerRadiusProperty">
+            <summary>
+            Identifies the BottomRightCornerRadius dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Graphics.RectangleBrush.BottomLeftCornerRadiusProperty">
+            <summary>
+            Identifies the BottomLeftCornerRadius dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Graphics.RectangleBrush.CornerRadiusProperty">
+            <summary>
+            Identifies the CornerRadius dependency property.
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.RectangleBrush.TopLeftCornerRadius">
+            <summary>
+            Get or set the top left corner radius
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.RectangleBrush.TopRightCornerRadius">
+            <summary>
+            Get or set the top right corner radius
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.RectangleBrush.BottomRightCornerRadius">
+            <summary>
+            Get or set the bottom right corner radius
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.RectangleBrush.BottomLeftCornerRadius">
+            <summary>
+            Get or set the bottom left corner radius
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.RectangleBrush.CornerRadius">
+            <summary>
+            Get or set the corner radius definition for all corners by a <see cref="T:Oxard.XControls.Shapes.CornerRadiusExpression"/>.
+            Values can be :
+            "5" // Set all corners to x and y radius to 5
+            "tl5" // Set tl (Top Left) corner to x and y to 5
+            "tl5,6 br10,8" // Set tl (Top Left) corner to x 5 and y 6 and br (Bottom Right) to x 10 and y 8
+            ...
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.RectangleBrush.Geometry">
+            <summary>
+            Get the geometry of the drawable
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.RectangleBrush.OnSizeAllocated(System.Double,System.Double)">
+            <summary>
+            Called when instance size changed (Width and Height).
+            </summary>
+            <param name="width">New width</param>
+            <param name="height">New height</param>
+        </member>
+        <member name="T:Oxard.XControls.IDrawable">
+            <summary>
+            Interface that defines a drawable. It can be a Shape or a drawingBrush.
+            </summary>
+        </member>
+        <member name="E:Oxard.XControls.IDrawable.GeometryChanged">
+            <summary>
+            Event called when shape geometry changed
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.IDrawable.Height">
+            <summary>
+            Get the height of the drawable
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.IDrawable.Width">
+            <summary>
+            Get the width of the drawable
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.IDrawable.Fill">
+            <summary>
+            Get the <see cref="T:Oxard.XControls.Graphics.Brush"/> used to fill the shape
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.IDrawable.Stroke">
+            <summary>
+            Get the <see cref="T:Xamarin.Forms.Color"/> used to draw the outline of the shape
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.IDrawable.StrokeThickness">
+            <summary>
+            Get the thickness of the stroke
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.IDrawable.StrokeDashArray">
+            <summary>
+            Get the stroke dash
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.IDrawable.Geometry">
+            <summary>
+            Get the geometry of the drawable
+            </summary>
+        </member>
+    </members>
+</doc>

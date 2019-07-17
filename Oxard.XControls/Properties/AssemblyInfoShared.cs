@@ -4,5 +4,11 @@
 [assembly: AssemblyProduct(nameof(Oxard.XControls))]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("Oxard")]
-[assembly: AssemblyVersion("2.2.7.10")]
-[assembly: AssemblyFileVersion("2.2.7.10")]
+
+// X.Y.Z.W => 
+// X : major version (big modification, dependencies updates, ...)
+// Y : minor version modification with some impact like namespace changed or class renamed...
+// Z : new components or features
+// W : bug correction, components improved
+[assembly: AssemblyVersion("2.2.8.10")]
+[assembly: AssemblyFileVersion("2.2.8.10")]

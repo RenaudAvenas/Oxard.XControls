@@ -2,8 +2,14 @@
 
 namespace Oxard.XControls.Components
 {
+    /// <summary>
+    /// Inherits from button and adding a check feature
+    /// </summary>
     public class CheckBox : Button
     {
+        /// <summary>
+        /// Identifies the IsChecked dependency property.
+        /// </summary>
         public static readonly BindableProperty IsCheckedProperty = BindableProperty.Create(nameof(IsChecked), typeof(bool), typeof(CheckBox), false, defaultBindingMode: BindingMode.TwoWay);
 
         /// <summary>
@@ -16,7 +22,7 @@ namespace Oxard.XControls.Components
         }
 
         /// <summary>
-        /// Invoke <see cref="Clicked"/> event and call Execute method of <see cref="Command"/> property. This method change the state of the CheckBox (see <see cref="IsChecked"/> property)
+        /// Invoke <see cref="Button.Clicked"/> event and call Execute method of <see cref="Command"/> property. This method change the state of the CheckBox (see <see cref="IsChecked"/> property)
         /// </summary>
         protected override void OnClicked()
         {

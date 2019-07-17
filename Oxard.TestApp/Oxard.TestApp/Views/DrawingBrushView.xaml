@@ -9,6 +9,7 @@
     xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
     xmlns:defaultstyles="clr-namespace:Oxard.XControls.DefaultStyles;assembly=Oxard.XControls.DefaultStyles"
     xmlns:usercontrols="clr-namespace:Oxard.TestApp.UserControls"
+    xmlns:controls="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
     mc:Ignorable="d"
     BackgroundColor="{StaticResource Key={x:Static defaultstyles:ColorKeys.ContentBackgroundColor}}"
     x:Class="Oxard.TestApp.Views.DrawingBrushView">
@@ -28,7 +29,50 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <shapes:Rectangle
+        <controls:Button
+            x:Name="Control"
+            HeightRequest="100"
+            WidthRequest="100"
+            IsBackgroundManagedByStyle="False">
+            <controls:Button.Style>
+                <Style
+                    TargetType="controls:Button">
+                    <Setter
+                        Property="Background">
+                        <Setter.Value>
+                            <graphics:RectangleBrush
+                                CornerRadius="5"
+                                Stroke="Blue"
+                                StrokeThickness="3"
+                                Fill="{x:Static graphics:Brushes.Green}" />
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger
+                            TargetType="controls:Button"
+                            Property="IsPressed"
+                            Value="True">
+                            <Setter
+                                Property="graphics:DrawingBrush.AttachedStroke"
+                                Value="Red" />
+                            <Setter
+                                Property="graphics:DrawingBrush.AttachedFill"
+                                Value="{x:Static graphics:Brushes.Blue}" />
+                            <Setter
+                                Property="graphics:DrawingBrush.AttachedStrokeDashArray"
+                                Value="1,1" />
+                            <Setter
+                                Property="graphics:DrawingBrush.AttachedStrokeThickness"
+                                Value="7" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </controls:Button.Style>
+            <Label
+                Text="Styled button test" />
+        </controls:Button>
+        
+        <!--<shapes:Rectangle
             HeightRequest="50"
             x:Name="Control"
             Stroke="Blue"
@@ -36,10 +80,10 @@
             Fill="{x:Static graphics:Brushes.White}"
             Margin="30"
             HorizontalOptions="Center"
-            WidthRequest="100" />
+            WidthRequest="100" />-->
 
-        <usercontrols:PropertyListControl
+        <!--<usercontrols:PropertyListControl
             Grid.Row="1"
-            Instance="{x:Reference Control}" />
+            Instance="{x:Reference Control}" />-->
     </Grid>
 </ContentView>
