@@ -4,6 +4,9 @@ using Xamarin.Forms;
 
 namespace Oxard.XControls.Extensions
 {
+    /// <summary>
+    /// Helpers for visual tree
+    /// </summary>
     public static class VisualTreeExtensions
     {
         /// <summary>

@@ -3,6 +3,9 @@ using Xamarin.Forms;
 
 namespace Oxard.XControls.Helpers
 {
+    /// <summary>
+    /// Helpers for controls measurements
+    /// </summary>
     public static class MeasureExtensions
     {
         /// <summary>

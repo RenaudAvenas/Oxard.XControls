@@ -4,8 +4,22 @@ using CornerRadius = Oxard.XControls.Shapes.CornerRadius;
 
 namespace Oxard.XControls.Graphics
 {
+    /// <summary>
+    /// Helpers for geometries
+    /// </summary>
     public static class GeometryHelper
     {
+        /// <summary>
+        /// Return a rectangle geometry
+        /// </summary>
+        /// <param name="width">Width of the rectangle</param>
+        /// <param name="height">Height of the rectangle</param>
+        /// <param name="strokeThickness">Stroke thickness of the rectangle</param>
+        /// <param name="topLeft">Top left corner definition of the rectangle</param>
+        /// <param name="topRight">Top right corner definition of the rectangle</param>
+        /// <param name="bottomRight">Bottom right corner definition of the rectangle</param>
+        /// <param name="bottomLeft">Bottom left corner definition of the rectangle</param>
+        /// <returns>Rectangle geometry</returns>
         public static Geometry GetRectangle(double width, double height, double strokeThickness, CornerRadius topLeft, CornerRadius topRight, CornerRadius bottomRight, CornerRadius bottomLeft)
         {
             var geometry = new Geometry(width, height, strokeThickness);
@@ -49,6 +63,13 @@ namespace Oxard.XControls.Graphics
             return geometry.ClosePath();
         }
 
+        /// <summary>
+        /// Return an ellipse geometry
+        /// </summary>
+        /// <param name="width">Width of the ellipse</param>
+        /// <param name="height">Height of the ellipse</param>
+        /// <param name="strokeThickness">Stroke thickness of the ellipse</param>
+        /// <returns>Ellipse geometry</returns>
         public static Geometry GetEllipse(double width, double height, double strokeThickness)
         {
             var geometry = new Geometry(width, height, strokeThickness);

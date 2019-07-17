@@ -6,22 +6,39 @@ using Xamarin.Forms;
 
 namespace Oxard.XControls.Graphics
 {
+    /// <summary>
+    /// Class that defines a geometry
+    /// </summary>
     public class Geometry
     {
         private readonly List<GeometrySegment> segments = new List<GeometrySegment>();
         private readonly ProjectionDefinition projectionDefinition;
         private Point startPoint;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public Geometry()
         {
         }
 
+        /// <summary>
+        /// Constructor that defines size and stroke thickness of the geometry
+        /// </summary>
+        /// <param name="size">Geometry bounds size</param>
+        /// <param name="strokeThickness">Wanted stroke thickness for this geometry</param>
         public Geometry(Size size, double strokeThickness)
         {
             this.projectionDefinition = new ProjectionDefinition(size.Width, size.Height, strokeThickness);
             this.startPoint = this.projectionDefinition.ProjectPoint(0d, 0d);
         }
 
+        /// <summary>
+        /// Constructor that defines size and stroke thickness of the geometry
+        /// </summary>
+        /// <param name="width">Geometry bound width</param>
+        /// <param name="height">Geometry bound height</param>
+        /// <param name="strokeThickness">Wanted stroke thickness for this geometry</param>
         public Geometry(double width, double height, double strokeThickness)
         {
             this.projectionDefinition = new ProjectionDefinition(width, height, strokeThickness);
@@ -33,36 +50,71 @@ namespace Oxard.XControls.Graphics
         /// </summary>
         public bool IsClosed { get; set; }
 
+        /// <summary>
+        /// Define start position of the geometry
+        /// </summary>
+        /// <param name="position">Start position</param>
+        /// <returns>The current geometry</returns>
         public Geometry StartAt(Point position)
         {
             this.startPoint = this.ProjectPoint(position);
             return this;
         }
 
+        /// <summary>
+        /// Define start position of the geometry
+        /// </summary>
+        /// <param name="x">X start position</param>
+        /// <param name="y">Y start position</param>
+        /// <returns>The current geometry</returns>
         public Geometry StartAt(double x, double y)
         {
             this.startPoint = this.ProjectPoint(x, y);
             return this;
         }
 
+        /// <summary>
+        /// Define a line from current position to <paramref name="toPoint"/> position
+        /// </summary>
+        /// <param name="toPoint">End line position</param>
+        /// <returns>The current geometry</returns>
         public Geometry LineTo(Point toPoint)
         {
             this.segments.Add(new LineSegment(this.ProjectPoint(toPoint)));
             return this;
         }
 
+        /// <summary>
+        /// Define a line from current position to end position
+        /// </summary>
+        /// <param name="toX">X end line position</param>
+        /// <param name="toY">Y end line position</param>
+        /// <returns>The current geometry</returns>
         public Geometry LineTo(double toX, double toY)
         {
             this.segments.Add(new LineSegment(this.ProjectPoint(toX, toY)));
             return this;
         }
 
+        /// <summary>
+        /// Define a corner from current position to <paramref name="toPoint"/> position
+        /// </summary>
+        /// <param name="toPoint">End line position</param>
+        /// <param name="sweepDirection">Sweep direction of the corner</param>
+        /// <returns>The current geometry</returns>
         public Geometry CornerTo(Point toPoint, SweepDirection sweepDirection)
         {
             this.segments.Add(new CornerSegment(this.ProjectPoint(toPoint), sweepDirection));
             return this;
         }
 
+        /// <summary>
+        /// Define a corner from current position to end position
+        /// </summary>
+        /// <param name="toX">X end corner position</param>
+        /// <param name="toY">Y end corner position</param>
+        /// <param name="sweepDirection">Sweep direction of the corner</param>
+        /// <returns>The current geometry</returns>
         public Geometry CornerTo(double toX, double toY, SweepDirection sweepDirection)
         {
             this.segments.Add(new CornerSegment(this.ProjectPoint(toX, toY), sweepDirection));
@@ -81,8 +133,23 @@ namespace Oxard.XControls.Graphics
             return this;
         }
 
+        /// <summary>
+        /// Adapt point calculation to <paramref name="size"/> and <paramref name="strokeThickness"/> of the geometry
+        /// </summary>
+        /// <param name="size">Size of the geometry</param>
+        /// <param name="strokeThickness">Stroke thickness of the geometry</param>
+        /// <param name="toTransform">Point to project</param>
+        /// <returns>ProjectedPoint</returns>
         public static Point ProjectPoint(Size size, double strokeThickness, Point toTransform) => ProjectPoint(size.Width, size.Height, strokeThickness, toTransform);
 
+        /// <summary>
+        /// Adapt point calculation to size and <paramref name="strokeThickness"/> of the geometry
+        /// </summary>
+        /// <param name="width">Width of the geometry</param>
+        /// <param name="height">Height of the geometry</param>
+        /// <param name="strokeThickness">Stroke thickness of the geometry</param>
+        /// <param name="toTransform">Point to project</param>
+        /// <returns>ProjectedPoint</returns>
         public static Point ProjectPoint(double width, double height, double strokeThickness, Point toTransform)
         {
             return new ProjectionDefinition(width, height, strokeThickness).ProjectPoint(toTransform);
@@ -117,6 +184,10 @@ namespace Oxard.XControls.Graphics
             return this.projectionDefinition.ProjectPoint(x, y);
         }
 
+        /// <summary>
+        /// Get the <see cref="GeometryReader"/> for current geometry
+        /// </summary>
+        /// <returns></returns>
         public GeometryReader GetReader()
         {
             return new GeometryReader(this.startPoint, this.segments);

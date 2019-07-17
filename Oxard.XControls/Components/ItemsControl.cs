@@ -8,11 +8,23 @@ using Xamarin.Forms;
 
 namespace Oxard.XControls.Components
 {
+    /// <summary>
+    /// Base class for items list with templating.
+    /// </summary>
     [ContentProperty(nameof(Items))]
     public class ItemsControl : ContentView
     {
+        /// <summary>
+        /// Identifies the ItemsSource dependency property.
+        /// </summary>
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource), typeof(IEnumerable), typeof(ItemsControl), null, propertyChanged: ItemsSourcePropertyChanged);
+        /// <summary>
+        /// Identifies the ItemTemplate dependency property.
+        /// </summary>
         public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(ItemsControl), null, propertyChanged: ItemTemplatePropertyChanged);
+        /// <summary>
+        /// Identifies the ItemTemplateSelector dependency property.
+        /// </summary>
         public static readonly BindableProperty ItemTemplateSelectorProperty = BindableProperty.Create(nameof(ItemTemplateSelector), typeof(DataTemplateSelector), typeof(ItemsControl), propertyChanged: ItemTemplateSelectorPropertyChanged);
 
         private bool isLoaded;
@@ -20,12 +32,18 @@ namespace Oxard.XControls.Components
         private Layout<View> itemsPanel;
         private Dictionary<object, View> generatedItems = new Dictionary<object, View>();
 
+        /// <summary>
+        /// Get or set the layout used to display items
+        /// </summary>
         public Layout<View> ItemsPanel
         {
             get => this.itemsPanel;
             set => this.ChangeLayout(value);
         }
 
+        /// <summary>
+        /// Get the list of views for each items
+        /// </summary>
         public IList<View> Items
         {
             get
@@ -39,24 +57,38 @@ namespace Oxard.XControls.Components
             }
         }
 
+        /// <summary>
+        /// Get or set the items source
+        /// </summary>
         public IEnumerable ItemsSource
         {
             get => (IEnumerable)this.GetValue(ItemsSourceProperty);
             set => this.SetValue(ItemsSourceProperty, value);
         }
 
+        /// <summary>
+        /// Get or set the data template to use to generate views from items
+        /// </summary>
         public DataTemplate ItemTemplate
         {
             get => (DataTemplate)this.GetValue(ItemTemplateProperty);
             set => this.SetValue(ItemTemplateProperty, value);
         }
 
+        /// <summary>
+        /// Get or set the data template selector to use to generate views from items
+        /// </summary>
         public DataTemplateSelector ItemTemplateSelector
         {
             get => (DataTemplateSelector)this.GetValue(ItemTemplateSelectorProperty);
             set => this.SetValue(ItemTemplateSelectorProperty, value);
         }
 
+        /// <summary>
+        /// Return true if the <paramref name="item"/> is its own container to display
+        /// </summary>
+        /// <param name="item">Item to check</param>
+        /// <returns>True if item its own container otherwise false</returns>
         public bool IsItemItsOwnContainer(object item)
         {
             if (!(item is View))
@@ -65,13 +97,28 @@ namespace Oxard.XControls.Components
             return this.IsItemItsOwnContainerOverride(item);
         }
 
+        /// <summary>
+        /// Return a view that represents an item of ItemsControl. This method is for inherits. If item is not a <see cref="View"/> use a DataTemplate, DataTemplateSelector or change ItemsSource to contains views.
+        /// This method throws a NotSupportedException
+        /// </summary>
+        /// <param name="item">Item to transform as view</param>
+        /// <returns>The view for the item</returns>
         protected View GetContainerForItemOverride(object item)
         {
             throw new NotSupportedException("item must be a view");
         }
 
+        /// <summary>
+        /// Return true if the <paramref name="item"/> is its own container to display
+        /// </summary>
+        /// <param name="item">Item to check</param>
+        /// <returns>True if item its own container otherwise false</returns>
         protected virtual bool IsItemItsOwnContainerOverride(object item) => true;
 
+        /// <summary>
+        /// Called when property changed
+        /// </summary>
+        /// <param name="propertyName">Name of the property</param>
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             if (propertyName == "Renderer")
@@ -94,6 +141,9 @@ namespace Oxard.XControls.Components
             base.OnPropertyChanged(propertyName);
         }
 
+        /// <summary>
+        /// Called when ItemsControl is unload
+        /// </summary>
         protected virtual void UnloadOverride()
         {
         }

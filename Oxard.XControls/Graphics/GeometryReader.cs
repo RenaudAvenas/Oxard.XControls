@@ -3,6 +3,9 @@ using Xamarin.Forms;
 
 namespace Oxard.XControls.Graphics
 {
+    /// <summary>
+    /// Reader for geometry
+    /// </summary>
     public class GeometryReader
     {
         private readonly List<GeometrySegment> segments;
@@ -14,8 +17,15 @@ namespace Oxard.XControls.Graphics
             this.FromPoint = startPoint;
         }
 
+        /// <summary>
+        /// Get the current start point
+        /// </summary>
         public Point FromPoint { get; private set; }
 
+        /// <summary>
+        /// Get the next segment of the geometry
+        /// </summary>
+        /// <returns>Next segment</returns>
         public GeometrySegment GetNext()
         {
             if (this.actualIndex >= 0)
