@@ -6,19 +6,38 @@ using System.Text.RegularExpressions;
 
 namespace Oxard.XControls.Shapes
 {
+    /// <summary>
+    /// Tranform a corner radius string expression to rectangle corner radius
+    /// </summary>
     public class CornerRadiusExpression
     {
+        /// <summary>
+        /// Create an expression with <paramref name="data"/> input
+        /// </summary>
+        /// <param name="data">Input expression</param>
         public CornerRadiusExpression(string data)
         {
             this.Split(data);
         }
 
+        /// <summary>
+        /// Get the top left CornerRadius from string expression
+        /// </summary>
         public CornerRadius TopLeft { get; private set; }
 
+        /// <summary>
+        /// Get the top right CornerRadius from string expression
+        /// </summary>
         public CornerRadius TopRight { get; private set; }
 
+        /// <summary>
+        /// Get the bottom right CornerRadius from string expression
+        /// </summary>
         public CornerRadius BottomRight { get; private set; }
 
+        /// <summary>
+        /// Get the bottom left CornerRadius from string expression
+        /// </summary>
         public CornerRadius BottomLeft { get; private set; }
 
         private void Split(string data)

@@ -190,6 +190,84 @@
             Called when Background property changed
             </summary>
         </member>
+        <member name="T:Oxard.XControls.Components.ItemsControl">
+            <summary>
+            Base class for items list with templating.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.ItemsControl.ItemsSourceProperty">
+            <summary>
+            Identifies the ItemsSource dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.ItemsControl.ItemTemplateProperty">
+            <summary>
+            Identifies the ItemTemplate dependency property.
+            </summary>
+        </member>
+        <member name="F:Oxard.XControls.Components.ItemsControl.ItemTemplateSelectorProperty">
+            <summary>
+            Identifies the ItemTemplateSelector dependency property.
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.ItemsControl.ItemsPanel">
+            <summary>
+            Get or set the layout used to display items
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.ItemsControl.Items">
+            <summary>
+            Get the list of views for each items
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.ItemsControl.ItemsSource">
+            <summary>
+            Get or set the items source
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.ItemsControl.ItemTemplate">
+            <summary>
+            Get or set the data template to use to generate views from items
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Components.ItemsControl.ItemTemplateSelector">
+            <summary>
+            Get or set the data template selector to use to generate views from items
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Components.ItemsControl.IsItemItsOwnContainer(System.Object)">
+            <summary>
+            Return true if the <paramref name="item"/> is its own container to display
+            </summary>
+            <param name="item">Item to check</param>
+            <returns>True if item its own container otherwise false</returns>
+        </member>
+        <member name="M:Oxard.XControls.Components.ItemsControl.GetContainerForItemOverride(System.Object)">
+            <summary>
+            Return a view that represents an item of ItemsControl. This method is for inherits. If item is not a <see cref="T:Xamarin.Forms.View"/> use a DataTemplate, DataTemplateSelector or change ItemsSource to contains views.
+            This method throws a NotSupportedException
+            </summary>
+            <param name="item">Item to transform as view</param>
+            <returns>The view for the item</returns>
+        </member>
+        <member name="M:Oxard.XControls.Components.ItemsControl.IsItemItsOwnContainerOverride(System.Object)">
+            <summary>
+            Return true if the <paramref name="item"/> is its own container to display
+            </summary>
+            <param name="item">Item to check</param>
+            <returns>True if item its own container otherwise false</returns>
+        </member>
+        <member name="M:Oxard.XControls.Components.ItemsControl.OnPropertyChanged(System.String)">
+            <summary>
+            Called when property changed
+            </summary>
+            <param name="propertyName">Name of the property</param>
+        </member>
+        <member name="M:Oxard.XControls.Components.ItemsControl.UnloadOverride">
+            <summary>
+            Called when ItemsControl is unload
+            </summary>
+        </member>
         <member name="T:Oxard.XControls.Components.LongPressButton">
             <summary>
             Inherits from <see cref="T:Oxard.XControls.Components.Button"/>. Manage a long press as a new command
@@ -275,6 +353,80 @@
             Get or set the <see cref="T:Oxard.XControls.Graphics.Brush"/> to use as background
             </summary>
         </member>
+        <member name="T:Oxard.XControls.Events.TouchEventArgs">
+            <summary>
+            Event argument for device Touch
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Events.TouchEventArgs.#ctor(System.Lazy{Xamarin.Forms.Point})">
+            <summary>
+            Constructor that define a lazy object to get device touch position
+            </summary>
+            <param name="lazyPosition">Lazy object to get device touch position</param>
+        </member>
+        <member name="M:Oxard.XControls.Events.TouchEventArgs.#ctor(Xamarin.Forms.Point)">
+            <summary>
+            Constructor that define device touch position
+            </summary>
+            <param name="position">Device touch position</param>
+        </member>
+        <member name="P:Oxard.XControls.Events.TouchEventArgs.Position">
+            <summary>
+            Get the device touch position
+            </summary>
+        </member>
+        <member name="T:Oxard.XControls.Events.TouchEventHandler">
+            <summary>
+            Delegate used to define touch events
+            </summary>
+            <param name="sender">The sender object</param>
+            <param name="args">The touch argument</param>
+        </member>
+        <member name="T:Oxard.XControls.Events.TouchManager">
+            <summary>
+            Class that managed touch events
+            </summary>
+        </member>
+        <member name="E:Oxard.XControls.Events.TouchManager.TouchDown">
+            <summary>
+            Raised when touch down
+            </summary>
+        </member>
+        <member name="E:Oxard.XControls.Events.TouchManager.TouchUp">
+            <summary>
+            Raised when touch up
+            </summary>
+        </member>
+        <member name="E:Oxard.XControls.Events.TouchManager.TouchMove">
+            <summary>
+            Raised when touch move
+            </summary>
+        </member>
+        <member name="E:Oxard.XControls.Events.TouchManager.TouchEnter">
+            <summary>
+            Raised when touch enter
+            </summary>
+        </member>
+        <member name="E:Oxard.XControls.Events.TouchManager.TouchLeave">
+            <summary>
+            Raised when touch leave
+            </summary>
+        </member>
+        <member name="E:Oxard.XControls.Events.TouchManager.TouchCanceled">
+            <summary>
+            Raised when touch canceled
+            </summary>
+        </member>
+        <member name="E:Oxard.XControls.Events.TouchManager.Clicked">
+            <summary>
+            Raised when a touch is considered as a click
+            </summary>
+        </member>
+        <member name="E:Oxard.XControls.Events.TouchManager.LongPressed">
+            <summary>
+            Raised when a touch is considered as a long press or click
+            </summary>
+        </member>
         <member name="P:Oxard.XControls.Events.TouchManager.LongPressTime">
             <summary>
             Get or set the time in milliseconds when the manager consider a touch as a long press. The default value is 1000
@@ -288,6 +440,82 @@
         <member name="P:Oxard.XControls.Events.TouchManager.IsClicking">
             <summary>
             Get a value that indicates if a click is in progress.
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Events.TouchManager.OnTouchCancel(Oxard.XControls.Events.TouchEventArgs)">
+            <summary>
+            Called when touch is canceled
+            </summary>
+            <param name="touchEventArgs">Touch arguments</param>
+        </member>
+        <member name="M:Oxard.XControls.Events.TouchManager.OnTouchDown(Oxard.XControls.Events.TouchEventArgs)">
+            <summary>
+            Called when touch is down
+            </summary>
+            <param name="touchEventArgs">Touch arguments</param>
+        </member>
+        <member name="M:Oxard.XControls.Events.TouchManager.OnTouchEnter(Oxard.XControls.Events.TouchEventArgs)">
+            <summary>
+            Called when touch enter
+            </summary>
+            <param name="touchEventArgs">Touch arguments</param>
+        </member>
+        <member name="M:Oxard.XControls.Events.TouchManager.OnTouchLeave(Oxard.XControls.Events.TouchEventArgs)">
+            <summary>
+            Called when touch leave
+            </summary>
+            <param name="touchEventArgs">Touch arguments</param>
+        </member>
+        <member name="M:Oxard.XControls.Events.TouchManager.OnTouchMove(Oxard.XControls.Events.TouchEventArgs)">
+            <summary>
+            Called when touch move
+            </summary>
+            <param name="touchEventArgs">Touch arguments</param>
+        </member>
+        <member name="M:Oxard.XControls.Events.TouchManager.OnTouchUp(Oxard.XControls.Events.TouchEventArgs)">
+            <summary>
+            Called when touch up
+            </summary>
+            <param name="touchEventArgs">Touch arguments</param>
+        </member>
+        <member name="M:Oxard.XControls.Events.TouchManager.DisableCurrentTouch">
+            <summary>
+            this method disable the current tracking of a current touch device
+            </summary>
+        </member>
+        <member name="T:Oxard.XControls.Extensions.DoubleExtensions">
+            <summary>
+            Helpers for double manipulation in controls
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Extensions.DoubleExtensions.DoubleIsEquals(System.Double,System.Double,System.Double)">
+            <summary>
+            Return true if <paramref name="a"/> is near <paramref name="b"/> with <paramref name="tolerance"/> (default is 0.0001)
+            </summary>
+            <param name="a">First operand</param>
+            <param name="b">Second operand</param>
+            <param name="tolerance">Equality tolerance</param>
+            <returns>True if <paramref name="a"/> - <paramref name="b"/> is inferior to <paramref name="tolerance"/></returns>
+        </member>
+        <member name="M:Oxard.XControls.Extensions.DoubleExtensions.TranslateIfInfinity(System.Double,System.Double)">
+            <summary>
+            Return <paramref name="defaultValue"/> if <paramref name="a"/> is positive infinity
+            </summary>
+            <param name="a">The operand</param>
+            <param name="defaultValue">Value to return if <paramref name="a"/> is positive infinity</param>
+            <returns>If <paramref name="a"/> is positive infinity returns <paramref name="defaultValue"/> otherwise <paramref name="a"/></returns>
+        </member>
+        <member name="M:Oxard.XControls.Extensions.DoubleExtensions.TranslateIfNegative(System.Double,System.Double)">
+            <summary>
+            Return <paramref name="defaultValue"/> if <paramref name="a"/> is negative
+            </summary>
+            <param name="a">The operand</param>
+            <param name="defaultValue">Value to return if <paramref name="a"/> is negative</param>
+            <returns>If <paramref name="a"/> is negative returns <paramref name="defaultValue"/> otherwise <paramref name="a"/></returns>
+        </member>
+        <member name="T:Oxard.XControls.Extensions.VisualTreeExtensions">
+            <summary>
+            Helpers for visual tree
             </summary>
         </member>
         <member name="M:Oxard.XControls.Extensions.VisualTreeExtensions.FindParent``1(Xamarin.Forms.Element)">
@@ -306,6 +534,11 @@
             <param name="element">Parent instance</param>
             <returns>All children of type <typeparamref name="T"/></returns>
         </member>
+        <member name="T:Oxard.XControls.Helpers.MeasureExtensions">
+            <summary>
+            Helpers for controls measurements
+            </summary>
+        </member>
         <member name="M:Oxard.XControls.Helpers.MeasureExtensions.GetStandardMeasure(Xamarin.Forms.View,System.Double,System.Double,System.Double)">
             <summary>
             Return a standard SizeRequest based on widthConstraint and heightConstraint or Width and Height requested.
@@ -320,6 +553,743 @@
             <param name="heightConstraint">Height which can be infinity</param>
             <param name="defaultValue">Value to use if width or height are infinity and request size undefined</param>
             <returns>A SizeRequest with correct sizes for measure pass</returns>
+        </member>
+        <member name="T:Oxard.XControls.Graphics.Brush">
+            <summary>
+            Base class for brushes
+            </summary>
+        </member>
+        <member name="T:Oxard.XControls.Graphics.Brushes">
+            <summary>
+            Basics solid color brush
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Accent">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.AliceBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.AntiqueWhite">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Aqua">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Aquamarine">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Azure">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Beige">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Bisque">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Black">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.BlanchedAlmond">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Blue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.BlueViolet">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Brown">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.BurlyWood">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.CadetBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Chartreuse">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Chocolate">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Coral">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.CornflowerBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Cornsilk">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Crimson">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Cyan">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkCyan">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkGoldenrod">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkGray">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkGreen">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkKhaki">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkMagenta">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkOliveGreen">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkOrange">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkOrchid">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkRed">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkSalmon">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkSeaGreen">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkSlateBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkSlateGray">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkTurquoise">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DarkViolet">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DeepPink">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DeepSkyBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DimGray">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.DodgerBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Firebrick">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.FloralWhite">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.ForestGreen">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Fuchsia">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Gainsboro">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.GhostWhite">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Gold">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Goldenrod">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Gray">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Green">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.GreenYellow">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Honeydew">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.HotPink">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.IndianRed">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Indigo">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Ivory">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Khaki">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Lavender">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LavenderBlush">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LawnGreen">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LemonChiffon">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LightBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LightCoral">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LightCyan">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LightGoldenrodYellow">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LightGray">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LightGreen">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LightPink">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LightSalmon">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LightSeaGreen">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LightSkyBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LightSlateGray">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LightSteelBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LightYellow">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Lime">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.LimeGreen">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Linen">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Magenta">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Maroon">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.MediumAquamarine">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.MediumBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.MediumOrchid">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.MediumPurple">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.MediumSeaGreen">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.MediumSlateBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.MediumSpringGreen">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.MediumTurquoise">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.MediumVioletRed">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.MidnightBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.MintCream">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.MistyRose">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Moccasin">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.NavajoWhite">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Navy">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.OldLace">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Olive">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.OliveDrab">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Orange">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.OrangeRed">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Orchid">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.PaleGoldenrod">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.PaleGreen">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.PaleTurquoise">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.PaleVioletRed">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.PapayaWhip">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.PeachPuff">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Peru">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Pink">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Plum">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.PowderBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Purple">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Red">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.RosyBrown">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.RoyalBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.SaddleBrown">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Salmon">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.SandyBrown">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.SeaGreen">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.SeaShell">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Sienna">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Silver">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.SkyBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.SlateBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.SlateGray">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Snow">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.SpringGreen">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.SteelBlue">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Tan">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Teal">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Thistle">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Tomato">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Transparent">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Turquoise">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Violet">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Wheat">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.White">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.WhiteSmoke">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.Yellow">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.Brushes.YellowGreen">
+            <summary>
+            Get brush for this color
+            </summary>
+        </member>
+        <member name="T:Oxard.XControls.Graphics.CornerSegment">
+            <summary>
+            Represent a 90° corner segment
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.CornerSegment.#ctor(Xamarin.Forms.Point,Oxard.XControls.Shapes.SweepDirection)">
+            <summary>
+            Default contructor
+            </summary>
+            <param name="endPoint">End point of corner</param>
+            <param name="sweepDirection">Sweep direction to draw the corner</param>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.CornerSegment.SweepDirection">
+            <summary>
+            Get or set the sweep direction to draw the corner
+            </summary>
         </member>
         <member name="T:Oxard.XControls.Graphics.DrawingBrush">
             <summary>
@@ -493,10 +1463,99 @@
             Launch <see cref="E:Oxard.XControls.Graphics.DrawingBrush.GeometryChanged"/> event. 
             </summary>
         </member>
+        <member name="T:Oxard.XControls.Graphics.EllipseBrush">
+            <summary>
+            Draw an ellipse as a brush
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.EllipseBrush.Geometry">
+            <summary>
+            Get the geometry of the drawable
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.EllipseBrush.OnSizeAllocated(System.Double,System.Double)">
+            <summary>
+            Called when instance size changed (Width and Height).
+            </summary>
+            <param name="width">New width</param>
+            <param name="height">New height</param>
+        </member>
+        <member name="T:Oxard.XControls.Graphics.Geometry">
+            <summary>
+            Class that defines a geometry
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.Geometry.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.Geometry.#ctor(Xamarin.Forms.Size,System.Double)">
+            <summary>
+            Constructor that defines size and stroke thickness of the geometry
+            </summary>
+            <param name="size">Geometry bounds size</param>
+            <param name="strokeThickness">Wanted stroke thickness for this geometry</param>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.Geometry.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            Constructor that defines size and stroke thickness of the geometry
+            </summary>
+            <param name="width">Geometry bound width</param>
+            <param name="height">Geometry bound height</param>
+            <param name="strokeThickness">Wanted stroke thickness for this geometry</param>
+        </member>
         <member name="P:Oxard.XControls.Graphics.Geometry.IsClosed">
             <summary>
             Get or set a value that indicate if the geometry path is closed or not
             </summary>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.Geometry.StartAt(Xamarin.Forms.Point)">
+            <summary>
+            Define start position of the geometry
+            </summary>
+            <param name="position">Start position</param>
+            <returns>The current geometry</returns>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.Geometry.StartAt(System.Double,System.Double)">
+            <summary>
+            Define start position of the geometry
+            </summary>
+            <param name="x">X start position</param>
+            <param name="y">Y start position</param>
+            <returns>The current geometry</returns>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.Geometry.LineTo(Xamarin.Forms.Point)">
+            <summary>
+            Define a line from current position to <paramref name="toPoint"/> position
+            </summary>
+            <param name="toPoint">End line position</param>
+            <returns>The current geometry</returns>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.Geometry.LineTo(System.Double,System.Double)">
+            <summary>
+            Define a line from current position to end position
+            </summary>
+            <param name="toX">X end line position</param>
+            <param name="toY">Y end line position</param>
+            <returns>The current geometry</returns>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.Geometry.CornerTo(Xamarin.Forms.Point,Oxard.XControls.Shapes.SweepDirection)">
+            <summary>
+            Define a corner from current position to <paramref name="toPoint"/> position
+            </summary>
+            <param name="toPoint">End line position</param>
+            <param name="sweepDirection">Sweep direction of the corner</param>
+            <returns>The current geometry</returns>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.Geometry.CornerTo(System.Double,System.Double,Oxard.XControls.Shapes.SweepDirection)">
+            <summary>
+            Define a corner from current position to end position
+            </summary>
+            <param name="toX">X end corner position</param>
+            <param name="toY">Y end corner position</param>
+            <param name="sweepDirection">Sweep direction of the corner</param>
+            <returns>The current geometry</returns>
         </member>
         <member name="M:Oxard.XControls.Graphics.Geometry.AddSegment(Oxard.XControls.Graphics.GeometrySegment)">
             <summary>
@@ -505,6 +1564,25 @@
             <remarks>If your stroke are cropped be careful to use ProjectPoint method to take care of stroke thickness</remarks>
             <param name="geometrySegment"></param>
             <returns>Current geometry</returns>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.Geometry.ProjectPoint(Xamarin.Forms.Size,System.Double,Xamarin.Forms.Point)">
+            <summary>
+            Adapt point calculation to <paramref name="size"/> and <paramref name="strokeThickness"/> of the geometry
+            </summary>
+            <param name="size">Size of the geometry</param>
+            <param name="strokeThickness">Stroke thickness of the geometry</param>
+            <param name="toTransform">Point to project</param>
+            <returns>ProjectedPoint</returns>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.Geometry.ProjectPoint(System.Double,System.Double,System.Double,Xamarin.Forms.Point)">
+            <summary>
+            Adapt point calculation to size and <paramref name="strokeThickness"/> of the geometry
+            </summary>
+            <param name="width">Width of the geometry</param>
+            <param name="height">Height of the geometry</param>
+            <param name="strokeThickness">Stroke thickness of the geometry</param>
+            <param name="toTransform">Point to project</param>
+            <returns>ProjectedPoint</returns>
         </member>
         <member name="M:Oxard.XControls.Graphics.Geometry.ProjectPoint(Xamarin.Forms.Point)">
             <summary>
@@ -523,11 +1601,76 @@
             <param name="y">Y coordinate of point to transform</param>
             <returns>Projected point</returns>
         </member>
+        <member name="M:Oxard.XControls.Graphics.Geometry.GetReader">
+            <summary>
+            Get the <see cref="T:Oxard.XControls.Graphics.GeometryReader"/> for current geometry
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Oxard.XControls.Graphics.Geometry.ClosePath">
             <summary>
             Return to the start point with a line and set the <see cref="P:Oxard.XControls.Graphics.Geometry.IsClosed"/> property to true
             </summary>
             <returns>The current geometry</returns>
+        </member>
+        <member name="T:Oxard.XControls.Graphics.GeometryHelper">
+            <summary>
+            Helpers for geometries
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.GeometryHelper.GetRectangle(System.Double,System.Double,System.Double,Oxard.XControls.Shapes.CornerRadius,Oxard.XControls.Shapes.CornerRadius,Oxard.XControls.Shapes.CornerRadius,Oxard.XControls.Shapes.CornerRadius)">
+            <summary>
+            Return a rectangle geometry
+            </summary>
+            <param name="width">Width of the rectangle</param>
+            <param name="height">Height of the rectangle</param>
+            <param name="strokeThickness">Stroke thickness of the rectangle</param>
+            <param name="topLeft">Top left corner definition of the rectangle</param>
+            <param name="topRight">Top right corner definition of the rectangle</param>
+            <param name="bottomRight">Bottom right corner definition of the rectangle</param>
+            <param name="bottomLeft">Bottom left corner definition of the rectangle</param>
+            <returns>Rectangle geometry</returns>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.GeometryHelper.GetEllipse(System.Double,System.Double,System.Double)">
+            <summary>
+            Return an ellipse geometry
+            </summary>
+            <param name="width">Width of the ellipse</param>
+            <param name="height">Height of the ellipse</param>
+            <param name="strokeThickness">Stroke thickness of the ellipse</param>
+            <returns>Ellipse geometry</returns>
+        </member>
+        <member name="T:Oxard.XControls.Graphics.GeometryReader">
+            <summary>
+            Reader for geometry
+            </summary>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.GeometryReader.FromPoint">
+            <summary>
+            Get the current start point
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.GeometryReader.GetNext">
+            <summary>
+            Get the next segment of the geometry
+            </summary>
+            <returns>Next segment</returns>
+        </member>
+        <member name="T:Oxard.XControls.Graphics.GeometrySegment">
+            <summary>
+            Represent a segment of a geometry
+            </summary>
+        </member>
+        <member name="M:Oxard.XControls.Graphics.GeometrySegment.#ctor(Xamarin.Forms.Point)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="endPoint">End point of the segment</param>
+        </member>
+        <member name="P:Oxard.XControls.Graphics.GeometrySegment.EndPoint">
+            <summary>
+            Get the end point of the segment
+            </summary>
         </member>
         <member name="T:Oxard.XControls.Graphics.RectangleBrush">
             <summary>
