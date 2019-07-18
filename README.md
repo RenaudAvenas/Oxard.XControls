@@ -1,6 +1,16 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## 2.2.9.10
+
+- MultiFormatLayout and LayoutAlgorythms
+
+Adding a new Layout that can take an external algorythm for measurement and layout opertion. So you can use it to change dynamically disposition of element. Its needed often when you change from portrait to landscape view when you just want to change layout but not children.
+
+ZStackAlgorythm allowed you to stack children on top of each other.
+
+StackAlgorythm stack children horizontally or vertically.
+
 ## v2.2.8.10
 
 - DrawingBrush

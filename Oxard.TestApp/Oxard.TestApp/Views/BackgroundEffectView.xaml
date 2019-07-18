@@ -5,9 +5,7 @@
     x:Class="Oxard.TestApp.Views.BackgroundEffectView"
     xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
     xmlns:effects="clr-namespace:Oxard.XControls.Effects;assembly=Oxard.XControls"
-    xmlns:brushes="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls"
-    xmlns:defaultstyles="clr-namespace:Oxard.XControls.DefaultStyles;assembly=Oxard.XControls.DefaultStyles"
-    BackgroundColor="{StaticResource Key={x:Static defaultstyles:ColorKeys.ContentBackgroundColor}}">
+    xmlns:brushes="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

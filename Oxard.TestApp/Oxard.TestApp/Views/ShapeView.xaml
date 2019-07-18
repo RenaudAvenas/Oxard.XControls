@@ -5,9 +5,7 @@
     xmlns:shapes="clr-namespace:Oxard.XControls.Shapes;assembly=Oxard.XControls"
     xmlns:graphics="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls"
     xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
-    xmlns:defaultstyles="clr-namespace:Oxard.XControls.DefaultStyles;assembly=Oxard.XControls.DefaultStyles"
     xmlns:testapp="clr-namespace:Oxard.TestApp"
-    BackgroundColor="{StaticResource Key={x:Static defaultstyles:ColorKeys.ContentBackgroundColor}}"
     x:Class="Oxard.TestApp.Views.ShapeView">
     <ContentView.Resources>
         <ResourceDictionary>

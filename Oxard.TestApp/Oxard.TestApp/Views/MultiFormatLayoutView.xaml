@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:layout="clr-namespace:Oxard.XControls.Layouts;assembly=Oxard.XControls"
+    xmlns:layouta="clr-namespace:Oxard.XControls.Layouts.LayoutAlgorythms;assembly=Oxard.XControls"
+    xmlns:component="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
+    xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
+    x:Class="Oxard.TestApp.Views.MultiFormatLayoutView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <componentthemes:Colors />
+                <componentthemes:ButtonStyle />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="*" />
+            <RowDefinition
+                Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <layout:MultiFormatLayout x:Name="MultiFormatLayout">
+            <layout:MultiFormatLayout.Algorythm>
+                <layouta:ZStackAlgorythm />
+            </layout:MultiFormatLayout.Algorythm>
+
+            <BoxView
+                VerticalOptions="Start"
+                BackgroundColor="Red"
+                HeightRequest="100"
+                WidthRequest="100" />
+
+            <BoxView
+                HorizontalOptions="Start"
+                BackgroundColor="Blue"
+                HeightRequest="50"
+                WidthRequest="50" />
+
+            <BoxView
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                BackgroundColor="Green"
+                HeightRequest="30"
+                WidthRequest="30" />
+
+            <BoxView
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                BackgroundColor="Aqua"
+                HeightRequest="20"
+                WidthRequest="20" />
+        </layout:MultiFormatLayout>
+
+        <component:Button
+            HorizontalOptions="Center"
+            Clicked="Button_Clicked"
+            Style="{StaticResource ButtonDefaultStyle}"
+            Grid.Row="1">
+            <Label
+                TextColor="White"
+                Text="Change layout algorythm" />
+        </component:Button>
+    </Grid>
+</ContentView>
