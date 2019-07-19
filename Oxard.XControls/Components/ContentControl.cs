@@ -130,17 +130,17 @@ namespace Oxard.XControls.Components
 
         private static void OnContentTemplatePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            (bindable as ContentControl).OnContentTemplateChanged();
+            (bindable as ContentControl)?.OnContentTemplateChanged();
         }
 
         private static void OnContentTemplateSelectorPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            (bindable as ContentControl).OnContentTemplateSelectorChanged();
+            (bindable as ContentControl)?.OnContentTemplateSelectorChanged();
         }
 
         private static void OnBackgroundPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            (bindable as ContentControl).OnBackgroundChanged(oldValue as Brush);
+            (bindable as ContentControl)?.OnBackgroundChanged(oldValue as Brush);
         }
 
         /// <summary>

@@ -7,6 +7,7 @@
     xmlns:graphics="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls"
     xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
     xmlns:controls="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
+    xmlns:userControls="clr-namespace:Oxard.TestApp.UserControls;assembly=Oxard.TestApp"
     mc:Ignorable="d"
     x:Class="Oxard.TestApp.Views.DrawingBrushView">
     <ContentView.Resources>
@@ -29,6 +30,7 @@
             x:Name="Control"
             HeightRequest="100"
             WidthRequest="100"
+            IsEnabled="False"
             IsBackgroundManagedByStyle="False">
             <controls:Button.Style>
                 <Style
@@ -61,6 +63,14 @@
                                 Property="graphics:DrawingBrush.AttachedStrokeThickness"
                                 Value="7" />
                         </Trigger>
+                        <Trigger
+                            TargetType="controls:Button"
+                            Property="IsEnabled"
+                            Value="False">
+                            <Setter
+                                Property="graphics:DrawingBrush.AttachedFill"
+                                Value="{x:Static graphics:Brushes.Gray}"/>
+                        </Trigger>
                     </Style.Triggers>
                 </Style>
             </controls:Button.Style>
@@ -78,8 +88,8 @@
             HorizontalOptions="Center"
             WidthRequest="100" />-->
 
-        <!--<usercontrols:PropertyListControl
+        <userControls:PropertyListControl
             Grid.Row="1"
-            Instance="{x:Reference Control}" />-->
+            Instance="{x:Reference Control}" />
     </Grid>
 </ContentView>

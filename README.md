@@ -1,7 +1,7 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
-## 2.2.9.10
+## 2.2.9.11
 
 - MultiFormatLayout and LayoutAlgorythms
 
@@ -10,6 +10,10 @@ Adding a new Layout that can take an external algorythm for measurement and layo
 ZStackAlgorythm allowed you to stack children on top of each other.
 
 StackAlgorythm stack children horizontally or vertically.
+
+- Bug fixed
+
+Null reference not checked on ContentControl bindable properties changed.
 
 ## v2.2.8.10
 
