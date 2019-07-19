@@ -1,6 +1,12 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## 2.2.9.12
+
+- DrawingBrush bug
+
+There was a null reference exception if a drawing brush attached property was set on element that has no BackgroundEffect or ContentControl that has no DrawingBrush for its Background
+
 ## 2.2.9.11
 
 - MultiFormatLayout and LayoutAlgorythms

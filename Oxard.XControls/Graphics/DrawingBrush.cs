@@ -198,7 +198,7 @@ namespace Oxard.XControls.Graphics
             else if (bindable is Element element)
             {
                 var backgroundEffect = (BackgroundEffect)element.Effects.FirstOrDefault(e => e is BackgroundEffect);
-                if (backgroundEffect.Background is DrawingBrush effectDrawingBrush)
+                if (backgroundEffect?.Background is DrawingBrush effectDrawingBrush)
                     toDo(effectDrawingBrush);
             }
         }
