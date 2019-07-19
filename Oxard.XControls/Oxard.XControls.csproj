@@ -15,6 +15,10 @@
     <DocumentationFile>C:\Sources\Oxard.XControls\Oxard.XControls\Oxard.XControls.xml</DocumentationFile>
   </PropertyGroup>
   
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Personnel\Oxard\Oxard.XControls\Oxard.XControls\Oxard.XControls.xml</DocumentationFile>
+  </PropertyGroup>
+  
   <ItemGroup>
     <None Remove="Oxard.XControls.xml" />
   </ItemGroup>
