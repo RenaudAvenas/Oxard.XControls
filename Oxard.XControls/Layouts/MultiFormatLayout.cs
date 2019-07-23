@@ -1,31 +1,31 @@
 ﻿using System;
-using Oxard.XControls.Layouts.LayoutAlgorythms;
+using Oxard.XControls.Layouts.LayoutAlgorithms;
 using Xamarin.Forms;
 
 namespace Oxard.XControls.Layouts
 {
     /// <summary>
-    /// Layout that can be specified by external layout algorythm (see <seeaslo cref="LayoutAlgorythm"/>)
+    /// Layout that can be specified by external layout algorithm (see <seeaslo cref="LayoutAlgorithm"/>)
     /// </summary>
     public class MultiFormatLayout : Layout<View>
     {
         /// <summary>
-        /// Identifies the Algorythm property.
+        /// Identifies the Algorithm property.
         /// </summary>
-        public static readonly BindableProperty AlgorythmProperty = BindableProperty.Create(nameof(Algorythm), typeof(LayoutAlgorythm), typeof(MultiFormatLayout), null, propertyChanged: OnAlgorythmPropertyChanged);
+        public static readonly BindableProperty AlgorithmProperty = BindableProperty.Create(nameof(Algorithm), typeof(LayoutAlgorithm), typeof(MultiFormatLayout), null, propertyChanged: OnAlgorithmPropertyChanged);
         
         /// <summary>
-        /// Get or set the current algorythm used to display children
+        /// Get or set the current algorithm used to display children
         /// </summary>
-        public LayoutAlgorythm Algorythm
+        public LayoutAlgorithm Algorithm
         {
-            get => (LayoutAlgorythm)this.GetValue(AlgorythmProperty);
-            set => this.SetValue(AlgorythmProperty, value);
+            get => (LayoutAlgorithm)this.GetValue(AlgorithmProperty);
+            set => this.SetValue(AlgorithmProperty, value);
         }
         
-        private static void OnAlgorythmPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void OnAlgorithmPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            (bindable as MultiFormatLayout)?.OnAlgorythmChanged(oldValue as LayoutAlgorythm);
+            (bindable as MultiFormatLayout)?.OnAlgorithmChanged(oldValue as LayoutAlgorithm);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Oxard.XControls.Layouts
         /// <returns>Requested size</returns>
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
-            var algorythm = this.Algorythm ?? new ZStackAlgorythm();
+            var algorithm = this.Algorithm ?? new ZStackAlgorithm();
             return base.OnMeasure(widthConstraint, heightConstraint);
         }
 
@@ -49,25 +49,25 @@ namespace Oxard.XControls.Layouts
         /// <param name="height">Height constraint to layout</param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            var algorythm = this.Algorythm ?? new ZStackAlgorythm();
-            algorythm.LayoutChildren(x, y, width, height);
+            var algorithm = this.Algorithm ?? new ZStackAlgorithm();
+            algorithm.LayoutChildren(x, y, width, height);
         }
 
-        private void OnAlgorythmChanged(LayoutAlgorythm oldAlgorythm)
+        private void OnAlgorithmChanged(LayoutAlgorithm oldAlgorithm)
         {
-            if (oldAlgorythm != null)
+            if (oldAlgorithm != null)
             {
-                oldAlgorythm.Invalidated -= this.OnAlgorythmInvalidated;
-                oldAlgorythm.ParentLayout = null;
+                oldAlgorithm.Invalidated -= this.OnAlgorithmInvalidated;
+                oldAlgorithm.ParentLayout = null;
             }
 
-            this.Algorythm.ParentLayout = this;
-            this.Algorythm.Invalidated += this.OnAlgorythmInvalidated;
+            this.Algorithm.ParentLayout = this;
+            this.Algorithm.Invalidated += this.OnAlgorithmInvalidated;
             this.InvalidateMeasure();
             this.InvalidateLayout();
         }
 
-        private void OnAlgorythmInvalidated(object sender, EventArgs e)
+        private void OnAlgorithmInvalidated(object sender, EventArgs e)
         {
             this.InvalidateMeasure();
         }

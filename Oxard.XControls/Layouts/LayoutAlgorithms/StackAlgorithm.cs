@@ -2,12 +2,12 @@
 using System.Linq;
 using Xamarin.Forms;
 
-namespace Oxard.XControls.Layouts.LayoutAlgorythms
+namespace Oxard.XControls.Layouts.LayoutAlgorithms
 {
     /// <summary>
-    /// Algorythm that stack horizontally or vertically all children
+    /// Algorithm that stack horizontally or vertically all children
     /// </summary>
-    public class StackAlgorythm : LayoutAlgorythm
+    public class StackAlgorithm : LayoutAlgorithm
     {
         private StackOrientation orientation = StackOrientation.Vertical;
         private double spacing;

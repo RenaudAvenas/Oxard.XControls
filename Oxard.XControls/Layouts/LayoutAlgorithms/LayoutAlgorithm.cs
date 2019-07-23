@@ -1,20 +1,20 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace Oxard.XControls.Layouts.LayoutAlgorythms
+namespace Oxard.XControls.Layouts.LayoutAlgorithms
 {
     /// <summary>
-    /// Base class for layout algorythms
+    /// Base class for layout algorithms
     /// </summary>
-    public abstract class LayoutAlgorythm : BindableObject
+    public abstract class LayoutAlgorithm : BindableObject
     {
         /// <summary>
-        /// Event raised when current algorythm should change disposition or measure.
+        /// Event raised when current algorithm should change disposition or measure.
         /// </summary>
         public event EventHandler Invalidated;
 
         /// <summary>
-        /// Get or set the layout that use current algorythm
+        /// Get or set the layout that use current algorithm
         /// </summary>
         public Layout<View> ParentLayout { get; set; }
 
@@ -65,7 +65,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorythms
         protected abstract void OnLayoutChildren(double x, double y, double width, double height);
 
         /// <summary>
-        /// Invalidate last disposition and measure of this algorythm
+        /// Invalidate last disposition and measure of this algorithm
         /// </summary>
         protected void Invalidate()
         {

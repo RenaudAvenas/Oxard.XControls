@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace Oxard.XControls.Components
 {
@@ -11,6 +12,16 @@ namespace Oxard.XControls.Components
         /// Identifies the IsChecked dependency property.
         /// </summary>
         public static readonly BindableProperty IsCheckedProperty = BindableProperty.Create(nameof(IsChecked), typeof(bool), typeof(CheckBox), false, defaultBindingMode: BindingMode.TwoWay);
+
+        /// <summary>
+        /// Get event that is invoked when CheckBox is checked
+        /// </summary>
+        public event EventHandler Checked;
+
+        /// <summary>
+        /// Get event that is invoked when CheckBox is unchecked
+        /// </summary>
+        public event EventHandler Unchecked;
 
         /// <summary>
         /// Get or set if the CheckBox is checked or not
@@ -26,10 +37,15 @@ namespace Oxard.XControls.Components
         /// </summary>
         protected override void OnClicked()
         {
-            base.OnClicked();
-
             this.IsChecked = !this.IsChecked;
             this.OnIsCheckedChanged();
+
+            if (this.IsChecked)
+                this.Checked?.Invoke(this, EventArgs.Empty);
+            else
+                this.Unchecked?.Invoke(this, EventArgs.Empty);
+
+            base.OnClicked();
         }
 
         /// <summary>

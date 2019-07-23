@@ -1,12 +1,12 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace Oxard.XControls.Layouts.LayoutAlgorythms
+namespace Oxard.XControls.Layouts.LayoutAlgorithms
 {
     /// <summary>
-    /// Algorythm that stack all children on top of each other
+    /// Algorithm that stack all children on top of each other
     /// </summary>
-    public class ZStackAlgorythm : LayoutAlgorythm 
+    public class ZStackAlgorithm : LayoutAlgorithm
     {
         /// <summary>
         /// Method called when a measurement is asked.

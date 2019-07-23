@@ -135,6 +135,7 @@ namespace Oxard.XControls.Events
             if (this.currentTouchDisabled)
                 return;
 
+            this.IsClicking = true;
             this.TouchEnter?.Invoke(this, touchEventArgs);
         }
 
@@ -147,6 +148,7 @@ namespace Oxard.XControls.Events
             if (this.currentTouchDisabled)
                 return;
 
+            this.IsClicking = false;
             this.currentStartTouch = null;
             this.TouchLeave?.Invoke(this, touchEventArgs);
         }

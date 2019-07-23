@@ -1,6 +1,20 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## 2.3.10.13
+
+- Spelling
+
+Rename algorythm into algorithm
+
+- CheckBox
+
+Add Checked and Unchecked event.
+
+- TouchManager
+
+There was a bug causes a clicked when touch up but touch left.
+
 ## 2.2.9.12
 
 - DrawingBrush bug

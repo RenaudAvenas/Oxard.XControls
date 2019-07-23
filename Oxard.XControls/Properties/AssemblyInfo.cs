@@ -13,4 +13,4 @@ using Xamarin.Forms;
 [assembly: XmlnsDefinition("https://github.com/RenaudAvenas/Oxard.XControls", "Oxard.XControls.Graphics", AssemblyName = "Oxard.XControls")]
 [assembly: XmlnsDefinition("https://github.com/RenaudAvenas/Oxard.XControls", "Oxard.XControls.Shapes", AssemblyName = "Oxard.XControls")]
 [assembly: XmlnsDefinition("https://github.com/RenaudAvenas/Oxard.XControls", "Oxard.XControls.Layouts", AssemblyName = "Oxard.XControls")]
-[assembly: XmlnsDefinition("https://github.com/RenaudAvenas/Oxard.XControls", "Oxard.XControls.Layouts.LayoutAlgorythms", AssemblyName = "Oxard.XControls")]
+[assembly: XmlnsDefinition("https://github.com/RenaudAvenas/Oxard.XControls", "Oxard.XControls.Layouts.LayoutAlgorithms", AssemblyName = "Oxard.XControls")]

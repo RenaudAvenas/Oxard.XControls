@@ -3,7 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:layout="clr-namespace:Oxard.XControls.Layouts;assembly=Oxard.XControls"
-    xmlns:layouta="clr-namespace:Oxard.XControls.Layouts.LayoutAlgorythms;assembly=Oxard.XControls"
+    xmlns:layouta="clr-namespace:Oxard.XControls.Layouts.LayoutAlgorithms;assembly=Oxard.XControls"
     xmlns:component="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
     xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
     x:Class="Oxard.TestApp.Views.MultiFormatLayoutView">
@@ -25,9 +25,9 @@
         </Grid.RowDefinitions>
         
         <layout:MultiFormatLayout x:Name="MultiFormatLayout">
-            <layout:MultiFormatLayout.Algorythm>
-                <layouta:ZStackAlgorythm />
-            </layout:MultiFormatLayout.Algorythm>
+            <layout:MultiFormatLayout.Algorithm>
+                <layouta:ZStackAlgorithm />
+            </layout:MultiFormatLayout.Algorithm>
 
             <BoxView
                 VerticalOptions="Start"
@@ -63,7 +63,7 @@
             Grid.Row="1">
             <Label
                 TextColor="White"
-                Text="Change layout algorythm" />
+                Text="Change layout algorithm" />
         </component:Button>
     </Grid>
 </ContentView>
