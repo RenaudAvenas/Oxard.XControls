@@ -10,5 +10,5 @@
 // Y : minor version modification with some impact like namespace changed or class renamed...
 // Z : new components or features
 // W : bug correction, components improved
-[assembly: AssemblyVersion("2.3.10.13")]
-[assembly: AssemblyFileVersion("2.3.10.13")]
+[assembly: AssemblyVersion("2.3.11.14")]
+[assembly: AssemblyFileVersion("2.3.11.14")]

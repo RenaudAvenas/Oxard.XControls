@@ -38,7 +38,7 @@
             Property="Foreground"
             Value="{StaticResource ButtonForegroundColor}" />
         <Setter
-            Property="Background">
+            Property="graphics:DrawingBrush.AttachedBrush">
             <Setter.Value>
                 <graphics:RectangleBrush
                     Fill="{StaticResource ButtonBackgroundBrush}"

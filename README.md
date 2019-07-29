@@ -1,6 +1,18 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## 2.3.11.14
+
+- TouchManager
+
+Clicked event was called before TouchUp. Now it is reversed.
+
+- Brushes
+
+All brushes are implemented IClonable. This is usefull to create styles with brushes and change there properties for one element and not for all elements.
+Particulary if you want a drawing brush and change there properties with attached properties in a Trigger.
+The AttachedFill attached property allow you to attached a clone of brush describe in on each element that use your style.
+
 ## 2.3.10.13
 
 - Spelling
