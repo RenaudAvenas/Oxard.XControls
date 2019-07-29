@@ -12,16 +12,6 @@ namespace Oxard.XControls.Graphics
     /// </summary>
     public abstract class DrawingBrush : Brush, IDrawable
     {
-        #region Debug infos
-
-        private static int currentInstanceId = 0;
-
-        public int InstanceId { get; }
-
-        public string Tag { get; set; }
-
-        #endregion
-
         /// <summary>
         /// Identifies the Fill dependency property.
         /// </summary>
@@ -58,15 +48,7 @@ namespace Oxard.XControls.Graphics
         /// Identifies the  AttachedStrokeDashArray dependency property
         /// </summary>
         public static readonly BindableProperty AttachedStrokeDashArrayProperty = BindableProperty.CreateAttached("AttachedStrokeDashArray", typeof(Point), typeof(DrawingBrush), new Point(1, 0), propertyChanged: OnAttachedStrokeDashArrayPropertyChanged/*, defaultValueCreator: AttachedStrokeDashArrayPropertyDefaultValueCreator*/);
-        
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public DrawingBrush()
-        {
-            this.InstanceId = currentInstanceId++;
-        }
-
+      
         /// <summary>
         /// Event called when shape geometry changed
         /// </summary>
@@ -135,7 +117,6 @@ namespace Oxard.XControls.Graphics
             copy.Stroke = this.Stroke;
             copy.StrokeThickness = this.StrokeThickness;
             copy.StrokeDashArray = this.StrokeDashArray;
-            copy.Tag = this.Tag;
 
             return copy;
         }
@@ -262,6 +243,9 @@ namespace Oxard.XControls.Graphics
 
         private static void OnAttachedBrushPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
+            if (newValue == null)
+                return;
+
             DrawingBrush drawingBrush;
             if (bindable is ContentControl contentControl)
             {
@@ -271,7 +255,14 @@ namespace Oxard.XControls.Graphics
             else if (bindable is Element element)
             {
                 drawingBrush = (DrawingBrush)((DrawingBrush)newValue).Clone();
-                element.Effects.Add(new BackgroundEffect { Background = drawingBrush });
+                var effect = (BackgroundEffect)element.Effects.FirstOrDefault(e => e is BackgroundEffect);
+                if(effect == null)
+                {
+                    effect = new BackgroundEffect();
+                    element.Effects.Add(effect);
+                }
+
+                effect.Background = drawingBrush;
             }
             else
                 return;
@@ -300,50 +291,6 @@ namespace Oxard.XControls.Graphics
         private static void OnAttachedStrokeDashArrayPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             TryFoundAndDoOnDrawingBrush(bindable, d => d.StrokeDashArray = (Point)newValue);
-        }
-
-        private static object AttachedFillPropertyDefaultValueCreator(BindableObject bindable)
-        {
-            var result = (Brush)Brushes.Transparent;
-
-            var baseBrush = GetAttachedBrush(bindable);
-            if (baseBrush != null)
-                result = baseBrush.Fill;
-
-            return result;
-        }
-
-        private static object AttachedStrokePropertyDefaultValueCreator(BindableObject bindable)
-        {
-            var result = Color.Transparent;
-
-            var baseBrush = GetAttachedBrush(bindable);
-            if (baseBrush != null)
-                result = baseBrush.Stroke;
-
-            return result;
-        }
-
-        private static object AttachedStrokeThicknessPropertyDefaultValueCreator(BindableObject bindable)
-        {
-            var result = 0d;
-
-            var baseBrush = GetAttachedBrush(bindable);
-            if (baseBrush != null)
-                result = baseBrush.StrokeThickness;
-
-            return result;
-        }
-
-        private static object AttachedStrokeDashArrayPropertyDefaultValueCreator(BindableObject bindable)
-        {
-            var result = new Point(1, 0);
-
-            var baseBrush = GetAttachedBrush(bindable);
-            if (baseBrush != null)
-                result = baseBrush.StrokeDashArray;
-
-            return result;
         }
 
         /// <summary>

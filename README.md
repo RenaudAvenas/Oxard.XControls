@@ -1,6 +1,12 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## 2.3.11.15
+
+- DrawingBrush
+
+Check null reference on AttachedBrush property changed
+
 ## 2.3.11.14
 
 - TouchManager
