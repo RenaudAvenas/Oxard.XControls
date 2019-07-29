@@ -42,5 +42,12 @@ namespace Oxard.XControls.Graphics
             get => (Point)this.GetValue(EndPointProperty);
             set => this.SetValue(EndPointProperty, value);
         }
+
+        /// <summary>
+        /// Creates a new <see cref="GradientBrush"/> that is a copy of the current instance.
+        /// Just clone custom properties of inherited classes. The clone method of GradientBrush already copies its own properties.
+        /// </summary>
+        /// <returns>A new <see cref="GradientBrush"/> that is a copy of this instance.</returns>
+        protected override GradientBrush CloneGradientBrush() => new LinearGradientBrush { StartPoint = this.StartPoint, EndPoint = this.EndPoint };
     }
 }

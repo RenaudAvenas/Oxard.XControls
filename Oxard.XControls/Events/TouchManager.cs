@@ -182,11 +182,6 @@ namespace Oxard.XControls.Events
 
             this.currentStartTouch = null;
 
-            if (this.IsClicking)
-                this.Clicked?.Invoke(this, EventArgs.Empty);
-
-            this.IsClicking = false;
-
             if (this.cancellationTokenSource != null)
             {
                 this.cancellationTokenSource.Cancel();
@@ -194,6 +189,11 @@ namespace Oxard.XControls.Events
             }
 
             this.TouchUp?.Invoke(this, touchEventArgs);
+
+            if (this.IsClicking)
+                this.Clicked?.Invoke(this, EventArgs.Empty);
+
+            this.IsClicking = false;
         }
 
         /// <summary>

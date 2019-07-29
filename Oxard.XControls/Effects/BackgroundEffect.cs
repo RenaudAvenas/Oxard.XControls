@@ -1,4 +1,5 @@
-﻿using Oxard.XControls.Graphics;
+﻿using System;
+using Oxard.XControls.Graphics;
 using Xamarin.Forms;
 
 namespace Oxard.XControls.Effects
@@ -8,16 +9,34 @@ namespace Oxard.XControls.Effects
     /// </summary>
     public class BackgroundEffect : RoutingEffect
     {
+        private Brush background;
+
         /// <summary>
         /// Default constructor
         /// </summary>
         public BackgroundEffect() : base($"OxardXControls.{nameof(BackgroundEffect)}")
         {
         }
-        
+
+        /// <summary>
+        /// Raised when <see cref="Background"/> property changed
+        /// </summary>
+        public event EventHandler BackgroundChanged;
+
         /// <summary>
         /// Get or set the <see cref="Brush"/> to use as background
         /// </summary>
-        public Brush Background { get; set; }
+        public Brush Background
+        {
+            get => background;
+            set
+            {
+                if (background != value)
+                {
+                    background = value;
+                    BackgroundChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
     }
 }

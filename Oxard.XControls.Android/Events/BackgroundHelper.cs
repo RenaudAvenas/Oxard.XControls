@@ -45,6 +45,11 @@ namespace Oxard.XControls.Droid.Events
             this.ApplyBackground();
         }
 
+        public void ReapplyBackground()
+        {
+            this.ApplyBackground();
+        }
+
         public void Dispose()
         {
             element.SizeChanged -= this.ElementOnSizeChanged;
@@ -67,6 +72,9 @@ namespace Oxard.XControls.Droid.Events
 
         private void ElementOnSizeChanged(object sender, EventArgs e)
         {
+            if(this.element.Width <= 0 || this.element.Height <= 0)
+                return;
+
             if (this.background is DrawingBrush drawingBrush)
                 drawingBrush.SetSize(this.element.Width, this.element.Height);
 
@@ -80,11 +88,17 @@ namespace Oxard.XControls.Droid.Events
 
         private void BrushOnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
+            if(e.PropertyName == nameof(this.element.Width) || e.PropertyName == nameof(this.element.Height))
+                return;
+
             this.ApplyBackground();
         }
 
         private void ApplyBackground()
         {
+            if (this.element.Width <= 0 || this.element.Height <= 0)
+                return;
+
             this.control.SetBackground(this.ToIDrawable(this.background).ToDrawable(this.control.Context));
         }
 

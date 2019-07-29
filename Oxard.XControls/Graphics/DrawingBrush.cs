@@ -1,6 +1,7 @@
 ﻿using Oxard.XControls.Components;
 using Oxard.XControls.Effects;
 using System;
+using System.ComponentModel.Design;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -11,6 +12,16 @@ namespace Oxard.XControls.Graphics
     /// </summary>
     public abstract class DrawingBrush : Brush, IDrawable
     {
+        #region Debug infos
+
+        private static int currentInstanceId = 0;
+
+        public int InstanceId { get; }
+
+        public string Tag { get; set; }
+
+        #endregion
+
         /// <summary>
         /// Identifies the Fill dependency property.
         /// </summary>
@@ -28,36 +39,32 @@ namespace Oxard.XControls.Graphics
         /// </summary>
         public static readonly BindableProperty StrokeDashArrayProperty = BindableProperty.Create(nameof(StrokeDashArray), typeof(Point), typeof(DrawingBrush), new Point(1, 0), propertyChanged: OnStrokeDashArrayPropertyChanged);
         /// <summary>
+        /// Identifies the AttachedBrush dependency property
+        /// </summary>
+        public static readonly BindableProperty AttachedBrushProperty = BindableProperty.CreateAttached("AttachedBrush", typeof(DrawingBrush), typeof(DrawingBrush), null, propertyChanged: OnAttachedBrushPropertyChanged);
+        /// <summary>
         /// Identifies the AttachedFill dependency property
         /// </summary>
-        public static readonly BindableProperty AttachedFillProperty = BindableProperty.CreateAttached("AttachedFill", typeof(Brush), typeof(DrawingBrush), Brushes.Transparent, propertyChanged: OnAttachedFillPropertyChanged, defaultValueCreator: AttachedFillPropertyDefaultValueCreator);
+        public static readonly BindableProperty AttachedFillProperty = BindableProperty.CreateAttached("AttachedFill", typeof(Brush), typeof(DrawingBrush), Brushes.Transparent, propertyChanged: OnAttachedFillPropertyChanged/*, defaultValueCreator: AttachedFillPropertyDefaultValueCreator*/);
         /// <summary>
         /// Identifies the  AttachedStroke dependency property
         /// </summary>
-        public static readonly BindableProperty AttachedStrokeProperty = BindableProperty.CreateAttached("AttachedStroke", typeof(Color), typeof(DrawingBrush), Color.Transparent, propertyChanged: OnAttachedStrokePropertyChanged, defaultValueCreator: AttachedStrokePropertyDefaultValueCreator);
+        public static readonly BindableProperty AttachedStrokeProperty = BindableProperty.CreateAttached("AttachedStroke", typeof(Color), typeof(DrawingBrush), Color.Transparent, propertyChanged: OnAttachedStrokePropertyChanged/*, defaultValueCreator: AttachedStrokePropertyDefaultValueCreator*/);
         /// <summary>
         /// Identifies the  AttachedStrokeThickness dependency property
         /// </summary>
-        public static readonly BindableProperty AttachedStrokeThicknessProperty = BindableProperty.CreateAttached("AttachedStrokeThickness", typeof(double), typeof(DrawingBrush), 0d, propertyChanged: OnAttachedStrokeThicknessPropertyChanged, defaultValueCreator: AttachedStrokeThicknessPropertyDefaultValueCreator);
+        public static readonly BindableProperty AttachedStrokeThicknessProperty = BindableProperty.CreateAttached("AttachedStrokeThickness", typeof(double), typeof(DrawingBrush), 0d, propertyChanged: OnAttachedStrokeThicknessPropertyChanged/*, defaultValueCreator: AttachedStrokeThicknessPropertyDefaultValueCreator*/);
         /// <summary>
         /// Identifies the  AttachedStrokeDashArray dependency property
         /// </summary>
-        public static readonly BindableProperty AttachedStrokeDashArrayProperty = BindableProperty.CreateAttached("AttachedStrokeDashArray", typeof(Point), typeof(DrawingBrush), new Point(1, 0), propertyChanged: OnAttachedStrokeDashArrayPropertyChanged, defaultValueCreator: AttachedStrokeDashArrayPropertyDefaultValueCreator);
-
-        private readonly Lazy<Brush> originialFill;
-        private readonly Lazy<Color> originalStroke;
-        private readonly Lazy<double> originalStrokeThickness;
-        private readonly Lazy<Point> originalStrokeDashArray;
-
+        public static readonly BindableProperty AttachedStrokeDashArrayProperty = BindableProperty.CreateAttached("AttachedStrokeDashArray", typeof(Point), typeof(DrawingBrush), new Point(1, 0), propertyChanged: OnAttachedStrokeDashArrayPropertyChanged/*, defaultValueCreator: AttachedStrokeDashArrayPropertyDefaultValueCreator*/);
+        
         /// <summary>
         /// Default constructor
         /// </summary>
         public DrawingBrush()
         {
-            this.originialFill = new Lazy<Brush>(() => this.Fill);
-            this.originalStroke = new Lazy<Color>(() => this.Stroke);
-            this.originalStrokeThickness = new Lazy<double>(() => this.StrokeThickness);
-            this.originalStrokeDashArray = new Lazy<Point>(() => this.StrokeDashArray);
+            this.InstanceId = currentInstanceId++;
         }
 
         /// <summary>
@@ -117,18 +124,52 @@ namespace Oxard.XControls.Graphics
         public double Height { get; private set; }
 
         /// <summary>
+        /// Creates a new object that is a copy of the current instance.
+        /// </summary>
+        /// <returns>A new object that is a copy of this instance.</returns>
+        public sealed override object Clone()
+        {
+            var copy = this.CloneDrawingBrush();
+
+            copy.Fill = (Brush)this.Fill.Clone();
+            copy.Stroke = this.Stroke;
+            copy.StrokeThickness = this.StrokeThickness;
+            copy.StrokeDashArray = this.StrokeDashArray;
+            copy.Tag = this.Tag;
+
+            return copy;
+        }
+
+        /// <summary>
         /// Called to define the <see cref="Width"/> and <see cref="Height"/> of the drawable
         /// </summary>
         /// <param name="width">Width of the drawable</param>
         /// <param name="height">Height of the drawable</param>
         public void SetSize(double width, double height)
         {
+            if(width < 0 || height < 0)
+                return;
+
             this.Width = width;
             this.Height = height;
             this.OnPropertyChanged(nameof(this.Width));
             this.OnPropertyChanged(nameof(this.Height));
             this.OnSizeAllocated(width, height);
         }
+
+        /// <summary>
+        /// Get the AttachedBrush property value for the specified bindable object.
+        /// </summary>
+        /// <param name="bindableObject">Object on which we want the value of the property</param>
+        /// <returns>AttachedBrush property value for the bindable object</returns>
+        public static DrawingBrush GetAttachedBrush(BindableObject bindableObject) => (DrawingBrush)bindableObject.GetValue(AttachedBrushProperty);
+
+        /// <summary>
+        /// Set the AttachedBrush property value for the specified bindable object. That set a clone of this brush on attached object (in <see cref="ContentControl.Background"/> property or in a new <see cref="BackgroundEffect"/>).
+        /// </summary>
+        /// <param name="bindableObject">Object that takes the value</param>
+        /// <param name="value">The value to set</param>
+        public static void SetAttachedBrush(BindableObject bindableObject, DrawingBrush value) => bindableObject.SetValue(AttachedBrushProperty, value);
 
         /// <summary>
         /// Get the AttachedFill property value for the specified bindable object
@@ -219,6 +260,28 @@ namespace Oxard.XControls.Graphics
         {
         }
 
+        private static void OnAttachedBrushPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            DrawingBrush drawingBrush;
+            if (bindable is ContentControl contentControl)
+            {
+                drawingBrush = (DrawingBrush)((DrawingBrush)newValue).Clone();
+                contentControl.Background = drawingBrush;
+            }
+            else if (bindable is Element element)
+            {
+                drawingBrush = (DrawingBrush)((DrawingBrush)newValue).Clone();
+                element.Effects.Add(new BackgroundEffect { Background = drawingBrush });
+            }
+            else
+                return;
+
+            SetAttachedFill(bindable, drawingBrush.Fill);
+            SetAttachedStroke(bindable, drawingBrush.Stroke);
+            SetAttachedStrokeThickness(bindable, drawingBrush.StrokeThickness);
+            SetAttachedStrokeDashArray(bindable, drawingBrush.StrokeDashArray);
+        }
+
         private static void OnAttachedFillPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             TryFoundAndDoOnDrawingBrush(bindable, d => d.Fill = (Brush)newValue);
@@ -241,29 +304,45 @@ namespace Oxard.XControls.Graphics
 
         private static object AttachedFillPropertyDefaultValueCreator(BindableObject bindable)
         {
-            Brush result = Brushes.Transparent;
-            TryFoundAndDoOnDrawingBrush(bindable,  d => result = d.originialFill.Value);
+            var result = (Brush)Brushes.Transparent;
+
+            var baseBrush = GetAttachedBrush(bindable);
+            if (baseBrush != null)
+                result = baseBrush.Fill;
+
             return result;
         }
 
         private static object AttachedStrokePropertyDefaultValueCreator(BindableObject bindable)
         {
             var result = Color.Transparent;
-            TryFoundAndDoOnDrawingBrush(bindable, d => result = d.originalStroke.Value);
+
+            var baseBrush = GetAttachedBrush(bindable);
+            if (baseBrush != null)
+                result = baseBrush.Stroke;
+
             return result;
         }
 
         private static object AttachedStrokeThicknessPropertyDefaultValueCreator(BindableObject bindable)
         {
             var result = 0d;
-            TryFoundAndDoOnDrawingBrush(bindable, d => result = d.originalStrokeThickness.Value);
+
+            var baseBrush = GetAttachedBrush(bindable);
+            if (baseBrush != null)
+                result = baseBrush.StrokeThickness;
+
             return result;
         }
 
         private static object AttachedStrokeDashArrayPropertyDefaultValueCreator(BindableObject bindable)
         {
             var result = new Point(1, 0);
-            TryFoundAndDoOnDrawingBrush(bindable, d => result = d.originalStrokeDashArray.Value);
+
+            var baseBrush = GetAttachedBrush(bindable);
+            if (baseBrush != null)
+                result = baseBrush.StrokeDashArray;
+
             return result;
         }
 
@@ -283,5 +362,12 @@ namespace Oxard.XControls.Graphics
         {
             this.GeometryChanged?.Invoke(this, EventArgs.Empty);
         }
+
+        /// <summary>
+        /// Creates a new <see cref="DrawingBrush"/> that is a copy of the current instance.
+        /// Just clone custom properties of inherited classes. The clone method of DrawingBrush already copies its own properties.
+        /// </summary>
+        /// <returns>A new <see cref="DrawingBrush"/> that is a copy of this instance.</returns>
+        protected abstract DrawingBrush CloneDrawingBrush();
     }
 }

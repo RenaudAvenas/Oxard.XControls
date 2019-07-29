@@ -90,6 +90,28 @@ namespace Oxard.XControls.Graphics
         /// </summary>
         public override Geometry Geometry => this.actualGeometry;
 
+        /// <summary>
+        /// Creates a new <see cref="DrawingBrush"/> that is a copy of the current instance.
+        /// Just clone custom properties of inherited classes. The clone method of DrawingBrush already copies its own properties.
+        /// </summary>
+        /// <returns>A new <see cref="DrawingBrush"/> that is a copy of this instance.</returns>
+        protected override DrawingBrush CloneDrawingBrush()
+        {
+            var rectangle = new RectangleBrush();
+
+            if (this.CornerRadius != null)
+                rectangle.CornerRadius = this.CornerRadius;
+            else
+            {
+                rectangle.TopLeftCornerRadius = new CornerRadius(this.TopLeftCornerRadius.RadiusX, this.TopLeftCornerRadius.RadiusY);
+                rectangle.TopRightCornerRadius = new CornerRadius(this.TopRightCornerRadius.RadiusX, this.TopRightCornerRadius.RadiusY);
+                rectangle.BottomRightCornerRadius = new CornerRadius(this.BottomRightCornerRadius.RadiusX, this.BottomRightCornerRadius.RadiusY);
+                rectangle.BottomLeftCornerRadius = new CornerRadius(this.BottomLeftCornerRadius.RadiusX, this.BottomLeftCornerRadius.RadiusY);
+            }
+
+            return rectangle;
+        }
+
         private static void SpecificCornerRadiusPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var rect = bindable as RectangleBrush;

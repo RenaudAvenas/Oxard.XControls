@@ -22,6 +22,13 @@
             this.CalculateGeometry();
         }
 
+        /// <summary>
+        /// Creates a new <see cref="DrawingBrush"/> that is a copy of the current instance.
+        /// Just clone custom properties of inherited classes. The clone method of DrawingBrush already copies its own properties.
+        /// </summary>
+        /// <returns>A new <see cref="DrawingBrush"/> that is a copy of this instance.</returns>
+        protected override DrawingBrush CloneDrawingBrush() => new EllipseBrush();
+
         private void CalculateGeometry()
         {
             this.actualGeometry = GeometryHelper.GetEllipse(this.Width, this.Height, this.StrokeThickness);
