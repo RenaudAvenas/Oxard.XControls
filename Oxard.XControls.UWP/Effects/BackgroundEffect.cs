@@ -28,6 +28,7 @@ namespace Oxard.XControls.UWP.Effects
         {
             var originalEffect = (XControls.Effects.BackgroundEffect)this.Element.Effects.FirstOrDefault(e => e is XControls.Effects.BackgroundEffect);
             this.originalEffect = originalEffect;
+            this.originalEffect.BackgroundChanged += this.OriginalEffectOnBackgroundChanged;
             if (this.originalEffect.Background is DrawingBrush drawingBrush)
             {
                 var visualElement = this.Element as VisualElement;
@@ -41,11 +42,6 @@ namespace Oxard.XControls.UWP.Effects
             this.ApplyBackground();
         }
 
-        private void DrawingBrushOnGeometryChanged(object sender, EventArgs e)
-        {
-            this.ApplyBackground();
-        }
-
         protected override void OnDetached()
         {
             if (this.originalEffect.Background is DrawingBrush drawingBrush)
@@ -55,6 +51,7 @@ namespace Oxard.XControls.UWP.Effects
                 drawingBrush.GeometryChanged -= this.DrawingBrushOnGeometryChanged;
             }
 
+            this.originalEffect.BackgroundChanged -= this.OriginalEffectOnBackgroundChanged;
             this.originalEffect = null;
         }
 
@@ -76,6 +73,16 @@ namespace Oxard.XControls.UWP.Effects
                 control.Background = this.originalEffect.Background.ToBrush();
             else if (this.Control is Panel panel)
                 panel.Background = this.originalEffect.Background.ToBrush();
+        }
+
+        private void OriginalEffectOnBackgroundChanged(object sender, EventArgs e)
+        {
+            this.ApplyBackground();
+        }
+
+        private void DrawingBrushOnGeometryChanged(object sender, EventArgs e)
+        {
+            this.ApplyBackground();
         }
     }
 }
