@@ -24,9 +24,9 @@ namespace Oxard.XControls.Droid.Events
 
         public BackgroundHelper(View androidView, VisualElement visualElement, Brush background)
         {
-            this.control = androidView;
-            this.element = visualElement;
-            this.background = background;
+            this.control = androidView ?? throw new ArgumentNullException(nameof(androidView));
+            this.element = visualElement ?? throw new ArgumentNullException(nameof(visualElement));
+            this.background = background ?? throw new ArgumentNullException(nameof(background));
 
             element.SizeChanged += this.ElementOnSizeChanged;
             this.ChangeBackground(background);
@@ -72,7 +72,7 @@ namespace Oxard.XControls.Droid.Events
 
         private void ElementOnSizeChanged(object sender, EventArgs e)
         {
-            if(this.element.Width <= 0 || this.element.Height <= 0)
+            if (this.element.Width <= 0 || this.element.Height <= 0)
                 return;
 
             if (this.background is DrawingBrush drawingBrush)
@@ -88,7 +88,7 @@ namespace Oxard.XControls.Droid.Events
 
         private void BrushOnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == nameof(this.element.Width) || e.PropertyName == nameof(this.element.Height))
+            if (e.PropertyName == nameof(this.element.Width) || e.PropertyName == nameof(this.element.Height))
                 return;
 
             this.ApplyBackground();

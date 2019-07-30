@@ -1,6 +1,16 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## 2.3.11.16
+
+- TouchManager
+
+Bug fix : TouchCancel cancel long press.
+
+- BackgroundEffect
+
+Bug fix : Background is applied on effect control if exists otherwise on effect container.
+
 ## 2.3.11.15
 
 - DrawingBrush

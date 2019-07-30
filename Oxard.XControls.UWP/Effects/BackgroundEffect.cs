@@ -5,6 +5,7 @@ using Oxard.XControls.UWP.Extensions;
 using Oxard.XControls.UWP.Interpretors;
 using System;
 using System.Linq;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;
@@ -17,6 +18,7 @@ namespace Oxard.XControls.UWP.Effects
     public class BackgroundEffect : PlatformEffect
     {
         private XControls.Effects.BackgroundEffect originalEffect;
+        private FrameworkElement backgroundControl;
 
         static BackgroundEffect()
         {
@@ -26,8 +28,11 @@ namespace Oxard.XControls.UWP.Effects
 
         protected override void OnAttached()
         {
-            var originalEffect = (XControls.Effects.BackgroundEffect)this.Element.Effects.FirstOrDefault(e => e is XControls.Effects.BackgroundEffect);
-            this.originalEffect = originalEffect;
+            this.backgroundControl = this.Control ?? this.Container;
+            if(this.backgroundControl == null)
+                return;
+
+            this.originalEffect = (XControls.Effects.BackgroundEffect)this.Element.Effects.First(e => e is XControls.Effects.BackgroundEffect);
             this.originalEffect.BackgroundChanged += this.OriginalEffectOnBackgroundChanged;
             if (this.originalEffect.Background is DrawingBrush drawingBrush)
             {
@@ -44,6 +49,9 @@ namespace Oxard.XControls.UWP.Effects
 
         protected override void OnDetached()
         {
+            if (this.backgroundControl == null)
+                return;
+
             if (this.originalEffect.Background is DrawingBrush drawingBrush)
             {
                 var visualElement = this.Element as VisualElement;
@@ -69,9 +77,9 @@ namespace Oxard.XControls.UWP.Effects
             if (this.originalEffect.Background == null)
                 return;
 
-            if (this.Control is Control control)
+            if (this.backgroundControl is Control control)
                 control.Background = this.originalEffect.Background.ToBrush();
-            else if (this.Control is Panel panel)
+            else if (this.backgroundControl is Panel panel)
                 panel.Background = this.originalEffect.Background.ToBrush();
         }
 
