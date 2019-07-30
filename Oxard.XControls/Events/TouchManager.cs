@@ -22,7 +22,7 @@ namespace Oxard.XControls.Events
         private bool currentTouchDisabled;
         private Task longPressDelayTask;
         private CancellationTokenSource cancellationTokenSource;
-        
+
         /// <summary>
         /// Raised when touch down
         /// </summary>
@@ -77,14 +77,21 @@ namespace Oxard.XControls.Events
         /// <param name="touchEventArgs">Touch arguments</param>
         public void OnTouchCancel(TouchEventArgs touchEventArgs)
         {
+            this.currentStartTouch = null;
+            this.IsClicking = false;
+
+            if (this.cancellationTokenSource != null)
+            {
+                this.cancellationTokenSource.Cancel();
+                this.cancellationTokenSource = null;
+            }
+
             if (this.currentTouchDisabled)
             {
                 this.currentTouchDisabled = false;
                 return;
             }
 
-            this.currentTouchDisabled = false;
-            this.IsClicking = false;
             this.TouchCanceled?.Invoke(this, touchEventArgs);
         }
 
@@ -114,7 +121,7 @@ namespace Oxard.XControls.Events
 
                     if (this.currentStartTouch == null || t.IsCanceled)
                         return;
-                    
+
                     if (this.LongPressCancelClick)
                         this.IsClicking = false;
 
