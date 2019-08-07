@@ -18,6 +18,20 @@ namespace Oxard.TestApp.Views
             this.algorithms.Add(this.MultiFormatLayout.Algorithm);
             this.algorithms.Add(new StackAlgorithm { Spacing = 10 });
             this.algorithms.Add(new StackAlgorithm { Spacing = 15, Orientation = StackOrientation.Horizontal });
+
+            var gridAlgorithm = new GridAlgorithm { ColumnSpacing = 10, RowSpacing = 20 };
+
+            gridAlgorithm.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
+            gridAlgorithm.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            gridAlgorithm.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(55, GridUnitType.Absolute) });
+
+            gridAlgorithm.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            gridAlgorithm.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) });
+            gridAlgorithm.RowDefinitions.Add(new RowDefinition { Height = new GridLength(55, GridUnitType.Absolute) });
+
+            this.algorithms.Add(gridAlgorithm);
+
+            this.AlgoLabel.Text = this.MultiFormatLayout.Algorithm.GetType().Name;
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -27,6 +41,8 @@ namespace Oxard.TestApp.Views
                 layoutIndex = 0;
 
             this.MultiFormatLayout.Algorithm = this.algorithms[layoutIndex];
+
+            this.AlgoLabel.Text = this.MultiFormatLayout.Algorithm.GetType().Name;
         }
     }
 }

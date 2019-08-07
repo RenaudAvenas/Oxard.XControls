@@ -23,12 +23,20 @@
             <RowDefinition
                 Height="Auto" />
         </Grid.RowDefinitions>
-        
-        <layout:MultiFormatLayout x:Name="MultiFormatLayout">
+
+        <layout:MultiFormatLayout
+            x:Name="MultiFormatLayout">
             <layout:MultiFormatLayout.Algorithm>
                 <layouta:ZStackAlgorithm />
             </layout:MultiFormatLayout.Algorithm>
 
+            <BoxView
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Grid.RowSpan="2"
+                BackgroundColor="Yellow"
+                HeightRequest="200"
+                WidthRequest="200" />
             <BoxView
                 VerticalOptions="Start"
                 BackgroundColor="Red"
@@ -36,12 +44,15 @@
                 WidthRequest="100" />
 
             <BoxView
+                Grid.Column="2"
                 HorizontalOptions="Start"
                 BackgroundColor="Blue"
                 HeightRequest="50"
                 WidthRequest="50" />
 
             <BoxView
+                Grid.Column="1"
+                Grid.Row="1"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 BackgroundColor="Green"
@@ -49,6 +60,8 @@
                 WidthRequest="30" />
 
             <BoxView
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 BackgroundColor="Aqua"
@@ -56,14 +69,25 @@
                 WidthRequest="20" />
         </layout:MultiFormatLayout>
 
-        <component:Button
+        <StackLayout
             HorizontalOptions="Center"
-            Clicked="Button_Clicked"
-            Style="{StaticResource ButtonDefaultStyle}"
-            Grid.Row="1">
+            Grid.Row="1"
+            Orientation="Horizontal">
+            <component:Button
+                Clicked="Button_Clicked"
+                Style="{StaticResource ButtonDefaultStyle}">
+                <Label
+                    TextColor="White"
+                    Text="Change layout algorithm" />
+            </component:Button>
+
+            <Label
+                Margin="10,0,0,0"
+                TextColor="White"
+                Text="Actual is : " />
             <Label
                 TextColor="White"
-                Text="Change layout algorithm" />
-        </component:Button>
+                x:Name="AlgoLabel" />
+        </StackLayout>
     </Grid>
 </ContentView>
