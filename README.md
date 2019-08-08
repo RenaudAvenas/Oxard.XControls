@@ -1,6 +1,16 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## 2.3.12.16
+
+- Algorithm (layouts)
+
+Add of Grid and UniformGrid algorithms for MultiFormatLayout.
+
+- Layouts
+
+You can create a layout that is based on one of LayoutAlgorithm by inherited from BaseLayout class. ZStackLayout and UniformGrid are implemented and use BaseLayout.
+
 ## 2.3.11.16
 
 - TouchManager

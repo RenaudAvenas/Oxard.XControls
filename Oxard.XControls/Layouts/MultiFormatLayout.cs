@@ -13,7 +13,7 @@ namespace Oxard.XControls.Layouts
         /// Identifies the Algorithm property.
         /// </summary>
         public static readonly BindableProperty AlgorithmProperty = BindableProperty.Create(nameof(Algorithm), typeof(LayoutAlgorithm), typeof(MultiFormatLayout), null, propertyChanged: OnAlgorithmPropertyChanged);
-        
+
         /// <summary>
         /// Get or set the current algorithm used to display children
         /// </summary>
@@ -22,7 +22,7 @@ namespace Oxard.XControls.Layouts
             get => (LayoutAlgorithm)this.GetValue(AlgorithmProperty);
             set => this.SetValue(AlgorithmProperty, value);
         }
-        
+
         private static void OnAlgorithmPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             (bindable as MultiFormatLayout)?.OnAlgorithmChanged(oldValue as LayoutAlgorithm);
@@ -36,8 +36,10 @@ namespace Oxard.XControls.Layouts
         /// <returns>Requested size</returns>
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
-            var algorithm = this.Algorithm ?? new ZStackAlgorithm();
-            return base.OnMeasure(widthConstraint, heightConstraint);
+            if (this.Algorithm == null)
+                this.Algorithm = new ZStackAlgorithm();
+
+            return this.Algorithm.Measure(widthConstraint, heightConstraint);
         }
 
         /// <summary>
@@ -49,8 +51,10 @@ namespace Oxard.XControls.Layouts
         /// <param name="height">Height constraint to layout</param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            var algorithm = this.Algorithm ?? new ZStackAlgorithm();
-            algorithm.LayoutChildren(x, y, width, height);
+            if (this.Algorithm == null)
+                this.Algorithm = new ZStackAlgorithm();
+
+            this.Algorithm.LayoutChildren(x, y, width, height);
         }
 
         private void OnAlgorithmChanged(LayoutAlgorithm oldAlgorithm)

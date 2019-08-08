@@ -1,5 +1,4 @@
-﻿using Oxard.XControls.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 

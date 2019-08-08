@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:layouts="clr-namespace:Oxard.XControls.Layouts;assembly=Oxard.XControls"
+    xmlns:usercontrols="clr-namespace:Oxard.TestApp.UserControls"
+    x:Class="Oxard.TestApp.Views.UniformGridView">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="3*" />
+            <RowDefinition
+                Height="1*" />
+        </Grid.RowDefinitions>
+        
+        <layouts:UniformGrid
+            Margin="15"
+            
+            x:Name="UniformGrid"
+            Columns="3">
+            <BoxView
+                BackgroundColor="White" />
+            <BoxView
+                Grid.ColumnSpan="2"
+                BackgroundColor="#CCCCCC" />
+            <BoxView
+                Grid.RowSpan="2"
+                BackgroundColor="#AAAAAA" />
+            <BoxView
+                BackgroundColor="#666666" />
+            <BoxView
+                BackgroundColor="#555555" />
+            <BoxView
+                BackgroundColor="#444444" />
+            <BoxView
+                BackgroundColor="#333333" />
+        </layouts:UniformGrid>
+
+        <usercontrols:PropertyListControl
+            Grid.Row="1"
+            Instance="{x:Reference UniformGrid}" />
+    </Grid>
+</ContentView>

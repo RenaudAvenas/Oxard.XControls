@@ -29,24 +29,24 @@
             <layout:MultiFormatLayout.Algorithm>
                 <layouta:ZStackAlgorithm />
             </layout:MultiFormatLayout.Algorithm>
-
+            
             <BoxView
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Grid.RowSpan="2"
-                BackgroundColor="Yellow"
+                BackgroundColor="White"
                 HeightRequest="200"
                 WidthRequest="200" />
             <BoxView
                 VerticalOptions="Start"
-                BackgroundColor="Red"
+                BackgroundColor="#CCCCCC"
                 HeightRequest="100"
                 WidthRequest="100" />
 
             <BoxView
                 Grid.Column="2"
                 HorizontalOptions="Start"
-                BackgroundColor="Blue"
+                BackgroundColor="#AAAAAA"
                 HeightRequest="50"
                 WidthRequest="50" />
 
@@ -55,7 +55,7 @@
                 Grid.Row="1"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
-                BackgroundColor="Green"
+                BackgroundColor="#666666"
                 HeightRequest="30"
                 WidthRequest="30" />
 
@@ -64,7 +64,7 @@
                 Grid.ColumnSpan="2"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
-                BackgroundColor="Aqua"
+                BackgroundColor="#555555"
                 HeightRequest="20"
                 WidthRequest="20" />
         </layout:MultiFormatLayout>

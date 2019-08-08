@@ -30,6 +30,7 @@ namespace Oxard.TestApp.Views
             gridAlgorithm.RowDefinitions.Add(new RowDefinition { Height = new GridLength(55, GridUnitType.Absolute) });
 
             this.algorithms.Add(gridAlgorithm);
+            this.algorithms.Add(new UniformGridAlgorithm { ColumnSpacing = 15, RowSpacing = 5, Columns = 3 });
 
             this.AlgoLabel.Text = this.MultiFormatLayout.Algorithm.GetType().Name;
         }
