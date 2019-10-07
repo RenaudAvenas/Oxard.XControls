@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace Oxard.XControls.Layouts.LayoutAlgorithms
@@ -17,7 +18,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
             var maxSize = Size.Zero;
-            foreach (var item in this.ParentLayout.Children)
+            foreach (var item in this.ParentLayout.Children.Where(c => c.IsVisible))
             {
                 var measuredSize = item.Measure(widthConstraint, heightConstraint, MeasureFlags.IncludeMargins);
                 maxSize.Width = Math.Max(measuredSize.Request.Width, maxSize.Width);
@@ -37,7 +38,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
         protected override void OnLayoutChildren(double x, double y, double width, double height)
         {
             var rectangle = new Rectangle(x, y, width, height);
-            foreach (var child in this.ParentLayout.Children)
+            foreach (var child in this.ParentLayout.Children.Where(c => c.IsVisible))
             {
                 Layout.LayoutChildIntoBoundingRegion(child, rectangle);
             }

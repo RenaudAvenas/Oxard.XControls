@@ -1,6 +1,12 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## 2.3.12.17
+
+- ZStackAlgorithm
+
+Bug fix : this layout did not take care about not visible children.
+
 ## 2.3.12.16
 
 - Algorithm (layouts)
