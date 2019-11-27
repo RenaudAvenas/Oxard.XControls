@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:layouts="clr-namespace:Oxard.XControls.Layouts;assembly=Oxard.XControls"
+    xmlns:usercontrols="clr-namespace:Oxard.TestApp.UserControls"
+    x:Class="Oxard.TestApp.Views.WrapLayoutView">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="1*" />
+        </Grid.RowDefinitions>
+        
+        <layouts:WrapLayout
+            Orientation="Vertical"
+            Margin="15"            
+            x:Name="WrapLayout">
+            <BoxView
+                WidthRequest="50"
+                HeightRequest="50"
+                BackgroundColor="White" />
+            <BoxView
+                WidthRequest="100"
+                HeightRequest="50"
+                BackgroundColor="#CCCCCC" />
+            <BoxView
+                WidthRequest="100"
+                HeightRequest="50"
+                BackgroundColor="#AAAAAA" />
+            <BoxView
+                WidthRequest="100"
+                HeightRequest="50"
+                BackgroundColor="#666666" />
+            <BoxView
+                WidthRequest="150"
+                HeightRequest="80"
+                BackgroundColor="#555555" />
+            <BoxView
+                WidthRequest="100"
+                HeightRequest="70"
+                BackgroundColor="#444444" />
+            <BoxView
+                WidthRequest="100"
+                HeightRequest="50"
+                BackgroundColor="#333333" />
+        </layouts:WrapLayout>
+
+        <usercontrols:PropertyListControl
+            Grid.Row="1"
+            Instance="{x:Reference WrapLayout}" />
+    </Grid>
+</ContentView>

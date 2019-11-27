@@ -1,6 +1,12 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## 2.3.13.17
+
+- WrapLayout & WrapAlgorithm
+
+WrapLayout and WrapAlgorithm have been added to controls.
+
 ## 2.3.12.17
 
 - ZStackAlgorithm

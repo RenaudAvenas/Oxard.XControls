@@ -25,6 +25,9 @@
     <Compile Update="Views\ItemsControlView.xaml.cs">
       <DependentUpon>ItemsControlView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\WrapLayoutView.xaml.cs">
+      <DependentUpon>WrapLayoutView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

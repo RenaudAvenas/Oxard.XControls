@@ -81,7 +81,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
 
             foreach (var child in this.ParentLayout.Children.Where(c => c.IsVisible))
             {
-                var sizeRequest = child.Measure(widthConstraint, double.PositiveInfinity);
+                var sizeRequest = child.Measure(widthConstraint, double.PositiveInfinity, MeasureFlags.IncludeMargins);
                 if (calculateWidth)
                     width = Math.Max(width, sizeRequest.Request.Width);
 
@@ -102,7 +102,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
 
             foreach (var child in this.ParentLayout.Children.Where(c => c.IsVisible))
             {
-                var sizeRequest = child.Measure(double.PositiveInfinity, heightConstraint);
+                var sizeRequest = child.Measure(double.PositiveInfinity, heightConstraint, MeasureFlags.IncludeMargins);
                 if (calculateHeight)
                     height = Math.Max(height, sizeRequest.Request.Height);
 

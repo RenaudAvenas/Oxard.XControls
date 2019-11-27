@@ -14,6 +14,13 @@ namespace Oxard.XControls.Layouts
         protected BaseLayout()
         {
             this.Algorithm.ParentLayout = this;
+            this.Algorithm.Invalidated += this.OnAlgorithmInvalidated;
+        }
+
+        private void OnAlgorithmInvalidated(object sender, System.EventArgs e)
+        {
+            this.InvalidateMeasure();
+            this.InvalidateLayout();
         }
 
         /// <summary>

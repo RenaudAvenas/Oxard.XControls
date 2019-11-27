@@ -74,6 +74,7 @@ namespace Oxard.XControls.Layouts
         private void OnAlgorithmInvalidated(object sender, EventArgs e)
         {
             this.InvalidateMeasure();
+            this.InvalidateLayout();
         }
     }
 }
