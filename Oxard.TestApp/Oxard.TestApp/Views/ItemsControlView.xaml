@@ -21,6 +21,7 @@
         </Grid.RowDefinitions>
         
         <components:ItemsControl
+            x:Name="ItemsControl"
             ItemsSource="{Binding Path=Source}">
             <components:ItemsControl.ItemsPanel>
                 <StackLayout

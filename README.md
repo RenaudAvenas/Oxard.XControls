@@ -1,6 +1,12 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## 2.3.14.17
+
+- ItemsControl
+
+Add GetViewForDataItem method to get generated item for a specific item in ItemsSource
+
 ## 2.3.13.17
 
 - WrapLayout & WrapAlgorithm

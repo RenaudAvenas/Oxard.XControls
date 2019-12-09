@@ -16,6 +16,7 @@ namespace Oxard.TestApp.Views
             this.BindingContext = this;
             this.Source = new ObservableCollection<string> { "Test1", "Test2" };
             this.InitializeComponent();
+
         }
 
         public ObservableCollection<string> Source { get; }
@@ -23,6 +24,7 @@ namespace Oxard.TestApp.Views
         private void AddButtonClicked(object sender, EventArgs e)
         {
             this.Source.Add(this.GetRandomString());
+            var result = this.ItemsControl.GetViewForDataItem<View>("Test2");
         }
 
         private void InsertButtonClicked(object sender, EventArgs e)

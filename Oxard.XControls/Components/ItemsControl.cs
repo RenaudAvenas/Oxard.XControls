@@ -27,10 +27,10 @@ namespace Oxard.XControls.Components
         /// </summary>
         public static readonly BindableProperty ItemTemplateSelectorProperty = BindableProperty.Create(nameof(ItemTemplateSelector), typeof(DataTemplateSelector), typeof(ItemsControl), propertyChanged: ItemTemplateSelectorPropertyChanged);
 
+        private readonly Dictionary<object, View> generatedItems = new Dictionary<object, View>();
         private bool isLoaded;
         private IList<View> items;
         private Layout<View> itemsPanel;
-        private Dictionary<object, View> generatedItems = new Dictionary<object, View>();
 
         /// <summary>
         /// Get or set the layout used to display items
@@ -82,6 +82,24 @@ namespace Oxard.XControls.Components
         {
             get => (DataTemplateSelector)this.GetValue(ItemTemplateSelectorProperty);
             set => this.SetValue(ItemTemplateSelectorProperty, value);
+        }
+
+        /// <summary>
+        /// Get the generated view for a data item in ItemsSource. Return null if no generated view of type T found
+        /// </summary>
+        /// <typeparam name="T">Type of desired view generated for item</typeparam>
+        /// <param name="item">Item in ItemsSource</param>
+        /// <returns>Generated view if found otherwise null</returns>
+        public T GetViewForDataItem<T>(object item) where T : View
+        {
+            var found = this.generatedItems.TryGetValue(item, out var view);
+            if (!found)
+                return null;
+
+            if (view is T typedView)
+                return typedView;
+
+            return null;
         }
 
         /// <summary>
@@ -147,7 +165,7 @@ namespace Oxard.XControls.Components
         protected virtual void UnloadOverride()
         {
         }
-
+        
         private static void ItemsSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             (bindable as ItemsControl)?.OnItemsSourceChanged(oldValue as IEnumerable);
