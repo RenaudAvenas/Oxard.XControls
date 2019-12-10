@@ -12,11 +12,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <DocumentationFile>C:\Sources\Oxard.XControls\Oxard.XControls\Oxard.XControls.xml</DocumentationFile>
+    <DocumentationFile>Oxard.XControls.xml</DocumentationFile>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Personnel\Oxard\Oxard.XControls\Oxard.XControls\Oxard.XControls.xml</DocumentationFile>
+    <DocumentationFile>Oxard.XControls.xml</DocumentationFile>
   </PropertyGroup>
   
   <ItemGroup>
