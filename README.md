@@ -1,6 +1,12 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+## 2.3.14.18
+
+- StackAlgorithm
+
+Bu fix : problem on calculation of measurement that return the size of the last child instead of the whole size of children
+
 ## 2.3.14.17
 
 - ItemsControl

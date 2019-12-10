@@ -85,7 +85,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                 if (calculateWidth)
                     width = Math.Max(width, sizeRequest.Request.Width);
 
-                totalHeight = sizeRequest.Request.Height + this.Spacing;
+                totalHeight += sizeRequest.Request.Height + this.Spacing;
             }
 
             if (totalHeight > 0)
@@ -106,7 +106,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                 if (calculateHeight)
                     height = Math.Max(height, sizeRequest.Request.Height);
 
-                totalWidth = sizeRequest.Request.Width + this.Spacing;
+                totalWidth += sizeRequest.Request.Width + this.Spacing;
             }
 
             if (totalWidth > 0)
