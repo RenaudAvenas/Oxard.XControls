@@ -1,6 +1,31 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
+To use components in your project with http://oxard.com/XControls shemas add this code to your App constructor:
+
+```csharp
+public App() 
+{ 
+    Oxard.XControls.Initializer.Init(); 
+    this.InitializeComponent(); 
+}
+```
+
+## 2.4.14.19
+
+- Xamarin.Forms update
+
+Now the library is based on Xamarin.Forms 4.1.0.555618.
+
+- XmlnsDefinition
+
+Initializer class has been created to initialize the library and use xmlns namespace. Call the Init method if the namespace is not recognize by your project.
+Furthermore namespace has been renamed to http://oxard.com/XControls
+
+- UWP and TouchHelper
+
+Bug fix : if you use a mouse, mouse over was considered as TouchEnter
+
 ## 2.3.14.18
 
 - StackAlgorithm

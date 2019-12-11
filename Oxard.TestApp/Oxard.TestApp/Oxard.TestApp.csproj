@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -10,24 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.0.0.425677" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Oxard.XControls.DefaultStyles\Oxard.XControls.DefaultStyles.csproj" />
     <ProjectReference Include="..\..\Oxard.XControls\Oxard.XControls.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Views\ContentControlView.xaml.cs">
-      <DependentUpon>ContentControlView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\ItemsControlView.xaml.cs">
-      <DependentUpon>ItemsControlView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\WrapLayoutView.xaml.cs">
-      <DependentUpon>WrapLayoutView.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -82,10 +70,25 @@
     <None Update="Views\ContentControlView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <None Update="Views\DrawingBrushView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Views\ItemsControlView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <None Update="Views\MultiFormatLayoutView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Views\ShapeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\UniformGridView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\WrapLayoutView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\ZStackView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>

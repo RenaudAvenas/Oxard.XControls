@@ -32,7 +32,8 @@ namespace Oxard.XControls.UWP.Events
 
         private void ControlOnPointerMoved(object sender, PointerRoutedEventArgs e)
         {
-            this.touchManager.OnTouchMove(new TouchEventArgs(e.GetCurrentPoint(this.control).Position.ToXamarinPoint()));
+            if (this.control.PointerCaptures?.Count > 0)
+                this.touchManager.OnTouchMove(new TouchEventArgs(e.GetCurrentPoint(this.control).Position.ToXamarinPoint()));
         }
 
         private void ControlOnPointerReleased(object sender, PointerRoutedEventArgs e)
@@ -49,12 +50,14 @@ namespace Oxard.XControls.UWP.Events
 
         private void ControlOnPointerExited(object sender, PointerRoutedEventArgs e)
         {
-            this.touchManager.OnTouchLeave(new TouchEventArgs(e.GetCurrentPoint(this.control).Position.ToXamarinPoint()));
+            if (this.control.PointerCaptures?.Count > 0)
+                this.touchManager.OnTouchLeave(new TouchEventArgs(e.GetCurrentPoint(this.control).Position.ToXamarinPoint()));
         }
 
         private void ControlOnPointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            this.touchManager.OnTouchEnter(new TouchEventArgs(e.GetCurrentPoint(this.control).Position.ToXamarinPoint()));
+            if (this.control.PointerCaptures?.Count > 0)
+                this.touchManager.OnTouchEnter(new TouchEventArgs(e.GetCurrentPoint(this.control).Position.ToXamarinPoint()));
         }
 
         public void Dispose()

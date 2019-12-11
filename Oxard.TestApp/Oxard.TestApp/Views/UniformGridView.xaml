@@ -2,7 +2,7 @@
 <ContentView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:layouts="clr-namespace:Oxard.XControls.Layouts;assembly=Oxard.XControls"
+    xmlns:oxard="http://oxard.com/XControls"
     xmlns:usercontrols="clr-namespace:Oxard.TestApp.UserControls"
     x:Class="Oxard.TestApp.Views.UniformGridView">
     <Grid>
@@ -13,7 +13,7 @@
                 Height="1*" />
         </Grid.RowDefinitions>
         
-        <layouts:UniformGrid
+        <oxard:UniformGrid
             Margin="15"
             
             x:Name="UniformGrid"
@@ -34,7 +34,7 @@
                 BackgroundColor="#444444" />
             <BoxView
                 BackgroundColor="#333333" />
-        </layouts:UniformGrid>
+        </oxard:UniformGrid>
 
         <usercontrols:PropertyListControl
             Grid.Row="1"

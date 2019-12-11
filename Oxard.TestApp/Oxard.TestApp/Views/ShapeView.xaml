@@ -2,15 +2,14 @@
 <ContentView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:shapes="clr-namespace:Oxard.XControls.Shapes;assembly=Oxard.XControls"
-    xmlns:graphics="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls"
-    xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
+    xmlns:oxard="http://oxard.com/XControls"
+    xmlns:style="http://oxard.com/Themes"
     xmlns:testapp="clr-namespace:Oxard.TestApp"
     x:Class="Oxard.TestApp.Views.ShapeView">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <componentthemes:Colors />
+                <style:Colors />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
@@ -32,20 +31,20 @@
         <BoxView
             Margin="10"
             BackgroundColor="CornflowerBlue" />
-        <shapes:Rectangle
+        <oxard:Rectangle
             Rotation="10"
             CornerRadius="20"
             Stroke="Black"
             StrokeThickness="0"
-            Fill="{x:Static graphics:Brushes.Aqua}" />
+            Fill="{x:Static oxard:Brushes.Aqua}" />
         <BoxView
             WidthRequest="40"
             HeightRequest="40"
             VerticalOptions="Center"
             HorizontalOptions="Center"
             BackgroundColor="CornflowerBlue" />
-        <shapes:Ellipse
-            Fill="{x:Static graphics:Brushes.Brown}"
+        <oxard:Ellipse
+            Fill="{x:Static oxard:Brushes.Brown}"
             Stroke="Beige"
             StrokeThickness="1"
             WidthRequest="40"
@@ -59,6 +58,6 @@
             HorizontalOptions="Center"
             HeightRequest="100"
             WidthRequest="200"
-            Fill="{x:Static graphics:Brushes.Beige}" />
+            Fill="{x:Static oxard:Brushes.Beige}" />
     </Grid>
 </ContentView>

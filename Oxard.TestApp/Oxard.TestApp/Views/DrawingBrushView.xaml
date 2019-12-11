@@ -4,17 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:graphics="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls"
-    xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
-    xmlns:controls="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
+    xmlns:oxard="http://oxard.com/XControls"
+    xmlns:style="http://oxard.com/Themes"
     xmlns:userControls="clr-namespace:Oxard.TestApp.UserControls;assembly=Oxard.TestApp"
     mc:Ignorable="d"
     x:Class="Oxard.TestApp.Views.DrawingBrushView">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <componentthemes:Colors />
-                <componentthemes:ButtonStyle />
+                <style:Colors />
+                <style:ButtonStyle />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
@@ -26,64 +25,64 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <controls:Button
+        <oxard:Button
             x:Name="Control"
             HeightRequest="100"
             WidthRequest="100"
             IsEnabled="False"
             IsBackgroundManagedByStyle="False">
-            <controls:Button.Style>
+            <oxard:Button.Style>
                 <Style
-                    TargetType="controls:Button">
+                    TargetType="oxard:Button">
                     <Setter
                         Property="Background">
                         <Setter.Value>
-                            <graphics:RectangleBrush
+                            <oxard:RectangleBrush
                                 CornerRadius="5"
                                 Stroke="Blue"
                                 StrokeThickness="3"
-                                Fill="{x:Static graphics:Brushes.Green}" />
+                                Fill="{x:Static oxard:Brushes.Green}" />
                         </Setter.Value>
                     </Setter>
                     <Style.Triggers>
                         <Trigger
-                            TargetType="controls:Button"
+                            TargetType="oxard:Button"
                             Property="IsPressed"
                             Value="True">
                             <Setter
-                                Property="graphics:DrawingBrush.AttachedStroke"
+                                Property="oxard:DrawingBrush.AttachedStroke"
                                 Value="Red" />
                             <Setter
-                                Property="graphics:DrawingBrush.AttachedFill"
-                                Value="{x:Static graphics:Brushes.Blue}" />
+                                Property="oxard:DrawingBrush.AttachedFill"
+                                Value="{x:Static oxard:Brushes.Blue}" />
                             <Setter
-                                Property="graphics:DrawingBrush.AttachedStrokeDashArray"
+                                Property="oxard:DrawingBrush.AttachedStrokeDashArray"
                                 Value="1,1" />
                             <Setter
-                                Property="graphics:DrawingBrush.AttachedStrokeThickness"
+                                Property="oxard:DrawingBrush.AttachedStrokeThickness"
                                 Value="7" />
                         </Trigger>
                         <Trigger
-                            TargetType="controls:Button"
+                            TargetType="oxard:Button"
                             Property="IsEnabled"
                             Value="False">
                             <Setter
-                                Property="graphics:DrawingBrush.AttachedFill"
-                                Value="{x:Static graphics:Brushes.Gray}"/>
+                                Property="oxard:DrawingBrush.AttachedFill"
+                                Value="{x:Static oxard:Brushes.Gray}"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
-            </controls:Button.Style>
+            </oxard:Button.Style>
             <Label
                 Text="Styled button test" />
-        </controls:Button>
+        </oxard:Button>
         
-        <!--<shapes:Rectangle
+        <!--<oxard:Rectangle
             HeightRequest="50"
             x:Name="Control"
             Stroke="Blue"
             StrokeThickness="1"
-            Fill="{x:Static graphics:Brushes.White}"
+            Fill="{x:Static oxard:Brushes.White}"
             Margin="30"
             HorizontalOptions="Center"
             WidthRequest="100" />-->

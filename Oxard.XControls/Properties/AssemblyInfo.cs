@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using Oxard.XControls;
+using System.Reflection;
 using System.Resources;
 using Xamarin.Forms;
 
@@ -8,9 +9,10 @@ using Xamarin.Forms;
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
 
-[assembly: XmlnsDefinition("https://github.com/RenaudAvenas/Oxard.XControls", "Oxard.XControls.Components", AssemblyName = "Oxard.XControls")]
-[assembly: XmlnsDefinition("https://github.com/RenaudAvenas/Oxard.XControls", "Oxard.XControls.Effects", AssemblyName = "Oxard.XControls")]
-[assembly: XmlnsDefinition("https://github.com/RenaudAvenas/Oxard.XControls", "Oxard.XControls.Graphics", AssemblyName = "Oxard.XControls")]
-[assembly: XmlnsDefinition("https://github.com/RenaudAvenas/Oxard.XControls", "Oxard.XControls.Shapes", AssemblyName = "Oxard.XControls")]
-[assembly: XmlnsDefinition("https://github.com/RenaudAvenas/Oxard.XControls", "Oxard.XControls.Layouts", AssemblyName = "Oxard.XControls")]
-[assembly: XmlnsDefinition("https://github.com/RenaudAvenas/Oxard.XControls", "Oxard.XControls.Layouts.LayoutAlgorithms", AssemblyName = "Oxard.XControls")]
+[assembly: Preserve]
+[assembly: XmlnsDefinition("http://oxard.com/XControls", "Oxard.XControls.Components")]
+[assembly: XmlnsDefinition("http://oxard.com/XControls", "Oxard.XControls.Effects")]
+[assembly: XmlnsDefinition("http://oxard.com/XControls", "Oxard.XControls.Graphics")]
+[assembly: XmlnsDefinition("http://oxard.com/XControls", "Oxard.XControls.Shapes")]
+[assembly: XmlnsDefinition("http://oxard.com/XControls", "Oxard.XControls.Layouts")]
+[assembly: XmlnsDefinition("http://oxard.com/XControls", "Oxard.XControls.Layouts.LayoutAlgorithms")]

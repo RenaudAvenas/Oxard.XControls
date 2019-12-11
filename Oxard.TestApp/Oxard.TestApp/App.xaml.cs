@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -9,8 +8,9 @@ namespace Oxard.TestApp
     {
         public App()
         {
+            XControls.Initializer.Init();
+            XControls.DefaultStyles.Initializer.Init();
             InitializeComponent();
-
             MainPage = new NavigationPage(new MainPage());
         }
 

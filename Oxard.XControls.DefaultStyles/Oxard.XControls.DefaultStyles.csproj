@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.0.0.425677" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
   </ItemGroup>
 
   <ItemGroup>
@@ -13,14 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ComponentThemes\LongPressButtonStyle.xaml.cs">
-      <DependentUpon>LongPressButtonStyle.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="ComponentThemes\RadioButtonStyle.xaml.cs">
-      <DependentUpon>RadioButtonStyle.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="ComponentThemes\CheckBoxStyle.xaml.cs">
-      <DependentUpon>CheckBoxStyle.xaml</DependentUpon>
+    <Compile Update="ComponentThemes\Colors.xaml.cs">
+      <DependentUpon>Colors.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -28,7 +22,13 @@
     <EmbeddedResource Update="ComponentThemes\ButtonStyle.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="ComponentThemes\Colors.xaml">
+    <EmbeddedResource Update="ComponentThemes\LongPressButtonStyle.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ComponentThemes\RadioButtonStyle.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ComponentThemes\CheckBoxStyle.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

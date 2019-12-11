@@ -3,17 +3,16 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Oxard.TestApp.Views.BackgroundEffectView"
-    xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
-    xmlns:effects="clr-namespace:Oxard.XControls.Effects;assembly=Oxard.XControls"
-    xmlns:brushes="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls">
+    xmlns:oxard="http://oxard.com/XControls"
+    xmlns:style="http://oxard.com/Themes">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <componentthemes:Colors />
-                <componentthemes:ButtonStyle />
-                <componentthemes:CheckBoxStyle />
-                <componentthemes:RadioButtonStyle />
-                <componentthemes:LongPressButtonStyle />
+                <style:Colors />
+                <style:ButtonStyle />
+                <style:CheckBoxStyle />
+                <style:RadioButtonStyle />
+                <style:LongPressButtonStyle />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
@@ -43,8 +42,8 @@
             Grid.Column="1"
             Text="Test">
             <Button.Effects>
-                <effects:BackgroundEffect
-                    Background="{x:Static brushes:Brushes.LightBlue}" />
+                <oxard:BackgroundEffect
+                    Background="{x:Static oxard:Brushes.LightBlue}" />
             </Button.Effects>
         </Button>
 
@@ -60,17 +59,17 @@
             Grid.Column="1"
             Text="Test">
             <Button.Effects>
-                <effects:BackgroundEffect>
-                    <effects:BackgroundEffect.Background>
-                        <brushes:LinearGradientBrush>
-                            <brushes:GradientStop
+                <oxard:BackgroundEffect>
+                    <oxard:BackgroundEffect.Background>
+                        <oxard:LinearGradientBrush>
+                            <oxard:GradientStop
                                 Color="LightBlue" />
-                            <brushes:GradientStop
+                            <oxard:GradientStop
                                 Offset="1"
                                 Color="Blue" />
-                        </brushes:LinearGradientBrush>
-                    </effects:BackgroundEffect.Background>
-                </effects:BackgroundEffect>
+                        </oxard:LinearGradientBrush>
+                    </oxard:BackgroundEffect.Background>
+                </oxard:BackgroundEffect>
             </Button.Effects>
         </Button>
 
@@ -86,15 +85,15 @@
             Grid.Column="1"
             Text="Test">
             <Button.Effects>
-                <effects:BackgroundEffect>
-                    <effects:BackgroundEffect.Background>
-                        <brushes:RectangleBrush
-                            Fill="{x:Static brushes:Brushes.LightBlue}"
+                <oxard:BackgroundEffect>
+                    <oxard:BackgroundEffect.Background>
+                        <oxard:RectangleBrush
+                            Fill="{x:Static oxard:Brushes.LightBlue}"
                             Stroke="Blue"
                             StrokeThickness="2"
                             CornerRadius="5" />
-                    </effects:BackgroundEffect.Background>
-                </effects:BackgroundEffect>
+                    </oxard:BackgroundEffect.Background>
+                </oxard:BackgroundEffect>
             </Button.Effects>
         </Button>
     </Grid>

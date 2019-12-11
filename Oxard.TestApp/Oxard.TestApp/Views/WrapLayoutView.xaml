@@ -2,7 +2,7 @@
 <ContentView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:layouts="clr-namespace:Oxard.XControls.Layouts;assembly=Oxard.XControls"
+    xmlns:oxard="http://oxard.com/XControls"
     xmlns:usercontrols="clr-namespace:Oxard.TestApp.UserControls"
     x:Class="Oxard.TestApp.Views.WrapLayoutView">
     <Grid>
@@ -13,7 +13,7 @@
                 Height="1*" />
         </Grid.RowDefinitions>
         
-        <layouts:WrapLayout
+        <oxard:WrapLayout
             Orientation="Vertical"
             Margin="15"            
             x:Name="WrapLayout">
@@ -45,7 +45,7 @@
                 WidthRequest="100"
                 HeightRequest="50"
                 BackgroundColor="#333333" />
-        </layouts:WrapLayout>
+        </oxard:WrapLayout>
 
         <usercontrols:PropertyListControl
             Grid.Row="1"

@@ -2,22 +2,20 @@
 <ContentView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:components="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
-    xmlns:graphics="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls"
-    xmlns:shapes="clr-namespace:Oxard.XControls.Shapes;assembly=Oxard.XControls"
-    xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
+    xmlns:oxard="http://oxard.com/XControls"
+    xmlns:style="http://oxard.com/Themes"
     x:Class="Oxard.TestApp.Views.ContentControlView">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <componentthemes:Colors />
+                <style:Colors />
             </ResourceDictionary.MergedDictionaries>
 
             <Style
-                TargetType="components:ContentControl">
+                TargetType="oxard:ContentControl">
                 <Setter
                     Property="Background"
-                    Value="{x:Static graphics:Brushes.AliceBlue}" />
+                    Value="{x:Static oxard:Brushes.AliceBlue}" />
                 <Setter
                     Property="BorderThickness"
                     Value="1" />
@@ -29,7 +27,7 @@
                     <Setter.Value>
                         <ControlTemplate>
                             <Grid>
-                                <shapes:Rectangle
+                                <oxard:Rectangle
                                     Fill="{TemplateBinding Background}"
                                     StrokeThickness="{TemplateBinding BorderThickness}"
                                     Stroke="{TemplateBinding BorderColor}" />
@@ -44,10 +42,10 @@
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <components:ContentControl
+    <oxard:ContentControl
         HorizontalContentOptions="Center"
         VerticalContentOptions="Center">
         <Label
             Text="Test" />
-    </components:ContentControl>
+    </oxard:ContentControl>
 </ContentView>

@@ -1,5 +1,4 @@
-﻿using System;
-using Oxard.XControls.Layouts.LayoutAlgorithms;
+﻿using Oxard.XControls.Layouts.LayoutAlgorithms;
 using Xamarin.Forms;
 
 namespace Oxard.XControls.Layouts
@@ -7,7 +6,6 @@ namespace Oxard.XControls.Layouts
     /// <summary>
     /// Layout that stack horizontally or vertically all children and wrap them if necessary
     /// </summary>
-    /// <seealso cref="Layouts.BaseLayout{LayoutAlgorithms.WrapAlgorithm}" />
     public class WrapLayout : BaseLayout<WrapAlgorithm>
     {
         /// <summary>

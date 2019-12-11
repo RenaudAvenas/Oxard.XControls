@@ -2,13 +2,13 @@
 <ContentView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
-    xmlns:components="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
+    xmlns:oxard="http://oxard.com/XControls"
+    xmlns:style="http://oxard.com/Themes"
     x:Class="Oxard.TestApp.Views.ItemsControlView">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <componentthemes:Colors />
+                <style:Colors />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
@@ -20,21 +20,21 @@
                 Height="Auto" />
         </Grid.RowDefinitions>
         
-        <components:ItemsControl
+        <oxard:ItemsControl
             x:Name="ItemsControl"
             ItemsSource="{Binding Path=Source}">
-            <components:ItemsControl.ItemsPanel>
+            <oxard:ItemsControl.ItemsPanel>
                 <StackLayout
                     Orientation="Horizontal" />
-            </components:ItemsControl.ItemsPanel>
-            <components:ItemsControl.ItemTemplate>
+            </oxard:ItemsControl.ItemsPanel>
+            <oxard:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label
                         TextColor="White"
                         Text="{Binding .}" />
                 </DataTemplate>
-            </components:ItemsControl.ItemTemplate>
-        </components:ItemsControl>
+            </oxard:ItemsControl.ItemTemplate>
+        </oxard:ItemsControl>
 
         <StackLayout
             Spacing="10"

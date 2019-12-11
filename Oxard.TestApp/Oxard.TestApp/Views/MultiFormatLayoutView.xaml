@@ -2,16 +2,14 @@
 <ContentView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:layout="clr-namespace:Oxard.XControls.Layouts;assembly=Oxard.XControls"
-    xmlns:layouta="clr-namespace:Oxard.XControls.Layouts.LayoutAlgorithms;assembly=Oxard.XControls"
-    xmlns:component="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
-    xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
+    xmlns:oxard="http://oxard.com/XControls"
+    xmlns:style="http://oxard.com/Themes"
     x:Class="Oxard.TestApp.Views.MultiFormatLayoutView">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <componentthemes:Colors />
-                <componentthemes:ButtonStyle />
+                <style:Colors />
+                <style:ButtonStyle />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
@@ -24,11 +22,11 @@
                 Height="Auto" />
         </Grid.RowDefinitions>
 
-        <layout:MultiFormatLayout
+        <oxard:MultiFormatLayout
             x:Name="MultiFormatLayout">
-            <layout:MultiFormatLayout.Algorithm>
-                <layouta:ZStackAlgorithm />
-            </layout:MultiFormatLayout.Algorithm>
+            <oxard:MultiFormatLayout.Algorithm>
+                <oxard:ZStackAlgorithm />
+            </oxard:MultiFormatLayout.Algorithm>
             
             <BoxView
                 Grid.Column="1"
@@ -67,19 +65,19 @@
                 BackgroundColor="#555555"
                 HeightRequest="20"
                 WidthRequest="20" />
-        </layout:MultiFormatLayout>
+        </oxard:MultiFormatLayout>
 
         <StackLayout
             HorizontalOptions="Center"
             Grid.Row="1"
             Orientation="Horizontal">
-            <component:Button
+            <oxard:Button
                 Clicked="Button_Clicked"
                 Style="{StaticResource ButtonDefaultStyle}">
                 <Label
                     TextColor="White"
                     Text="Change layout algorithm" />
-            </component:Button>
+            </oxard:Button>
 
             <Label
                 Margin="10,0,0,0"

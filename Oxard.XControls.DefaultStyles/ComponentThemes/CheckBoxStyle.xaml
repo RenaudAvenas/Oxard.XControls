@@ -8,7 +8,7 @@
     <ResourceDictionary.MergedDictionaries>
         <componentthemes:Colors />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <Style
         x:Key="CheckBoxDefaultStyle"
         TargetType="components:CheckBox">
@@ -37,7 +37,8 @@
         <Setter
             Property="HorizontalContentOptions"
             Value="Start" />
-        <Setter Property="ControlTemplate">
+        <Setter
+            Property="ControlTemplate">
             <Setter.Value>
                 <ControlTemplate>
                     <StackLayout

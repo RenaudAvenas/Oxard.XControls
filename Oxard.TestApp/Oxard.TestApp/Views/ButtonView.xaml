@@ -2,17 +2,17 @@
 <ContentView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
-    xmlns:components="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
+    xmlns:oxard="http://oxard.com/XControls"
+    xmlns:style="http://oxard.com/Themes"
     x:Class="Oxard.TestApp.Views.ButtonView">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <componentthemes:Colors />
-                <componentthemes:ButtonStyle />
-                <componentthemes:CheckBoxStyle />
-                <componentthemes:RadioButtonStyle />
-                <componentthemes:LongPressButtonStyle />
+                <style:Colors />
+                <style:ButtonStyle />
+                <style:CheckBoxStyle />
+                <style:RadioButtonStyle />
+                <style:LongPressButtonStyle />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
@@ -48,7 +48,7 @@
             Text="Button :" />
         <!--<usercontrols:PropertyListControl
             Grid.Column="1">-->
-        <components:Button
+        <oxard:Button
             x:Name="Button"
             Grid.Column="1"
             Style="{StaticResource ButtonDefaultStyle}"
@@ -57,7 +57,7 @@
             <Label
                 TextColor="{Binding Path=Foreground, Source={x:Reference Button}}"
                 Text="Click me!" />
-        </components:Button>
+        </oxard:Button>
         <!--</usercontrols:PropertyListControl>-->
 
         <Label
@@ -77,7 +77,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <components:LongPressButton
+            <oxard:LongPressButton
                 VerticalContentOptions="Center"
                 Style="{StaticResource LongPressButtonDefaultStyle}"
                 Clicked="LongPressButton_Clicked"
@@ -85,7 +85,7 @@
                 <Label
                     TextColor="White"
                     Text="Click me or long press!" />
-            </components:LongPressButton>
+            </oxard:LongPressButton>
 
             <Label
                 Grid.Column="1"
@@ -105,22 +105,22 @@
             Grid.Column="1"
             Spacing="30"
             Orientation="Horizontal">
-            <components:CheckBox
+            <oxard:CheckBox
                 Style="{StaticResource CheckBoxDefaultStyle}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center">
                 <Label
                     TextColor="White"
                     Text="Check me!" />
-            </components:CheckBox>
-            <components:CheckBox
+            </oxard:CheckBox>
+            <oxard:CheckBox
                 Style="{StaticResource CheckBoxDefaultStyle}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center">
                 <Label
                     TextColor="White"
                     Text="Check me!" />
-            </components:CheckBox>
+            </oxard:CheckBox>
         </StackLayout>
 
         <Label
@@ -135,22 +135,22 @@
             Grid.Column="1"
             Spacing="30"
             Orientation="Horizontal">
-            <components:RadioButton
+            <oxard:RadioButton
                 Style="{StaticResource RadioButtonDefaultStyle}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center">
                 <Label
                     TextColor="White"
                     Text="Choice 1" />
-            </components:RadioButton>
-            <components:RadioButton
+            </oxard:RadioButton>
+            <oxard:RadioButton
                 Style="{StaticResource RadioButtonDefaultStyle}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center">
                 <Label
                     TextColor="White"
                     Text="Choice 2" />
-            </components:RadioButton>
+            </oxard:RadioButton>
         </StackLayout>
 
         <Label
@@ -166,7 +166,7 @@
             Spacing="30"
             Orientation="Horizontal">
             <StackLayout>
-                <components:RadioButton
+                <oxard:RadioButton
                     IsUncheckable="True"
                     GroupName="GroupName"
                     Style="{StaticResource RadioButtonDefaultStyle}"
@@ -175,8 +175,8 @@
                     <Label
                         TextColor="White"
                         Text="Choice 1" />
-                </components:RadioButton>
-                <components:RadioButton
+                </oxard:RadioButton>
+                <oxard:RadioButton
                     GroupName="GroupName"
                     IsUncheckable="True"
                     Style="{StaticResource RadioButtonDefaultStyle}"
@@ -185,10 +185,10 @@
                     <Label
                         TextColor="White"
                         Text="Choice 2" />
-                </components:RadioButton>
+                </oxard:RadioButton>
             </StackLayout>
             <StackLayout>
-                <components:RadioButton
+                <oxard:RadioButton
                     GroupName="GroupName"
                     IsUncheckable="True"
                     Style="{StaticResource RadioButtonDefaultStyle}"
@@ -197,8 +197,8 @@
                     <Label
                         TextColor="White"
                         Text="Choice 3" />
-                </components:RadioButton>
-                <components:RadioButton
+                </oxard:RadioButton>
+                <oxard:RadioButton
                     GroupName="GroupName"
                     IsUncheckable="True"
                     Style="{StaticResource RadioButtonDefaultStyle}"
@@ -207,7 +207,7 @@
                     <Label
                         TextColor="White"
                         Text="Choice 4" />
-                </components:RadioButton>
+                </oxard:RadioButton>
             </StackLayout>
         </StackLayout>
     </Grid>
