@@ -11,6 +11,13 @@ public App()
 }
 ```
 
+## 2.4.14.20
+
+- ItemsControl
+
+Bu fix : GetContainerForItemOverride is overridable and have no parameter. If ItemTemplate or DataTemplateSelector is used, the generated item content is filled with template (if item generated is a content view)
+
+
 ## 2.4.14.19
 
 - Xamarin.Forms update

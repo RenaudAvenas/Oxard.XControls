@@ -117,13 +117,11 @@ namespace Oxard.XControls.Components
 
         /// <summary>
         /// Return a view that represents an item of ItemsControl. This method is for inherits. If item is not a <see cref="View"/> use a DataTemplate, DataTemplateSelector or change ItemsSource to contains views.
-        /// This method throws a NotSupportedException
         /// </summary>
-        /// <param name="item">Item to transform as view</param>
         /// <returns>The view for the item</returns>
-        protected View GetContainerForItemOverride(object item)
+        protected virtual View GetContainerForItemOverride()
         {
-            throw new NotSupportedException("item must be a view");
+            return null;
         }
 
         /// <summary>
@@ -267,7 +265,14 @@ namespace Oxard.XControls.Components
 
             var view = templatedView as View;
             if (!this.IsItemItsOwnContainer(templatedView))
-                view = this.GetContainerForItemOverride(templatedView);
+            {
+                view = this.GetContainerForItemOverride();
+                if (view is ContentView contentView)
+                    contentView.Content = templatedView as View;
+            }
+
+            if (view == null)
+                throw new NotSupportedException($"Type of {item.GetType()} must be a valid item or you must override GetContainerForItemOverride in {this.GetType()}");
 
             view.BindingContext = item;
 
