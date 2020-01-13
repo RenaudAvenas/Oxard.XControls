@@ -146,6 +146,7 @@ namespace Oxard.XControls.Components
                         this.ItemsPanel = new StackLayout();
                     else
                         this.RecreateAllItems();
+                    this.Loaded();
                 }
                 else
                 {
@@ -155,6 +156,13 @@ namespace Oxard.XControls.Components
             }
 
             base.OnPropertyChanged(propertyName);
+        }
+
+        /// <summary>
+        /// Called when items control is loaded
+        /// </summary>
+        protected virtual void Loaded()
+        {
         }
 
         /// <summary>
