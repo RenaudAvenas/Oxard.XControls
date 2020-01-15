@@ -9,23 +9,22 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
     /// </summary>
     public class StackAlgorithm : LayoutAlgorithm
     {
-        private StackOrientation orientation = StackOrientation.Vertical;
-        private double spacing;
+        /// <summary>
+        /// Identifies the Orientation property.
+        /// </summary>
+        public static readonly BindableProperty OrientationProperty = BindableProperty.Create(nameof(Orientation), typeof(StackOrientation), typeof(StackAlgorithm), StackOrientation.Vertical, propertyChanged: OnMeasureLayoutRequested);
+        /// <summary>
+        /// Identifies the Spacing property.
+        /// </summary>
+        public static readonly BindableProperty SpacingProperty = BindableProperty.Create(nameof(Spacing), typeof(double), typeof(StackAlgorithm), 0d, propertyChanged: OnMeasureLayoutRequested);
 
         /// <summary>
         /// Get or set the orientation of stack
         /// </summary>
         public StackOrientation Orientation
         {
-            get => this.orientation;
-            set
-            {
-                if (this.orientation == value)
-                    return;
-
-                this.orientation = value;
-                this.Invalidate();
-            }
+            get => (StackOrientation)this.GetValue(OrientationProperty);
+            set => this.SetValue(OrientationProperty, value);
         }
 
         /// <summary>
@@ -33,15 +32,8 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
         /// </summary>
         public double Spacing
         {
-            get => spacing;
-            set
-            {
-                if (this.spacing == value)
-                    return;
-
-                this.spacing = value;
-                this.Invalidate();
-            }
+            get => (double)this.GetValue(SpacingProperty);
+            set => this.SetValue(SpacingProperty, value);
         }
 
         /// <summary>

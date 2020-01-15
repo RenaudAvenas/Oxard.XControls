@@ -48,6 +48,17 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
         }
 
         /// <summary>
+        /// Call this method when measure or layout is requested in inherited classes.
+        /// </summary>
+        /// <param name="bindable">The bindable layout algorithm.</param>
+        /// <param name="oldValue">The old value of a property.</param>
+        /// <param name="newValue">The new value of a property.</param>
+        protected static void OnMeasureLayoutRequested(BindableObject bindable, object oldValue, object newValue)
+        {
+            (bindable as LayoutAlgorithm)?.Invalidate();
+        }
+
+        /// <summary>
         /// Method called when a measurement is asked.
         /// </summary>
         /// <param name="widthConstraint">Width constraint</param>

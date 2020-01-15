@@ -89,8 +89,6 @@ namespace Oxard.XControls.Layouts
         protected virtual void OnColumnsChanged()
         {
             this.Algorithm.Columns = this.Columns;
-            this.InvalidateMeasure();
-            this.InvalidateLayout();
         }
 
         /// <summary>
@@ -99,8 +97,6 @@ namespace Oxard.XControls.Layouts
         protected virtual void OnRowsChanged()
         {
             this.Algorithm.Rows = this.Rows;
-            this.InvalidateMeasure();
-            this.InvalidateLayout();
         }
 
         /// <summary>
@@ -109,8 +105,6 @@ namespace Oxard.XControls.Layouts
         protected virtual void OnColumnSpacingChanged()
         {
             this.Algorithm.ColumnSpacing = this.ColumnSpacing;
-            this.InvalidateMeasure();
-            this.InvalidateLayout();
         }
 
         /// <summary>
@@ -120,8 +114,6 @@ namespace Oxard.XControls.Layouts
         protected virtual void OnRowSpacingChanged()
         {
             this.Algorithm.RowSpacing = this.RowSpacing;
-            this.InvalidateMeasure();
-            this.InvalidateLayout();
         }
     }
 }

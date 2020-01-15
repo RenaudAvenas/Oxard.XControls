@@ -12,15 +12,32 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
         private ChildTable table;
 
         /// <summary>
-        /// Get or set the space between each row
+        /// Identifies the ColumnSpacing property.
         /// </summary>
-        public double RowSpacing { get; set; }
+        public static readonly BindableProperty ColumnSpacingProperty = BindableProperty.Create(nameof(ColumnSpacing), typeof(double), typeof(GridAlgorithm), default(double), propertyChanged: OnMeasureLayoutRequested);
+        /// <summary>
+        /// Identifies the RowSpacing property.
+        /// </summary>
+        public static readonly BindableProperty RowSpacingProperty = BindableProperty.Create(nameof(RowSpacing), typeof(double), typeof(GridAlgorithm), default(double), propertyChanged: OnMeasureLayoutRequested);
 
         /// <summary>
         /// Get or set the space between each columns
         /// </summary>
-        public double ColumnSpacing { get; set; }
+        public double ColumnSpacing
+        {
+            get => (double)this.GetValue(ColumnSpacingProperty);
+            set => this.SetValue(ColumnSpacingProperty, value);
+        }
 
+        /// <summary>
+        /// Get or set space between each rows
+        /// </summary>
+        public double RowSpacing
+        {
+            get => (double)this.GetValue(RowSpacingProperty);
+            set => this.SetValue(RowSpacingProperty, value);
+        }
+       
         /// <summary>
         /// Get the columns definition.</summary>
         /// <value>The columns definition.</value>

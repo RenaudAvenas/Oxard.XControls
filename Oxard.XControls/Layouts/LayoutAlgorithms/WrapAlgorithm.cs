@@ -12,58 +12,46 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
     /// <seealso cref="Oxard.XControls.Layouts.LayoutAlgorithms.LayoutAlgorithm" />
     public class WrapAlgorithm : LayoutAlgorithm
     {
-        private StackOrientation orientation = StackOrientation.Horizontal;
-        private double spacing;
-        private double wrapSpacing;
+        /// <summary>
+        /// Identifies the Orientation property.
+        /// </summary>
+        public static readonly BindableProperty OrientationProperty = BindableProperty.Create(nameof(Orientation), typeof(StackOrientation), typeof(WrapAlgorithm), StackOrientation.Horizontal, propertyChanged: OnMeasureLayoutRequested);
+        /// <summary>
+        /// Identifies the Spacing property.
+        /// </summary>
+        public static readonly BindableProperty SpacingProperty = BindableProperty.Create(nameof(Spacing), typeof(double), typeof(WrapAlgorithm), default(double), propertyChanged: OnMeasureLayoutRequested);
+        /// <summary>
+        /// Identifies the WrapSpacing property.
+        /// </summary>
+        public static readonly BindableProperty WrapSpacingProperty = BindableProperty.Create(nameof(WrapSpacing), typeof(double), typeof(WrapAlgorithm), default(double), propertyChanged: OnMeasureLayoutRequested);
 
         /// <summary>
-        /// Get or set the orientation of stack
+        /// Get or set the orientation of the WrapLayout
         /// </summary>
         public StackOrientation Orientation
         {
-            get => this.orientation;
-            set
-            {
-                if (this.orientation == value)
-                    return;
-
-                this.orientation = value;
-                this.Invalidate();
-            }
+            get => (StackOrientation)this.GetValue(OrientationProperty);
+            set => this.SetValue(OrientationProperty, value);
         }
 
         /// <summary>
-        /// Get or set the space between each children.
+        /// Get or set the space between each child
         /// </summary>
         public double Spacing
         {
-            get => spacing;
-            set
-            {
-                if (this.spacing == value)
-                    return;
-
-                this.spacing = value;
-                this.Invalidate();
-            }
+            get => (double)this.GetValue(SpacingProperty);
+            set => this.SetValue(SpacingProperty, value);
         }
 
         /// <summary>
-        /// Get or set the space between each wrapping groups of children.
+        /// Get or set spacing between each wrap of children
         /// </summary>
         public double WrapSpacing
         {
-            get => wrapSpacing;
-            set
-            {
-                if (this.wrapSpacing == value)
-                    return;
-
-                this.wrapSpacing = value;
-                this.Invalidate();
-            }
+            get => (double)this.GetValue(WrapSpacingProperty);
+            set => this.SetValue(WrapSpacingProperty, value);
         }
-
+          
         /// <summary>
         /// Method called when a measurement is asked.
         /// </summary>
@@ -112,18 +100,18 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                 else if (actualY + sizeRequest.Request.Height > heightConstraint)
                 {
                     // We need to wrap / change row
-                    maxHeight = Math.Max(maxHeight, actualY - this.spacing);
+                    maxHeight = Math.Max(maxHeight, actualY - this.Spacing);
                     actualY = 0;
-                    actualX += columnWidth + this.wrapSpacing;
+                    actualX += columnWidth + this.WrapSpacing;
                     columnWidth = 0;
                 }
 
-                actualY += sizeRequest.Request.Height + this.spacing;
+                actualY += sizeRequest.Request.Height + this.Spacing;
                 columnWidth = Math.Max(columnWidth, sizeRequest.Request.Width);
             }
 
             var width = actualX + columnWidth;
-            maxHeight = Math.Max(maxHeight, actualY - this.spacing);
+            maxHeight = Math.Max(maxHeight, actualY - this.Spacing);
 
             return new SizeRequest(new Size(width, Math.Min(maxHeight, heightConstraint.TranslateIfInfinity())));
         }
@@ -147,18 +135,18 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                 else if (actualX + sizeRequest.Request.Width > widthConstraint)
                 {
                     // We need to wrap / change row
-                    maxWidth = Math.Max(maxWidth, actualX - this.spacing);
+                    maxWidth = Math.Max(maxWidth, actualX - this.Spacing);
                     actualX = 0;
-                    actualY += rowHeight + this.wrapSpacing;
+                    actualY += rowHeight + this.WrapSpacing;
                     rowHeight = 0;
                 }
 
-                actualX += sizeRequest.Request.Width + this.spacing;
+                actualX += sizeRequest.Request.Width + this.Spacing;
                 rowHeight = Math.Max(rowHeight, sizeRequest.Request.Height);
             }
 
             var height = actualY + rowHeight;
-            maxWidth = Math.Max(maxWidth, actualX - this.spacing);
+            maxWidth = Math.Max(maxWidth, actualX - this.Spacing);
 
             return new SizeRequest(new Size(Math.Min(maxWidth, widthConstraint.TranslateIfInfinity()), height));
         }
@@ -183,7 +171,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                     this.LayoutRow(childrenOnRow, currentY, rowHeight);
 
                     currentX = x;
-                    currentY += rowHeight + this.wrapSpacing;
+                    currentY += rowHeight + this.WrapSpacing;
                     rowHeight = 0;
                     childrenOnRow.Clear();
                 }
@@ -217,7 +205,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                     this.LayoutColumn(childrenOnColumn, currentX, columnWidth);
 
                     currentY = y;
-                    currentX += columnWidth + this.wrapSpacing;
+                    currentX += columnWidth + this.WrapSpacing;
                     columnWidth = 0;
                     childrenOnColumn.Clear();
                 }
@@ -257,7 +245,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                 }
 
                 child.Layout(new Rectangle(xOnRow, alignY, childMeasure.Request.Width, childHeight));
-                xOnRow += childMeasure.Request.Width + this.spacing;
+                xOnRow += childMeasure.Request.Width + this.Spacing;
 
             }
         }
@@ -288,7 +276,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                 }
 
                 child.Layout(new Rectangle(alignX, yOnColumn, childWidth, childMeasure.Request.Height));
-                yOnColumn += childMeasure.Request.Height + this.spacing;
+                yOnColumn += childMeasure.Request.Height + this.Spacing;
 
             }
         }

@@ -16,37 +16,58 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
         private bool isLeftToRight = true;
 
         /// <summary>
-        /// Gets or sets the number of columns.
+        /// Identifies the Columns property.
         /// </summary>
-        /// <value>
-        /// The columns.
-        /// </value>
-        public int Columns { get; set; }
+        public static readonly BindableProperty ColumnsProperty = BindableProperty.Create(nameof(Columns), typeof(int), typeof(UniformGridAlgorithm), default(int), propertyChanged: OnMeasureLayoutRequested);
+        /// <summary>
+        /// Identifies the Rows property.
+        /// </summary>
+        public static readonly BindableProperty RowsProperty = BindableProperty.Create(nameof(Rows), typeof(int), typeof(UniformGridAlgorithm), default(int), propertyChanged: OnMeasureLayoutRequested);
+        /// <summary>
+        /// Identifies the ColumnSpacing property.
+        /// </summary>
+        public static readonly BindableProperty ColumnSpacingProperty = BindableProperty.Create(nameof(ColumnSpacing), typeof(double), typeof(UniformGridAlgorithm), default(double), propertyChanged: OnMeasureLayoutRequested);
+        /// <summary>
+        /// Identifies the RowSpacing property.
+        /// </summary>
+        public static readonly BindableProperty RowSpacingProperty = BindableProperty.Create(nameof(RowSpacing), typeof(double), typeof(UniformGridAlgorithm), default(double), propertyChanged: OnMeasureLayoutRequested);
 
         /// <summary>
-        /// Gets or sets the number of rows.
+        /// Get or set the number of columns
         /// </summary>
-        /// <value>
-        /// The rows.
-        /// </value>
-        public int Rows { get; set; }
+        public int Columns
+        {
+            get => (int)this.GetValue(ColumnsProperty);
+            set => this.SetValue(ColumnsProperty, value);
+        }
 
         /// <summary>
-        /// Gets or sets the column spacing.
+        /// Get or set the number of rows
         /// </summary>
-        /// <value>
-        /// The column spacing.
-        /// </value>
-        public double ColumnSpacing { get; set; }
+        public int Rows
+        {
+            get => (int)this.GetValue(RowsProperty);
+            set => this.SetValue(RowsProperty, value);
+        }
 
         /// <summary>
-        /// Gets or sets the row spacing.
+        /// Get or set the space between each columns
         /// </summary>
-        /// <value>
-        /// The row spacing.
-        /// </value>
-        public double RowSpacing { get; set; }
+        public double ColumnSpacing
+        {
+            get => (double)this.GetValue(ColumnSpacingProperty);
+            set => this.SetValue(ColumnSpacingProperty, value);
+        }
 
+        /// <summary>
+        /// Get or set space between each rows
+        /// </summary>
+        public double RowSpacing
+        {
+            get => (double)this.GetValue(RowSpacingProperty);
+            set => this.SetValue(RowSpacingProperty, value);
+        }
+               
         /// <summary>
         /// Method called when a measurement is asked.
         /// </summary>

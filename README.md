@@ -11,6 +11,13 @@ public App()
 }
 ```
 
+## 2.4.14.22
+
+- LayoutAlgorithm
+
+All Oxard LayoutAlgorithm inherited classes use BindableProperty instead of classical CLR properties and are now bindable.
+Method OnMeasureLayoutRequested added to LayoutAlgorithm base class to simplify bindable properties declaration in inherited classes.
+
 ## 2.4.14.21
 
 - ItemsControl
