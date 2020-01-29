@@ -26,6 +26,18 @@ namespace Oxard.XControls.Components
         /// Identifies the ItemTemplateSelector dependency property.
         /// </summary>
         public static readonly BindableProperty ItemTemplateSelectorProperty = BindableProperty.Create(nameof(ItemTemplateSelector), typeof(DataTemplateSelector), typeof(ItemsControl), propertyChanged: ItemTemplateSelectorPropertyChanged);
+        /// <summary>
+        /// Identifies the AlternationCount property.
+        /// </summary>
+        public static readonly BindableProperty AlternationCountProperty = BindableProperty.Create(nameof(AlternationCount), typeof(int), typeof(ItemsControl), default(int), propertyChanged: OnAlternationCountPropertyChanged);
+        /// <summary>
+        /// Identifies the key of AlternationIndex dependency property.
+        /// </summary>
+        public static readonly BindablePropertyKey AlternationIndexPropertyKey = BindableProperty.CreateAttachedReadOnly("AlternationIndex", typeof(int), typeof(ItemsControl), default(int));
+        /// <summary>
+        /// Identifies the AlternationIndex dependency property.
+        /// </summary>
+        public static readonly BindableProperty AlternationIndexProperty = AlternationIndexPropertyKey.BindableProperty;
 
         private readonly Dictionary<object, View> generatedItems = new Dictionary<object, View>();
         private bool isLoaded;
@@ -82,6 +94,15 @@ namespace Oxard.XControls.Components
         {
             get => (DataTemplateSelector)this.GetValue(ItemTemplateSelectorProperty);
             set => this.SetValue(ItemTemplateSelectorProperty, value);
+        }
+
+        /// <summary>
+        /// Get or set the number of alternating item containers in the <see cref="ItemsControl"/>, which enables alternating containers to have a unique appearance.
+        /// </summary>
+        public int AlternationCount
+        {
+            get => (int)this.GetValue(AlternationCountProperty);
+            set => this.SetValue(AlternationCountProperty, value);
         }
 
         /// <summary>
@@ -171,7 +192,26 @@ namespace Oxard.XControls.Components
         protected virtual void UnloadOverride()
         {
         }
-        
+
+        /// <summary>
+        /// Get the AlternationIndex property value for the specified bindable object
+        /// </summary>
+        /// <param name="bindableObject">Object on which we want the value of the property</param>
+        /// <returns>AlternationIndex property value for the bindable object</returns>
+        public static int GetAlternationIndex(BindableObject bindableObject) => (int)bindableObject.GetValue(AlternationIndexProperty);
+
+        /// <summary>
+        /// Set the AlternationIndex property value for the specified bindable object
+        /// </summary>
+        /// <param name="bindableObject">Object that takes the value</param>
+        /// <param name="value">The value to affect</param>
+        private static void SetAlternationIndex(BindableObject bindableObject, int value) => bindableObject.SetValue(AlternationIndexPropertyKey, value);
+
+        private static void OnAlternationCountPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            (bindable as ItemsControl)?.OnAlternationCountChanged();
+        }
+
         private static void ItemsSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             (bindable as ItemsControl)?.OnItemsSourceChanged(oldValue as IEnumerable);
@@ -304,12 +344,22 @@ namespace Oxard.XControls.Components
 
         private void CreateAndAddItemFor(object item)
         {
-            this.ItemsPanel.Children.Add(this.GetContainerForItem(item));
+            var container = this.GetContainerForItem(item);
+            this.ItemsPanel.Children.Add(container);
+            if (this.AlternationCount > 0)
+                this.ComputeAlternationIndexForItem(container, this.ItemsPanel.Children.Count - 1);
+
         }
 
         private void CreateAndInsertItemFor(object item, int index)
         {
-            this.ItemsPanel.Children.Insert(index, this.GetContainerForItem(item));
+            var container = this.GetContainerForItem(item);
+            this.ItemsPanel.Children.Insert(index, container);
+            if (this.AlternationCount > 0)
+            {
+                for (int i = index; i < this.ItemsPanel.Children.Count; i++)
+                    this.ComputeAlternationIndexForItem(this.ItemsPanel.Children[i], i);
+            }
         }
 
         private void RemoveItemFor(object item)
@@ -317,8 +367,29 @@ namespace Oxard.XControls.Components
             if (this.generatedItems.TryGetValue(item, out View generatedItem))
             {
                 this.generatedItems.Remove(item);
+                int index = this.itemsPanel.Children.IndexOf(generatedItem);
                 this.ItemsPanel.Children.Remove(generatedItem);
+
+                if (this.AlternationCount > 0)
+                {
+                    for (int i = index; i < this.ItemsPanel.Children.Count; i++)
+                        this.ComputeAlternationIndexForItem(this.ItemsPanel.Children[i], i);
+                }
             }
+        }
+
+        private void ComputeAlternationIndexForItem(View item, int index)
+        {
+            SetAlternationIndex(item, index % this.AlternationCount);
+        }
+
+        private void OnAlternationCountChanged()
+        {
+            if (this.ItemsPanel == null)
+                return;
+
+            for (int i = 0; i < this.ItemsPanel.Children.Count; i++)
+                this.ComputeAlternationIndexForItem(this.ItemsPanel.Children[i], i);
         }
     }
 }

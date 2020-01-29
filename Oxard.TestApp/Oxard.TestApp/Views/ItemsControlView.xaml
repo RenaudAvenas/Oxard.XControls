@@ -22,6 +22,7 @@
         
         <oxard:ItemsControl
             x:Name="ItemsControl"
+            AlternationCount="3"
             ItemsSource="{Binding Path=Source}">
             <oxard:ItemsControl.ItemsPanel>
                 <StackLayout
@@ -29,9 +30,37 @@
             </oxard:ItemsControl.ItemsPanel>
             <oxard:ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Label
-                        TextColor="White"
-                        Text="{Binding .}" />
+                    <ContentView>
+                        <ContentView.Triggers>
+                            <Trigger
+                                TargetType="ContentView"
+                                Property="oxard:ItemsControl.AlternationIndex"
+                                Value="0">
+                                <Setter
+                                    Property="BackgroundColor"
+                                    Value="#CCCCCC" />
+                            </Trigger>
+                            <Trigger
+                                TargetType="ContentView"
+                                Property="oxard:ItemsControl.AlternationIndex"
+                                Value="1">
+                                <Setter
+                                    Property="BackgroundColor"
+                                    Value="#AAAAAA" />
+                            </Trigger>
+                            <Trigger
+                                TargetType="ContentView"
+                                Property="oxard:ItemsControl.AlternationIndex"
+                                Value="2">
+                                <Setter
+                                    Property="BackgroundColor"
+                                    Value="#666666" />
+                            </Trigger>
+                        </ContentView.Triggers>
+                        <Label
+                            TextColor="White"
+                            Text="{Binding .}" />
+                    </ContentView>
                 </DataTemplate>
             </oxard:ItemsControl.ItemTemplate>
         </oxard:ItemsControl>

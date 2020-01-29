@@ -1,7 +1,7 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
-To use components in your project with http://oxard.com/XControls shemas add this code to your App constructor:
+To use components in your project with http://oxard.com/XControls shemas add this code to your App constructor (or somewhere in your assembly where you use oxard controls at the beginning):
 
 ```csharp
 public App() 
@@ -10,6 +10,12 @@ public App()
     this.InitializeComponent(); 
 }
 ```
+
+## 2.4.14.23
+
+- ItemsControl
+
+You can now use AlternationCount property to specify item container behavior depending on their value of AlternationIndex attached property. 
 
 ## 2.4.14.22
 
