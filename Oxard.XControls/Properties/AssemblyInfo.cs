@@ -16,3 +16,4 @@ using Xamarin.Forms;
 [assembly: XmlnsDefinition("http://oxard.com/XControls", "Oxard.XControls.Shapes")]
 [assembly: XmlnsDefinition("http://oxard.com/XControls", "Oxard.XControls.Layouts")]
 [assembly: XmlnsDefinition("http://oxard.com/XControls", "Oxard.XControls.Layouts.LayoutAlgorithms")]
+[assembly: XmlnsDefinition("http://oxard.com/XControls", "Oxard.XControls.Interactivity")]

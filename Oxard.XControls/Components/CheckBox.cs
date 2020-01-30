@@ -11,8 +11,8 @@ namespace Oxard.XControls.Components
         /// <summary>
         /// Identifies the IsChecked dependency property.
         /// </summary>
-        public static readonly BindableProperty IsCheckedProperty = BindableProperty.Create(nameof(IsChecked), typeof(bool), typeof(CheckBox), false, defaultBindingMode: BindingMode.TwoWay);
-
+        public static readonly BindableProperty IsCheckedProperty = BindableProperty.Create(nameof(IsChecked), typeof(bool), typeof(CheckBox), false, defaultBindingMode: BindingMode.TwoWay, propertyChanged: OnIsCheckedPropertyChanged);
+        
         /// <summary>
         /// Get event that is invoked when CheckBox is checked
         /// </summary>
@@ -38,21 +38,23 @@ namespace Oxard.XControls.Components
         protected override void OnClicked()
         {
             this.IsChecked = !this.IsChecked;
-            this.OnIsCheckedChanged();
-
-            if (this.IsChecked)
-                this.Checked?.Invoke(this, EventArgs.Empty);
-            else
-                this.Unchecked?.Invoke(this, EventArgs.Empty);
-
             base.OnClicked();
         }
 
         /// <summary>
-        /// Called when <see cref="IsChecked"/> property has changed
+        /// Called when <see cref="IsChecked"/> property has changed. This method raise <see cref="Checked"/> and <see cref="Unchecked"/> events.
         /// </summary>
         protected virtual void OnIsCheckedChanged()
         {
+            if (this.IsChecked)
+                this.Checked?.Invoke(this, EventArgs.Empty);
+            else
+                this.Unchecked?.Invoke(this, EventArgs.Empty);
+        }
+
+        private static void OnIsCheckedPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            (bindable as CheckBox)?.OnIsCheckedChanged();
         }
     }
 }

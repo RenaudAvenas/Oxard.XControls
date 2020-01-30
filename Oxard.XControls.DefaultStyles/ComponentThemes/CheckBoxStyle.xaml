@@ -1,9 +1,8 @@
 ﻿<ResourceDictionary
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:components="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
-    xmlns:shapes="clr-namespace:Oxard.XControls.Shapes;assembly=Oxard.XControls"
     xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes"
+    xmlns:oxard="http://oxard.com/XControls"
     x:Class="Oxard.XControls.DefaultStyles.ComponentThemes.CheckBoxStyle">
     <ResourceDictionary.MergedDictionaries>
         <componentthemes:Colors />
@@ -11,10 +10,10 @@
 
     <Style
         x:Key="CheckBoxDefaultStyle"
-        TargetType="components:CheckBox">
+        TargetType="oxard:CheckBox">
         <Style.Triggers>
             <Trigger
-                TargetType="components:CheckBox"
+                TargetType="oxard:CheckBox"
                 Property="IsChecked"
                 Value="True">
                 <Setter
@@ -44,7 +43,7 @@
                     <StackLayout
                         Orientation="Horizontal"
                         Spacing="10">
-                        <shapes:Rectangle
+                        <oxard:Rectangle
                             HeightRequest="20"
                             WidthRequest="20"
                             VerticalOptions="Center"

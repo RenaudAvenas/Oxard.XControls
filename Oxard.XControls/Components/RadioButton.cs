@@ -44,9 +44,17 @@ namespace Oxard.XControls.Components
                 return;
 
             base.OnClicked();
+        }
 
+        /// <summary>
+        /// Called when <see cref="CheckBox.IsChecked"/> property has changed. This method raise <see cref="CheckBox.Checked"/> and <see cref="CheckBox.Unchecked"/> events.
+        /// </summary>
+        protected override void OnIsCheckedChanged()
+        {
             if (this.IsChecked)
                 this.ManageIsChecked();
+
+            base.OnIsCheckedChanged();
         }
 
         private static void RegisterInGroupName(RadioButton button)

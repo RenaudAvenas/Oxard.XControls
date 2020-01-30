@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:oxard="http://oxard.com/XControls"
+    xmlns:themes="http://oxard.com/Themes"
+    mc:Ignorable="d"
+    x:Class="Oxard.TestApp.Views.InteractivityView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <themes:Colors />
+                <themes:ButtonStyle />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style
+                x:Key="InteractivityStyle"
+                TargetType="oxard:RadioButton">
+                <Setter
+                    Property="HeightRequest"
+                    Value="40" />
+                <Setter
+                    Property="IsBackgroundManagedByStyle"
+                    Value="True" />
+                <Setter
+                    Property="Background"
+                    Value="{StaticResource ButtonBackgroundBrush}" />
+                <Setter
+                    Property="BorderColor"
+                    Value="Transparent" />
+                <Setter
+                    Property="BorderThickness"
+                    Value="1" />
+                <Setter
+                    Property="VerticalContentOptions"
+                    Value="Center" />
+                <Setter
+                    Property="HorizontalContentOptions"
+                    Value="Center" />
+                <Setter
+                    Property="ControlTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Grid>
+                                <oxard:Rectangle
+                                    CornerRadius="3"
+                                    Fill="{TemplateBinding Background}"
+                                    Stroke="{TemplateBinding BorderColor}"
+                                    StrokeThickness="{TemplateBinding BorderThickness}" />
+                                <ContentPresenter
+                                    HorizontalOptions="{TemplateBinding HorizontalContentOptions}"
+                                    VerticalOptions="{TemplateBinding VerticalContentOptions}" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter
+                    Property="oxard:Interactivity.Triggers">
+                    <Setter.Value>
+                        <oxard:TriggerCollection>
+                            <oxard:Trigger
+                                Property="{x:Static oxard:RadioButton.IsCheckedProperty}"
+                                Value="True">
+                                <oxard:Setter
+                                    Property="{x:Static oxard:RadioButton.BackgroundProperty}"
+                                    Value="{StaticResource ButtonPressedBackgroundBrush}" />
+                            </oxard:Trigger>
+                            <oxard:Trigger
+                                Property="{x:Static oxard:RadioButton.IsEnabledProperty}"
+                                Value="False">
+                                <oxard:Setter
+                                    Property="{x:Static oxard:RadioButton.BackgroundProperty}"
+                                    Value="{StaticResource ButtonDisableBackgroundBrush}" />
+                            </oxard:Trigger>
+                        </oxard:TriggerCollection>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style
+                x:Key="XfStyle"
+                TargetType="oxard:RadioButton">
+                <Setter
+                    Property="HeightRequest"
+                    Value="40" />
+                <Setter
+                    Property="IsBackgroundManagedByStyle"
+                    Value="True" />
+                <Setter
+                    Property="Background"
+                    Value="{StaticResource ButtonBackgroundBrush}" />
+                <Setter
+                    Property="BorderColor"
+                    Value="Transparent" />
+                <Setter
+                    Property="BorderThickness"
+                    Value="1" />
+                <Setter
+                    Property="VerticalContentOptions"
+                    Value="Center" />
+                <Setter
+                    Property="HorizontalContentOptions"
+                    Value="Center" />
+                <Setter
+                    Property="ControlTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Grid>
+                                <oxard:Rectangle
+                                    CornerRadius="3"
+                                    Fill="{TemplateBinding Background}"
+                                    Stroke="{TemplateBinding BorderColor}"
+                                    StrokeThickness="{TemplateBinding BorderThickness}" />
+                                <ContentPresenter
+                                    HorizontalOptions="{TemplateBinding HorizontalContentOptions}"
+                                    VerticalOptions="{TemplateBinding VerticalContentOptions}" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger
+                        TargetType="oxard:RadioButton"
+                        Property="IsChecked"
+                        Value="True">
+                        <Setter
+                            Property="Background"
+                            Value="{StaticResource ButtonPressedBackgroundBrush}" />
+                    </Trigger>
+                    <Trigger
+                        TargetType="oxard:RadioButton"
+                        Property="IsEnabled"
+                        Value="False">
+                        <Setter
+                            Property="Background"
+                            Value="{StaticResource ButtonDisableBackgroundBrush}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <StackLayout
+            HorizontalOptions="Center">
+            <Label
+                TextColor="White"
+                Text="Oxard triggers" />
+            <oxard:UniformGrid
+                x:Name="GridContainer"
+                IsEnabled="False"
+                VerticalOptions="Start"
+                Columns="3"
+                ColumnSpacing="15"
+                Margin="15">
+                <oxard:RadioButton
+                    x:Name="Button1"
+                    Style="{StaticResource InteractivityStyle}"
+                    IsEnabled="{Binding IsEnabled, Source={x:Reference GridContainer}}">
+                    <Label
+                        VerticalOptions="Center"
+                        TextColor="White"
+                        Text="CheckBox1" />
+                </oxard:RadioButton>
+                <oxard:RadioButton
+                    x:Name="Button2"
+                    IsChecked="True"
+                    Style="{StaticResource InteractivityStyle}"
+                    IsEnabled="{Binding IsEnabled, Source={x:Reference GridContainer}}">
+                    <Label
+                        VerticalOptions="Center"
+                        TextColor="White"
+                        Text="CheckBox2" />
+                </oxard:RadioButton>
+                <oxard:RadioButton
+                    x:Name="Button3"
+                    Style="{StaticResource InteractivityStyle}"
+                    IsEnabled="{Binding IsEnabled, Source={x:Reference GridContainer}}">
+                    <Label
+                        VerticalOptions="Center"
+                        TextColor="White"
+                        Text="CheckBox3" />
+                </oxard:RadioButton>
+            </oxard:UniformGrid>
+        </StackLayout>
+
+        <StackLayout
+            Grid.Column="1">
+            <Label
+                HorizontalOptions="Center"
+                TextColor="White"
+                Text="XF triggers" />
+            <oxard:UniformGrid
+                x:Name="XfGridContainer"
+                IsEnabled="False"
+                VerticalOptions="Start"
+                Columns="3"
+                ColumnSpacing="15"
+                Margin="15">
+                <oxard:RadioButton
+                    x:Name="XfButton1"
+                    Style="{StaticResource XfStyle}"
+                    IsEnabled="{Binding IsEnabled, Source={x:Reference GridContainer}}">
+                    <Label
+                        VerticalOptions="Center"
+                        TextColor="White"
+                        Text="CheckBox1" />
+                </oxard:RadioButton>
+                <oxard:RadioButton
+                    x:Name="XfButton2"
+                    IsChecked="True"
+                    Style="{StaticResource XfStyle}"
+                    IsEnabled="{Binding IsEnabled, Source={x:Reference GridContainer}}">
+                    <Label
+                        VerticalOptions="Center"
+                        TextColor="White"
+                        Text="CheckBox2" />
+                </oxard:RadioButton>
+                <oxard:RadioButton
+                    x:Name="XfButton3"
+                    Style="{StaticResource XfStyle}"
+                    IsEnabled="{Binding IsEnabled, Source={x:Reference GridContainer}}">
+                    <Label
+                        VerticalOptions="Center"
+                        TextColor="White"
+                        Text="CheckBox3" />
+                </oxard:RadioButton>
+            </oxard:UniformGrid>
+        </StackLayout>
+
+        <StackLayout
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Orientation="Horizontal"
+            Spacing="15">
+            <oxard:Button
+                Style="{StaticResource ButtonDefaultStyle}"
+                Clicked="ButtonOnSwitchEnableClicked">
+                <Label
+                    Text="Switch enable"
+                    TextColor="White" />
+            </oxard:Button>
+            <oxard:Button
+                Style="{StaticResource ButtonDefaultStyle}"
+                Clicked="ButtonOnCheckNextClicked">
+                <Label
+                    Text="Check next button"
+                    TextColor="White" />
+            </oxard:Button>
+        </StackLayout>
+    </Grid>
+</ContentView>
