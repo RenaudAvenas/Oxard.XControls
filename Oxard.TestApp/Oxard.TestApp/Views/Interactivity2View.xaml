@@ -4,16 +4,22 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:oxard="http://oxard.com/XControls"
     xmlns:themes="http://oxard.com/Themes"
+    xmlns:oxard="http://oxard.com/XControls"
     mc:Ignorable="d"
-    x:Class="Oxard.TestApp.Views.InteractivityView">
+    x:Class="Oxard.TestApp.Views.Interactivity2View">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <themes:Colors />
                 <themes:ButtonStyle />
             </ResourceDictionary.MergedDictionaries>
+
+            <Color
+                x:Key="ButtonPressedDisabledBackgroundColor">#CECECE</Color>
+            <oxard:SolidColorBrush
+                x:Key="ButtonPressedDisabledBackgroundBrush"
+                Color="{StaticResource ButtonPressedDisabledBackgroundColor}" />
 
             <Style
                 x:Key="InteractivityStyle"
@@ -74,6 +80,27 @@
                                     Property="{x:Static oxard:RadioButton.BackgroundProperty}"
                                     Value="{StaticResource ButtonDisableBackgroundBrush}" />
                             </oxard:Trigger>
+                            <oxard:MultiTrigger>
+                                <oxard:MultiTrigger.Conditions>
+                                    <oxard:PropertyCondition
+                                        Property="{x:Static oxard:RadioButton.IsEnabledProperty}"
+                                        Value="False" />
+                                    <oxard:PropertyCondition
+                                        Property="{x:Static oxard:RadioButton.IsCheckedProperty}"
+                                        Value="True" />
+                                </oxard:MultiTrigger.Conditions>
+
+                                <oxard:Setter
+                                    Property="{x:Static oxard:RadioButton.BackgroundProperty}"
+                                    Value="{StaticResource ButtonPressedDisabledBackgroundBrush}" />
+                            </oxard:MultiTrigger>
+                            <oxard:DataTrigger
+                                Binding="{Binding Path=IsDataBindingActivated}"
+                                Value="True">
+                                <oxard:Setter
+                                    Property="{x:Static oxard:RadioButton.BorderColorProperty}"
+                                    Value="Red" />
+                            </oxard:DataTrigger>
                         </oxard:TriggerCollection>
                     </Setter.Value>
                 </Setter>
@@ -137,6 +164,21 @@
                             Property="Background"
                             Value="{StaticResource ButtonDisableBackgroundBrush}" />
                     </Trigger>
+                    <MultiTrigger
+                        TargetType="oxard:RadioButton">
+                        <MultiTrigger.Conditions>
+                            <PropertyCondition
+                                Property="IsEnabled"
+                                Value="False" />
+                            <PropertyCondition
+                                Property="IsChecked"
+                                Value="True" />
+                        </MultiTrigger.Conditions>
+
+                        <Setter
+                            Property="Background"
+                            Value="{StaticResource ButtonPressedDisabledBackgroundBrush}" />
+                    </MultiTrigger>
                 </Style.Triggers>
             </Style>
         </ResourceDictionary>
@@ -148,13 +190,21 @@
                 Height="Auto" />
             <RowDefinition
                 Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
+        <Label
+            HorizontalOptions="Center"
+            Grid.ColumnSpan="2"
+            TextColor="White"
+            Text="Triggers + MultiTrigger" />
         <StackLayout
+            Grid.Row="1"
             HorizontalOptions="Center">
             <Label
                 HorizontalOptions="Center"
@@ -199,6 +249,7 @@
         </StackLayout>
 
         <StackLayout
+            Grid.Row="1"
             Grid.Column="1">
             <Label
                 HorizontalOptions="Center"
@@ -243,7 +294,7 @@
         </StackLayout>
 
         <StackLayout
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.ColumnSpan="2"
             Orientation="Horizontal"
             Spacing="15">
@@ -259,6 +310,13 @@
                 Clicked="ButtonOnCheckNextClicked">
                 <Label
                     Text="Check next button"
+                    TextColor="White" />
+            </oxard:Button>
+            <oxard:Button
+                Style="{StaticResource ButtonDefaultStyle}"
+                Clicked="ButtonOnTestDataTrigger">
+                <Label
+                    Text="Test data trigger"
                     TextColor="White" />
             </oxard:Button>
         </StackLayout>

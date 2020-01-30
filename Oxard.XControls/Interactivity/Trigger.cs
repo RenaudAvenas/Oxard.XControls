@@ -68,10 +68,10 @@ namespace Oxard.XControls.Interactivity
 
             private void CheckIsActive()
             {
-                if (this.triggerSource.convertedValue == null)
+                if (this.triggerSource.convertedValue == null && this.triggerSource.Value != null)
                 {
                     if (this.triggerSource.Value is string stringValue)
-                        this.triggerSource.convertedValue = stringValue.ConvertFor(this.triggerSource.Property);
+                        this.triggerSource.convertedValue = stringValue.ConvertFor(this.triggerSource.Property.ReturnType);
                     else
                         this.triggerSource.convertedValue = this.triggerSource.Value;
                 }

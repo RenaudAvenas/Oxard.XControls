@@ -11,6 +11,40 @@ public App()
 }
 ```
 
+## 2.4.15.23
+
+- Oxard.Interactivity
+
+Add a new Triggers attached property to manage some bugs with Xamarin.Forms native Triggers
+```xml
+ <Style x:Key="InteractivityStyle" TargetType="oxard:RadioButton">
+    <Setter Property="oxard:Interactivity.Triggers">
+        <Setter.Value>
+            <oxard:TriggerCollection>
+                <oxard:Trigger
+                    Property="{x:Static oxard:RadioButton.IsCheckedProperty}"
+                    Value="True">
+                    <oxard:Setter
+                        Property="{x:Static oxard:RadioButton.BackgroundProperty}"
+                        Value="{StaticResource ButtonPressedBackgroundBrush}" />
+                </oxard:Trigger>
+                <oxard:Trigger
+                    Property="{x:Static oxard:RadioButton.IsEnabledProperty}"
+                    Value="False">
+                    <oxard:Setter
+                        Property="{x:Static oxard:RadioButton.BackgroundProperty}"
+                        Value="{StaticResource ButtonDisableBackgroundBrush}" />
+                </oxard:Trigger>
+            </oxard:TriggerCollection>
+        </Setter.Value>
+    </Setter>
+</Style>
+```
+
+- CheckBox and RadioButton
+
+Fix a bug when set IsChecked property by code
+
 ## 2.4.14.23
 
 - ItemsControl

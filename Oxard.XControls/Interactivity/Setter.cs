@@ -7,6 +7,8 @@ namespace Oxard.XControls.Interactivity
     /// </summary>
     public class Setter
     {
+        private object convertedValue;
+
         /// <summary>
         /// Gets or sets the property to set.
         /// </summary>
@@ -25,7 +27,15 @@ namespace Oxard.XControls.Interactivity
 
         internal void Apply(BindableObject bindable)
         {
-            bindable.SetValue(this.Property, this.Value);
+            if(this.convertedValue == null && this.Value != null)
+            {
+                if (this.Value is string stringValue)
+                    this.convertedValue = stringValue.ConvertFor(this.Property.ReturnType);
+                else
+                    this.convertedValue = this.Value;
+            }
+
+            bindable.SetValue(this.Property, this.convertedValue);
         }
     }
 }

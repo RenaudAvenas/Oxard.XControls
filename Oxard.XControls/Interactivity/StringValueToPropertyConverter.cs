@@ -14,32 +14,42 @@ namespace Oxard.XControls.Interactivity
         private static readonly Type intType = typeof(int);
         private static readonly Type doubleType = typeof(double);
         private static readonly Type stringType = typeof(string);
+        private static readonly Type colorType = typeof(Color);
         private static readonly List<Type> managedTypes = new List<Type>
         {
             boolType,
             intType,
-            doubleType
+            doubleType,
+            colorType
         };
 
-        public static object ConvertFor(this string stringValue, BindableProperty property)
+        /// <summary>
+        /// Convert standard string to specific type
+        /// </summary>
+        /// <example>"True" => boolean true value. Red return <see cref="Xamarin.Forms.Color.Red"/></example>
+        /// <param name="stringValue"></param>
+        /// <param name="targetType"></param>
+        /// <returns></returns>
+        public static object ConvertFor(this string stringValue, Type targetType)
         {
-            if (property.ReturnType == stringType)
+            if (targetType == stringType)
                 return stringValue;
             
-            if (managedTypes.Contains(property.ReturnType))
+            if (managedTypes.Contains(targetType))
             {
-                if (property.ReturnType == boolType)
+                if (targetType == boolType)
                     return bool.TryParse(stringValue, out bool result) ? result : throw new ArgumentException($"Expected value must be a boolean but it is this string : {stringValue}", nameof(stringValue));
-                if (property.ReturnType == intType)
+                if (targetType == intType)
                     return int.TryParse(stringValue, out int result) ? result : throw new ArgumentException($"Expected value must be an integer but it is this string : {stringValue}", nameof(stringValue));
-                if (property.ReturnType == doubleType)
+                if (targetType == doubleType)
                     return double.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out double result) ? result : throw new ArgumentException($"Expected value must be an integer but it is this string : {stringValue}", nameof(stringValue));
-                
+                if (targetType == colorType)
+                    return new ColorTypeConverter().ConvertFromInvariantString(stringValue);
             }
-            else if (property.ReturnType.IsEnum)
-                return Enum.Parse(property.ReturnType, stringValue);
+            else if (targetType.IsEnum)
+                return Enum.Parse(targetType, stringValue);
 
-            throw new ArgumentException($"Expected value must be a {property.ReturnType} but it is this string : {stringValue}", nameof(stringValue));
+            throw new ArgumentException($"Expected value must be a {targetType} but it is this string : {stringValue}", nameof(stringValue));
         }
     }
 }
