@@ -76,7 +76,7 @@ namespace Oxard.XControls.Interactivity
                         this.conditionSource.convertedValue = this.conditionSource.Value;
                 }
 
-                if (object.Equals(this.conditionSource.convertedValue, this.Bindable.GetValue(this.conditionSource.Property)) && !this.IsValid)
+                if (object.Equals(this.conditionSource.convertedValue, this.Bindable.GetValue(this.conditionSource.Property)))
                     this.IsValid = true;
                 else
                     this.IsValid = false;

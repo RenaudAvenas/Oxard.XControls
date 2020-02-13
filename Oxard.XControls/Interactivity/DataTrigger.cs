@@ -88,7 +88,7 @@ namespace Oxard.XControls.Interactivity
                         this.triggerSource.convertedValue = this.triggerSource.Value;
                 }
 
-                if (object.Equals(this.triggerSource.convertedValue, bindingValue) && !this.IsActive)
+                if (object.Equals(this.triggerSource.convertedValue, bindingValue))
                     this.IsActive = true;
                 else
                     this.IsActive = false;

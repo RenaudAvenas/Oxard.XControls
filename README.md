@@ -10,6 +10,11 @@ public App()
     this.InitializeComponent(); 
 }
 ```
+## 2.4.15.24
+
+- Oxard.Interactivity
+
+Fix on activation on already active trigger.
 
 ## 2.4.15.23
 
