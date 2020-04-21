@@ -19,7 +19,7 @@ namespace Oxard.TestApp.Views
             this.algorithms.Add(new StackAlgorithm { Spacing = 10 });
             this.algorithms.Add(new StackAlgorithm { Spacing = 15, Orientation = StackOrientation.Horizontal });
 
-            var gridAlgorithm = new GridAlgorithm { ColumnSpacing = 10, RowSpacing = 20 };
+            var gridAlgorithm = new GridAlgorithm(); // { ColumnSpacing = 10, RowSpacing = 20 };
 
             gridAlgorithm.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
             gridAlgorithm.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });

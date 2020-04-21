@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Oxard.XControls</id>
-    <version>2.4.15.24</version>
+    <version>3.4.15.25</version>
     <authors>Renaud AVENAS</authors>
     <owners>Renaud AVENAS</owners>
     <projectUrl>https://github.com/RenaudAvenas/Oxard.XControls</projectUrl>
@@ -13,7 +13,7 @@
     <tags>Xamarin Forms controls</tags>
 	<license type="expression">GPL-3.0-only</license>
     <dependencies>
-      <dependency id="Xamarin.Forms" version="4.1.0.555618" />
+      <dependency id="Xamarin.Forms" version="4.3.0.991250" />
     </dependencies>
   </metadata>
   <files>

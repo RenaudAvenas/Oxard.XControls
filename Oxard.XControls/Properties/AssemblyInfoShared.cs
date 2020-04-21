@@ -7,8 +7,8 @@
 
 // X.Y.Z.W => 
 // X : major version (big modification, dependencies updates, ...)
-// Y : minor version modification with some impact like namespace changed or class renamed...
+// Y : minor version modification with some impact like namespace changes or class renamed...
 // Z : new components or features
 // W : bug correction, components improved
-[assembly: AssemblyVersion("2.4.15.24")]
-[assembly: AssemblyFileVersion("2.4.15.24")]
+[assembly: AssemblyVersion("3.4.15.25")]
+[assembly: AssemblyFileVersion("3.4.15.25")]

@@ -10,6 +10,15 @@ public App()
     this.InitializeComponent(); 
 }
 ```
+## 3.4.15.25
+- XF update
+
+Xamarin forms update to 4.3.0.991250
+
+- GridAlgoritm
+
+Fix a bug when measure a grid in width or height inifinite with Column or Row with a GridLength.Star
+
 ## 2.4.15.24
 
 - Oxard.Interactivity
