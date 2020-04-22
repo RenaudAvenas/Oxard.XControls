@@ -37,7 +37,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
             get => (double)this.GetValue(RowSpacingProperty);
             set => this.SetValue(RowSpacingProperty, value);
         }
-       
+
         /// <summary>
         /// Get the columns definition.</summary>
         /// <value>The columns definition.</value>
@@ -201,55 +201,54 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                 if (starWidth < totalReservedWidth)
                     starWidth = starWidth - (totalReservedWidth - starWidth);
 
-                if (starWidth < 0)
+                // If width is infinty we add space in star columns if necessary
+                if (double.IsPositiveInfinity(width))
+                {
+                    var starredColumns = new List<ColumnInfo>();
+                    var starValue = 0d;
+                    foreach (var columnInfo in this.table.ColumnInfos)
+                    {
+                        if (!columnInfo.ColumnDefinition.Width.IsStar)
+                            continue;
+
+                        starredColumns.Add(columnInfo);
+                        foreach (var childInfo in columnInfo.ChildInfos)
+                        {
+                            if (childInfo.LastStarColumn != columnInfo)
+                                continue;
+
+                            var actualAvailableWidth = this.GetChildAvailableWidth(childInfo);
+                            var desiredSize = childInfo.GetDesiredSize(double.PositiveInfinity, double.PositiveInfinity);
+
+                            if (actualAvailableWidth < desiredSize.Request.Width)
+                            {
+                                var childStarNumber = 0d;
+                                for (int i = 0; i < childInfo.ColumnSpan; i++)
+                                {
+                                    var currentChildColumn = this.table.ColumnInfos[childInfo.StartColumnIndex + i];
+                                    if (currentChildColumn.ColumnDefinition.Width.IsStar)
+                                        childStarNumber += currentChildColumn.ColumnDefinition.Width.Value;
+                                }
+
+                                var neededStarSize = (desiredSize.Request.Width - actualAvailableWidth) / childStarNumber;
+                                starValue = Math.Max(starValue, neededStarSize);
+                            }
+                        }
+                    }
+
+                    foreach (var columnInfo in starredColumns)
+                    {
+                        columnInfo.GrewWidth(starValue * columnInfo.ColumnDefinition.Width.Value);
+                        certainWidth += columnInfo.Width;
+                    }
+                }
+                else if (starWidth < 0)
                 {
                     // Not enough space to display child, star value is zero and all auto column must take there reserved space
                     foreach (var columnInfo in starWidthImpactedAutoColumns)
                     {
                         columnInfo.GrewWidth(columnInfo.Width + columnInfo.ReservedWidth);
                         certainWidth += columnInfo.ReservedWidth;
-                    }
-
-                    // If width is infinty we add space in star columns if necessary
-                    if (double.IsPositiveInfinity(width))
-                    {
-                        var starredColumns = new List<ColumnInfo>();
-                        var starValue = 0d;
-                        foreach (var columnInfo in this.table.ColumnInfos)
-                        {
-                            if (!columnInfo.ColumnDefinition.Width.IsStar)
-                                continue;
-
-                            starredColumns.Add(columnInfo);
-                            foreach (var childInfo in columnInfo.ChildInfos)
-                            {
-                                if (!childInfo.IsLastChildColumn(columnInfo))
-                                    continue;
-
-                                var actualAvailableWidth = this.GetChildAvailableWidth(childInfo);
-                                var desiredSize = childInfo.GetDesiredSize(double.PositiveInfinity, double.PositiveInfinity);
-
-                                if (actualAvailableWidth < desiredSize.Request.Width)
-                                {
-                                    var childStarNumber = 0d;
-                                    for (int i = 0; i < childInfo.ColumnSpan; i++)
-                                    {
-                                        var currentChildColumn = this.table.ColumnInfos[childInfo.StartColumnIndex + i];
-                                        if (currentChildColumn.ColumnDefinition.Width.IsStar)
-                                            childStarNumber += currentChildColumn.ColumnDefinition.Width.Value;
-                                    }
-
-                                    var neededStarSize = (desiredSize.Request.Width - actualAvailableWidth) / childStarNumber;
-                                    starValue = Math.Max(starValue, neededStarSize);
-                                }
-                            }
-                        }
-
-                        foreach (var columnInfo in starredColumns)
-                        {
-                            columnInfo.GrewWidth(starValue * columnInfo.ColumnDefinition.Width.Value);
-                            certainWidth += columnInfo.Width;
-                        }
                     }
                 }
                 else
@@ -385,55 +384,54 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                 if (starHeight < totalReservedHeight)
                     starHeight = starHeight - (totalReservedHeight - starHeight);
 
-                if (starHeight <= 0)
+                if (double.IsPositiveInfinity(height))
+                {
+                    // If height is infinty we add space in star rows if necessary
+                    var starredRows = new List<RowInfo>();
+                    var starValue = 0d;
+                    foreach (var rowInfo in this.table.RowInfos)
+                    {
+                        if (!rowInfo.RowDefinition.Height.IsStar)
+                            continue;
+
+                        starredRows.Add(rowInfo);
+                        foreach (var childInfo in rowInfo.ChildInfos)
+                        {
+                            if (childInfo.LastStarRow != rowInfo)
+                                continue;
+
+                            var actualAvailableHeight = this.GetChildAvailableHeight(childInfo);
+                            var desiredSize = childInfo.GetDesiredSize(this.GetChildAvailableWidth(childInfo), double.PositiveInfinity);
+
+                            if (actualAvailableHeight < desiredSize.Request.Height)
+                            {
+                                var childStarNumber = 0d;
+                                for (int i = 0; i < childInfo.RowSpan; i++)
+                                {
+                                    var currentChildRow = this.table.RowInfos[childInfo.StartRowIndex + i];
+                                    if (currentChildRow.RowDefinition.Height.IsStar)
+                                        childStarNumber += currentChildRow.RowDefinition.Height.Value;
+                                }
+
+                                var neededStarSize = (desiredSize.Request.Height - actualAvailableHeight) / childStarNumber;
+                                starValue = Math.Max(starValue, neededStarSize);
+                            }
+                        }
+                    }
+
+                    foreach (var rowInfo in starredRows)
+                    {
+                        rowInfo.GrewHeight(starValue * rowInfo.RowDefinition.Height.Value);
+                        certainHeight += rowInfo.Height;
+                    }
+                }
+                else if (starHeight <= 0)
                 {
                     // Not enough space to display child, star value is zero and all auto row must take there reserved space
                     foreach (var rowInfo in starImpactedAutoRows)
                     {
                         rowInfo.GrewHeight(rowInfo.Height + rowInfo.ReservedHeight);
                         certainHeight += rowInfo.ReservedHeight;
-                    }
-
-                    // If height is infinty we add space in star rows if necessary
-                    if (double.IsPositiveInfinity(height))
-                    {
-                        var starredRows = new List<RowInfo>();
-                        var starValue = 0d;
-                        foreach (var rowInfo in this.table.RowInfos)
-                        {
-                            if (!rowInfo.RowDefinition.Height.IsStar)
-                                continue;
-
-                            starredRows.Add(rowInfo);
-                            foreach (var childInfo in rowInfo.ChildInfos)
-                            {
-                                if (!childInfo.IsLastChildRow(rowInfo))
-                                    continue;
-
-                                var actualAvailableHeight = this.GetChildAvailableHeight(childInfo);
-                                var desiredSize = childInfo.GetDesiredSize(this.GetChildAvailableWidth(childInfo), double.PositiveInfinity);
-
-                                if (actualAvailableHeight < desiredSize.Request.Height)
-                                {
-                                    var childStarNumber = 0d;
-                                    for (int i = 0; i < childInfo.RowSpan; i++)
-                                    {
-                                        var currentChildRow = this.table.RowInfos[childInfo.StartRowIndex + i];
-                                        if (currentChildRow.RowDefinition.Height.IsStar)
-                                            childStarNumber += currentChildRow.RowDefinition.Height.Value;
-                                    }
-
-                                    var neededStarSize = (desiredSize.Request.Height - actualAvailableHeight) / childStarNumber;
-                                    starValue = Math.Max(starValue, neededStarSize);
-                                }
-                            }
-                        }
-
-                        foreach (var rowInfo in starredRows)
-                        {
-                            rowInfo.GrewHeight(starValue * rowInfo.RowDefinition.Height.Value);
-                            certainHeight += rowInfo.Height;
-                        }
                     }
                 }
                 else
@@ -573,6 +571,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                 var childInfo = new ChildInfo(child, this.ColumnInfos, this.RowInfos);
 
                 ColumnInfo lastAutoColumn = null;
+                ColumnInfo lastStarColumn = null;
                 for (int i = 0; i < childInfo.ColumnSpan; i++)
                 {
                     var columnInfo = this.ColumnInfos[childInfo.StartColumnIndex + i];
@@ -582,10 +581,14 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                     if (columnInfo.ColumnDefinition.Width.IsAuto)
                         lastAutoColumn = columnInfo;
                     else if (columnInfo.ColumnDefinition.Width.IsStar)
+                    {
                         childInfo.CrossStarColumn = true;
+                        lastStarColumn = columnInfo;
+                    }
                 }
 
                 RowInfo lastAutoRow = null;
+                RowInfo lastStarRow = null;
                 for (int i = 0; i < childInfo.RowSpan; i++)
                 {
                     var rowInfo = this.RowInfos[childInfo.StartRowIndex + i];
@@ -595,10 +598,14 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                     if (rowInfo.RowDefinition.Height.IsAuto)
                         lastAutoRow = rowInfo;
                     else if (rowInfo.RowDefinition.Height.IsStar)
+                    {
                         childInfo.CrossStarRow = true;
+                        lastStarRow = rowInfo;
+                    }
                 }
 
                 childInfo.SetLastAuto(lastAutoColumn, lastAutoRow);
+                childInfo.SetLastStar(lastStarColumn, lastStarRow);
 
                 var key = new Tuple<int, int>(childInfo.StartColumnIndex, childInfo.StartRowIndex);
                 if (this.flatChildTable.TryGetValue(key, out var list))
@@ -771,6 +778,10 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
 
             public RowInfo LastAutoRow { get; private set; }
 
+            public ColumnInfo LastStarColumn { get; private set; }
+
+            public RowInfo LastStarRow { get; private set; }
+
             public ColumnInfo StartColumn { get; }
 
             public RowInfo StartRow { get; }
@@ -785,14 +796,16 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                 return desiredSize.Value;
             }
 
-            public bool IsLastChildColumn(ColumnInfo column) => column.ColumnIndex == this.StartColumnIndex + this.ColumnSpan - 1;
-
-            public bool IsLastChildRow(RowInfo row) => row.RowIndex == this.StartRowIndex + this.RowSpan - 1;
-
             internal void SetLastAuto(ColumnInfo lastAutoColumn, RowInfo lastAutoRow)
             {
                 this.LastAutoColumn = lastAutoColumn;
                 this.LastAutoRow = lastAutoRow;
+            }
+
+            internal void SetLastStar(ColumnInfo lastStarColumn, RowInfo lastStarRow)
+            {
+                this.LastStarColumn = lastStarColumn;
+                this.LastStarRow = lastStarRow;
             }
         }
     }

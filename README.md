@@ -10,6 +10,18 @@ public App()
     this.InitializeComponent(); 
 }
 ```
+## 3.5.15.26
+
+- GridAlgoritm
+
+Fix a bug when measure a grid in width or height inifinite with Column or Row with a GridLength.Star (yes again!)
+
+- MultiFormatLayout
+
+Prevent measurement and layout when algotihm change during measurement or layout.
+
+OnMeasure and LayoutChildren are sealed. Use BeforeMeasure or BeforeLayoutChildren instead.
+
 ## 3.4.15.25
 - XF update
 

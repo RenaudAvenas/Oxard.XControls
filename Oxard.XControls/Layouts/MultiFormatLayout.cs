@@ -9,6 +9,9 @@ namespace Oxard.XControls.Layouts
     /// </summary>
     public class MultiFormatLayout : Layout<View>
     {
+        private bool isMeasuring;
+        private bool isLayouting;
+
         /// <summary>
         /// Identifies the Algorithm property.
         /// </summary>
@@ -34,12 +37,19 @@ namespace Oxard.XControls.Layouts
         /// <param name="widthConstraint">Width constraint</param>
         /// <param name="heightConstraint">Height constraint</param>
         /// <returns>Requested size</returns>
-        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
+        protected override sealed SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
+            this.isMeasuring = true;
+
+            this.BeforeMeasure(widthConstraint, heightConstraint);
             if (this.Algorithm == null)
                 this.Algorithm = new ZStackAlgorithm();
 
-            return this.Algorithm.Measure(widthConstraint, heightConstraint);
+            var measure = this.Algorithm.Measure(widthConstraint, heightConstraint);
+
+            this.isMeasuring = false;
+
+            return measure;
         }
 
         /// <summary>
@@ -49,12 +59,37 @@ namespace Oxard.XControls.Layouts
         /// <param name="y">Y delay</param>
         /// <param name="width">Width constraint to layout</param>
         /// <param name="height">Height constraint to layout</param>
-        protected override void LayoutChildren(double x, double y, double width, double height)
+        protected override sealed void LayoutChildren(double x, double y, double width, double height)
         {
+            this.isLayouting = true;
+
+            this.BeforeLayoutChildren(x, y, width, height);
             if (this.Algorithm == null)
                 this.Algorithm = new ZStackAlgorithm();
 
             this.Algorithm.LayoutChildren(x, y, width, height);
+
+            this.isLayouting = false;
+        }
+
+        /// <summary>
+        /// Method called before a measurement is asked.
+        /// </summary>
+        /// <param name="widthConstraint">Width constraint</param>
+        /// <param name="heightConstraint">Height constraint</param>
+        protected virtual void BeforeMeasure(double widthConstraint, double heightConstraint)
+        {
+        }
+
+        /// <summary>
+        /// Called before layout the children of the current layout
+        /// </summary>
+        /// <param name="x">X delay</param>
+        /// <param name="y">Y delay</param>
+        /// <param name="width">Width constraint to layout</param>
+        /// <param name="height">Height constraint to layout</param>
+        protected virtual void BeforeLayoutChildren(double x, double y, double width, double height)
+        {
         }
 
         private void OnAlgorithmChanged(LayoutAlgorithm oldAlgorithm)
@@ -67,14 +102,19 @@ namespace Oxard.XControls.Layouts
 
             this.Algorithm.ParentLayout = this;
             this.Algorithm.Invalidated += this.OnAlgorithmInvalidated;
-            this.InvalidateMeasure();
-            this.InvalidateLayout();
+
+            if (!this.isMeasuring)
+                this.InvalidateMeasure();
+            if (!this.isLayouting)
+                this.InvalidateLayout();
         }
 
         private void OnAlgorithmInvalidated(object sender, EventArgs e)
         {
-            this.InvalidateMeasure();
-            this.InvalidateLayout();
+            if (!this.isMeasuring)
+                this.InvalidateMeasure();
+            if (!this.isLayouting)
+                this.InvalidateLayout();
         }
     }
 }
