@@ -10,6 +10,12 @@ public App()
     this.InitializeComponent(); 
 }
 ```
+## 3.5.15.27
+
+- MultiFormatLayout
+
+Fix : if algorithm was set durring measurment or layout, MultiFormatLayout made infinity loop.
+
 ## 3.5.15.26
 
 - GridAlgoritm

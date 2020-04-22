@@ -103,18 +103,20 @@ namespace Oxard.XControls.Layouts
             this.Algorithm.ParentLayout = this;
             this.Algorithm.Invalidated += this.OnAlgorithmInvalidated;
 
-            if (!this.isMeasuring)
+            if (!this.isMeasuring && !this.isLayouting)
+            {
                 this.InvalidateMeasure();
-            if (!this.isLayouting)
                 this.InvalidateLayout();
+            }
         }
 
         private void OnAlgorithmInvalidated(object sender, EventArgs e)
         {
-            if (!this.isMeasuring)
+            if (!this.isMeasuring && !this.isLayouting)
+            {
                 this.InvalidateMeasure();
-            if (!this.isLayouting)
                 this.InvalidateLayout();
+            }
         }
     }
 }
