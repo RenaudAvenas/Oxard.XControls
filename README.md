@@ -10,6 +10,12 @@ public App()
     this.InitializeComponent(); 
 }
 ```
+## 3.5.15.28
+
+- UWP
+
+Adding output files in nuget package to build on UWP.
+
 ## 3.5.15.27
 
 - MultiFormatLayout
