@@ -15,12 +15,14 @@ namespace Oxard.XControls.Interactivity
         private static readonly Type doubleType = typeof(double);
         private static readonly Type stringType = typeof(string);
         private static readonly Type colorType = typeof(Color);
+        private static readonly Type brushType = typeof(Brush);
         private static readonly List<Type> managedTypes = new List<Type>
         {
             boolType,
             intType,
             doubleType,
-            colorType
+            colorType,
+            brushType
         };
 
         /// <summary>
@@ -45,6 +47,10 @@ namespace Oxard.XControls.Interactivity
                     return double.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out double result) ? result : throw new ArgumentException($"Expected value must be an integer but it is this string : {stringValue}", nameof(stringValue));
                 if (targetType == colorType)
                     return new ColorTypeConverter().ConvertFromInvariantString(stringValue);
+                if (targetType == colorType)
+                    return new ColorTypeConverter().ConvertFromInvariantString(stringValue);
+                if (targetType == brushType)
+                    return new BrushTypeConverter().ConvertFromInvariantString(stringValue);
             }
             else if (targetType.IsEnum)
                 return Enum.Parse(targetType, stringValue);
