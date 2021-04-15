@@ -1,5 +1,5 @@
-﻿using Oxard.XControls.Shapes;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
+using Xamarin.Forms.Shapes;
 using CornerRadius = Oxard.XControls.Shapes.CornerRadius;
 
 namespace Oxard.XControls.Graphics
@@ -22,68 +22,47 @@ namespace Oxard.XControls.Graphics
         /// <returns>Rectangle geometry</returns>
         public static Geometry GetRectangle(double width, double height, double strokeThickness, CornerRadius topLeft, CornerRadius topRight, CornerRadius bottomRight, CornerRadius bottomLeft)
         {
-            var geometry = new Geometry(width, height, strokeThickness);
+            var geometry = new PathGeometry();
 
-            if (topLeft != null)
+            var pathFigure = new PathFigure();
+            pathFigure.IsClosed = true;
+            geometry.Figures.Add(pathFigure);
+
+            var halfStroke = strokeThickness / 2d;
+
+            if (topLeft != null && !topLeft.IsEmpty)
             {
-                geometry
-                    .StartAt(new Point(0, topLeft.RadiusY))
-                    .CornerTo(new Point(topLeft.RadiusX, 0), SweepDirection.Clockwise);
+                pathFigure.StartPoint = new Point(halfStroke, topLeft.RadiusY + halfStroke);
+                pathFigure.Segments.Add(new ArcSegment { Point = new Point(topLeft.RadiusX + halfStroke, halfStroke), RotationAngle = 90, SweepDirection = SweepDirection.Clockwise, Size = new Size(topLeft.RadiusX, topLeft.RadiusY), IsLargeArc = false });
             }
             else
-                geometry.StartAt(0, 0);
+                pathFigure.StartPoint = new Point(halfStroke, halfStroke);
 
-            if (topRight != null)
+            if (topRight != null && !topRight.IsEmpty)
             {
-                geometry
-                    .LineTo(new Point(width - topRight.RadiusX, 0))
-                    .CornerTo(new Point(width, topRight.RadiusY), SweepDirection.Clockwise);
+                pathFigure.Segments.Add(new LineSegment { Point = new Point(width - topRight.RadiusX - halfStroke, halfStroke) });
+                pathFigure.Segments.Add(new ArcSegment { Point = new Point(width - halfStroke, topRight.RadiusY + halfStroke), RotationAngle = 90, SweepDirection = SweepDirection.Clockwise, Size = new Size(topRight.RadiusX, topRight.RadiusY) });
             }
             else
-                geometry.LineTo(width, 0);
+                pathFigure.Segments.Add(new LineSegment { Point = new Point(width - halfStroke, halfStroke) });
 
-            if (bottomRight != null)
+            if (bottomRight != null && !bottomRight.IsEmpty)
             {
-                geometry
-                    .LineTo(new Point(width, height - bottomRight.RadiusY))
-                    .CornerTo(new Point(width - bottomRight.RadiusX, height), SweepDirection.Clockwise);
+                pathFigure.Segments.Add(new LineSegment { Point = new Point(width - halfStroke, height - bottomRight.RadiusY - halfStroke) });
+                pathFigure.Segments.Add(new ArcSegment { Point = new Point(width - bottomRight.RadiusX - halfStroke, height - halfStroke), RotationAngle = 90, SweepDirection = SweepDirection.Clockwise, Size = new Size(bottomRight.RadiusX, bottomRight.RadiusY) });
             }
             else
-                geometry.LineTo(width, height);
+                pathFigure.Segments.Add(new LineSegment { Point = new Point(width - halfStroke, height - halfStroke) });
 
-            if (bottomLeft != null)
+            if (bottomLeft != null && !bottomLeft.IsEmpty)
             {
-                geometry
-                    .LineTo(new Point(bottomLeft.RadiusX, height))
-                    .CornerTo(new Point(0, height - bottomLeft.RadiusY), SweepDirection.Clockwise);
+                pathFigure.Segments.Add(new LineSegment { Point = new Point(bottomLeft.RadiusX + halfStroke, height - halfStroke) });
+                pathFigure.Segments.Add(new ArcSegment { Point = new Point(halfStroke, height - bottomLeft.RadiusY - halfStroke), RotationAngle = 90, SweepDirection = SweepDirection.Clockwise, Size = new Size(bottomLeft.RadiusX, bottomLeft.RadiusY) });
             }
             else
-                geometry.LineTo(0, height);
+                pathFigure.Segments.Add(new LineSegment { Point = new Point(halfStroke, height - halfStroke) });
 
-            return geometry.ClosePath();
-        }
-
-        /// <summary>
-        /// Return an ellipse geometry
-        /// </summary>
-        /// <param name="width">Width of the ellipse</param>
-        /// <param name="height">Height of the ellipse</param>
-        /// <param name="strokeThickness">Stroke thickness of the ellipse</param>
-        /// <returns>Ellipse geometry</returns>
-        public static Geometry GetEllipse(double width, double height, double strokeThickness)
-        {
-            var geometry = new Geometry(width, height, strokeThickness);
-
-            var radiusY = height / 2d;
-            var radiusX = width / 2d;
-
-            return geometry
-                 .StartAt(0, radiusY)
-                 .CornerTo(radiusX, 0, SweepDirection.Clockwise)
-                 .CornerTo(width, radiusY, SweepDirection.Clockwise)
-                 .CornerTo(radiusX, height, SweepDirection.Clockwise)
-                 .CornerTo(0, radiusY, SweepDirection.Clockwise)
-                 .ClosePath();
+            return geometry;
         }
     }
 }

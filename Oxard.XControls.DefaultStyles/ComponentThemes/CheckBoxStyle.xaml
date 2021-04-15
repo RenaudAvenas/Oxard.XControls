@@ -20,8 +20,8 @@
                     Property="Background"
                     Value="{StaticResource ButtonPressedBackgroundBrush}" />
                 <Setter
-                    Property="BorderColor"
-                    Value="{StaticResource ButtonPressedBackgroundColor}" />
+                    Property="BorderBrush"
+                    Value="{StaticResource ButtonPressedBackgroundBrush}" />
             </Trigger>
         </Style.Triggers>
         <Setter
@@ -31,8 +31,8 @@
             Property="IsBackgroundManagedByStyle"
             Value="True" />
         <Setter
-            Property="BorderColor"
-            Value="{StaticResource ButtonBackgroundColor}" />
+            Property="BorderBrush"
+            Value="{StaticResource ButtonBackgroundBrush}" />
         <Setter
             Property="HorizontalContentOptions"
             Value="Start" />
@@ -43,12 +43,12 @@
                     <StackLayout
                         Orientation="Horizontal"
                         Spacing="10">
-                        <oxard:Rectangle
+                        <oxard:RoundedRectangle
                             HeightRequest="20"
                             WidthRequest="20"
                             VerticalOptions="Center"
                             CornerRadius="2"
-                            Stroke="{TemplateBinding BorderColor}"
+                            Stroke="{TemplateBinding BorderBrush}"
                             StrokeThickness="{TemplateBinding BorderThickness}"
                             Fill="{TemplateBinding Background}" />
                         <ContentPresenter

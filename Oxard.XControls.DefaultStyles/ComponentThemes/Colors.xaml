@@ -17,15 +17,15 @@
     <Color
         x:Key="ButtonDisableBackgroundColor">#282828</Color>
 
-    <oxard:SolidColorBrush
+    <SolidColorBrush
         x:Key="ButtonBackgroundBrush"
         Color="{StaticResource ButtonBackgroundColor}" />
 
-    <oxard:SolidColorBrush
+    <SolidColorBrush
         x:Key="ButtonPressedBackgroundBrush"
         Color="{StaticResource ButtonPressedBackgroundColor}" />
 
-    <oxard:SolidColorBrush
+    <SolidColorBrush
         x:Key="ButtonDisableBackgroundBrush"
         Color="{StaticResource ButtonDisableBackgroundColor}" />
 

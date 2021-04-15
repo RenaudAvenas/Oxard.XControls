@@ -1,5 +1,6 @@
 ﻿using Oxard.XControls.Shapes;
 using Xamarin.Forms;
+using Xamarin.Forms.Shapes;
 using CornerRadius = Oxard.XControls.Shapes.CornerRadius;
 
 namespace Oxard.XControls.Graphics
@@ -91,6 +92,18 @@ namespace Oxard.XControls.Graphics
         public override Geometry Geometry => this.actualGeometry;
 
         /// <summary>
+        /// To be added.
+        /// </summary>
+        /// <value>
+        /// To be added.
+        /// </value>
+        /// <exception cref="System.NotImplementedException"></exception>
+        /// <remarks>
+        /// To be added.
+        /// </remarks>
+        public override bool IsEmpty => false;
+
+        /// <summary>
         /// Creates a new <see cref="DrawingBrush"/> that is a copy of the current instance.
         /// Just clone custom properties of inherited classes. The clone method of DrawingBrush already copies its own properties.
         /// </summary>
@@ -103,10 +116,14 @@ namespace Oxard.XControls.Graphics
                 rectangle.CornerRadius = this.CornerRadius;
             else
             {
-                rectangle.TopLeftCornerRadius = new CornerRadius(this.TopLeftCornerRadius.RadiusX, this.TopLeftCornerRadius.RadiusY);
-                rectangle.TopRightCornerRadius = new CornerRadius(this.TopRightCornerRadius.RadiusX, this.TopRightCornerRadius.RadiusY);
-                rectangle.BottomRightCornerRadius = new CornerRadius(this.BottomRightCornerRadius.RadiusX, this.BottomRightCornerRadius.RadiusY);
-                rectangle.BottomLeftCornerRadius = new CornerRadius(this.BottomLeftCornerRadius.RadiusX, this.BottomLeftCornerRadius.RadiusY);
+                if (this.TopLeftCornerRadius != null)
+                    rectangle.TopLeftCornerRadius = new CornerRadius(this.TopLeftCornerRadius.RadiusX, this.TopLeftCornerRadius.RadiusY);
+                if (this.TopRightCornerRadius != null)
+                    rectangle.TopRightCornerRadius = new CornerRadius(this.TopRightCornerRadius.RadiusX, this.TopRightCornerRadius.RadiusY);
+                if (this.BottomRightCornerRadius != null)
+                    rectangle.BottomRightCornerRadius = new CornerRadius(this.BottomRightCornerRadius.RadiusX, this.BottomRightCornerRadius.RadiusY);
+                if (this.BottomLeftCornerRadius != null)
+                    rectangle.BottomLeftCornerRadius = new CornerRadius(this.BottomLeftCornerRadius.RadiusX, this.BottomLeftCornerRadius.RadiusY);
             }
 
             return rectangle;

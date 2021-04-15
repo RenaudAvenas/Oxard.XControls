@@ -37,5 +37,16 @@
         /// Get or set the Y radius
         /// </summary>
         public double RadiusY { get; set; }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is empty (Radius X and Y set to zero).
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is empty; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsEmpty
+        {
+            get => this.RadiusX == 0d && this.RadiusY == 0d;
+        }
     }
 }

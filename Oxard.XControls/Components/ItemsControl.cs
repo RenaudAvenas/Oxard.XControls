@@ -198,7 +198,7 @@ namespace Oxard.XControls.Components
         /// </summary>
         /// <param name="bindableObject">Object on which we want the value of the property</param>
         /// <returns>AlternationIndex property value for the bindable object</returns>
-        public static int GetAlternationIndex(BindableObject bindableObject) => (int)bindableObject.GetValue(AlternationIndexProperty);
+        public static int GetAlternationIndex(BindableObject bindableObject) => ((int?)bindableObject?.GetValue(AlternationIndexProperty)).GetValueOrDefault();
 
         /// <summary>
         /// Set the AlternationIndex property value for the specified bindable object

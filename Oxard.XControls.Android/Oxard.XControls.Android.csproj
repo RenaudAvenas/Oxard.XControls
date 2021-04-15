@@ -16,7 +16,7 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -55,27 +55,19 @@
     <Compile Include="..\Oxard.XControls\Properties\AssemblyInfoShared.cs">
       <Link>Properties\AssemblyInfoShared.cs</Link>
     </Compile>
-    <Compile Include="Effects\BackgroundEffect.cs" />
     <Compile Include="Events\TouchHelper.cs" />
-    <Compile Include="Extensions\BrushExtensions.cs" />
-    <Compile Include="Graphics\DrawableAdapter.cs" />
-    <Compile Include="Extensions\GeometryExtensions.cs" />
-    <Compile Include="Events\BackgroundHelper.cs" />
-    <Compile Include="Interpretors\CornerSegmentInterpretor.cs" />
-    <Compile Include="Interpretors\ISegmentInterpretor.cs" />
-    <Compile Include="Interpretors\LineSegmentInterpretor.cs" />
-    <Compile Include="NativeControls\ShapeView.cs" />
+    <Compile Include="Graphics\BrushExtensions.cs" />
+    <Compile Include="Graphics\DrawingBrushDrawable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\Components\ButtonRenderer.cs" />
     <Compile Include="Renderers\Components\ContentControlRenderer.cs" />
-    <Compile Include="Renderers\Shapes\ShapeRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.3.0.991250</Version>
+      <Version>5.0.0.2012</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

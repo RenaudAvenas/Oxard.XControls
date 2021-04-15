@@ -1,4 +1,7 @@
-﻿namespace Oxard.XControls.Graphics
+﻿using Xamarin.Forms;
+using Xamarin.Forms.Shapes;
+
+namespace Oxard.XControls.Graphics
 {
     /// <summary>
     /// Draw an ellipse as a brush
@@ -11,6 +14,17 @@
         /// Get the geometry of the drawable
         /// </summary>
         public override Geometry Geometry => this.actualGeometry;
+
+        /// <summary>
+        /// To be added.
+        /// </summary>
+        /// <value>
+        /// To be added.
+        /// </value>
+        /// <remarks>
+        /// To be added.
+        /// </remarks>
+        public override bool IsEmpty => false;
 
         /// <summary>
         /// Called when instance size changed (Width and Height).
@@ -31,7 +45,7 @@
 
         private void CalculateGeometry()
         {
-            this.actualGeometry = GeometryHelper.GetEllipse(this.Width, this.Height, this.StrokeThickness);
+            this.actualGeometry = new EllipseGeometry(new Point(this.Width / 2d, this.Height / 2d), this.Width / 2d, this.Height / 2d);
             this.InvalidateGeometry();
         }
     }

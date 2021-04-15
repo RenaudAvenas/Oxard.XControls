@@ -28,7 +28,7 @@
                     Property="Background"
                     Value="{StaticResource ButtonBackgroundBrush}" />
                 <Setter
-                    Property="BorderColor"
+                    Property="BorderBrush"
                     Value="Transparent" />
                 <Setter
                     Property="BorderThickness"
@@ -44,10 +44,10 @@
                     <Setter.Value>
                         <ControlTemplate>
                             <Grid>
-                                <oxard:Rectangle
+                                <oxard:RoundedRectangle
                                     CornerRadius="3"
                                     Fill="{TemplateBinding Background}"
-                                    Stroke="{TemplateBinding BorderColor}"
+                                    Stroke="{TemplateBinding BorderBrush}"
                                     StrokeThickness="{TemplateBinding BorderThickness}" />
                                 <ContentPresenter
                                     HorizontalOptions="{TemplateBinding HorizontalContentOptions}"
@@ -92,7 +92,7 @@
                     Property="Background"
                     Value="{StaticResource ButtonBackgroundBrush}" />
                 <Setter
-                    Property="BorderColor"
+                    Property="BorderBrush"
                     Value="Transparent" />
                 <Setter
                     Property="BorderThickness"
@@ -108,10 +108,11 @@
                     <Setter.Value>
                         <ControlTemplate>
                             <Grid>
-                                <oxard:Rectangle
-                                    CornerRadius="3"
+                                <Rectangle
+                                    RadiusX="3"
+                                    RadiusY="3"
                                     Fill="{TemplateBinding Background}"
-                                    Stroke="{TemplateBinding BorderColor}"
+                                    Stroke="{TemplateBinding BorderBrush}"
                                     StrokeThickness="{TemplateBinding BorderThickness}" />
                                 <ContentPresenter
                                     HorizontalOptions="{TemplateBinding HorizontalContentOptions}"

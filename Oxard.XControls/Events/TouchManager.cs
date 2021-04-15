@@ -15,7 +15,7 @@ namespace Oxard.XControls.Events
     /// <summary>
     /// Class that managed touch events
     /// </summary>
-    public class TouchManager
+    public class TouchManager : IDisposable
     {
         private const double moveTolerance = 10;
         private StartTouch currentStartTouch;
@@ -211,6 +211,25 @@ namespace Oxard.XControls.Events
             this.IsClicking = false;
             this.currentStartTouch = null;
             this.currentTouchDisabled = true;
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposable"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        protected virtual void Dispose(bool disposable)
+        {
+            this.longPressDelayTask?.Dispose();
+            this.cancellationTokenSource?.Dispose();
         }
 
         private class StartTouch

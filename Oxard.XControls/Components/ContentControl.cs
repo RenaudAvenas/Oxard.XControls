@@ -1,6 +1,4 @@
-﻿using Oxard.XControls.Effects;
-using Oxard.XControls.Graphics;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Oxard.XControls.Components
 {
@@ -16,11 +14,7 @@ namespace Oxard.XControls.Components
         /// <summary>
         /// Identifies the ContentTemplateSelector dependency property.
         /// </summary>
-        public static readonly BindableProperty ContentTemplateSelectorProperty = BindableProperty.Create(nameof(ContentTemplateSelector), typeof(DataTemplateSelector), typeof(ContentControl), propertyChanged: OnContentTemplateSelectorPropertyChanged);
-        /// <summary>
-        /// Identifies the Background dependency property.
-        /// </summary>
-        public static readonly BindableProperty BackgroundProperty = BindableProperty.Create(nameof(Background), typeof(Brush), typeof(ContentControl), Brushes.Transparent, propertyChanged: OnBackgroundPropertyChanged);
+        public static readonly BindableProperty ContentTemplateSelectorProperty = BindableProperty.Create(nameof(ContentTemplateSelector), typeof(DataTemplateSelector), typeof(ContentControl), propertyChanged: OnContentTemplateSelectorPropertyChanged);       
         /// <summary>
         /// Identifies the Foreground dependency property.
         /// </summary>
@@ -32,7 +26,7 @@ namespace Oxard.XControls.Components
         /// <summary>
         /// Identifies the BorderColor dependency property.
         /// </summary>
-        public static readonly BindableProperty BorderColorProperty = BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(ContentControl), Color.Transparent);
+        public static readonly BindableProperty BorderBrushProperty = BindableProperty.Create(nameof(BorderBrush), typeof(Brush), typeof(ContentControl), Brush.Transparent);
         /// <summary>
         /// Identifies the HorizontalContentOptions dependency property.
         /// </summary>
@@ -65,15 +59,6 @@ namespace Oxard.XControls.Components
         }
 
         /// <summary>
-        /// Get or set the background of the ContentControl
-        /// </summary>
-        public Brush Background
-        {
-            get => (Brush)this.GetValue(BackgroundProperty);
-            set => this.SetValue(BackgroundProperty, value);
-        }
-
-        /// <summary>
         /// Get or set the foreground of the ContentControl
         /// </summary>
         public Color? Foreground
@@ -94,10 +79,10 @@ namespace Oxard.XControls.Components
         /// <summary>
         /// Get or set the border color
         /// </summary>
-        public Color BorderColor
+        public Brush BorderBrush
         {
-            get => (Color)this.GetValue(BorderColorProperty);
-            set => this.SetValue(BorderColorProperty, value);
+            get => (Brush)this.GetValue(BorderBrushProperty);
+            set => this.SetValue(BorderBrushProperty, value);
         }
 
         /// <summary>
@@ -119,8 +104,7 @@ namespace Oxard.XControls.Components
         }
 
         /// <summary>
-        /// Get or set a value that indicates if <see cref="Background"/> property is managed in the control template or not.
-        /// Set false to use a <see cref="BackgroundEffect"/>.
+        /// Get or set a value that indicates if <see cref="VisualElement.Background"/> property is managed in the control template or not.
         /// </summary>
         public bool IsBackgroundManagedByStyle
         {
@@ -137,19 +121,7 @@ namespace Oxard.XControls.Components
         {
             (bindable as ContentControl)?.OnContentTemplateSelectorChanged();
         }
-
-        private static void OnBackgroundPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            (bindable as ContentControl)?.OnBackgroundChanged(oldValue as Brush);
-        }
-
-        /// <summary>
-        /// Called when Background property changed
-        /// </summary>
-        protected virtual void OnBackgroundChanged(Brush oldValue)
-        {
-        }
-        
+       
         private void OnContentTemplateChanged()
         {
             if (this.ContentTemplate == null && this.ContentTemplateSelector == null)

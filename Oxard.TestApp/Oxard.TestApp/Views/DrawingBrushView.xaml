@@ -21,74 +21,52 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition
-                Height="Auto" />
+                Height="40" />
+            <RowDefinition
+                Height="40" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <oxard:Button
-            x:Name="Control"
-            HeightRequest="100"
-            WidthRequest="100"
-            IsEnabled="False"
-            IsBackgroundManagedByStyle="False">
-            <oxard:Button.Style>
-                <Style
-                    TargetType="oxard:Button">
-                    <Setter
-                        Property="Background">
-                        <Setter.Value>
-                            <oxard:RectangleBrush
-                                CornerRadius="5"
-                                Stroke="Blue"
-                                StrokeThickness="3"
-                                Fill="{x:Static oxard:Brushes.Green}" />
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger
-                            TargetType="oxard:Button"
-                            Property="IsPressed"
-                            Value="True">
-                            <Setter
-                                Property="oxard:DrawingBrush.AttachedStroke"
-                                Value="Red" />
-                            <Setter
-                                Property="oxard:DrawingBrush.AttachedFill"
-                                Value="{x:Static oxard:Brushes.Blue}" />
-                            <Setter
-                                Property="oxard:DrawingBrush.AttachedStrokeDashArray"
-                                Value="1,1" />
-                            <Setter
-                                Property="oxard:DrawingBrush.AttachedStrokeThickness"
-                                Value="7" />
-                        </Trigger>
-                        <Trigger
-                            TargetType="oxard:Button"
-                            Property="IsEnabled"
-                            Value="False">
-                            <Setter
-                                Property="oxard:DrawingBrush.AttachedFill"
-                                Value="{x:Static oxard:Brushes.Gray}"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </oxard:Button.Style>
+        <oxard:ContentControl>
+            <oxard:ContentControl.Background>
+                <oxard:RectangleBrush
+                    CornerRadius="5"
+                    Fill="Aqua"
+                    Stroke="Red"
+                    StrokeThickness="4"
+                    StrokeLineCap="Round"
+                    StrokeDashArray="10 2 3 2"
+                    StrokeDashOffset="1"
+                    StrokeLineJoin="Round"
+                    x:Name="RectangleBrush" />
+            </oxard:ContentControl.Background>
             <Label
-                Text="Styled button test" />
-        </oxard:Button>
-        
-        <!--<oxard:Rectangle
-            HeightRequest="50"
-            x:Name="Control"
-            Stroke="Blue"
-            StrokeThickness="1"
-            Fill="{x:Static oxard:Brushes.White}"
-            Margin="30"
-            HorizontalOptions="Center"
-            WidthRequest="100" />-->
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Text="Content control with drawableBackground" />
+        </oxard:ContentControl>
+
+        <oxard:ContentControl 
+            Grid.Row="1">
+            <oxard:ContentControl.Background>
+                <oxard:EllipseBrush
+                    Aspect="None"
+                    Fill="Aqua"
+                    Stroke="Red"
+                    StrokeThickness="2"
+                    StrokeDashArray="10 10"
+                    StrokeLineCap="Round"
+                    StrokeDashOffset="1"
+                    StrokeLineJoin="Round"/>
+            </oxard:ContentControl.Background>
+            <Label
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Text="Content control with drawableBackground" />
+        </oxard:ContentControl>
 
         <userControls:PropertyListControl
-            Grid.Row="1"
-            Instance="{x:Reference Control}" />
+            Grid.Row="2"
+            Instance="{x:Reference RectangleBrush}" />
     </Grid>
 </ContentView>

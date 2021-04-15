@@ -26,38 +26,23 @@
                 Width="Auto" />
         </Grid.ColumnDefinitions>
         
-        <BoxView
+        <!--<BoxView
             BackgroundColor="#608FE0" />
         <BoxView
             Margin="10"
-            BackgroundColor="CornflowerBlue" />
-        <oxard:Rectangle
-            Rotation="10"
-            CornerRadius="20"
-            Stroke="Black"
-            StrokeThickness="0"
-            Fill="{x:Static oxard:Brushes.Aqua}" />
+            BackgroundColor="CornflowerBlue" />-->
+        
         <BoxView
-            WidthRequest="40"
+            WidthRequest="100"
             HeightRequest="40"
-            VerticalOptions="Center"
             HorizontalOptions="Center"
             BackgroundColor="CornflowerBlue" />
-        <oxard:Ellipse
-            Fill="{x:Static oxard:Brushes.Brown}"
-            Stroke="Beige"
-            StrokeThickness="1"
-            WidthRequest="40"
-            HeightRequest="40"
-            VerticalOptions="Center"
-            HorizontalOptions="Center" />
-
-        <testapp:RandomShape
-            Grid.Row="1"
-            Grid.Column="1"
+        <oxard:RoundedRectangle
             HorizontalOptions="Center"
-            HeightRequest="100"
-            WidthRequest="200"
-            Fill="{x:Static oxard:Brushes.Beige}" />
+            WidthRequest="100"
+            CornerRadius="20"
+            Stroke="Red"
+            StrokeThickness="4"
+            Fill="Aqua" />
     </Grid>
 </ContentView>

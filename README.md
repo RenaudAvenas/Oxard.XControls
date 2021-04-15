@@ -10,6 +10,16 @@ public App()
     this.InitializeComponent(); 
 }
 ```
+
+## 4.5.15.28
+
+- Update to Xamarin.Forms 5
+
+All oxard brushes are removed except DrawingBrush. Use XF brushes instead. BackgoundEffect has been deleted because Background property is supported by XF.
+Renderers for ContentControl (and all inherits controls) support DrawingBrush.
+
+Oxard shapes has been deleted except Rectangle that is renamed to RoundedRectangle
+
 ## 3.5.15.28
 
 - UWP

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2041
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxard.TestApp", "Oxard.TestApp\Oxard.TestApp\Oxard.TestApp.csproj", "{160317AC-B6B1-450F-ABFF-25C341E3C115}"
 EndProject
@@ -255,6 +255,8 @@ Global
 		{94D849B2-91C3-4610-A752-5849595A1A76}.AppStore|x86.Build.0 = Release|x86
 		{94D849B2-91C3-4610-A752-5849595A1A76}.AppStore|x86.Deploy.0 = Release|x86
 		{94D849B2-91C3-4610-A752-5849595A1A76}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{94D849B2-91C3-4610-A752-5849595A1A76}.Debug|Any CPU.Build.0 = Debug|x86
+		{94D849B2-91C3-4610-A752-5849595A1A76}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{94D849B2-91C3-4610-A752-5849595A1A76}.Debug|ARM.ActiveCfg = Debug|ARM
 		{94D849B2-91C3-4610-A752-5849595A1A76}.Debug|ARM.Build.0 = Debug|ARM
 		{94D849B2-91C3-4610-A752-5849595A1A76}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -466,7 +468,8 @@ Global
 		{8EC797D3-5EAD-4028-8B0B-1B4A38A92003}.AppStore|x86.ActiveCfg = Release|x86
 		{8EC797D3-5EAD-4028-8B0B-1B4A38A92003}.AppStore|x86.Build.0 = Release|x86
 		{8EC797D3-5EAD-4028-8B0B-1B4A38A92003}.AppStore|x86.Deploy.0 = Release|x86
-		{8EC797D3-5EAD-4028-8B0B-1B4A38A92003}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{8EC797D3-5EAD-4028-8B0B-1B4A38A92003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EC797D3-5EAD-4028-8B0B-1B4A38A92003}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EC797D3-5EAD-4028-8B0B-1B4A38A92003}.Debug|ARM.ActiveCfg = Debug|ARM
 		{8EC797D3-5EAD-4028-8B0B-1B4A38A92003}.Debug|ARM.Build.0 = Debug|ARM
 		{8EC797D3-5EAD-4028-8B0B-1B4A38A92003}.Debug|ARM.Deploy.0 = Debug|ARM

@@ -1,33 +1,33 @@
-﻿using Oxard.XControls.Graphics;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
+using Xamarin.Forms.Shapes;
 
 namespace Oxard.XControls.Shapes
 {
     /// <summary>
     /// Class that draw a rectangle shape
     /// </summary>
-    public class Rectangle : Shape
+    public class RoundedRectangle : Path
     {
         /// <summary>
         /// Identifies the TopLeftCornerRadius dependency property.
         /// </summary>
-        public static readonly BindableProperty TopLeftCornerRadiusProperty = BindableProperty.Create(nameof(TopLeftCornerRadius), typeof(CornerRadius), typeof(Rectangle), propertyChanged: SpecificCornerRadiusPropertyChanged);
+        public static readonly BindableProperty TopLeftCornerRadiusProperty = BindableProperty.Create(nameof(TopLeftCornerRadius), typeof(CornerRadius), typeof(RoundedRectangle), propertyChanged: SpecificCornerRadiusPropertyChanged);
         /// <summary>
         /// Identifies the TopRightCornerRadius dependency property.
         /// </summary>
-        public static readonly BindableProperty TopRightCornerRadiusProperty = BindableProperty.Create(nameof(TopRightCornerRadius), typeof(CornerRadius), typeof(Rectangle), propertyChanged: SpecificCornerRadiusPropertyChanged);
+        public static readonly BindableProperty TopRightCornerRadiusProperty = BindableProperty.Create(nameof(TopRightCornerRadius), typeof(CornerRadius), typeof(RoundedRectangle), propertyChanged: SpecificCornerRadiusPropertyChanged);
         /// <summary>
         /// Identifies the BottomRightCornerRadius dependency property.
         /// </summary>
-        public static readonly BindableProperty BottomRightCornerRadiusProperty = BindableProperty.Create(nameof(BottomRightCornerRadius), typeof(CornerRadius), typeof(Rectangle), propertyChanged: SpecificCornerRadiusPropertyChanged);
+        public static readonly BindableProperty BottomRightCornerRadiusProperty = BindableProperty.Create(nameof(BottomRightCornerRadius), typeof(CornerRadius), typeof(RoundedRectangle), propertyChanged: SpecificCornerRadiusPropertyChanged);
         /// <summary>
         /// Identifies the BottomLeftCornerRadius dependency property.
         /// </summary>
-        public static readonly BindableProperty BottomLeftCornerRadiusProperty = BindableProperty.Create(nameof(BottomLeftCornerRadius), typeof(CornerRadius), typeof(Rectangle), propertyChanged: SpecificCornerRadiusPropertyChanged);
+        public static readonly BindableProperty BottomLeftCornerRadiusProperty = BindableProperty.Create(nameof(BottomLeftCornerRadius), typeof(CornerRadius), typeof(RoundedRectangle), propertyChanged: SpecificCornerRadiusPropertyChanged);
         /// <summary>
         /// Identifies the CornerRadius dependency property.
         /// </summary>
-        public static readonly BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(string), typeof(Rectangle), propertyChanged: CornerRadiusPropertyChanged);
+        public static readonly BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(string), typeof(RoundedRectangle), propertyChanged: CornerRadiusPropertyChanged);
 
         private Geometry actualGeometry;
         // Used for opimization when using CornerRadiusProperty
@@ -85,11 +85,6 @@ namespace Oxard.XControls.Shapes
         }
 
         /// <summary>
-        /// Get the geometry of the drawable
-        /// </summary>
-        public override Geometry Geometry => this.actualGeometry;
-
-        /// <summary>
         /// Called when instance size changed (Width and Height).
         /// </summary>
         /// <param name="width">New width</param>
@@ -105,19 +100,19 @@ namespace Oxard.XControls.Shapes
             if (calculationInProgress || !this.isLoaded)
                 return;
 
-            this.actualGeometry = GeometryHelper.GetRectangle(this.Width, this.Height, this.StrokeThickness, this.TopLeftCornerRadius, this.TopRightCornerRadius, this.BottomRightCornerRadius, this.BottomLeftCornerRadius); ;
-            this.InvalidateGeometry();
+            this.actualGeometry = Graphics.GeometryHelper.GetRectangle(this.Width, this.Height, this.StrokeThickness, this.TopLeftCornerRadius, this.TopRightCornerRadius, this.BottomRightCornerRadius, this.BottomLeftCornerRadius); ;
+            this.Data = this.actualGeometry;
         }
 
         private static void SpecificCornerRadiusPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            Rectangle rect = bindable as Rectangle;
+            RoundedRectangle rect = bindable as RoundedRectangle;
             rect?.SpecificCornerRadiusChanged();
         }
 
         private static void CornerRadiusPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            Rectangle rect = bindable as Rectangle;
+            RoundedRectangle rect = bindable as RoundedRectangle;
             rect?.CornerRadiusChanged();
         }
 

@@ -1,79 +1,81 @@
-﻿using Oxard.XControls.Interpretors;
-using Oxard.XControls.Extensions;
-using Oxard.XControls.UWP.Extensions;
-using Oxard.XControls.UWP.Interpretors;
+﻿using Oxard.XControls.UWP.Extensions;
 using System;
 using System.ComponentModel;
-using Windows.UI.Xaml.Media;
+using Oxard.XControls.Graphics;
+using Xamarin.Forms.Platform.UWP;
+using Windows.Foundation;
+using WDoubleCollection = Windows.UI.Xaml.Media.DoubleCollection;
+using WPenLineCap = Windows.UI.Xaml.Media.PenLineCap;
 using Windows.UI.Xaml.Shapes;
 using Windows.UI.Xaml;
-using Oxard.XControls.Graphics;
 
 namespace Oxard.XControls.UWP.NativeControls
 {
     public class DrawingPath : Path
     {
-        public static readonly DependencyProperty DrawableProperty = DependencyProperty.Register(nameof(Drawable), typeof(IDrawable), typeof(DrawingPath), new PropertyMetadata(null, OnDrawablePropertyChanged));
-
-        static DrawingPath()
-        {
-            InterpretorManager.RegisterForTypeIfNotExists(typeof(Graphics.LineSegment), new LineSegmentInterpretor());
-            InterpretorManager.RegisterForTypeIfNotExists(typeof(CornerSegment), new CornerSegmentInterpretor());
-        }
+        public static readonly DependencyProperty DrawableProperty = DependencyProperty.Register(nameof(Drawable), typeof(DrawingBrush), typeof(DrawingPath), new PropertyMetadata(null, OnDrawablePropertyChanged));
 
         public DrawingPath()
         {
         }
 
-        public IDrawable Drawable
+        public DrawingBrush Drawable
         {
-            get { return (IDrawable)GetValue(DrawableProperty); }
+            get { return (DrawingBrush)GetValue(DrawableProperty); }
             set { SetValue(DrawableProperty, value); }
-        }
-
-        public void RefreshDrawable()
-        {
-            this.UpdatePath();
         }
 
         private static void OnDrawablePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            (d as DrawingPath)?.OnDrawableChanged(e.OldValue as IDrawable);
+            (d as DrawingPath)?.OnDrawableChanged(e.OldValue as DrawingBrush);
         }
 
-        private void OnDrawableChanged(IDrawable oldDrawable)
+        private void OnDrawableChanged(DrawingBrush oldDrawable)
         {
             if (oldDrawable != null)
             {
                 oldDrawable.GeometryChanged -= this.DrawableOnGeometryChanged;
-                if (oldDrawable is INotifyPropertyChanged oldNotifier)
-                    oldNotifier.PropertyChanged -= NotifierPropertyChanged;
+                oldDrawable.PropertyChanged -= DrawablePropertyChanged;
             }
 
             if (this.Drawable == null)
                 return;
 
-            this.SetStroke();
-            this.SetStrokeThickness();
-            this.SetFill();
-            this.SetStrokeDashArray();
             this.UpdatePath();
+            this.UpdateAspect();
+            this.UpdateFill();
+            this.UpdateStroke();
+            this.UpdateStrokeThickness();
+            this.UpdateStrokeDashArray();
+            this.UpdateStrokeDashOffset();
+            this.UpdateStrokeLineCap();
+            this.UpdateStrokeLineJoin();
+            this.UpdateStrokeMiterLimit();
 
             this.Drawable.GeometryChanged += this.DrawableOnGeometryChanged;
-            if (this.Drawable is INotifyPropertyChanged notifier)
-                notifier.PropertyChanged += this.NotifierPropertyChanged;
+            this.Drawable.PropertyChanged += this.DrawablePropertyChanged;
         }
 
-        private void NotifierPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void DrawablePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(IDrawable.Stroke))
-                this.SetStroke();
-            else if (e.PropertyName == nameof(IDrawable.Fill))
-                this.SetFill();
-            else if (e.PropertyName == nameof(IDrawable.StrokeThickness))
-                this.SetStrokeThickness();
-            else if (e.PropertyName == nameof(IDrawable.StrokeDashArray))
-                this.SetStrokeDashArray();
+            if (e.PropertyName == nameof(DrawingBrush.Stroke))
+                this.UpdateStroke();
+            else if (e.PropertyName == nameof(DrawingBrush.Fill))
+                this.UpdateFill();
+            else if (e.PropertyName == nameof(DrawingBrush.StrokeThickness))
+                this.UpdateStrokeThickness();
+            else if (e.PropertyName == nameof(DrawingBrush.StrokeDashArray))
+                this.UpdateStrokeDashArray();
+            else if (e.PropertyName == nameof(DrawingBrush.Aspect))
+                this.UpdateAspect();
+            else if (e.PropertyName == nameof(DrawingBrush.StrokeDashOffset))
+                this.UpdateStrokeDashOffset();
+            else if (e.PropertyName == nameof(DrawingBrush.StrokeLineCap))
+                this.UpdateStrokeLineCap();
+            else if (e.PropertyName == nameof(DrawingBrush.StrokeLineJoin))
+                this.UpdateStrokeLineJoin();
+            else if (e.PropertyName == nameof(DrawingBrush.StrokeMiterLimit))
+                this.UpdateStrokeMiterLimit();
         }
 
         private void DrawableOnGeometryChanged(object sender, EventArgs e)
@@ -81,57 +83,86 @@ namespace Oxard.XControls.UWP.NativeControls
             this.UpdatePath();
         }
 
-        private void SetStroke()
-        {
-            this.Stroke = this.Drawable.Stroke.ToBrush();
-        }
-
-        private void SetFill()
-        {
-            this.Fill = this.Drawable.Fill.ToBrush();
-        }
-
-        private void SetStrokeThickness()
-        {
-            this.StrokeThickness = this.Drawable.StrokeThickness;
-        }
-
-        private void SetStrokeDashArray()
-        {
-            if (this.Drawable.StrokeDashArray.Y.DoubleIsEquals(0d))
-                this.StrokeDashArray = new DoubleCollection();
-            else
-                this.StrokeDashArray = new DoubleCollection { this.Drawable.StrokeDashArray.X, this.Drawable.StrokeDashArray.Y };
-        }
-
         private void UpdatePath()
         {
             if (this.Drawable?.Geometry == null)
                 return;
 
-            var reader = this.Drawable.Geometry.GetReader();
-
-            var geometry = new PathGeometry();
-            var figure = new PathFigure { IsClosed = this.Drawable.Geometry.IsClosed, StartPoint = reader.FromPoint.ToPoint() };
-
-            var segment = reader.GetNext();
-            while (segment != null)
-            {
-                var interpretor = InterpretorManager.GetForType(segment.GetType());
-
-                if (interpretor == null)
-                    throw new InvalidOperationException($"Interpretor for type {segment.GetType()} was not found. Use InterpretorManager.RegisterForType method to register your interpretor.");
-
-                if (!(interpretor is ISegmentInterpretor segmentInterpretor))
-                    throw new InvalidOperationException($"Interpretor for type {segment.GetType()} was found but it is not an ISegmentInterpretor.");
-
-                figure.Segments.Add(segmentInterpretor.ToNativeSegment(segment, reader.FromPoint));
-
-                segment = reader.GetNext();
-            }
-
-            geometry.Figures.Add(figure);
-            this.Data = geometry;
+            this.Data = this.Drawable.Geometry.ToWindows();
         }
-    }
+
+		private void UpdateAspect()
+		{
+			this.Stretch = this.Drawable.Aspect.ToWindows();
+
+            if (this.Stretch == Windows.UI.Xaml.Media.Stretch.Uniform)
+            {
+                this.HorizontalAlignment = HorizontalAlignment.Center;
+                this.VerticalAlignment = VerticalAlignment.Center;
+            }
+            else
+            {
+                this.HorizontalAlignment = HorizontalAlignment.Left;
+                this.VerticalAlignment = VerticalAlignment.Top;
+            }
+        }
+
+		private void UpdateFill()
+		{
+			this.Fill = this.Drawable.Fill.ToBrush();
+		}
+
+		private void UpdateStroke()
+		{
+			this.Stroke = this.Drawable.Stroke.ToBrush();
+		}
+
+		private void UpdateStrokeThickness()
+		{
+			this.StrokeThickness = this.Drawable.StrokeThickness;
+		}
+
+		private void UpdateStrokeDashArray()
+		{
+			if (this.StrokeDashArray != null)
+				this.StrokeDashArray.Clear();
+
+			if (this.Drawable.StrokeDashArray != null && this.Drawable.StrokeDashArray.Count > 0)
+			{
+				if (this.StrokeDashArray == null)
+					this.StrokeDashArray = new WDoubleCollection();
+
+				double[] array = new double[this.Drawable.StrokeDashArray.Count];
+				this.Drawable.StrokeDashArray.CopyTo(array, 0);
+
+				foreach (double value in array)
+				{
+					this.StrokeDashArray.Add(value);
+				}
+			}
+		}
+
+		private void UpdateStrokeDashOffset()
+		{
+			this.StrokeDashOffset = this.Drawable.StrokeDashOffset;
+		}
+
+		private void UpdateStrokeLineCap()
+		{
+			WPenLineCap wLineCap = this.Drawable.StrokeLineCap.ToWindows();
+
+			this.StrokeStartLineCap = wLineCap;
+			this.StrokeEndLineCap = wLineCap;
+		}
+
+		private void UpdateStrokeLineJoin()
+		{
+			this.StrokeLineJoin = this.Drawable.StrokeLineJoin.ToWindows();
+		}
+
+		private void UpdateStrokeMiterLimit()
+		{
+			this.StrokeMiterLimit = this.Drawable.StrokeMiterLimit;
+		}
+	}
 }

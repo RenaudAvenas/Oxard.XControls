@@ -41,8 +41,8 @@
             Property="graphics:DrawingBrush.AttachedBrush">
             <Setter.Value>
                 <graphics:RectangleBrush
-                    Fill="{StaticResource ButtonBackgroundBrush}"
-                    CornerRadius="2" />
+                    CornerRadius="2"
+                    Fill="{StaticResource ButtonBackgroundBrush}" />
             </Setter.Value>
         </Setter>
         <Setter

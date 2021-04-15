@@ -1,13 +1,9 @@
-﻿using Oxard.TestApp.UWP.Interpretors;
-using Oxard.XControls.Interpretors;
-using Oxard.XControls.UWP.Interpretors;
-using System;
+﻿using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Xamarin.Forms.Platform.UWP;
 
 namespace Oxard.TestApp.UWP
 {
@@ -22,7 +18,6 @@ namespace Oxard.TestApp.UWP
         /// </summary>
         public App()
         {
-            InterpretorManager.RegisterForType(typeof(IBrushInterpretor), new BrushInterpretor());
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }

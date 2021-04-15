@@ -15,22 +15,22 @@
                 TargetType="oxard:ContentControl">
                 <Setter
                     Property="Background"
-                    Value="{x:Static oxard:Brushes.AliceBlue}" />
+                    Value="AliceBlue" />
                 <Setter
                     Property="BorderThickness"
                     Value="1" />
                 <Setter
-                    Property="BorderColor"
+                    Property="BorderBrush"
                     Value="Black" />
                 <Setter
                     Property="ControlTemplate">
                     <Setter.Value>
                         <ControlTemplate>
                             <Grid>
-                                <oxard:Rectangle
+                                <Rectangle
                                     Fill="{TemplateBinding Background}"
                                     StrokeThickness="{TemplateBinding BorderThickness}"
-                                    Stroke="{TemplateBinding BorderColor}" />
+                                    Stroke="{TemplateBinding BorderBrush}" />
                                 <ContentPresenter
                                     HorizontalOptions="{TemplateBinding HorizontalContentOptions}"
                                     VerticalOptions="{TemplateBinding VerticalContentOptions}" />

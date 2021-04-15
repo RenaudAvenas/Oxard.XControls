@@ -1,6 +1,7 @@
 ﻿using Oxard.XControls.Graphics;
 using System;
 using Xamarin.Forms;
+using Xamarin.Forms.Shapes;
 
 namespace Oxard.XControls
 {
@@ -30,9 +31,9 @@ namespace Oxard.XControls
         Brush Fill { get; }
 
         /// <summary>
-        /// Get the <see cref="Color"/> used to draw the outline of the shape
+        /// Get the <see cref="Brush"/> used to draw the outline of the shape
         /// </summary>
-        Color Stroke { get; }
+        Brush Stroke { get; }
 
         /// <summary>
         /// Get the thickness of the stroke
@@ -40,13 +41,50 @@ namespace Oxard.XControls
         double StrokeThickness { get; }
 
         /// <summary>
-        /// Get the stroke dash
+        /// Get the stroke dash array
         /// </summary>
-        Point StrokeDashArray { get; }
+        DoubleCollection StrokeDashArray { get; }
 
         /// <summary>
         /// Get the geometry of the drawable
         /// </summary>
         Geometry Geometry { get; }
+
+        /// <summary>
+        /// Gets or the stroke dash offset.
+        /// </summary>
+        double StrokeDashOffset { get; }
+
+        /// <summary>
+        /// Gets the stroke line cap.
+        /// </summary>
+        /// <value>
+        /// The stroke line cap.
+        /// </value>
+        PenLineCap StrokeLineCap { get; }
+
+        /// <summary>
+        /// Gets the stroke line join.
+        /// </summary>
+        /// <value>
+        /// The stroke line join.
+        /// </value>
+        PenLineJoin StrokeLineJoin { get; }
+
+        /// <summary>
+        /// Gets the stroke miter limit.
+        /// </summary>
+        /// <value>
+        /// The stroke miter limit.
+        /// </value>
+        double StrokeMiterLimit { get; }
+
+        /// <summary>
+        /// Gets the aspect.
+        /// </summary>
+        /// <value>
+        /// The aspect.
+        /// </value>
+        Stretch Aspect { get; }
     }
 }

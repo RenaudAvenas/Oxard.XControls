@@ -17,7 +17,7 @@
 
             <Color
                 x:Key="ButtonPressedDisabledBackgroundColor">#CECECE</Color>
-            <oxard:SolidColorBrush
+            <SolidColorBrush
                 x:Key="ButtonPressedDisabledBackgroundBrush"
                 Color="{StaticResource ButtonPressedDisabledBackgroundColor}" />
 
@@ -34,7 +34,7 @@
                     Property="Background"
                     Value="{StaticResource ButtonBackgroundBrush}" />
                 <Setter
-                    Property="BorderColor"
+                    Property="BorderBrush"
                     Value="Transparent" />
                 <Setter
                     Property="BorderThickness"
@@ -50,10 +50,11 @@
                     <Setter.Value>
                         <ControlTemplate>
                             <Grid>
-                                <oxard:Rectangle
-                                    CornerRadius="3"
+                                <Rectangle
+                                    RadiusX="3"
+                                    RadiusY="3"
                                     Fill="{TemplateBinding Background}"
-                                    Stroke="{TemplateBinding BorderColor}"
+                                    Stroke="{TemplateBinding BorderBrush}"
                                     StrokeThickness="{TemplateBinding BorderThickness}" />
                                 <ContentPresenter
                                     HorizontalOptions="{TemplateBinding HorizontalContentOptions}"
@@ -98,7 +99,7 @@
                                 Binding="{Binding Path=IsDataBindingActivated}"
                                 Value="True">
                                 <oxard:Setter
-                                    Property="{x:Static oxard:RadioButton.BorderColorProperty}"
+                                    Property="{x:Static oxard:RadioButton.BorderBrushProperty}"
                                     Value="Red" />
                             </oxard:DataTrigger>
                         </oxard:TriggerCollection>
@@ -119,7 +120,7 @@
                     Property="Background"
                     Value="{StaticResource ButtonBackgroundBrush}" />
                 <Setter
-                    Property="BorderColor"
+                    Property="BorderBrush"
                     Value="Transparent" />
                 <Setter
                     Property="BorderThickness"
@@ -135,10 +136,11 @@
                     <Setter.Value>
                         <ControlTemplate>
                             <Grid>
-                                <oxard:Rectangle
-                                    CornerRadius="3"
+                                <Rectangle
+                                    RadiusX="3"
+                                    RadiusY="3"
                                     Fill="{TemplateBinding Background}"
-                                    Stroke="{TemplateBinding BorderColor}"
+                                    Stroke="{TemplateBinding BorderBrush}"
                                     StrokeThickness="{TemplateBinding BorderThickness}" />
                                 <ContentPresenter
                                     HorizontalOptions="{TemplateBinding HorizontalContentOptions}"

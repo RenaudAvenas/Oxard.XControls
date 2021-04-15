@@ -2,8 +2,8 @@
 using Oxard.XControls.Graphics;
 using Oxard.XControls.UWP.NativeControls;
 using Oxard.XControls.UWP.Renderers.Components;
-using Windows.Foundation;
 using Windows.UI.Xaml;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;
 using ContentControl = Oxard.XControls.Components.ContentControl;
 
@@ -17,14 +17,10 @@ namespace Oxard.XControls.UWP.Renderers.Components
 
         protected override void OnElementChanged(ElementChangedEventArgs<T> e)
         {
-            if (e.OldElement != null)
-                e.OldElement.SizeChanged -= this.ElementOnSizeChanged;
-
             base.OnElementChanged(e);
 
             if (e.NewElement != null)
             {
-                this.Element.SizeChanged += this.ElementOnSizeChanged;
                 this.ApplyIsBackgroundManagedByStyle();
             }
         }
@@ -34,36 +30,29 @@ namespace Oxard.XControls.UWP.Renderers.Components
             if (this.drawingPath != null)
                 this.drawingPath.Drawable = null;
 
-            this.Element.SizeChanged -= this.ElementOnSizeChanged;
             base.Dispose(disposing);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            if (e.PropertyName == nameof(ContentControl.Background))
-                this.ApplyBackground();
-            else if (e.PropertyName == nameof(ContentControl.IsBackgroundManagedByStyle))
-                this.ApplyIsBackgroundManagedByStyle();
-        }
-
-        private void ElementOnSizeChanged(object sender, System.EventArgs e)
-        {
-            if (this.Element.Background is DrawingBrush drawable)
+            if(e.PropertyName == nameof(VisualElement.Width) || e.PropertyName == nameof(VisualElement.Height))
             {
-                drawable.SetSize(this.Element.Width, this.Element.Height);
-                this.drawingPath.RefreshDrawable();
+                if (this.drawingPath != null)
+                    this.drawingPath.Drawable.SetSize(this.Element.Width, this.Element.Height);
             }
+            if (e.PropertyName == nameof(ContentControl.IsBackgroundManagedByStyle))
+                this.ApplyIsBackgroundManagedByStyle();
         }
 
         private void ApplyIsBackgroundManagedByStyle()
         {
-            this.ApplyBackground();
+            this.UpdateBackground();
         }
 
-        private void ApplyBackground()
+        protected override void UpdateBackground()
         {
-            if (this.Element.Background == null || this.Element.IsBackgroundManagedByStyle)
+            if (this.Element.IsBackgroundManagedByStyle)
             {
                 if (this.drawingPath != null)
                 {
@@ -74,36 +63,45 @@ namespace Oxard.XControls.UWP.Renderers.Components
                 return;
             }
 
-            if (this.drawingPath == null)
-            {
-                this.drawingPath = new DrawingPath();
-                this.Children.Insert(0, this.drawingPath);
-            }
-
             if (this.Element.Background is DrawingBrush drawingBrush)
             {
+                if (this.Control is Windows.UI.Xaml.Controls.Control control)
+                    control.Background = null;
+
+                if (this.drawingPath == null)
+                {
+                    this.drawingPath = new DrawingPath();
+                    this.Children.Insert(0, this.drawingPath);
+                }
+
                 drawingBrush.SetSize(this.Element.Width, this.Element.Height);
                 this.drawingPath.Drawable = drawingBrush;
+
+                return;
             }
             else
             {
-                var rectangleBrush = new RectangleBrush { Fill = this.Element.Background };
-                rectangleBrush.SetSize(this.Element.Width, this.Element.Height);
-                this.drawingPath.Drawable = rectangleBrush;
+                if (this.drawingPath != null)
+                {
+                    this.Children.Remove(this.drawingPath);
+                    this.drawingPath = null;
+                }
             }
+
+            base.UpdateBackground();
         }
 
-        protected override Size MeasureOverride(Size availableSize)
+        protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
         {
             if (this.Children[0] is DrawingPath)
                 Children[0].Measure(availableSize);
             return base.MeasureOverride(availableSize);
         }
 
-        protected override Size ArrangeOverride(Size finalSize)
+        protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size finalSize)
         {
             if (this.Children[0] is DrawingPath)
-                Children[0].Arrange(new Rect(new Point(), finalSize));
+                Children[0].Arrange(new Windows.Foundation.Rect(new Windows.Foundation.Point(), finalSize));
             return base.ArrangeOverride(finalSize);
         }
     }

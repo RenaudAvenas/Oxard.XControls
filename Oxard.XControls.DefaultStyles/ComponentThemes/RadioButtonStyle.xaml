@@ -2,13 +2,12 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:components="clr-namespace:Oxard.XControls.Components;assembly=Oxard.XControls"
-    xmlns:shapes="clr-namespace:Oxard.XControls.Shapes;assembly=Oxard.XControls"
     xmlns:componentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes"
     x:Class="Oxard.XControls.DefaultStyles.ComponentThemes.RadioButtonStyle">
     <ResourceDictionary.MergedDictionaries>
         <componentthemes:Colors />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <Style
         x:Key="RadioButtonDefaultStyle"
         TargetType="components:RadioButton">
@@ -21,8 +20,8 @@
                     Property="Background"
                     Value="{StaticResource ButtonPressedBackgroundBrush}" />
                 <Setter
-                    Property="BorderColor"
-                    Value="{StaticResource ButtonPressedBackgroundColor}" />
+                    Property="BorderBrush"
+                    Value="{StaticResource ButtonPressedBackgroundBrush}" />
             </Trigger>
         </Style.Triggers>
         <Setter
@@ -32,22 +31,23 @@
             Property="IsBackgroundManagedByStyle"
             Value="True" />
         <Setter
-            Property="BorderColor"
-            Value="{StaticResource ButtonBackgroundColor}" />
+            Property="BorderBrush"
+            Value="{StaticResource ButtonBackgroundBrush}" />
         <Setter
             Property="HorizontalContentOptions"
             Value="Start" />
-        <Setter Property="ControlTemplate">
+        <Setter
+            Property="ControlTemplate">
             <Setter.Value>
                 <ControlTemplate>
                     <StackLayout
                         Orientation="Horizontal"
                         Spacing="10">
-                        <shapes:Ellipse
+                        <Ellipse
                             HeightRequest="20"
                             WidthRequest="20"
                             VerticalOptions="Center"
-                            Stroke="{TemplateBinding BorderColor}"
+                            Stroke="{TemplateBinding BorderBrush}"
                             StrokeThickness="{TemplateBinding BorderThickness}"
                             Fill="{TemplateBinding Background}" />
                         <ContentPresenter

@@ -40,6 +40,8 @@ namespace Oxard.XControls.Shapes
         /// </summary>
         public CornerRadius BottomLeft { get; private set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1304:Spécifier CultureInfo", Justification = "Names are valid because they are defines in this method")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1305:Spécifier IFormatProvider", Justification = "If values cannot be converted, then caller must change his call")]
         private void Split(string data)
         {
             try
