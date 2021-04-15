@@ -13,7 +13,7 @@
     <tags>Xamarin Forms controls</tags>
 	<license type="expression">GPL-3.0-only</license>
     <dependencies>
-      <dependency id="Xamarin.Forms" version="4.3.0.991250" />
+      <dependency id="Xamarin.Forms" version="5.0.0.2012" />
     </dependencies>
   </metadata>
   <files>
