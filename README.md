@@ -11,6 +11,53 @@ public App()
 }
 ```
 
+## 4.5.16.28
+
+- Triggers
+
+Oxard triggers can have setters that have a different target than the object that declare the trigger.
+
+In the following example, a trigger is declared on a Button but change Labels TextColor.
+
+```xml
+<Grid
+    RowDefinitions="Auto, Auto, *">
+    <Label
+        Grid.Row="0"
+        x:Name="Label1"
+        Text="Foreground white when button pressed"
+        TextColor="Red" />
+    <Label
+        Grid.Row="1"
+        x:Name="Label2"
+        Text="Foreground blue when button pressed"
+        TextColor="Green" />
+
+    <oxard:Button
+        Grid.Row="2">
+        <oxard:Interactivity.Triggers>
+            <oxard:TriggerCollection>
+                <oxard:Trigger
+                    Property="{x:Static oxard:Button.IsPressedProperty}"
+                    Value="True">
+                    <oxard:Setter
+                        Target="{x:Reference Label1}"
+                        Property="{x:Static Label.TextColorProperty}"
+                        Value="White" />
+                    <oxard:Setter
+                        Target="{x:Reference Label2}"
+                        Property="{x:Static Label.TextColorProperty}"
+                        Value="Blue" />
+                </oxard:Trigger>
+            </oxard:TriggerCollection>
+        </oxard:Interactivity.Triggers>
+        <Label
+            Text="Click me!"
+            TextColor="White" />
+    </oxard:Button>
+</Grid>
+```
+
 ## 4.5.15.28
 
 - Update to Xamarin.Forms 5

@@ -25,6 +25,14 @@ namespace Oxard.XControls.Interactivity
         /// </value>
         public object Value { get; set; }
 
+        /// <summary>
+        /// Gets or sets the target object where the setter will be applied. Let this value to null if the target is the object that declare this setter
+        /// </summary>
+        /// <value>
+        /// The target.
+        /// </value>
+        public BindableObject Target { get; set; }
+
         internal void Apply(BindableObject bindable)
         {
             if(this.convertedValue == null && this.Value != null)

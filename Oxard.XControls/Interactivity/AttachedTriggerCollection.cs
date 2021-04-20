@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -10,9 +11,9 @@ namespace Oxard.XControls.Interactivity
     internal class AttachedTriggerCollection
     {
         private readonly List<AttachedTriggerBase> attachedTriggers = new List<AttachedTriggerBase>();
-        private readonly Dictionary<BindableProperty, object> originalPropertyValues = new Dictionary<BindableProperty, object>();
+        private readonly Dictionary<BindablePropertyValueExtension, object> originalPropertyValues = new Dictionary<BindablePropertyValueExtension, object>();
         private BindableObject attachedObject;
-                
+
         internal void AttachTo(TriggerCollection collection, BindableObject bindable)
         {
             this.attachedObject = bindable;
@@ -41,29 +42,34 @@ namespace Oxard.XControls.Interactivity
 
         private void ApplyTriggers()
         {
-            var settersToApplyByProperties = new Dictionary<BindableProperty, Setter>();
+            var settersToApplyByProperties = new Dictionary<BindablePropertyValueExtension, Setter>();
             foreach (var trigger in this.attachedTriggers)
             {
                 if (!trigger.IsActive)
                     continue;
 
                 foreach (var setter in trigger.Setters)
-                    settersToApplyByProperties[setter.Property] = setter;
+                    settersToApplyByProperties[new BindablePropertyValueExtension(setter.Target ?? this.attachedObject, setter.Property)] = setter;
             }
 
-            foreach (var setter in settersToApplyByProperties.Values)
+            foreach (var kvp in settersToApplyByProperties)
             {
-                if (!this.originalPropertyValues.ContainsKey(setter.Property))
-                    this.originalPropertyValues[setter.Property] = this.attachedObject.GetValue(setter.Property);
+                if (!this.originalPropertyValues.ContainsKey(kvp.Key))
+                    this.originalPropertyValues[kvp.Key] = kvp.Key.Value;
 
-                setter.Apply(this.attachedObject);
+                kvp.Value.Apply(kvp.Value.Target ?? this.attachedObject);
             }
         }
 
         private void UnapplyTrigger(AttachedTriggerBase triggerToUnapply)
         {
-            var impactedProperties = triggerToUnapply.Setters.ToDictionary(s => s.Property, s => this.originalPropertyValues[s.Property]);
-            var settersToApplyByProperties = new Dictionary<BindableProperty, Setter>();
+            var impactedProperties = triggerToUnapply.Setters.ToDictionary(s => new BindablePropertyValueExtension(s.Target ?? this.attachedObject, s.Property), s =>
+            {
+                this.originalPropertyValues.GetIfContains(k => k.Target == (s.Target ?? this.attachedObject) && k.Property == s.Property, out var result);
+                return result.Value;
+            });
+
+            var settersToApplyByProperties = new Dictionary<BindablePropertyValueExtension, Setter>();
 
             foreach (var trigger in this.attachedTriggers)
             {
@@ -72,10 +78,10 @@ namespace Oxard.XControls.Interactivity
 
                 foreach (var setter in trigger.Setters)
                 {
-                    if (impactedProperties.ContainsKey(setter.Property))
+                    if (impactedProperties.GetIfContains(k => k.Target == (setter.Target ?? this.attachedObject) && k.Property == setter.Property, out var kvp))
                     {
-                        settersToApplyByProperties[setter.Property] = setter;
-                        impactedProperties.Remove(setter.Property);
+                        settersToApplyByProperties[kvp.Key] = setter;
+                        impactedProperties.Remove(kvp.Key);
                     }
                 }
             }
@@ -83,7 +89,7 @@ namespace Oxard.XControls.Interactivity
             foreach (var setter in settersToApplyByProperties.Values)
                 setter.Apply(this.attachedObject);
             foreach (var returnToOriginKeyValuePair in impactedProperties)
-                this.attachedObject.SetValue(returnToOriginKeyValuePair.Key, returnToOriginKeyValuePair.Value);
+                returnToOriginKeyValuePair.Key.Value = returnToOriginKeyValuePair.Value;
 
         }
 
@@ -94,6 +100,24 @@ namespace Oxard.XControls.Interactivity
                 this.ApplyTriggers();
             else
                 this.UnapplyTrigger(trigger);
+        }
+    }
+
+    internal static class DictionaryBindablePropertyValueExtension
+    {
+        internal static bool GetIfContains<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, Func<TKey, bool> condition, out KeyValuePair<TKey, TValue> kvpResult)
+        {
+            foreach (var kvp in dictionary)
+            {
+                if (condition(kvp.Key))
+                {
+                    kvpResult = kvp;
+                    return true;
+                }
+            }
+
+            kvpResult = default;
+            return false;
         }
     }
 }
