@@ -6,7 +6,7 @@ using Xamarin.Forms;
 namespace Oxard.XControls.Interactivity
 {
     /// <summary>
-    /// Represent an attched triggers collection
+    /// Represent an attached triggers collection
     /// </summary>
     public class TriggerCollection : ICollection<TriggerBase>
     {

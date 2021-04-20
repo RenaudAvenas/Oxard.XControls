@@ -27,7 +27,7 @@
     <file src="Oxard.XControls.UWP\bin\Release\Oxard.XControls.UWP.dll" target="lib\uap10.0"/>
     <file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="lib\uap10.0"/>
     <file src="Oxard.XControls.UWP\bin\Release\Oxard.XControls.UWP.pri" target="lib\uap10.0"/>
-    <file src="Oxard.XControls.UWP\bin\Release\Oxard.XControls.UWP.xr.xml" target="lib\uap10.0\Oxard.XControls.UWP"/>
+    <file src="Oxard.XControls.UWP\bin\Release\Xamarin.Forms.Platform.UAP\Xamarin.Forms.Platform.UAP.xr.xml" target="lib\uap10.0\Xamarin.Forms.Platform.UAP.xr.xml"/>
     <file src="Oxard.XControls\Oxard.XControls.xml" target="lib\uap10.0"/>
   </files>
 </package>
