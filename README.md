@@ -11,6 +11,20 @@ public App()
 }
 ```
 
+You can also user Preserve attribute too anywhere like this :
+
+```csharp
+using Oxard.XControls;
+
+[assembly:Preserve]
+```
+
+## 4.5.16.29
+
+- Setter
+
+Fix a bug when unapply a setter to an object when Target property is set.
+
 ## 4.5.16.28
 
 - Triggers

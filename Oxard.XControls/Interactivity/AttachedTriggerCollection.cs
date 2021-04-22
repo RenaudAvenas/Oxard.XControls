@@ -87,7 +87,7 @@ namespace Oxard.XControls.Interactivity
             }
 
             foreach (var setter in settersToApplyByProperties.Values)
-                setter.Apply(this.attachedObject);
+                setter.Apply(setter.Target ?? this.attachedObject);
             foreach (var returnToOriginKeyValuePair in impactedProperties)
                 returnToOriginKeyValuePair.Key.Value = returnToOriginKeyValuePair.Value;
 
