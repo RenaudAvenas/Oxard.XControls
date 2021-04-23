@@ -24,6 +24,13 @@ namespace Oxard.XControls.Interactivity
 
         internal void AttachTo(BindableObject bindable)
         {
+            // If bindable not loaded yet, wait with it
+            if (bindable is VisualElement visualElement && visualElement.Bounds.IsEmpty)
+            {
+                Device.BeginInvokeOnMainThread(() => this.AttachTo(bindable));
+                return;
+            }
+
             var attachedCollection = new AttachedTriggerCollection();
             attachedCollection.AttachTo(this, bindable);
         }

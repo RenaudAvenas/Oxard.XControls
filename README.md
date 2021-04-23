@@ -18,6 +18,11 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+## 4.5.16.30
+
+- Interactivity
+
+Wait control to be loaded before applying setter and fix bugs when multiple trigger change the same property on same target
 
 ## 4.5.16.29
 
