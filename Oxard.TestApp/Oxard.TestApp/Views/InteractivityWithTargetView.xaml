@@ -8,6 +8,15 @@
     xmlns:oxard="http://oxard.com/XControls"
     mc:Ignorable="d"
     x:Class="Oxard.TestApp.Views.InteractivityWithTargetView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <themes:Colors />
+                <themes:ButtonStyle />
+                <themes:CheckBoxStyle />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
 
     <Grid
         RowDefinitions="Auto, Auto, *">
@@ -22,27 +31,82 @@
             Text="Foreground blue when button pressed"
             TextColor="Green" />
 
-        <oxard:Button
-            Grid.Row="2">
-            <oxard:Interactivity.Triggers>
-                <oxard:TriggerCollection>
-                    <oxard:Trigger
-                        Property="{x:Static oxard:Button.IsPressedProperty}"
-                        Value="True">
-                        <oxard:Setter
-                            Target="{x:Reference Label1}"
-                            Property="{x:Static Label.TextColorProperty}"
-                            Value="White" />
-                        <oxard:Setter
-                            Target="{x:Reference Label2}"
-                            Property="{x:Static Label.TextColorProperty}"
-                            Value="Blue" />
-                    </oxard:Trigger>
-                </oxard:TriggerCollection>
-            </oxard:Interactivity.Triggers>
-            <Label
-                Text="Click me!"
-                TextColor="White" />
-        </oxard:Button>
+        <StackLayout
+            VerticalOptions="Start"
+            Grid.Row="2"
+            Orientation="Horizontal">
+            <oxard:CheckBox
+                Style="{StaticResource CheckBoxDefaultStyle}">
+                <oxard:Interactivity.Triggers>
+                    <oxard:TriggerCollection>
+                        <oxard:Trigger
+                            Property="{x:Static oxard:CheckBox.IsPressedProperty}"
+                            Value="True">
+                            <oxard:Setter
+                                Target="{x:Reference Label1}"
+                                Property="{x:Static Label.TextColorProperty}"
+                                Value="Green" />
+                            <oxard:Setter
+                                Target="{x:Reference Label2}"
+                                Property="{x:Static Label.TextColorProperty}"
+                                Value="Red" />
+                        </oxard:Trigger>
+                        <oxard:Trigger
+                            Property="{x:Static oxard:CheckBox.IsCheckedProperty}"
+                            Value="True">
+                            <oxard:Setter
+                                Target="{x:Reference Label1}"
+                                Property="{x:Static Label.TextColorProperty}"
+                                Value="Aqua" />
+                            <oxard:Setter
+                                Target="{x:Reference Label2}"
+                                Property="{x:Static Label.TextColorProperty}"
+                                Value="Orange" />
+                        </oxard:Trigger>
+                    </oxard:TriggerCollection>
+                </oxard:Interactivity.Triggers>
+                <Label
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Text="Click me!"
+                    TextColor="White" />
+            </oxard:CheckBox>
+            <oxard:CheckBox
+                Style="{StaticResource CheckBoxDefaultStyle}">
+                <oxard:Interactivity.Triggers>
+                    <oxard:TriggerCollection>
+                        <oxard:Trigger
+                            Property="{x:Static oxard:Button.IsPressedProperty}"
+                            Value="True">
+                            <oxard:Setter
+                                Target="{x:Reference Label1}"
+                                Property="{x:Static Label.TextColorProperty}"
+                                Value="White" />
+                            <oxard:Setter
+                                Target="{x:Reference Label2}"
+                                Property="{x:Static Label.TextColorProperty}"
+                                Value="Blue" />
+                        </oxard:Trigger>
+                        <oxard:Trigger
+                            Property="{x:Static oxard:CheckBox.IsCheckedProperty}"
+                            Value="True">
+                            <oxard:Setter
+                                Target="{x:Reference Label1}"
+                                Property="{x:Static Label.TextColorProperty}"
+                                Value="Yellow" />
+                            <oxard:Setter
+                                Target="{x:Reference Label2}"
+                                Property="{x:Static Label.TextColorProperty}"
+                                Value="Gray" />
+                        </oxard:Trigger>
+                    </oxard:TriggerCollection>
+                </oxard:Interactivity.Triggers>
+                <Label
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Text="Click me!"
+                    TextColor="White" />
+            </oxard:CheckBox>
+        </StackLayout>
     </Grid>
 </ContentView>

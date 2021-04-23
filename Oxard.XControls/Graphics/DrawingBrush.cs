@@ -7,7 +7,7 @@ namespace Oxard.XControls.Graphics
     /// <summary>
     /// Class that can be used to draw a shape as a background via BackgroundEffect or BackgroundProperty
     /// </summary>
-    public abstract class DrawingBrush : Brush, IDrawable
+    public abstract class DrawingBrush : Brush
     {
         /// <summary>
         /// Identifies the Fill dependency property.

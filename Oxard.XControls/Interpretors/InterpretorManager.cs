@@ -1,5 +1,4 @@
-﻿using Oxard.XControls.Graphics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Oxard.XControls.Interpretors
@@ -7,7 +6,6 @@ namespace Oxard.XControls.Interpretors
     /// <summary>
     /// Manage and register interpretors. Interpretors can be used to define how to manage a feature that does not enable on each platform to tranform the orginal feature in a replacement feature.
     /// </summary>
-    /// <example><see cref="RadialGradientBrush"/> is not supported in UWP but can be transform to a linear gradient brush by an interpretor</example>
     public static class InterpretorManager
     {
         private static readonly Dictionary<Type, IInterpretor> Interpretors = new Dictionary<Type, IInterpretor>();

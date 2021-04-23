@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Xamarin.Forms;
 
 namespace Oxard.XControls.Interactivity
@@ -10,8 +9,8 @@ namespace Oxard.XControls.Interactivity
     /// </summary>
     internal class AttachedTriggerCollection
     {
+        private static readonly BindableProperty SettersByBindableProperty = BindableProperty.CreateAttached("SettersByBindable", typeof(Dictionary<BindableProperty, SetterValueCollection>), typeof(AttachedTriggerCollection), null);
         private readonly List<AttachedTriggerBase> attachedTriggers = new List<AttachedTriggerBase>();
-        private readonly Dictionary<BindablePropertyValueExtension, object> originalPropertyValues = new Dictionary<BindablePropertyValueExtension, object>();
         private BindableObject attachedObject;
 
         internal void AttachTo(TriggerCollection collection, BindableObject bindable)
@@ -22,9 +21,23 @@ namespace Oxard.XControls.Interactivity
                 var associatedTrigger = trigger.AttachTo(this.attachedObject);
                 associatedTrigger.IsActiveChanged += this.OnTriggerIsActiveChanged;
                 this.attachedTriggers.Add(associatedTrigger);
-            }
 
-            this.ApplyTriggers();
+                foreach (var setter in associatedTrigger.Setters)
+                {
+                    var target = setter.Target ?? this.attachedObject;
+                    var setterValueCollections = GetSettersByBindable(target);
+
+                    if (!setterValueCollections.ContainsKey(setter.Property))
+                        setterValueCollections[setter.Property] = new SetterValueCollection(target, setter.Property);
+
+                    setterValueCollections[setter.Property].RegisterTrigger(associatedTrigger);
+
+                    if (!associatedTrigger.IsActive)
+                        continue;
+
+                    setterValueCollections[setter.Property].ApplySetter(associatedTrigger, setter);
+                }
+            }
         }
 
         internal void DetachTo()
@@ -34,70 +47,62 @@ namespace Oxard.XControls.Interactivity
             {
                 trigger.DetachTo();
                 trigger.IsActiveChanged -= this.OnTriggerIsActiveChanged;
+
+                foreach (var setter in trigger.Setters)
+                {
+                    var target = setter.Target ?? this.attachedObject;
+                    var setterValueCollections = GetSettersByBindable(target);
+
+                    setterValueCollections[setter.Property].UnregisterTrigger(trigger);
+                    if (setterValueCollections[setter.Property].IsEmpty)
+                        setterValueCollections.Remove(setter.Property);
+
+                    if (setterValueCollections.Count == 0)
+                        target.SetValue(SettersByBindableProperty, null);
+                }
             }
 
-            this.originalPropertyValues.Clear();
             this.attachedTriggers.Clear();
         }
 
-        private void ApplyTriggers()
+        private static Dictionary<BindableProperty, SetterValueCollection> GetSettersByBindable(BindableObject bindable)
         {
-            var settersToApplyByProperties = new Dictionary<BindablePropertyValueExtension, Setter>();
-            foreach (var trigger in this.attachedTriggers)
+            var result = (Dictionary<BindableProperty, SetterValueCollection>)bindable.GetValue(SettersByBindableProperty);
+            if (result == null)
             {
-                if (!trigger.IsActive)
-                    continue;
-
-                foreach (var setter in trigger.Setters)
-                    settersToApplyByProperties[new BindablePropertyValueExtension(setter.Target ?? this.attachedObject, setter.Property)] = setter;
+                result = new Dictionary<BindableProperty, SetterValueCollection>();
+                bindable.SetValue(SettersByBindableProperty, result);
             }
 
-            foreach (var kvp in settersToApplyByProperties)
-            {
-                if (!this.originalPropertyValues.ContainsKey(kvp.Key))
-                    this.originalPropertyValues[kvp.Key] = kvp.Key.Value;
+            return result;
+        }
 
-                kvp.Value.Apply(kvp.Value.Target ?? this.attachedObject);
+        private void ApplyTrigger(AttachedTriggerBase triggerToApply)
+        {
+            foreach (var setter in triggerToApply.Setters)
+            {
+                var target = setter.Target ?? this.attachedObject;
+                var setterValueCollections = GetSettersByBindable(target);
+
+                setterValueCollections[setter.Property].ApplySetter(triggerToApply, setter);
             }
         }
 
         private void UnapplyTrigger(AttachedTriggerBase triggerToUnapply)
         {
-            var impactedProperties = triggerToUnapply.Setters.ToDictionary(s => new BindablePropertyValueExtension(s.Target ?? this.attachedObject, s.Property), s =>
+            foreach (var setter in triggerToUnapply.Setters)
             {
-                this.originalPropertyValues.GetIfContains(k => k.Target == (s.Target ?? this.attachedObject) && k.Property == s.Property, out var result);
-                return result.Value;
-            });
-
-            var settersToApplyByProperties = new Dictionary<BindablePropertyValueExtension, Setter>();
-
-            foreach (var trigger in this.attachedTriggers)
-            {
-                if (!trigger.IsActive)
-                    continue;
-
-                foreach (var setter in trigger.Setters)
-                {
-                    if (impactedProperties.GetIfContains(k => k.Target == (setter.Target ?? this.attachedObject) && k.Property == setter.Property, out var kvp))
-                    {
-                        settersToApplyByProperties[kvp.Key] = setter;
-                        impactedProperties.Remove(kvp.Key);
-                    }
-                }
+                var target = setter.Target ?? this.attachedObject;
+                var valuesByProperty = GetSettersByBindable(target);
+                valuesByProperty[setter.Property].UnapplySetter(triggerToUnapply, setter);
             }
-
-            foreach (var setter in settersToApplyByProperties.Values)
-                setter.Apply(setter.Target ?? this.attachedObject);
-            foreach (var returnToOriginKeyValuePair in impactedProperties)
-                returnToOriginKeyValuePair.Key.Value = returnToOriginKeyValuePair.Value;
-
         }
 
-        private void OnTriggerIsActiveChanged(object sender, System.EventArgs e)
+        private void OnTriggerIsActiveChanged(object sender, EventArgs e)
         {
             var trigger = (AttachedTriggerBase)sender;
             if (trigger.IsActive)
-                this.ApplyTriggers();
+                this.ApplyTrigger(trigger);
             else
                 this.UnapplyTrigger(trigger);
         }
