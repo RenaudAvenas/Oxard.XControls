@@ -18,6 +18,12 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+## 4.5.16.31
+
+- RoundedRectangle
+
+Fix a bug on android to calculate mesure not from Data property but from WhidthRequest and HeightRequest.
+
 ## 4.5.16.30
 
 - Interactivity

@@ -10,29 +10,22 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <style:Colors />
+                <style:CheckBoxStyle />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="*" />
             <RowDefinition
                 Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition
-                Width="Auto" />
-        </Grid.ColumnDefinitions>
-        
+
         <!--<BoxView
-            BackgroundColor="#608FE0" />
-        <BoxView
-            Margin="10"
-            BackgroundColor="CornflowerBlue" />-->
-        
-        <BoxView
             WidthRequest="100"
             HeightRequest="40"
             HorizontalOptions="Center"
@@ -43,6 +36,52 @@
             CornerRadius="20"
             Stroke="Red"
             StrokeThickness="4"
-            Fill="Aqua" />
+            Fill="Aqua" />-->
+
+        <oxard:ContentControl
+            Grid.Row="1">
+            <Grid
+                RowDefinitions="Auto,*,Auto">
+                <oxard:RoundedRectangle
+                    Grid.RowSpan="2"
+                    CornerRadius="20"
+                    Stroke="Red"
+                    StrokeThickness="4"
+                    Fill="Aqua" />
+                <Label
+                    Text="Toto" />
+
+                <Label
+                    HeightRequest="150"
+                    Grid.Row="1"
+                    Text="Content" />
+
+                <Label
+                    TextColor="White"
+                    x:Name="ErrorLabel"
+                    Grid.Row="2"
+                    Text="Error" />
+            </Grid>
+        </oxard:ContentControl>
+
+        <oxard:CheckBox
+            Grid.Row="2"
+            Style="{StaticResource CheckBoxDefaultStyle}">
+            <oxard:Interactivity.Triggers>
+                <oxard:TriggerCollection>
+                    <oxard:Trigger
+                        Property="{x:Static oxard:CheckBox.IsCheckedProperty}"
+                        Value="True">
+                        <oxard:Setter
+                            Target="{x:Reference ErrorLabel}"
+                            Property="{x:Static VisualElement.IsVisibleProperty}"
+                            Value="False" />
+                    </oxard:Trigger>
+                </oxard:TriggerCollection>
+            </oxard:Interactivity.Triggers>
+            <Label
+                TextColor="White"
+                Text="Click here" />
+        </oxard:CheckBox>
     </Grid>
 </ContentView>

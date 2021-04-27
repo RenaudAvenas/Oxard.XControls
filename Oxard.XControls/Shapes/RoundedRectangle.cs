@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Oxard.XControls.Extensions;
+using Xamarin.Forms;
 using Xamarin.Forms.Shapes;
 
 namespace Oxard.XControls.Shapes
@@ -85,6 +86,22 @@ namespace Oxard.XControls.Shapes
         }
 
         /// <summary>
+        /// Method that is called when a layout measurement happens.
+        /// </summary>
+        /// <param name="widthConstraint">The width constraint to request.</param>
+        /// <param name="heightConstraint">The height constraint to request.</param>
+        /// <returns>
+        /// To be added.
+        /// </returns>
+        /// <remarks>
+        /// To be added.
+        /// </remarks>
+        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
+        {
+            return new SizeRequest(new Size(this.WidthRequest.TranslateIfNegative(), this.HeightRequest.TranslateIfNegative()));
+        }
+
+        /// <summary>
         /// Called when instance size changed (Width and Height).
         /// </summary>
         /// <param name="width">New width</param>
@@ -92,10 +109,10 @@ namespace Oxard.XControls.Shapes
         protected override void OnSizeAllocated(double width, double height)
         {
             this.isLoaded = true;
-            this.CalculateGeometry();
+            this.CalculateGeometry(width, height);
         }
 
-        private void CalculateGeometry()
+        private void CalculateGeometry(double width, double height)
         {
             if (calculationInProgress || !this.isLoaded)
                 return;
@@ -128,12 +145,12 @@ namespace Oxard.XControls.Shapes
 
             calculationInProgress = false;
 
-            this.CalculateGeometry();
+            this.CalculateGeometry(this.Width, this.Height);
         }
 
         private void SpecificCornerRadiusChanged()
         {
-            this.CalculateGeometry();
+            this.CalculateGeometry(this.Width, this.Height);
         }
     }
 }
