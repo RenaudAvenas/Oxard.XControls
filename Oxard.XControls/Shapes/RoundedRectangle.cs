@@ -1,4 +1,5 @@
 ﻿using Oxard.XControls.Extensions;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using Xamarin.Forms.Shapes;
 
@@ -110,6 +111,20 @@ namespace Oxard.XControls.Shapes
         {
             this.isLoaded = true;
             this.CalculateGeometry(width, height);
+        }
+
+        /// <summary>
+        /// Method that is called when a bound property is changed.
+        /// </summary>
+        /// <param name="propertyName">The name of the bound property that changed.</param>
+        /// <remarks>
+        /// To be added.
+        /// </remarks>
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            if (propertyName == nameof(StrokeThickness))
+                this.CalculateGeometry(this.Width, this.Height);
+            base.OnPropertyChanged(propertyName);
         }
 
         private void CalculateGeometry(double width, double height)

@@ -46,7 +46,7 @@
                     Grid.RowSpan="2"
                     CornerRadius="20"
                     Stroke="Red"
-                    StrokeThickness="4"
+                    StrokeThickness="0"
                     Fill="Aqua" />
                 <Label
                     Text="Toto" />

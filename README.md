@@ -18,6 +18,12 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+## 4.5.16.32
+
+- RoundedRectangle
+
+Calculate it's size when stroke thickness changed
+
 ## 4.5.16.31
 
 - RoundedRectangle
