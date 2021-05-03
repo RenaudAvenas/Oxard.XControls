@@ -18,6 +18,12 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+## 4.5.16.33
+
+- RectangleBrush
+
+Same bug fix than 4.5.16.32 for RectangleBrush
+
 ## 4.5.16.32
 
 - RoundedRectangle

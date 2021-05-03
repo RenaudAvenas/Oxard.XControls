@@ -152,6 +152,15 @@ namespace Oxard.XControls.Graphics
             this.CalculateGeometry();
         }
 
+        /// <summary>
+        /// Called when <see cref="DrawingBrush.StrokeThicknessProperty"/> changed for this instance of <see cref="DrawingBrush"/>.
+        /// </summary>
+        protected override void OnStrokeThicknessChanged()
+        {
+            base.OnStrokeThicknessChanged();
+            this.CalculateGeometry();
+        }
+
         private void CornerRadiusChanged()
         {
             var expression = new CornerRadiusExpression(this.CornerRadius);
