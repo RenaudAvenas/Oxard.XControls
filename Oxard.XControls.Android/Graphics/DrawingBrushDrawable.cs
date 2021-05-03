@@ -64,6 +64,7 @@ namespace Oxard.XControls.Droid.Graphics
             this.element = element;
             this.drawingBrush = drawingBrush;
             this.drawingBrush.PropertyChanged += this.DrawingBrushOnPropertyChanged;
+            this.drawingBrush.GeometryChanged += this.DrawingBrushOnGeometryChanged;
 
             this.UpdateFill(this.drawingBrush.Fill);
             this.UpdateStroke(this.drawingBrush.Stroke);
@@ -103,7 +104,7 @@ namespace Oxard.XControls.Droid.Graphics
 
             if (_fill != null)
             {
-                this.Paint.SetStyle(Paint.Style.Fill);
+                this.Paint.SetStyle(_strokeWidth > 0 ? Paint.Style.Fill : Paint.Style.FillAndStroke);
 
                 if (_fill is GradientBrush fillGradientBrush)
                 {
@@ -129,14 +130,12 @@ namespace Oxard.XControls.Droid.Graphics
                 this.Paint.SetShader(null);
             }
 
-            if (_stroke != null)
+            if (_stroke != null && _strokeWidth > 0)
             {
                 this.Paint.SetStyle(Paint.Style.Stroke);
 
                 if (_stroke is GradientBrush strokeGradientBrush)
                 {
-                    UpdatePathStrokeBounds();
-
                     if (strokeGradientBrush is LinearGradientBrush linearGradientBrush)
                         _strokeShader = CreateLinearGradient(linearGradientBrush, _pathStrokeBounds);
 
@@ -430,6 +429,11 @@ namespace Oxard.XControls.Droid.Graphics
                     edgeColor,
                     tilemode);
             }
+        }
+        
+        private void DrawingBrushOnGeometryChanged(object sender, EventArgs e)
+        {
+            this.UpdateShape(this.drawingBrush.Geometry.ToAPath(this.view.Context));
         }
     }
 }

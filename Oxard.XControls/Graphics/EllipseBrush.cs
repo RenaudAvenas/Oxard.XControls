@@ -37,6 +37,16 @@ namespace Oxard.XControls.Graphics
         }
 
         /// <summary>
+        /// Called when <see cref="DrawingBrush.StrokeThicknessProperty" /> changed for this instance of <see cref="DrawingBrush" />.
+        /// </summary>
+        protected override void OnStrokeThicknessChanged()
+        {
+            base.OnStrokeThicknessChanged();
+            this.CalculateGeometry();
+
+        }
+
+        /// <summary>
         /// Creates a new <see cref="DrawingBrush"/> that is a copy of the current instance.
         /// Just clone custom properties of inherited classes. The clone method of DrawingBrush already copies its own properties.
         /// </summary>

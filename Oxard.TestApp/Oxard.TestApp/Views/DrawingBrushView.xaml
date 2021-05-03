@@ -18,7 +18,8 @@
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <Grid>
+    <Grid
+        RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition
                 Height="40" />
@@ -46,7 +47,7 @@
                 Text="Content control with drawableBackground" />
         </oxard:ContentControl>
 
-        <oxard:ContentControl 
+        <oxard:ContentControl
             Grid.Row="1">
             <oxard:ContentControl.Background>
                 <oxard:EllipseBrush
@@ -57,7 +58,7 @@
                     StrokeDashArray="10 10"
                     StrokeLineCap="Round"
                     StrokeDashOffset="1"
-                    StrokeLineJoin="Round"/>
+                    StrokeLineJoin="Round" />
             </oxard:ContentControl.Background>
             <Label
                 VerticalOptions="Center"

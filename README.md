@@ -11,13 +11,20 @@ public App()
 }
 ```
 
-You can also user Preserve attribute too anywhere like this :
+You can also use Preserve attribute too anywhere like this :
 
 ```csharp
 using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+## 4.5.16.34
+
+- Android DrawingBrush
+
+    - On android, drawing brush was not react to GeometryChanged event.
+    - If StrokeThickness is 0 then stroke is not rendered.
+
 ## 4.5.16.33
 
 - RectangleBrush
