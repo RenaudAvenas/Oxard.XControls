@@ -22,6 +22,12 @@ using Oxard.XControls;
 
 - Android DrawingBrush
 
+DrawingBrush are not disposed correctly on android
+
+## 4.5.16.34
+
+- Android DrawingBrush
+
     - On android, drawing brush was not react to GeometryChanged event.
     - If StrokeThickness is 0 then stroke is not rendered.
 

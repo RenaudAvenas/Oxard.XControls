@@ -247,7 +247,10 @@ namespace Oxard.XControls.Droid.Graphics
         {
             base.Dispose(disposing);
             if (disposing)
+            {
                 this.drawingBrush.PropertyChanged -= this.DrawingBrushOnPropertyChanged;
+                this.drawingBrush.GeometryChanged -= this.DrawingBrushOnGeometryChanged;
+            }
 
         }
 
