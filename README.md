@@ -18,6 +18,12 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+## 4.5.16.35
+
+- Android ContentControlRenderer
+
+When renderer is disposed, the background was not disposed too. This version fixed it.
+
 ## 4.5.16.34
 
 - Android DrawingBrush

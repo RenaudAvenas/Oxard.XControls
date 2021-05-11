@@ -18,10 +18,11 @@ namespace Oxard.XControls.Droid.Graphics
         /// <param name="view">Android element</param>
         /// <param name="element">Xamarin.Forms element</param>
         /// <param name="drawingBrush">The brush to apply</param>
-        public static void UpdateBackground(this AView view, VisualElement element, DrawingBrush drawingBrush)
+        public static DrawingBrushDrawable UpdateBackground(this AView view, VisualElement element, DrawingBrush drawingBrush)
         {
             var drawingBrushDrawable = new DrawingBrushDrawable(view, element, drawingBrush);
             view.SetBackground(drawingBrushDrawable);
+            return drawingBrushDrawable;
         }
 
         /// <summary>
