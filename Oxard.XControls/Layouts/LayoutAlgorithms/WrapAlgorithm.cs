@@ -7,6 +7,29 @@ using Xamarin.Forms;
 namespace Oxard.XControls.Layouts.LayoutAlgorithms
 {
     /// <summary>
+    /// Describe how child must be placed on a layout
+    /// </summary>
+    public enum ChildAlignment
+    {
+        /// <summary>
+        /// Dock child on the left or top (depending on layout direction)
+        /// </summary>
+        LeftOrTop,
+        /// <summary>
+        /// Dock child on the right or bottom (depending on layout direction)
+        /// </summary>
+        RightOrBottom,
+        /// <summary>
+        /// Center child on layout
+        /// </summary>
+        Center,
+        /// <summary>
+        /// Maximize size of child to fill the layout
+        /// </summary>
+        Justify
+    }
+
+    /// <summary>
     /// Algorithm that stack horizontally or vertically all children and wrap them if necessary
     /// </summary>
     /// <seealso cref="Oxard.XControls.Layouts.LayoutAlgorithms.LayoutAlgorithm" />
@@ -24,6 +47,10 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
         /// Identifies the WrapSpacing property.
         /// </summary>
         public static readonly BindableProperty WrapSpacingProperty = BindableProperty.Create(nameof(WrapSpacing), typeof(double), typeof(WrapAlgorithm), default(double), propertyChanged: OnMeasureLayoutRequested);
+        /// <summary>
+        /// Identifies the ChildAlignment property.
+        /// </summary>
+        public static readonly BindableProperty ChildAlignmentProperty = BindableProperty.Create(nameof(ChildAlignment), typeof(ChildAlignment), typeof(WrapAlgorithm), ChildAlignment.LeftOrTop, propertyChanged: OnLayoutOnlyRequested);
 
         /// <summary>
         /// Get or set the orientation of the WrapLayout
@@ -51,7 +78,16 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
             get => (double)this.GetValue(WrapSpacingProperty);
             set => this.SetValue(WrapSpacingProperty, value);
         }
-          
+
+        /// <summary>
+        /// Get or set the childrend alignment by rows or columns in the wrap layout
+        /// </summary>
+        public ChildAlignment ChildAlignment
+        {
+            get => (ChildAlignment)this.GetValue(ChildAlignmentProperty);
+            set => this.SetValue(ChildAlignmentProperty, value);
+        }
+
         /// <summary>
         /// Method called when a measurement is asked.
         /// </summary>
@@ -168,7 +204,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                 else if (currentX + childMeasure.Request.Width > width)
                 {
                     // Wrapping needed, we can display the current row
-                    this.LayoutRow(childrenOnRow, currentY, rowHeight);
+                    this.LayoutRow(childrenOnRow, currentY, rowHeight, width);
 
                     currentX = x;
                     currentY += rowHeight + this.WrapSpacing;
@@ -182,7 +218,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
             }
 
             if (childrenOnRow.Count > 0)
-                this.LayoutRow(childrenOnRow, currentY, rowHeight);
+                this.LayoutRow(childrenOnRow, currentY, rowHeight, width);
         }
 
         private void OnLayoutChildrenVertical(double x, double y, double height)
@@ -202,7 +238,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                 else if (currentY + childMeasure.Request.Height > height)
                 {
                     // Wrapping needed, we can display the current row
-                    this.LayoutColumn(childrenOnColumn, currentX, columnWidth);
+                    this.LayoutColumn(childrenOnColumn, currentX, columnWidth, height);
 
                     currentY = y;
                     currentX += columnWidth + this.WrapSpacing;
@@ -216,12 +252,34 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
             }
 
             if (childrenOnColumn.Count > 0)
-                this.LayoutColumn(childrenOnColumn, currentX, columnWidth);
+                this.LayoutColumn(childrenOnColumn, currentX, columnWidth, height);
         }
 
-        private void LayoutRow(Dictionary<View, SizeRequest> childrenOnRow, double rowY, double rowHeight)
+        private void LayoutRow(Dictionary<View, SizeRequest> childrenOnRow, double rowY, double rowHeight, double totalWidth)
         {
             var xOnRow = 0d;
+
+            var childWidthSum = childrenOnRow.Sum(c => c.Value.Request.Width);
+            childWidthSum += Spacing * (childrenOnRow.Count - 1);
+
+            var justifyWidthBonus = 0d;
+
+            if (totalWidth > childWidthSum)
+            {
+                switch (this.ChildAlignment)
+                {
+                    case ChildAlignment.RightOrBottom:
+                        xOnRow = totalWidth - childWidthSum;
+                        break;
+                    case ChildAlignment.Center:
+                        xOnRow = totalWidth / 2d - childWidthSum / 2d;
+                        break;
+                    case ChildAlignment.Justify:
+                        justifyWidthBonus = (totalWidth - childWidthSum) / childrenOnRow.Count;
+                        break;
+                }
+            }
+
             foreach (var rowKeyValue in childrenOnRow)
             {
                 var childMeasure = rowKeyValue.Value;
@@ -244,15 +302,36 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                         break;
                 }
 
-                child.Layout(new Rectangle(xOnRow, alignY, childMeasure.Request.Width, childHeight));
-                xOnRow += childMeasure.Request.Width + this.Spacing;
-
+                child.Layout(new Rectangle(xOnRow, alignY, childMeasure.Request.Width + justifyWidthBonus, childHeight));
+                xOnRow += childMeasure.Request.Width + justifyWidthBonus + this.Spacing;
             }
         }
 
-        private void LayoutColumn(Dictionary<View, SizeRequest> childrenOnColumn, double columnX, double columnWidth)
+        private void LayoutColumn(Dictionary<View, SizeRequest> childrenOnColumn, double columnX, double columnWidth, double totalHeight)
         {
             var yOnColumn = 0d;
+
+            var childHeightSum = childrenOnColumn.Sum(c => c.Value.Request.Height);
+            childHeightSum += Spacing * (childrenOnColumn.Count - 1);
+
+            var justifyHeightBonus = 0d;
+
+            if (totalHeight > childHeightSum)
+            {
+                switch (this.ChildAlignment)
+                {
+                    case ChildAlignment.RightOrBottom:
+                        yOnColumn = totalHeight - childHeightSum;
+                        break;
+                    case ChildAlignment.Center:
+                        yOnColumn = totalHeight / 2d - childHeightSum / 2d;
+                        break;
+                    case ChildAlignment.Justify:
+                        justifyHeightBonus = (totalHeight - childHeightSum) / childrenOnColumn.Count;
+                        break;
+                }
+            }
+
             foreach (var columnKeyValue in childrenOnColumn)
             {
                 var childMeasure = columnKeyValue.Value;
@@ -275,9 +354,8 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                         break;
                 }
 
-                child.Layout(new Rectangle(alignX, yOnColumn, childWidth, childMeasure.Request.Height));
-                yOnColumn += childMeasure.Request.Height + this.Spacing;
-
+                child.Layout(new Rectangle(alignX, yOnColumn, childWidth, childMeasure.Request.Height + justifyHeightBonus));
+                yOnColumn += childMeasure.Request.Height + justifyHeightBonus + this.Spacing;
             }
         }
     }

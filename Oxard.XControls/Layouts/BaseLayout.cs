@@ -17,10 +17,12 @@ namespace Oxard.XControls.Layouts
             this.Algorithm.Invalidated += this.OnAlgorithmInvalidated;
         }
 
-        private void OnAlgorithmInvalidated(object sender, System.EventArgs e)
+        private void OnAlgorithmInvalidated(object sender, LayoutAlgorithmInvalidatedEventArgs e)
         {
-            this.InvalidateMeasure();
-            this.InvalidateLayout();
+            if (e.InvalidateMeasure)
+                this.InvalidateMeasure();
+            if (e.InvalidateLayout)
+                this.InvalidateLayout();
         }
 
         /// <summary>

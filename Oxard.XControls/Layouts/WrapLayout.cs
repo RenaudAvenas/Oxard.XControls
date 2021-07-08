@@ -1,4 +1,5 @@
 ﻿using Oxard.XControls.Layouts.LayoutAlgorithms;
+using System;
 using Xamarin.Forms;
 
 namespace Oxard.XControls.Layouts
@@ -22,7 +23,12 @@ namespace Oxard.XControls.Layouts
         /// Identifies the WrapSpacing property.
         /// </summary>
         public static readonly BindableProperty WrapSpacingProperty = BindableProperty.Create(nameof(WrapSpacing), typeof(double), typeof(WrapLayout), default(double), propertyChanged: OnWrapSpacingPropertyChanged);
-        
+
+        /// <summary>
+        /// Identifies the ChildAlignment property.
+        /// </summary>
+        public static readonly BindableProperty ChildAlignmentProperty = BindableProperty.Create(nameof(ChildAlignment), typeof(ChildAlignment), typeof(WrapAlgorithm), ChildAlignment.LeftOrTop, propertyChanged: OnChildAlignmentPropertyChanged);
+
         /// <summary>
         /// Get or set the orientation of the WrapLayout
         /// </summary>
@@ -51,6 +57,15 @@ namespace Oxard.XControls.Layouts
         }
 
         /// <summary>
+        /// Get or set the childrend alignment by rows or columns in the wrap layout
+        /// </summary>
+        public ChildAlignment ChildAlignment
+        {
+            get => (ChildAlignment)this.GetValue(ChildAlignmentProperty);
+            set => this.SetValue(ChildAlignmentProperty, value);
+        }
+
+        /// <summary>
         /// Called when <see cref="Orientation"/> property changed. It affects orientation property of its internal <seealso cref="WrapAlgorithm"/>
         /// </summary>
         protected virtual void OnOrientationChanged()
@@ -74,6 +89,14 @@ namespace Oxard.XControls.Layouts
             this.Algorithm.WrapSpacing = this.WrapSpacing;
         }
 
+        /// <summary>
+        /// Called when <see cref="ChildAlignment"/> property changed. It affects ChildAlignment property of its internal <seealso cref="WrapAlgorithm"/>
+        /// </summary>
+        protected virtual void OnChildAlignmentChanged()
+        {
+            this.Algorithm.ChildAlignment = this.ChildAlignment;
+        }
+
         private static void OnOrientationPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             (bindable as WrapLayout)?.OnOrientationChanged();
@@ -87,6 +110,11 @@ namespace Oxard.XControls.Layouts
         private static void OnWrapSpacingPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             (bindable as WrapLayout)?.OnWrapSpacingChanged();
+        }
+
+        private static void OnChildAlignmentPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            (bindable as WrapLayout)?.OnChildAlignmentChanged();
         }
     }
 }

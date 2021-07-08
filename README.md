@@ -18,6 +18,25 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+## 4.7.17.36
+- WrapLayout
+
+A new ChildAlignment property is added on WrapLayout and WrapAlgorithm. It align child in rows or columns in WrapLayouts.
+
+Example :
+
+ChildAlignment : LeftOrTop
+
+![WrapLayoutLeft](Documentation/wrapLayoutLeft.png "WrapLayout with LeftOrTop")
+
+ChildAlignment : Center
+
+![WrapLayoutCenter](Documentation/wrapLayoutCenter.png "WrapLayout with Center")
+
+ChildAlignment : Justify
+
+![WrapLayoutJustify](Documentation/wrapLayoutJustify.png "WrapLayout with Justify")
+
 ## 4.6.16.36
 - Minimal Xamarin Forms version supported set to 4.8.0.1821 
 

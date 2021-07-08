@@ -4,6 +4,57 @@ using Xamarin.Forms;
 namespace Oxard.XControls.Layouts.LayoutAlgorithms
 {
     /// <summary>
+    /// Delegate used to launched <see cref="LayoutAlgorithm.Invalidated"/> event
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="args">The <see cref="LayoutAlgorithmInvalidatedEventArgs"/> instance containing the event data.</param>
+    public delegate void LayoutAlgorithmInvalidatedEventHandler(object sender, LayoutAlgorithmInvalidatedEventArgs args);
+
+    /// <summary>
+    /// Class used to invalidate measure, layout or both
+    /// </summary>
+    /// <seealso cref="System.EventArgs" />
+    /// <seealso cref="LayoutAlgorithm"/>
+    public class LayoutAlgorithmInvalidatedEventArgs : EventArgs
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LayoutAlgorithmInvalidatedEventArgs"/> class.
+        /// </summary>
+        /// <param name="invalidateMeasure">Initialize <see cref="InvalidateMeasure"/> with the value</param>
+        /// <param name="invalidateLayout">Initialize <see cref="InvalidateLayout"/> with the value</param>
+        public LayoutAlgorithmInvalidatedEventArgs(bool invalidateMeasure, bool invalidateLayout)
+        {
+            this.InvalidateMeasure = invalidateMeasure;
+            this.InvalidateLayout = invalidateLayout;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LayoutAlgorithmInvalidatedEventArgs"/> class.
+        /// <see cref="InvalidateMeasure"/> and <see cref="InvalidateLayout"/> properties will be set to <c>true</c>
+        /// </summary>
+        public LayoutAlgorithmInvalidatedEventArgs() : this(true, true)
+        {
+
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the algorithm need to invalidate measure.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if need to invalidate measure; otherwise, <c>false</c>.
+        /// </value>
+        public bool InvalidateMeasure { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the algorithm need to invalidate layout.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if need to invalidate layout; otherwise, <c>false</c>.
+        /// </value>
+        public bool InvalidateLayout { get; }
+    }
+
+    /// <summary>
     /// Base class for layout algorithms
     /// </summary>
     public abstract class LayoutAlgorithm : BindableObject
@@ -11,7 +62,7 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
         /// <summary>
         /// Event raised when current algorithm should change disposition or measure.
         /// </summary>
-        public event EventHandler Invalidated;
+        public event LayoutAlgorithmInvalidatedEventHandler Invalidated;
 
         /// <summary>
         /// Get or set the layout that use current algorithm
@@ -59,6 +110,28 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
         }
 
         /// <summary>
+        /// Call this method when only layout is requested in inherited classes.
+        /// </summary>
+        /// <param name="bindable">The bindable layout algorithm.</param>
+        /// <param name="oldValue">The old value of a property.</param>
+        /// <param name="newValue">The new value of a property.</param>
+        protected static void OnLayoutOnlyRequested(BindableObject bindable, object oldValue, object newValue)
+        {
+            (bindable as LayoutAlgorithm)?.InvalidateLayout();
+        }
+
+        /// <summary>
+        /// Call this method when only measure is requested in inherited classes.
+        /// </summary>
+        /// <param name="bindable">The bindable layout algorithm.</param>
+        /// <param name="oldValue">The old value of a property.</param>
+        /// <param name="newValue">The new value of a property.</param>
+        protected static void OnMeasureOnlyRequested(BindableObject bindable, object oldValue, object newValue)
+        {
+            (bindable as LayoutAlgorithm)?.InvalidateMeasure();
+        }
+
+        /// <summary>
         /// Method called when a measurement is asked.
         /// </summary>
         /// <param name="widthConstraint">Width constraint</param>
@@ -80,7 +153,23 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
         /// </summary>
         protected void Invalidate()
         {
-            this.Invalidated?.Invoke(this, EventArgs.Empty);
+            this.Invalidated?.Invoke(this, new LayoutAlgorithmInvalidatedEventArgs());
+        }
+
+        /// <summary>
+        /// Invalidate last disposition of this algorithm
+        /// </summary>
+        protected void InvalidateLayout()
+        {
+            this.Invalidated?.Invoke(this, new LayoutAlgorithmInvalidatedEventArgs(false, true));
+        }
+
+        /// <summary>
+        /// Invalidate last measure of this algorithm
+        /// </summary>
+        protected void InvalidateMeasure()
+        {
+            this.Invalidated?.Invoke(this, new LayoutAlgorithmInvalidatedEventArgs(true, false));
         }
     }
 }
