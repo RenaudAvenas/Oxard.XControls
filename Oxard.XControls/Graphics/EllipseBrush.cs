@@ -55,7 +55,7 @@ namespace Oxard.XControls.Graphics
 
         private void CalculateGeometry()
         {
-            this.actualGeometry = new EllipseGeometry(new Point(this.Width / 2d, this.Height / 2d), this.Width / 2d, this.Height / 2d);
+            this.actualGeometry = new EllipseGeometry { Center = new Point(this.Width / 2d, this.Height / 2d), RadiusX = this.Width / 2d, RadiusY = this.Height / 2d };
             this.InvalidateGeometry();
         }
     }

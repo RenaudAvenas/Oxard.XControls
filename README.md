@@ -18,6 +18,9 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+## 4.6.16.36
+- Minimal Xamarin Forms version supported set to 4.8.0.1821 
+
 ## 4.5.16.36
 
 - Android ContentControlRenderer

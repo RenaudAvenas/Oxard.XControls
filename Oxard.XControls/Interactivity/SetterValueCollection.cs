@@ -10,6 +10,7 @@ namespace Oxard.XControls.Interactivity
         private readonly BindableObject bindable;
         private readonly BindableProperty property;
         private object originalValue;
+        private bool originalValueSet;
 
         internal SetterValueCollection(BindableObject bindable, BindableProperty property)
         {
@@ -41,8 +42,11 @@ namespace Oxard.XControls.Interactivity
             var lastActiveTrigger = setters.Keys.Last(t => t.IsActive);
             bool affectsValue = lastActiveTrigger == trigger;
 
-            if (this.originalValue == null)
+            if (!this.originalValueSet)
+            {
                 this.originalValue = this.bindable.GetValue(this.property);
+                this.originalValueSet = true;
+            }
 
             if (setters[trigger] == null)
                 setters[trigger] = new List<Setter>();

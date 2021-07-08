@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<FlyoutPage
+<MasterDetailPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:defaultstyles="clr-namespace:Oxard.XControls.DefaultStyles;assembly=Oxard.XControls.DefaultStyles"
     xmlns:compponentthemes="clr-namespace:Oxard.XControls.DefaultStyles.ComponentThemes;assembly=Oxard.XControls.DefaultStyles"
     x:Class="Oxard.TestApp.MainPage">
-    <FlyoutPage.Resources>
+    <MasterDetailPage.Resources>
         <compponentthemes:Colors />
-    </FlyoutPage.Resources>
-    <FlyoutPage.Flyout>
+    </MasterDetailPage.Resources>
+    <MasterDetailPage.Master>
         <ContentPage
             Title="Views">
             <ListView
@@ -24,8 +24,8 @@
                 </ListView.ItemTemplate>
             </ListView>
         </ContentPage>
-    </FlyoutPage.Flyout>
-    <FlyoutPage.Detail>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
         <ContentPage
             BackgroundColor="{StaticResource Key={x:Static defaultstyles:ColorKeys.ContentBackgroundColor}}">
             <Grid
@@ -45,5 +45,5 @@
                     Clicked="ButtonOnClicked" />
             </Grid>
         </ContentPage>
-    </FlyoutPage.Detail>
-</FlyoutPage>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>
