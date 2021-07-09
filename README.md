@@ -18,6 +18,11 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+## 4.7.17.37
+- WrapLayout
+
+Fix a bug with some layout measurement.
+
 ## 4.7.17.36
 - WrapLayout
 

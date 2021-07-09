@@ -292,10 +292,10 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                     case LayoutAlignment.Start:
                         break;
                     case LayoutAlignment.Center:
-                        alignY = rowHeight / 2d - childMeasure.Request.Height / 2d;
+                        alignY += rowHeight / 2d - childMeasure.Request.Height / 2d;
                         break;
                     case LayoutAlignment.End:
-                        alignY = rowHeight - childMeasure.Request.Height;
+                        alignY += rowHeight - childMeasure.Request.Height;
                         break;
                     default:
                         childHeight = rowHeight;
@@ -344,10 +344,10 @@ namespace Oxard.XControls.Layouts.LayoutAlgorithms
                     case LayoutAlignment.Start:
                         break;
                     case LayoutAlignment.Center:
-                        alignX = columnWidth / 2d - childMeasure.Request.Width / 2d;
+                        alignX += columnWidth / 2d - childMeasure.Request.Width / 2d;
                         break;
                     case LayoutAlignment.End:
-                        alignX = columnWidth - childMeasure.Request.Width;
+                        alignX += columnWidth - childMeasure.Request.Width;
                         break;
                     default:
                         childWidth = columnWidth;
