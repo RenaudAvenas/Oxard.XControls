@@ -18,6 +18,11 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+## 4.7.17.38
+- ContentControl
+
+ContentData property added and ContentData is used to template content via ContentTemplate or ContentTemplateSelector properties
+
 ## 4.7.17.37
 - WrapLayout
 

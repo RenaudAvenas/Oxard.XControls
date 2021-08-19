@@ -9,6 +9,9 @@ namespace Oxard.TestApp.Views
         public ContentControlView()
         {
             this.InitializeComponent();
+            this.BindingContext = this;
         }
+
+        public bool Test { get; set; }
     }
 }

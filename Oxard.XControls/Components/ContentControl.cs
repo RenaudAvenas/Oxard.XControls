@@ -8,13 +8,17 @@ namespace Oxard.XControls.Components
     public class ContentControl : ContentView
     {
         /// <summary>
+        /// Identifies the ContentData dependency property.
+        /// </summary>
+        public static readonly BindableProperty ContentDataProperty = BindableProperty.Create(nameof(ContentData), typeof(object), typeof(ContentControl), propertyChanged: OnContentDataPropertyChanged);
+        /// <summary>
         /// Identifies the ContentTemplate dependency property.
         /// </summary>
         public static readonly BindableProperty ContentTemplateProperty = BindableProperty.Create(nameof(ContentTemplate), typeof(DataTemplate), typeof(ContentControl), propertyChanged: OnContentTemplatePropertyChanged);
         /// <summary>
         /// Identifies the ContentTemplateSelector dependency property.
         /// </summary>
-        public static readonly BindableProperty ContentTemplateSelectorProperty = BindableProperty.Create(nameof(ContentTemplateSelector), typeof(DataTemplateSelector), typeof(ContentControl), propertyChanged: OnContentTemplateSelectorPropertyChanged);       
+        public static readonly BindableProperty ContentTemplateSelectorProperty = BindableProperty.Create(nameof(ContentTemplateSelector), typeof(DataTemplateSelector), typeof(ContentControl), propertyChanged: OnContentTemplateSelectorPropertyChanged);
         /// <summary>
         /// Identifies the Foreground dependency property.
         /// </summary>
@@ -39,6 +43,18 @@ namespace Oxard.XControls.Components
         /// Identifies the IsBackgroundManagedByStyle dependency property.
         /// </summary>
         public static readonly BindableProperty IsBackgroundManagedByStyleProperty = BindableProperty.Create(nameof(IsBackgroundManagedByStyle), typeof(bool), typeof(ContentControl), false);
+
+        /// <summary>
+        /// Gets or sets the content data to display (affect Content by ContentTemplate or ContentTemplateSelector property).
+        /// </summary>
+        /// <value>
+        /// The content data.
+        /// </value>
+        public object ContentData
+        {
+            get => this.GetValue(ContentDataProperty);
+            set => this.SetValue(ContentDataProperty, value);
+        }
 
         /// <summary>
         /// Get or set the data template used to display content
@@ -121,9 +137,25 @@ namespace Oxard.XControls.Components
         {
             (bindable as ContentControl)?.OnContentTemplateSelectorChanged();
         }
-       
+
+        private static void OnContentDataPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            (bindable as ContentControl)?.OnContentDataChanged();
+        }
+
+        private void OnContentDataChanged()
+        {
+            if (this.ContentTemplate != null)
+                this.OnContentTemplateChanged();
+            else if (this.ContentTemplateSelector != null)
+                this.OnContentTemplateSelectorChanged();
+        }
+
         private void OnContentTemplateChanged()
         {
+            if (this.BindingContext == null)
+                return;
+
             if (this.ContentTemplate == null && this.ContentTemplateSelector == null)
             {
                 this.Content = null;
@@ -135,21 +167,24 @@ namespace Oxard.XControls.Components
                 return;
 
             var content = (View)this.ContentTemplate.CreateContent();
-            content.BindingContext = this.Content;
+            content.BindingContext = this.ContentData;
 
             this.Content = content;
         }
 
         private void OnContentTemplateSelectorChanged()
         {
+            if (this.BindingContext == null)
+                return;
+
             if (this.ContentTemplate == null && this.ContentTemplateSelector == null)
             {
                 this.Content = null;
                 return;
             }
 
-            var content = (View)this.ContentTemplateSelector.SelectTemplate(this.Content, this).CreateContent();
-            content.BindingContext = this.Content;
+            var content = (View)this.ContentTemplateSelector.SelectTemplate(this.ContentData, this).CreateContent();
+            content.BindingContext = this.ContentData;
 
             this.Content = content;
         }

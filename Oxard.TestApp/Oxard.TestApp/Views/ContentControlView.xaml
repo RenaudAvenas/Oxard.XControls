@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:oxard="http://oxard.com/XControls"
     xmlns:style="http://oxard.com/Themes"
+    xmlns:views="clr-namespace:Oxard.TestApp.Views"
     x:Class="Oxard.TestApp.Views.ContentControlView">
     <ContentView.Resources>
         <ResourceDictionary>
@@ -39,13 +40,38 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <views:ContentTemplateSelectorSample
+                x:Key="TemplateSelector">
+                <views:ContentTemplateSelectorSample.TrueTemplate>
+                    <DataTemplate>
+                        <Label
+                            Text="True" />
+                    </DataTemplate>
+                </views:ContentTemplateSelectorSample.TrueTemplate>
+                <views:ContentTemplateSelectorSample.FalseTemplate>
+                    <DataTemplate>
+                        <Label
+                            Text="False" />
+                    </DataTemplate>
+                </views:ContentTemplateSelectorSample.FalseTemplate>
+            </views:ContentTemplateSelectorSample>
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <oxard:ContentControl
-        HorizontalContentOptions="Center"
-        VerticalContentOptions="Center">
-        <Label
-            Text="Test" />
-    </oxard:ContentControl>
+    <Grid
+        RowDefinitions="*,*">
+        <oxard:ContentControl
+            HorizontalContentOptions="Center"
+            VerticalContentOptions="Center">
+            <Label
+                Text="Test" />
+        </oxard:ContentControl>
+        <oxard:ContentControl
+            Grid.Row="1"
+            ContentData="{Binding Path=Test}"
+            ContentTemplateSelector="{StaticResource TemplateSelector}"
+            HorizontalContentOptions="Center"
+            VerticalContentOptions="Center" />
+    </Grid>
 </ContentView>
