@@ -18,6 +18,11 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+## 4.7.17.39
+- ContentControl
+
+If ContentData is null at beginning, ContentTemplate or ContentTemplateSelector was not applied.
+
 ## 4.7.17.38
 - ContentControl
 

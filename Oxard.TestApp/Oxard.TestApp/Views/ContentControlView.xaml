@@ -43,6 +43,12 @@
 
             <views:ContentTemplateSelectorSample
                 x:Key="TemplateSelector">
+                <views:ContentTemplateSelectorSample.NullTemplate>
+                    <DataTemplate>
+                        <Label
+                            Text="Null" />
+                    </DataTemplate>
+                </views:ContentTemplateSelectorSample.NullTemplate>
                 <views:ContentTemplateSelectorSample.TrueTemplate>
                     <DataTemplate>
                         <Label
@@ -60,7 +66,7 @@
     </ContentView.Resources>
 
     <Grid
-        RowDefinitions="*,*">
+        RowDefinitions="*,*, Auto">
         <oxard:ContentControl
             HorizontalContentOptions="Center"
             VerticalContentOptions="Center">
@@ -73,5 +79,10 @@
             ContentTemplateSelector="{StaticResource TemplateSelector}"
             HorizontalContentOptions="Center"
             VerticalContentOptions="Center" />
+
+        <Button
+            Text="Change content"
+            Grid.Row="2"
+            Clicked="Button_Clicked" />
     </Grid>
 </ContentView>

@@ -7,6 +7,8 @@ namespace Oxard.XControls.Components
     /// </summary>
     public class ContentControl : ContentView
     {
+        private bool needReapplyContentDataTemplate;
+
         /// <summary>
         /// Identifies the ContentData dependency property.
         /// </summary>
@@ -128,6 +130,19 @@ namespace Oxard.XControls.Components
             set => this.SetValue(IsBackgroundManagedByStyleProperty, value);
         }
 
+        /// <summary>
+        /// Method called when BindingContext changed.
+        /// </summary>
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+            if (this.needReapplyContentDataTemplate)
+            {
+                this.needReapplyContentDataTemplate = false;
+                this.OnContentDataChanged();
+            }
+        }
+
         private static void OnContentTemplatePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             (bindable as ContentControl)?.OnContentTemplateChanged();
@@ -154,7 +169,10 @@ namespace Oxard.XControls.Components
         private void OnContentTemplateChanged()
         {
             if (this.BindingContext == null)
+            {
+                this.needReapplyContentDataTemplate = true;
                 return;
+            }
 
             if (this.ContentTemplate == null && this.ContentTemplateSelector == null)
             {
@@ -175,11 +193,15 @@ namespace Oxard.XControls.Components
         private void OnContentTemplateSelectorChanged()
         {
             if (this.BindingContext == null)
+            {
+                this.needReapplyContentDataTemplate = true;
                 return;
+            }
 
             if (this.ContentTemplate == null && this.ContentTemplateSelector == null)
             {
                 this.Content = null;
+                this.needReapplyContentDataTemplate = true;
                 return;
             }
 
