@@ -14,18 +14,21 @@ namespace Oxard.XControls.Components
         /// Identifies the Command dependency property.
         /// </summary>
         public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(Button), propertyChanged: CommandPropertyChanged);
+
         /// <summary>
         /// Identifies the CommandParameter dependency property.
         /// </summary>
         public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(Button), propertyChanged: CommandParameterPropertyChanged);
+
         /// <summary>
         /// Identifies the IsPressed readonly dependency property.
         /// </summary>
-        public static readonly BindablePropertyKey IsPressedPropertyKey = BindableProperty.CreateReadOnly(nameof(IsPressed), typeof(bool), typeof(Button), false);
+        public static readonly BindablePropertyKey IsPressedPropertyKey = BindableProperty.CreateReadOnly(nameof(IsPressed), typeof(bool), typeof(Button), false, propertyChanged: IsPressedPropertyChanged);
+
         /// <summary>
         /// Identifies the IsPressed dependency property.
         /// </summary>
-        public static BindableProperty IsPressedProperty = IsPressedPropertyKey.BindableProperty;
+        public static readonly BindableProperty IsPressedProperty = IsPressedPropertyKey.BindableProperty;
 
         /// <summary>
         /// Default constructor
@@ -88,6 +91,13 @@ namespace Oxard.XControls.Components
                 this.Command.Execute(this.CommandParameter);
         }
 
+        /// <summary>
+        /// Called when <see cref="IsPressed"/> changed
+        /// </summary>
+        protected virtual void OnIsPressedChanged()
+        {
+        }
+
         private static void CommandPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             (bindable as Button)?.CommandChanged(oldValue as ICommand);
@@ -96,6 +106,11 @@ namespace Oxard.XControls.Components
         private static void CommandParameterPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
             (bindable as Button)?.CommandParameterChanged();
+        }
+
+        private static void IsPressedPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            (bindable as Button)?.OnIsPressedChanged();
         }
 
         private void CommandChanged(ICommand oldValue)

@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:oxard="clr-namespace:Oxard.XControls.Graphics;assembly=Oxard.XControls"
     x:Class="Oxard.XControls.DefaultStyles.ComponentThemes.Colors">
 
     <Color
@@ -16,6 +15,10 @@
         x:Key="ButtonPressedBackgroundColor">#9E9E9E</Color>
     <Color
         x:Key="ButtonDisableBackgroundColor">#282828</Color>
+    <Color
+        x:Key="SelectedBackgroundColor">#5D0061AE</Color>
+    <Color
+        x:Key="SelectedBorderColor">#0061AE</Color>
 
     <SolidColorBrush
         x:Key="ButtonBackgroundBrush"
@@ -28,5 +31,10 @@
     <SolidColorBrush
         x:Key="ButtonDisableBackgroundBrush"
         Color="{StaticResource ButtonDisableBackgroundColor}" />
-
+    <SolidColorBrush
+        x:Key="SelectedBackgroundBrush"
+        Color="{StaticResource SelectedBackgroundColor}" />
+    <SolidColorBrush
+        x:Key="SelectedBorderBrush"
+        Color="{StaticResource SelectedBorderColor}" />
 </ResourceDictionary>

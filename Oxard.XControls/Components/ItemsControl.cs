@@ -18,26 +18,36 @@ namespace Oxard.XControls.Components
         /// Identifies the ItemsSource dependency property.
         /// </summary>
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource), typeof(IEnumerable), typeof(ItemsControl), null, propertyChanged: ItemsSourcePropertyChanged);
+
         /// <summary>
         /// Identifies the ItemTemplate dependency property.
         /// </summary>
         public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(ItemsControl), null, propertyChanged: ItemTemplatePropertyChanged);
+
         /// <summary>
         /// Identifies the ItemTemplateSelector dependency property.
         /// </summary>
         public static readonly BindableProperty ItemTemplateSelectorProperty = BindableProperty.Create(nameof(ItemTemplateSelector), typeof(DataTemplateSelector), typeof(ItemsControl), propertyChanged: ItemTemplateSelectorPropertyChanged);
+
         /// <summary>
         /// Identifies the AlternationCount property.
         /// </summary>
         public static readonly BindableProperty AlternationCountProperty = BindableProperty.Create(nameof(AlternationCount), typeof(int), typeof(ItemsControl), default(int), propertyChanged: OnAlternationCountPropertyChanged);
+
         /// <summary>
         /// Identifies the key of AlternationIndex dependency property.
         /// </summary>
         public static readonly BindablePropertyKey AlternationIndexPropertyKey = BindableProperty.CreateAttachedReadOnly("AlternationIndex", typeof(int), typeof(ItemsControl), default(int));
+
         /// <summary>
         /// Identifies the AlternationIndex dependency property.
         /// </summary>
         public static readonly BindableProperty AlternationIndexProperty = AlternationIndexPropertyKey.BindableProperty;
+
+        /// <summary>
+        /// Identifies the ItemContainerStyle dependency property.
+        /// </summary>
+        public static readonly BindableProperty ItemContainerStyleProperty = BindableProperty.Create(nameof(ItemContainerStyle), typeof(Style), typeof(ItemsControl), propertyChanged: OnItemContainerStylePropertyChanged);
 
         private readonly Dictionary<object, View> generatedItems = new Dictionary<object, View>();
         private bool isLoaded;
@@ -106,6 +116,15 @@ namespace Oxard.XControls.Components
         }
 
         /// <summary>
+        /// Get or set the style of each UI item in the ItemsControl
+        /// </summary>
+        public Style ItemContainerStyle
+        {
+            get => (Style)this.GetValue(ItemContainerStyleProperty);
+            set => this.SetValue(ItemContainerStyleProperty, value);
+        }
+
+        /// <summary>
         /// Get the generated view for a data item in ItemsSource. Return null if no generated view of type T found
         /// </summary>
         /// <typeparam name="T">Type of desired view generated for item</typeparam>
@@ -153,6 +172,23 @@ namespace Oxard.XControls.Components
         protected virtual bool IsItemItsOwnContainerOverride(object item) => true;
 
         /// <summary>
+        /// Returns the data used to generate the <paramref name="view"/>
+        /// </summary>
+        /// <typeparam name="T">Type of ItemsControl UI items</typeparam>
+        /// <param name="view">The generated view item</param>
+        /// <returns>The data used to generate the view</returns>
+        protected object GetDataItemForView<T>(T view)
+        {
+            foreach (var kvp in this.generatedItems)
+            {
+                if (kvp.Value.Equals(view))
+                    return kvp.Key;
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Called when property changed
         /// </summary>
         /// <param name="propertyName">Name of the property</param>
@@ -194,6 +230,18 @@ namespace Oxard.XControls.Components
         }
 
         /// <summary>
+        /// Called when <see cref="ItemContainerStyle"/> changed.
+        /// </summary>
+        protected virtual void OnItemContainerStyleChanged()
+        {
+            if (ItemsPanel == null)
+                return;
+
+            foreach (var item in ItemsPanel.Children)
+                item.Style = this.ItemContainerStyle;
+        }
+
+        /// <summary>
         /// Get the AlternationIndex property value for the specified bindable object
         /// </summary>
         /// <param name="bindableObject">Object on which we want the value of the property</param>
@@ -215,6 +263,11 @@ namespace Oxard.XControls.Components
         private static void ItemsSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             (bindable as ItemsControl)?.OnItemsSourceChanged(oldValue as IEnumerable);
+        }
+
+        private static void OnItemContainerStylePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            (bindable as ItemsControl)?.OnItemContainerStyleChanged();
         }
 
         private void Unload()
@@ -260,16 +313,20 @@ namespace Oxard.XControls.Components
                         }
                     }
                     break;
+
                 case NotifyCollectionChangedAction.Move:
                     this.RecreateAllItems();
                     break;
+
                 case NotifyCollectionChangedAction.Remove:
                     foreach (object item in e.OldItems)
                         this.RemoveItemFor(item);
                     break;
+
                 case NotifyCollectionChangedAction.Replace:
                     this.RecreateAllItems();
                     break;
+
                 case NotifyCollectionChangedAction.Reset:
                     this.RecreateAllItems();
                     break;
@@ -300,8 +357,13 @@ namespace Oxard.XControls.Components
         {
             if (this.IsItemItsOwnContainer(item))
             {
-                this.generatedItems[item] = (View)item;
-                return (View)item;
+                var itemAsView = (View)item;
+                this.generatedItems[item] = itemAsView;
+
+                if (this.ItemContainerStyle != null)
+                    itemAsView.Style = this.ItemContainerStyle;
+
+                return itemAsView;
             }
 
             var templatedView = item;
@@ -325,6 +387,10 @@ namespace Oxard.XControls.Components
             view.BindingContext = item;
 
             this.generatedItems[item] = view;
+
+            if (this.ItemContainerStyle != null)
+                view.Style = this.ItemContainerStyle;
+
             return view;
         }
 
@@ -348,7 +414,6 @@ namespace Oxard.XControls.Components
             this.ItemsPanel.Children.Add(container);
             if (this.AlternationCount > 0)
                 this.ComputeAlternationIndexForItem(container, this.ItemsPanel.Children.Count - 1);
-
         }
 
         private void CreateAndInsertItemFor(object item, int index)

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31025.194
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxard.TestApp", "Oxard.TestApp\Oxard.TestApp\Oxard.TestApp.csproj", "{160317AC-B6B1-450F-ABFF-25C341E3C115}"
 EndProject
@@ -482,6 +482,7 @@ Global
 		{8EC797D3-5EAD-4028-8B0B-1B4A38A92003}.Debug|x86.Build.0 = Debug|x86
 		{8EC797D3-5EAD-4028-8B0B-1B4A38A92003}.Debug|x86.Deploy.0 = Debug|x86
 		{8EC797D3-5EAD-4028-8B0B-1B4A38A92003}.Release|Any CPU.ActiveCfg = Release|x86
+		{8EC797D3-5EAD-4028-8B0B-1B4A38A92003}.Release|Any CPU.Build.0 = Release|x86
 		{8EC797D3-5EAD-4028-8B0B-1B4A38A92003}.Release|ARM.ActiveCfg = Release|ARM
 		{8EC797D3-5EAD-4028-8B0B-1B4A38A92003}.Release|ARM.Build.0 = Release|ARM
 		{8EC797D3-5EAD-4028-8B0B-1B4A38A92003}.Release|ARM.Deploy.0 = Release|ARM

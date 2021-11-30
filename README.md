@@ -18,6 +18,12 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+
+## 4.7.18.39
+- ListBox
+
+Adding new ListBox component.
+
 ## 4.7.17.39
 - ContentControl
 

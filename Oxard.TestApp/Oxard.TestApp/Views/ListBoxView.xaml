@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:oxard="http://oxard.com/XControls"
+    xmlns:style="http://oxard.com/Themes"
+    xmlns:views="clr-namespace:Oxard.TestApp.Views"
+    x:Class="Oxard.TestApp.Views.ListBoxView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <style:Colors />
+                <style:ButtonStyle />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Grid
+        Margin="10"
+        RowDefinitions="*, Auto">
+        <oxard:ListBox
+            ItemsSource="{Binding Path=Items}"
+            x:Name="ListBox">
+            <oxard:ListBox.ItemContainerStyle>
+                <Style
+                    TargetType="oxard:ListBoxItem">
+                    <Setter
+                        Property="oxard:DrawingBrush.AttachedBrush">
+                        <Setter.Value>
+                            <oxard:RectangleBrush
+                                Stroke="{StaticResource SelectedBorderBrush}"
+                                StrokeThickness="0" />
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger
+                            TargetType="oxard:ListBoxItem"
+                            Property="IsSelected"
+                            Value="True">
+                            <Setter
+                                Property="oxard:DrawingBrush.AttachedFill"
+                                Value="{StaticResource SelectedBackgroundBrush}" />
+                            <Setter
+                                Property="oxard:DrawingBrush.AttachedStrokeThickness"
+                                Value="1" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </oxard:ListBox.ItemContainerStyle>
+            <oxard:ListBox.ItemTemplate>
+                <DataTemplate
+                    x:DataType="views:ListItem">
+                    <Label
+                        TextColor="{StaticResource ButtonForegroundColor}"
+                        Text="{Binding Text}" />
+                </DataTemplate>
+            </oxard:ListBox.ItemTemplate>
+        </oxard:ListBox>
+
+        <StackLayout
+            Grid.Row="1"
+            Orientation="Horizontal"
+            Spacing="15">
+            <oxard:Button
+                x:Name="SelectByIndexButton"
+                Style="{StaticResource ButtonDefaultStyle}"
+                Clicked="SelectByIndexClicked">
+                <Label
+                    TextColor="{Binding Path=Foreground, Source={x:Reference SelectByIndexButton}}"
+                    Text="Select by index" />
+            </oxard:Button>
+            <oxard:Button
+                x:Name="SelectByItemButton"
+                Style="{StaticResource ButtonDefaultStyle}"
+                Clicked="SelectByItemClicked">
+                <Label
+                    TextColor="{Binding Path=Foreground, Source={x:Reference SelectByItemButton}}"
+                    Text="Select by data" />
+            </oxard:Button>
+        </StackLayout>
+    </Grid>
+</ContentView>
