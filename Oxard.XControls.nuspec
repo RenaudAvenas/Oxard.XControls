@@ -1,33 +1,36 @@
 <?xml version="1.0"?>
 <package >
-  <metadata>
-    <id>Oxard.XControls</id>
-    <version>4.7.18.39</version>
-    <authors>Renaud AVENAS</authors>
-    <owners>Renaud AVENAS</owners>
-    <projectUrl>https://github.com/RenaudAvenas/Oxard.XControls</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Xamarin forms extendable and customizable controls</description>
-    <releaseNotes>See https://github.com/RenaudAvenas/Oxard.XControls/blob/master/README.md </releaseNotes>
-    <copyright>Copyright 2019</copyright>
-    <tags>Xamarin Forms controls</tags>
-	<license type="expression">GPL-3.0-only</license>
-    <dependencies>
-      <dependency id="Xamarin.Forms" version="4.8.0.1821" />
-    </dependencies>
-  </metadata>
-  <files>
-    <file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="lib\netstandard2"/>
-    <file src="Oxard.XControls\Oxard.XControls.xml" target="lib\netstandard2"/>
-	
-    <file src="Oxard.XControls.Android\bin\Release\Oxard.XControls.Android.dll" target="lib\MonoAndroid81"/>
-    <file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="lib\MonoAndroid81"/>
-    <file src="Oxard.XControls\Oxard.XControls.xml" target="lib\MonoAndroid81"/>
-	
-    <file src="Oxard.XControls.UWP\bin\Release\Oxard.XControls.UWP.dll" target="lib\uap10.0"/>
-    <file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="lib\uap10.0"/>
-    <file src="Oxard.XControls.UWP\bin\Release\Oxard.XControls.UWP.pri" target="lib\uap10.0"/>
-    <file src="Oxard.XControls.UWP\bin\Release\Xamarin.Forms.Platform.UAP\Xamarin.Forms.Platform.UAP.xr.xml" target="lib\uap10.0\Xamarin.Forms.Platform.UAP.xr.xml"/>
-    <file src="Oxard.XControls\Oxard.XControls.xml" target="lib\uap10.0"/>
-  </files>
+	<metadata>
+		<id>Oxard.XControls</id>
+		<version>4.7.19.39</version>
+		<authors>Renaud AVENAS</authors>
+		<owners>Renaud AVENAS</owners>
+		<projectUrl>https://github.com/RenaudAvenas/Oxard.XControls</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Xamarin forms extendable and customizable controls</description>
+		<releaseNotes>See https://github.com/RenaudAvenas/Oxard.XControls/blob/master/README.md </releaseNotes>
+		<copyright>Copyright 2019</copyright>
+		<tags>Xamarin Forms controls</tags>
+		<license type="expression">GPL-3.0-only</license>
+		<readme>docs\README.md</readme>
+		<dependencies>
+			<dependency id="Xamarin.Forms" version="4.8.0.1821" />
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="README.md" target="docs\"/>
+
+		<file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="lib\netstandard2"/>
+		<file src="Oxard.XControls\Oxard.XControls.xml" target="lib\netstandard2"/>
+
+		<file src="Oxard.XControls.Android\bin\Release\Oxard.XControls.Android.dll" target="lib\MonoAndroid81"/>
+		<file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="lib\MonoAndroid81"/>
+		<file src="Oxard.XControls\Oxard.XControls.xml" target="lib\MonoAndroid81"/>
+
+		<file src="Oxard.XControls.UWP\bin\Release\Oxard.XControls.UWP.dll" target="lib\uap10.0"/>
+		<file src="Oxard.XControls\bin\Release\netstandard2.0\Oxard.XControls.dll" target="lib\uap10.0"/>
+		<file src="Oxard.XControls.UWP\bin\Release\Oxard.XControls.UWP.pri" target="lib\uap10.0"/>
+		<file src="Oxard.XControls.UWP\bin\Release\Xamarin.Forms.Platform.UAP\Xamarin.Forms.Platform.UAP.xr.xml" target="lib\uap10.0\Xamarin.Forms.Platform.UAP.xr.xml"/>
+		<file src="Oxard.XControls\Oxard.XControls.xml" target="lib\uap10.0"/>
+	</files>
 </package>

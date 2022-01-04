@@ -19,6 +19,13 @@ using Oxard.XControls;
 [assembly:Preserve]
 ```
 
+## 4.7.19.39
+- OrientedLine
+
+Adding OrientedLine to draw lines horizontally or vertically.
+
+![OrientedLine](Documentation/orientedLines.png "Vertical and horizontal lines")
+
 ## 4.7.18.39
 - ListBox
 

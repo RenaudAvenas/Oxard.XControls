@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Oxard.XControls.Shapes;
+using Xamarin.Forms;
 using Xamarin.Forms.Shapes;
 using CornerRadius = Oxard.XControls.Shapes.CornerRadius;
 
@@ -10,7 +11,7 @@ namespace Oxard.XControls.Graphics
     public static class GeometryHelper
     {
         /// <summary>
-        /// Return a rectangle geometry
+        /// Returns a rectangle geometry
         /// </summary>
         /// <param name="width">Width of the rectangle</param>
         /// <param name="height">Height of the rectangle</param>
@@ -61,6 +62,39 @@ namespace Oxard.XControls.Graphics
             }
             else
                 pathFigure.Segments.Add(new LineSegment { Point = new Point(halfStroke, height - halfStroke) });
+
+            return geometry;
+        }
+
+        /// <summary>
+        /// Returns an oriented line geometry
+        /// </summary>
+        /// <param name="thickness">The thickness of the line</param>
+        /// <param name="orientation">The orientation of the line</param>
+        /// <param name="lineDimension">The size of the line</param>
+        /// <param name="containerSize">The size where the line is drawn. If the orientation is vertical, containerSize must be the available width to draw the line otherwise the available height.</param>
+        /// <returns>Oriented line geometry</returns>
+        public static Geometry GetOrientedLine(double thickness, LineOrientation orientation, double lineDimension, double containerSize)
+        {
+            var geometry = new PathGeometry();
+
+            var pathFigure = new PathFigure();
+            pathFigure.IsClosed = false;
+            geometry.Figures.Add(pathFigure);
+
+            var halfStroke = thickness / 2d;
+            var middleContainer = containerSize / 2d;
+
+            if (orientation == LineOrientation.Vertical)
+            {
+                pathFigure.StartPoint = new Point(middleContainer - halfStroke, 0);
+                pathFigure.Segments.Add(new LineSegment { Point = new Point(middleContainer - halfStroke, lineDimension) });
+            }
+            else
+            {
+                pathFigure.StartPoint = new Point(0, middleContainer - halfStroke);
+                pathFigure.Segments.Add(new LineSegment { Point = new Point(lineDimension, middleContainer - halfStroke) });
+            }
 
             return geometry;
         }

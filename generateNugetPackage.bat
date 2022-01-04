@@ -1,4 +1,4 @@
-set MSBUILD_PATH="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin"
+set MSBUILD_PATH="C:\Program Files\Microsoft Visual Studio\2022\Community\Msbuild\Current\Bin"
 
 echo Build solution
 %MSBUILD_PATH%\MSBuild.exe Oxard.XControls\Oxard.XControls.csproj /t:build /p:Configuration=Release
