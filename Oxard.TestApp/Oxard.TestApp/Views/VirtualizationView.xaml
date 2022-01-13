@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:themes="http://oxard.com/Themes"
+    xmlns:oxard="http://oxard.com/XControls"
+    xmlns:views="clr-namespace:Oxard.TestApp.Views"
+    x:Class="Oxard.TestApp.Views.VirtualizationView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <themes:Colors />
+                <themes:ButtonStyle />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+        <DataTemplate
+            x:Key="ComplexeElementTemplate"
+            x:DataType="views:ComplexeElement">
+            <Grid
+                BackgroundColor="{Binding BackgroundColor}"
+                ColumnDefinitions="Auto, *"
+                ColumnSpacing="10">
+                <Label
+                    Text="{Binding GlyphText}"
+                    TextColor="{Binding ForegroundColor}" />
+                <Label
+                    Grid.Column="1"
+                    Text="{Binding Text}"
+                    TextColor="{Binding ForegroundColor}" />
+            </Grid>
+        </DataTemplate>
+
+        <Style
+            TargetType="oxard:VirtualizingItemsControl">
+            <Setter
+                Property="ControlTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <ScrollView
+                            x:Name="PART_ScrollOwner">
+                            <ContentPresenter />
+                        </ScrollView>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ContentView.Resources>
+
+    <Grid
+        RowDefinitions="*, Auto, Auto"
+        ColumnDefinitions="*,*">
+        <ActivityIndicator
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="3"
+            x:Name="ActivityIndicator" />
+
+        <ScrollView>
+            <oxard:ItemsControl
+                x:Name="NotVirtualizedItemsControl"
+                ItemTemplate="{StaticResource ComplexeElementTemplate}" />
+        </ScrollView>
+        <oxard:VirtualizingItemsControl
+            Grid.Column="1"
+            x:Name="VirtualizedItemsControl"
+            ItemTemplate="{StaticResource ComplexeElementTemplate}" />
+
+        <Label
+            Grid.ColumnSpan="2"
+            Grid.Row="1"
+            TextColor="{StaticResource ButtonForegroundColor}"
+            x:Name="SummaryLabel" />
+        <StackLayout
+            Orientation="Horizontal"
+            HorizontalOptions="Center"
+            Grid.ColumnSpan="2"
+            Grid.Row="2">
+            <Button
+                TextColor="{StaticResource ButtonForegroundColor}"
+                Clicked="OnGenerateDataButton_Clicked"
+                Text="Generate data" />
+            <Button
+                TextColor="{StaticResource ButtonForegroundColor}"
+                Clicked="NotVirualizedButton_Clicked"
+                Text="Set not virtualized source" />
+            <Button
+                TextColor="{StaticResource ButtonForegroundColor}"
+                Clicked="VirualizedButton_Clicked"
+                Text="Set virtualized source" />
+            <Button
+                TextColor="{StaticResource ButtonForegroundColor}"
+                Clicked="ResetButton_Clicked"
+                Text="Reset" />
+        </StackLayout>
+    </Grid>
+</ContentView>

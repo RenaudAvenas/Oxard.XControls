@@ -18,6 +18,11 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+## 4.7.20.40
+-Virtualization
+
+First version of UI virtualization with VirtualizingItemsControl and VirtualizingStackLayout. For now, VirtualizingItemsControl is a fork of ItemsControl.
+
 ## 4.7.19.40
 - TriggerCollection
 

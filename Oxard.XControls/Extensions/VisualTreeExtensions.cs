@@ -14,7 +14,7 @@ namespace Oxard.XControls.Extensions
         /// </summary>
         /// <typeparam name="T">Type of parent</typeparam>
         /// <param name="element">Instance</param>
-        /// <returns>The parent of type <typeparamref name="T"/> if it be found otherwise null</returns>
+        /// <returns>The parent of type <typeparamref name="T"/> if found; otherwise null</returns>
         public static T FindParent<T>(this Element element) where T : Element
         {
             var actualElement = element;
