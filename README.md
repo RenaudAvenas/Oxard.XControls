@@ -18,6 +18,10 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+## 4.7.19.40
+- TriggerCollection
+
+Fix a bug if attach to non visible object that causes thread memory leak.
 
 ## 4.7.19.39
 - OrientedLine

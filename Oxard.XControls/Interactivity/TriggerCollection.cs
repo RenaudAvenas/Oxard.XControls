@@ -24,15 +24,8 @@ namespace Oxard.XControls.Interactivity
 
         internal void AttachTo(BindableObject bindable)
         {
-            // If bindable not loaded yet, wait with it
-            if (bindable is VisualElement visualElement && visualElement.Bounds.IsEmpty)
-            {
-                Device.BeginInvokeOnMainThread(() => this.AttachTo(bindable));
-                return;
-            }
-
-            var attachedCollection = new AttachedTriggerCollection();
-            attachedCollection.AttachTo(this, bindable);
+            // If bindable may be not loaded yet, schedule attachTo to next UI frame
+            Device.BeginInvokeOnMainThread(() => this.ApplyTriggerCollection(bindable));
         }
 
         internal void DetachTo()
@@ -43,8 +36,8 @@ namespace Oxard.XControls.Interactivity
         /// Adds an item to the collection.
         /// </summary>
         /// <param name="item">The object to add to the collection.</param>
-        public void Add(TriggerBase item) 
-        { 
+        public void Add(TriggerBase item)
+        {
             this.triggers.Add(item);
         }
 
@@ -90,6 +83,12 @@ namespace Oxard.XControls.Interactivity
         public bool Remove(TriggerBase item)
         {
             return this.triggers.Remove(item);
+        }
+
+        private void ApplyTriggerCollection(BindableObject bindable)
+        {
+            var attachedCollection = new AttachedTriggerCollection();
+            attachedCollection.AttachTo(this, bindable);
         }
 
         /// <summary>

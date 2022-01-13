@@ -36,6 +36,7 @@
             Grid.Row="2"
             Orientation="Horizontal">
             <oxard:CheckBox
+                x:Name="FirstCheckBox"
                 Style="{StaticResource CheckBoxDefaultStyle}">
                 <oxard:Interactivity.Triggers>
                     <oxard:TriggerCollection>
@@ -72,6 +73,7 @@
                     TextColor="White" />
             </oxard:CheckBox>
             <oxard:CheckBox
+                IsVisible="{Binding Source={x:Reference FirstCheckBox}, Path=IsChecked}"
                 Style="{StaticResource CheckBoxDefaultStyle}">
                 <oxard:Interactivity.Triggers>
                     <oxard:TriggerCollection>
