@@ -33,6 +33,8 @@ namespace Oxard.XControls.Interactivity
         /// </value>
         public BindableObject Target { get; set; }
 
+        internal object ConvertedValue => convertedValue;
+
         internal void Apply(BindableObject bindable)
         {
             if(this.convertedValue == null && this.Value != null)

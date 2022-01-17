@@ -262,6 +262,13 @@
                     Text="Check next button"
                     TextColor="White" />
             </oxard:Button>
+            <oxard:Button
+                Style="{StaticResource ButtonDefaultStyle}"
+                Clicked="ButtonOnChangeBackgroundClicked">
+                <Label
+                    Text="Change buttons background"
+                    TextColor="White" />
+            </oxard:Button>
         </StackLayout>
     </Grid>
 </ContentView>

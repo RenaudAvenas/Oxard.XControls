@@ -18,6 +18,14 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+## 4.7.20.41
+-Virtualization
+
+Fix a bug with Oxard Triggers which ignored changement on original value of a bindable property.
+If you affect a property to a value "A" via Oxard Setter and then you change this property to "B" 
+in your code, the "B" value is stored as original value and setter is reapplied and property value 
+is "A" until setter be deactivated.
+
 ## 4.7.20.40
 -Virtualization
 
