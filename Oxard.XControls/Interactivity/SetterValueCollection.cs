@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Oxard.XControls.Extensions;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
@@ -79,7 +80,12 @@ namespace Oxard.XControls.Interactivity
             if (affectsValue)
             {
                 if (lastActiveTrigger == null)
-                    this.bindable.SetValue(this.property, this.originalValue);
+                {
+                    if (setter.OriginalValueBinding != null)
+                        this.bindable.SetBinding(this.property, setter.OriginalValueBinding.Clone());
+                    else
+                        this.bindable.SetValue(this.property, this.originalValue);
+                }
                 else
                     setters[lastActiveTrigger].Last().Apply(this.bindable);
             }

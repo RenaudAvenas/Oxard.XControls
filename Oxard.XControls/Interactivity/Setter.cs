@@ -33,6 +33,11 @@ namespace Oxard.XControls.Interactivity
         /// </value>
         public BindableObject Target { get; set; }
 
+        /// <summary>
+        /// Get or set the binding used to get the original value of property affected by the setter
+        /// </summary>
+        public BindingBase OriginalValueBinding { get; set; }
+
         internal object ConvertedValue => convertedValue;
 
         internal void Apply(BindableObject bindable)
