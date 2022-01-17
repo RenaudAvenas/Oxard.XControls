@@ -13,6 +13,7 @@ namespace Oxard.TestApp.Views
     {
         private readonly Random random = new Random();
         private List<ComplexeElement> source;
+        private ScrollToPosition nextScrollToPosition = ScrollToPosition.Start;
 
         public VirtualizationView()
         {
@@ -66,6 +67,8 @@ namespace Oxard.TestApp.Views
                 {
                     source.Add(GenerateRandomComplexeElement());
                 }
+
+                source[500] = new ComplexeElement { BackgroundColor = Color.Red, ForegroundColor = Color.White, GlyphText = "S", Text = "Scroll to element" };
             });
 
             stopwatch.Stop();
@@ -104,6 +107,32 @@ namespace Oxard.TestApp.Views
             SummaryLabel.Text = string.Empty;
             VirtualizedItemsControl.ItemsSource = null;
             NotVirtualizedItemsControl.ItemsSource = null;
+        }
+
+        private void ScrollTo_Clicked(object sender, EventArgs e)
+        {
+            VirtualizedItemsControl.ScrollToAsync(source[500], this.nextScrollToPosition, true);
+
+            var previousScrollToPosition = this.nextScrollToPosition;
+            switch (this.nextScrollToPosition)
+            {
+                case ScrollToPosition.MakeVisible:
+                    this.nextScrollToPosition = ScrollToPosition.Start;
+                    break;
+                case ScrollToPosition.Start:
+                    this.nextScrollToPosition = ScrollToPosition.Center;
+                    break;
+                case ScrollToPosition.Center:
+                    this.nextScrollToPosition = ScrollToPosition.End;
+                    break;
+                case ScrollToPosition.End:
+                    this.nextScrollToPosition = ScrollToPosition.MakeVisible;
+                    break;
+                default:
+                    break;
+            }
+
+            SummaryLabel.Text = $"Scroll to element at index 500 with scroll position : {previousScrollToPosition} (new scroll position wil be {this.nextScrollToPosition})";
         }
     }
 

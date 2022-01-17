@@ -96,6 +96,40 @@ namespace Oxard.XControls.Layouts
             this.VirtualizingItemsControl.GenerateRange(minIndex, maxIndex);
         }
 
+        /// <summary>
+        /// Return a point where the child at <paramref name="index"/> should appear
+        /// </summary>
+        /// <param name="index">Index of child in collection</param>
+        /// <param name="scrollToPosition">Position of child after scrolling</param>
+        /// <returns>The top left point to scroll to</returns>
+        protected virtual Point GetChildPositionForScroll(int index, ScrollToPosition scrollToPosition)
+        {
+            var y = rowHeight * index;
+            var adaptedScrollToPosition = scrollToPosition;
+
+            if(adaptedScrollToPosition == ScrollToPosition.MakeVisible)
+            {
+                if (y < Viewport.Y)
+                    adaptedScrollToPosition = ScrollToPosition.Start;
+                else if (y + rowHeight > Viewport.Y + Viewport.Height)
+                    adaptedScrollToPosition = ScrollToPosition.End;
+                else
+                    y = Viewport.Y;
+            }
+
+            switch (adaptedScrollToPosition)
+            {
+                case ScrollToPosition.Center:
+                    y -= (Viewport.Height / 2d) - (rowHeight / 2d);
+                    break;
+                case ScrollToPosition.End:
+                    y -= Viewport.Height - rowHeight;
+                    break;
+            }
+
+            return new Point(0, y);
+        }
+
         internal void SetVirtualizingItemsControl(VirtualizingItemsControl virtualizingItemsControl)
         {
             if (this.ScrollOwner != null)
@@ -112,6 +146,11 @@ namespace Oxard.XControls.Layouts
         {
             InvalidateMeasure();
             Device.BeginInvokeOnMainThread(OnItemsSourceChanged);
+        }
+
+        internal Point InternalGetChildPositionForScroll(int index, ScrollToPosition scrollToPosition)
+        {
+            return this.GetChildPositionForScroll(index, scrollToPosition);
         }
 
         private void InitializeScrollOwner()

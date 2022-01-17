@@ -70,8 +70,10 @@
             Grid.Row="1"
             TextColor="{StaticResource ButtonForegroundColor}"
             x:Name="SummaryLabel" />
-        <StackLayout
-            Orientation="Horizontal"
+        <oxard:UniformGrid
+            Columns="4"
+            ColumnSpacing="5"
+            RowSpacing="5"
             HorizontalOptions="Center"
             Grid.ColumnSpan="2"
             Grid.Row="2">
@@ -91,6 +93,10 @@
                 TextColor="{StaticResource ButtonForegroundColor}"
                 Clicked="ResetButton_Clicked"
                 Text="Reset" />
-        </StackLayout>
+            <Button
+                TextColor="{StaticResource ButtonForegroundColor}"
+                Clicked="ScrollTo_Clicked"
+                Text="Scroll to" />
+        </oxard:UniformGrid>
     </Grid>
 </ContentView>

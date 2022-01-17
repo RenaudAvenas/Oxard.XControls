@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Oxard.XControls.Components
@@ -209,6 +210,26 @@ namespace Oxard.XControls.Components
                 return generatedItem.View as T;
 
             return null;
+        }
+
+        /// <summary>
+        /// Scroll to display <paramref name="item"/>
+        /// </summary>
+        /// <param name="item">The item to display</param>
+        /// <param name="scrollToPosition"></param>
+        /// <param name="animated"></param>
+        public Task ScrollToAsync(object item, ScrollToPosition scrollToPosition, bool animated)
+        {
+            if (this.ScrollOwner == null)
+                return Task.CompletedTask;
+
+            if (this.generatedItems.TryGetValue(item, out var generatedItem))
+                return this.ScrollOwner.ScrollToAsync(generatedItem.View, scrollToPosition, animated);
+            else
+            {
+                var pointToScroll = this.itemsPanel.InternalGetChildPositionForScroll(ItemsSource.IndexOf(item), scrollToPosition);
+                return this.ScrollOwner.ScrollToAsync(pointToScroll.X, pointToScroll.Y, animated);
+            }
         }
 
         /// <summary>
