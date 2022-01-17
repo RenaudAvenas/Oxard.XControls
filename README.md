@@ -18,8 +18,20 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+## 4.7.21.41
+- Interactivity
+
+Setters overrides original property value when applied but if the orginal value is from a binding, 
+the binding was lost. In this version, you can set a OriginalValueBinding on setters to specify 
+which binding setter must be used to set the original binding when it is unapplied.
+
+- Virtualization
+
+Add a ScrollToAsync(object item) method on VirtualizingItemsControl to scroll to an element of the 
+ItemsSource even if the view for item is not generated yet.
+
 ## 4.7.20.41
--Virtualization
+- Virtualization
 
 Fix a bug with Oxard Triggers which ignored changement on original value of a bindable property.
 If you affect a property to a value "A" via Oxard Setter and then you change this property to "B" 
@@ -27,7 +39,7 @@ in your code, the "B" value is stored as original value and setter is reapplied 
 is "A" until setter be deactivated.
 
 ## 4.7.20.40
--Virtualization
+- Virtualization
 
 First version of UI virtualization with VirtualizingItemsControl and VirtualizingStackLayout. For now, VirtualizingItemsControl is a fork of ItemsControl.
 
