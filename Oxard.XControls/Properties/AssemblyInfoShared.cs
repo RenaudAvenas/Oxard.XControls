@@ -5,10 +5,10 @@
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("Oxard")]
 
-// X.Y.Z.W => 
+// X.Y.Z.W =>
 // X : major version (big modification, dependencies updates, ...)
 // Y : minor version modification with some impact like namespace changes or class renamed...
 // Z : new components or features
 // W : bug correction, components improved
-[assembly: AssemblyVersion("4.7.21.41")]
-[assembly: AssemblyFileVersion("4.7.21.41")]
+[assembly: AssemblyVersion("4.7.22.41")]
+[assembly: AssemblyFileVersion("4.7.22.41")]

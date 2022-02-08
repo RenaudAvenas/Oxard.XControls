@@ -55,6 +55,8 @@
     <Compile Include="..\Oxard.XControls\Properties\AssemblyInfoShared.cs">
       <Link>Properties\AssemblyInfoShared.cs</Link>
     </Compile>
+    <Compile Include="Events\IKeyboardListener.cs" />
+    <Compile Include="Events\KeyboardHelper.cs" />
     <Compile Include="Events\TouchHelper.cs" />
     <Compile Include="Graphics\BrushExtensions.cs" />
     <Compile Include="Graphics\DrawingBrushDrawable.cs" />

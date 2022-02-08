@@ -1,7 +1,7 @@
 # Oxard.XControls
 Oxard XControls (for Xamarin controls) is available on nuget.org (https://www.nuget.org/packages/Oxard.XControls)
 
-To use components in your project with http://oxard.com/XControls shemas add this code to your App constructor (or somewhere in your assembly where you use oxard controls at the beginning):
+To use components in your project with http://oxard.com/XControls shemas add this code to your App constructor (or somewhere in your assembly where you use oxard controls):
 
 ```csharp
 public App() 
@@ -18,6 +18,41 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+
+## 4.7.22.41
+- Keyboard management
+
+You can use KeyboardManager to have access to keyboard events. If you want to get keys on a specific control, attach a KeyboardHelper on each platform.
+Don't forget to call KeyboardHelper.Initialize method in mainActivity for android and App.xaml.cs for UWP to get events from the whole application.
+For android, you need to implement IKeyboardListener on a renderer or on your MainActivity.
+Copy and paste this code :
+
+```csharp
+
+        // Renderer or mainactiviry class
+        public override bool DispatchKeyEvent(KeyEvent e)
+        {
+            var androidKeyboardEventArgs = new AndroidKeyboardEventArgs(e);
+            PreviewKeyEvent?.Invoke(this, androidKeyboardEventArgs);
+            return androidKeyboardEventArgs.Handled == true ? true : base.DispatchKeyEvent(e);
+        }
+
+        public override bool OnKeyDown([GeneratedEnum] Keycode keyCode, KeyEvent e)
+        {
+            var androidKeyboardEventArgs = new AndroidKeyboardEventArgs(e);
+            KeyEvent?.Invoke(this, androidKeyboardEventArgs);
+            return androidKeyboardEventArgs.Handled == true ? true : base.OnKeyDown(keyCode, e);
+        }
+
+        public override bool OnKeyUp([GeneratedEnum] Keycode keyCode, KeyEvent e)
+        {
+            var androidKeyboardEventArgs = new AndroidKeyboardEventArgs(e);
+            KeyEvent?.Invoke(this, androidKeyboardEventArgs);
+            return androidKeyboardEventArgs.Handled == true ? true : base.OnKeyUp(keyCode, e);
+        }
+
+```
+
 ## 4.7.21.41
 - Interactivity
 

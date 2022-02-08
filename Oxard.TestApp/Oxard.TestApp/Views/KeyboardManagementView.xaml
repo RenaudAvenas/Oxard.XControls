@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Oxard.TestApp.Views.KeyboardManagementView">
+    <ContentView.Content>
+        <Grid
+            RowDefinitions="Auto, Auto, Auto, Auto, Auto">
+
+            <StackLayout
+                Orientation="Horizontal"
+                Spacing="15">
+                <Button
+                    Clicked="OnButton_ShowKeyboardClicked"
+                    TextColor="White"
+                    Text="Show keyboard" />
+                <Button
+                    Clicked="OnButton_HideKeyboardClicked"
+                    TextColor="White"
+                    Text="Hide keyboard" />
+                <Label
+                    TextColor="White"
+                    Text="Handle preview events : " />
+                <CheckBox
+                    x:Name="HandleEventsCheckBox" />
+            </StackLayout>
+
+            <Label
+                Grid.Row="1"
+                TextColor="White"
+                x:Name="PreviewKeyLabel" />
+            <Label
+                Grid.Row="2"
+                TextColor="White"
+                x:Name="KeyLabel" />
+            <Label
+                Grid.Row="3"
+                TextColor="White"
+                x:Name="ModifiersLabel" />
+            <Entry
+                TextColor="White"
+                Grid.Row="4"
+                Text="Native keyboard management entry" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>
