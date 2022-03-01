@@ -2,6 +2,7 @@
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+
 namespace Oxard.TestApp
 {
     public partial class App : Application

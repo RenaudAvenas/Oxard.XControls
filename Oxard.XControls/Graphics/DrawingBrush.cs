@@ -13,74 +13,92 @@ namespace Oxard.XControls.Graphics
         /// Identifies the Fill dependency property.
         /// </summary>
         public static readonly BindableProperty FillProperty = BindableProperty.Create(nameof(Fill), typeof(Brush), typeof(DrawingBrush), Brush.Transparent, propertyChanged: OnFillPropertyChanged);
+
         /// <summary>
         /// Identifies the Stroke dependency property.
         /// </summary>
         public static readonly BindableProperty StrokeProperty = BindableProperty.Create(nameof(Stroke), typeof(Brush), typeof(DrawingBrush), Brush.Transparent, propertyChanged: OnStrokePropertyChanged);
+
         /// <summary>
         /// Identifies the StrokeThickness dependency property.
         /// </summary>
         public static readonly BindableProperty StrokeThicknessProperty = BindableProperty.Create(nameof(StrokeThickness), typeof(double), typeof(DrawingBrush), 0d, propertyChanged: OnStrokeThicknessPropertyChanged);
+
         /// <summary>
         /// Identifies the StrokeDash dependency property.
         /// </summary>
         public static readonly BindableProperty StrokeDashArrayProperty = BindableProperty.Create(nameof(StrokeDashArray), typeof(DoubleCollection), typeof(DrawingBrush), new DoubleCollection(), propertyChanged: OnStrokeDashArrayPropertyChanged);
+
         /// <summary>
         /// Identifies the Fill dependency property.
         /// </summary>
         public static readonly BindableProperty StrokeDashOffsetProperty = BindableProperty.Create(nameof(StrokeDashOffset), typeof(double), typeof(DrawingBrush), 0d, propertyChanged: OnStrokeDashOffsetPropertyChanged);
+
         /// <summary>
         /// Identifies the Fill dependency property.
         /// </summary>
         public static readonly BindableProperty StrokeLineCapProperty = BindableProperty.Create(nameof(StrokeLineCap), typeof(PenLineCap), typeof(DrawingBrush), PenLineCap.Flat, propertyChanged: OnStrokeLineCapPropertyChanged);
+
         /// <summary>
         /// Identifies the Fill dependency property.
         /// </summary>
         public static readonly BindableProperty StrokeLineJoinProperty = BindableProperty.Create(nameof(StrokeLineJoin), typeof(PenLineJoin), typeof(DrawingBrush), PenLineJoin.Bevel, propertyChanged: OnStrokeLineJoinPropertyChanged);
+
         /// <summary>
         /// Identifies the Fill dependency property.
         /// </summary>
         public static readonly BindableProperty StrokeMiterLimitProperty = BindableProperty.Create(nameof(StrokeMiterLimit), typeof(double), typeof(DrawingBrush), 0d, propertyChanged: OnStrokeMiterLimitPropertyChanged);
+
         /// <summary>
         /// Identifies the Fill dependency property.
         /// </summary>
         public static readonly BindableProperty AspectProperty = BindableProperty.Create(nameof(Aspect), typeof(Stretch), typeof(DrawingBrush), Stretch.None, propertyChanged: OnAspectPropertyChanged);
+
         /// <summary>
         /// Identifies the AttachedBrush dependency property
         /// </summary>
         public static readonly BindableProperty AttachedBrushProperty = BindableProperty.CreateAttached("AttachedBrush", typeof(DrawingBrush), typeof(DrawingBrush), null, propertyChanged: OnAttachedBrushPropertyChanged);
+
         /// <summary>
         /// Identifies the AttachedFill dependency property
         /// </summary>
         public static readonly BindableProperty AttachedFillProperty = BindableProperty.CreateAttached("AttachedFill", typeof(Brush), typeof(DrawingBrush), Brush.Transparent, propertyChanged: OnAttachedFillPropertyChanged);
+
         /// <summary>
         /// Identifies the  AttachedStroke dependency property
         /// </summary>
         public static readonly BindableProperty AttachedStrokeProperty = BindableProperty.CreateAttached("AttachedStroke", typeof(Brush), typeof(DrawingBrush), Brush.Transparent, propertyChanged: OnAttachedStrokePropertyChanged);
+
         /// <summary>
         /// Identifies the  AttachedStrokeThickness dependency property
         /// </summary>
         public static readonly BindableProperty AttachedStrokeThicknessProperty = BindableProperty.CreateAttached("AttachedStrokeThickness", typeof(double), typeof(DrawingBrush), 0d, propertyChanged: OnAttachedStrokeThicknessPropertyChanged);
+
         /// <summary>
         /// Identifies the  AttachedStrokeDashArray dependency property
         /// </summary>
         public static readonly BindableProperty AttachedStrokeDashArrayProperty = BindableProperty.CreateAttached("AttachedStrokeDashArray", typeof(DoubleCollection), typeof(DrawingBrush), new DoubleCollection(), propertyChanged: OnAttachedStrokeDashArrayPropertyChanged);
+
         /// <summary>
         /// Identifies the  AttachedStrokeDashOffset dependency property.
         /// </summary>
         public static readonly BindableProperty AttachedStrokeDashOffsetProperty = BindableProperty.CreateAttached("AttachedStrokeDashOffset", typeof(double), typeof(DrawingBrush), 0d, propertyChanged: OnAttachedStrokeDashOffsetPropertyChanged);
+
         /// <summary>
         /// Identifies the AttachedStrokeLineCap dependency property.
         /// </summary>
         public static readonly BindableProperty AttachedStrokeLineCapProperty = BindableProperty.CreateAttached("AttachedStrokeLineCap", typeof(PenLineCap), typeof(DrawingBrush), PenLineCap.Flat, propertyChanged: OnAttachedStrokeLineCapPropertyChanged);
+
         /// <summary>
         /// Identifies the AttachedStrokeLineJoin dependency property.
         /// </summary>
         public static readonly BindableProperty AttachedStrokeLineJoinProperty = BindableProperty.CreateAttached("AttachedStrokeLineJoin", typeof(PenLineJoin), typeof(DrawingBrush), PenLineJoin.Bevel, propertyChanged: OnAttachedStrokeLineJoinPropertyChanged);
+
         /// <summary>
         /// Identifies the AttachedStrokeMiterLimit dependency property.
         /// </summary>
         public static readonly BindableProperty AttachedStrokeMiterLimitProperty = BindableProperty.CreateAttached("AttachedStrokeMiterLimit", typeof(double), typeof(DrawingBrush), 0d, propertyChanged: OnAttachedStrokeMiterLimitPropertyChanged);
+
         /// <summary>
         /// Identifies the AttachedAspect dependency property.
         /// </summary>
@@ -90,7 +108,7 @@ namespace Oxard.XControls.Graphics
         /// Event called when shape geometry changed
         /// </summary>
         public event EventHandler GeometryChanged;
-        
+
         /// <summary>
         /// Get or set the <see cref="Brush"/> used to fill the shape
         /// </summary>
@@ -214,6 +232,11 @@ namespace Oxard.XControls.Graphics
             copy.Stroke = this.Stroke;
             copy.StrokeThickness = this.StrokeThickness;
             copy.StrokeDashArray = this.StrokeDashArray;
+            copy.StrokeDashOffset = this.StrokeDashOffset;
+            copy.StrokeMiterLimit = this.StrokeMiterLimit;
+            copy.StrokeLineCap = this.StrokeLineCap;
+            copy.StrokeLineJoin = this.StrokeLineJoin;
+            copy.Aspect = this.Aspect;
 
             return copy;
         }
@@ -225,7 +248,7 @@ namespace Oxard.XControls.Graphics
         /// <param name="height">Height of the drawable</param>
         public void SetSize(double width, double height)
         {
-            if(width < 0 || height < 0)
+            if (width < 0 || height < 0)
                 return;
 
             this.Width = width;
@@ -473,47 +496,56 @@ namespace Oxard.XControls.Graphics
         /// <summary>
         /// Called when <see cref="FillProperty"/> changed for this instance of <see cref="DrawingBrush"/>.
         /// </summary>
-        protected virtual void OnFillChanged() { }
+        protected virtual void OnFillChanged()
+        { }
 
         /// <summary>
         /// Called when <see cref="StrokeProperty"/> changed for this instance of <see cref="DrawingBrush"/>.
         /// </summary>
-        protected virtual void OnStrokeChanged() { }
+        protected virtual void OnStrokeChanged()
+        { }
 
         /// <summary>
         /// Called when <see cref="StrokeThicknessProperty"/> changed for this instance of <see cref="DrawingBrush"/>.
         /// </summary>
-        protected virtual void OnStrokeThicknessChanged() { }
+        protected virtual void OnStrokeThicknessChanged()
+        { }
 
         /// <summary>
         /// Called when <see cref="StrokeDashArrayProperty"/> changed for this instance of <see cref="DrawingBrush"/>.
         /// </summary>
-        protected virtual void OnStrokeDashArrayChanged() { }
+        protected virtual void OnStrokeDashArrayChanged()
+        { }
 
         /// <summary>
         /// Called when <see cref="StrokeDashOffsetProperty"/> changed for this instance of <see cref="DrawingBrush"/>.
         /// </summary>
-        protected virtual void OnStrokeDashOffsetChanged() { }
+        protected virtual void OnStrokeDashOffsetChanged()
+        { }
 
         /// <summary>
         /// Called when <see cref="StrokeLineCapProperty"/> changed for this instance of <see cref="DrawingBrush"/>.
         /// </summary>
-        protected virtual void OnStrokeLineCapChanged() { }
+        protected virtual void OnStrokeLineCapChanged()
+        { }
 
         /// <summary>
         /// Called when <see cref="StrokeLineJoinProperty"/> changed for this instance of <see cref="DrawingBrush"/>.
         /// </summary>
-        protected virtual void OnStrokeLineJoinChanged() { }
+        protected virtual void OnStrokeLineJoinChanged()
+        { }
 
         /// <summary>
         /// Called when <see cref="StrokeMiterLimitProperty"/> changed for this instance of <see cref="DrawingBrush"/>.
         /// </summary>
-        protected virtual void OnStrokeMiterLimitChanged() { }
+        protected virtual void OnStrokeMiterLimitChanged()
+        { }
 
         /// <summary>
         /// Called when <see cref="AspectProperty"/> changed for this instance of <see cref="DrawingBrush"/>.
         /// </summary>
-        protected virtual void OnAspectChanged() { }
+        protected virtual void OnAspectChanged()
+        { }
 
         /// <summary>
         /// Called when instance size changed (Width and Height).
@@ -525,7 +557,7 @@ namespace Oxard.XControls.Graphics
         }
 
         /// <summary>
-        /// Launch <see cref="GeometryChanged"/> event. 
+        /// Launch <see cref="GeometryChanged"/> event.
         /// </summary>
         protected void InvalidateGeometry()
         {

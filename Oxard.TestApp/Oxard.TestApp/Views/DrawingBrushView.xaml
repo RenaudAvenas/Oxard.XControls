@@ -8,13 +8,28 @@
     xmlns:style="http://oxard.com/Themes"
     xmlns:userControls="clr-namespace:Oxard.TestApp.UserControls;assembly=Oxard.TestApp"
     mc:Ignorable="d"
-    x:Class="Oxard.TestApp.Views.DrawingBrushView">
+    x:Class="Oxard.TestApp.Views.DrawingBrushView"
+    x:Name="DrawingBrushViewRoot">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <style:Colors />
                 <style:ButtonStyle />
             </ResourceDictionary.MergedDictionaries>
+
+            <SolidColorBrush
+                x:Key="RedColor"
+                Color="Red" />
+            <SolidColorBrush
+                x:Key="BlueColor"
+                Color="Blue" />
+            <SolidColorBrush
+                x:Key="AquaColor"
+                Color="Aqua" />
+
+            <SolidColorBrush
+                x:Key="EllipseBackground"
+                Color="Aqua" />
         </ResourceDictionary>
     </ContentView.Resources>
 
@@ -52,7 +67,7 @@
             <oxard:ContentControl.Background>
                 <oxard:EllipseBrush
                     Aspect="None"
-                    Fill="Aqua"
+                    Fill="{oxard:ExtendedDynamicResourceExtension EllipseBackground, UseReflection=True}"
                     Stroke="Red"
                     StrokeThickness="2"
                     StrokeDashArray="10 10"
@@ -69,5 +84,10 @@
         <userControls:PropertyListControl
             Grid.Row="2"
             Instance="{x:Reference RectangleBrush}" />
+        <Button
+            Grid.Row="3"
+            TextColor="White"
+            Text="Change color"
+            Clicked="ChangeColorButtonClicked" />
     </Grid>
 </ContentView>

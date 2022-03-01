@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:oxard="http://oxard.com/XControls"
+    x:Class="Oxard.TestApp.Views.DynamicResourceView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Color
+                x:Key="BackgroundLabel">Blue</Color>
+            <SolidColorBrush
+                x:Key="BackgroundLabelBrush"
+                Color="{DynamicResource BackgroundLabel}" />
+            <SolidColorBrush
+                x:Key="OxardBackgroundLabelBrush"
+                Color="{oxard:ExtendedDynamicResourceExtension BackgroundLabel, UseReflection=True}" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <Grid
+            RowDefinitions="Auto, *, Auto">
+            <StackLayout
+                Spacing="10">
+                <Label
+                    TextColor="White"
+                    Background="{StaticResource BackgroundLabelBrush}"
+                    Text="Sample with xamarin dynamic resource" />
+                <Label
+                    TextColor="White"
+                    Background="{StaticResource OxardBackgroundLabelBrush}"
+                    Text="Sample with oxard dynamic resource" />
+            </StackLayout>
+
+            <Button
+                HorizontalOptions="Center"
+                Grid.Row="2"
+                TextColor="White"
+                BackgroundColor="Gray"
+                Text="Change background color"
+                Clicked="ChangeColorButton_Clicked" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -8,7 +8,6 @@ using Xamarin.Forms;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
-
 [assembly: Preserve]
 [assembly: XmlnsDefinition("http://oxard.com/XControls", "Oxard.XControls.Components")]
 [assembly: XmlnsDefinition("http://oxard.com/XControls", "Oxard.XControls.Effects")]
@@ -17,3 +16,4 @@ using Xamarin.Forms;
 [assembly: XmlnsDefinition("http://oxard.com/XControls", "Oxard.XControls.Layouts")]
 [assembly: XmlnsDefinition("http://oxard.com/XControls", "Oxard.XControls.Layouts.LayoutAlgorithms")]
 [assembly: XmlnsDefinition("http://oxard.com/XControls", "Oxard.XControls.Interactivity")]
+[assembly: XmlnsDefinition("http://oxard.com/XControls", "Oxard.XControls.MarkupExtensions")] 

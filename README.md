@@ -18,6 +18,39 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+## 4.7.23.41
+- DynamicResource
+
+Xamarin.Forms DynamicResource does not work on object that not implement internal XF interface IResource.
+By example, if you want to set a dynamic resource for SolidColorBrush Color property, this code does not work :
+
+```xml
+<ResourceDictionary>
+    <Color
+        x:Key="BackgroundLabel">Blue</Color>
+    <SolidColorBrush
+        x:Key="BackgroundLabelBrush"
+        Color="{DynamicResource BackgroundLabel}" />
+</ResourceDictionary>
+```
+
+If you set BackgroundLabelBrush to a label background, its background will be not set.
+Use this equivalent with Oxard offers a workaround :
+
+```xml
+<ResourceDictionary>
+    <Color
+        x:Key="BackgroundLabel">Blue</Color>
+    <SolidColorBrush
+        x:Key="OxardBackgroundLabelBrush"
+        Color="{oxard:ExtendedDynamicResource BackgroundLabel, UseReflection=True}" />
+</ResourceDictionary>
+```
+
+The background of label change and if you override the BackgroundLabel resource it takes effect.
+
+You should set UseReflection to true to associate your dynamic resource to first visual parent element of the brush or you can set the Container property to indicate where resources will be found.
+If UseReflection is set to false and Container is not set (this is the default values), Oxard takes Application.Current instance to find resources.
 
 ## 4.7.22.41
 - Keyboard management

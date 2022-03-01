@@ -15,16 +15,6 @@ namespace Oxard.XControls.UWP.Renderers.Components
     {
         private DrawingPath drawingPath;
 
-        protected override void OnElementChanged(ElementChangedEventArgs<T> e)
-        {
-            base.OnElementChanged(e);
-
-            if (e.NewElement != null)
-            {
-                this.ApplyIsBackgroundManagedByStyle();
-            }
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (this.drawingPath != null)
@@ -36,7 +26,7 @@ namespace Oxard.XControls.UWP.Renderers.Components
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            if(e.PropertyName == nameof(VisualElement.Width) || e.PropertyName == nameof(VisualElement.Height))
+            if (e.PropertyName == nameof(VisualElement.Width) || e.PropertyName == nameof(VisualElement.Height))
             {
                 if (this.drawingPath != null)
                     this.drawingPath.Drawable.SetSize(this.Element.Width, this.Element.Height);
