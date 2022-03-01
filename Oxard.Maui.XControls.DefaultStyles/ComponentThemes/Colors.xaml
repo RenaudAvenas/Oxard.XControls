@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary 
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="Oxard.Maui.XControls.DefaultStyles.ComponentThemes.Colors">
+    
+	<Color
+        x:Key="ContentBackgroundColor">#1E1E1E</Color>
+    <Color
+        x:Key="ButtonForegroundColor">White</Color>
+    <Color
+        x:Key="ButtonDisableForegroundColor">#636363</Color>
+    <Color
+        x:Key="ButtonBackgroundColor">#686868</Color>
+    <Color
+        x:Key="ButtonPressedBackgroundColor">#9E9E9E</Color>
+    <Color
+        x:Key="ButtonDisableBackgroundColor">#282828</Color>
+    <Color
+        x:Key="SelectedBackgroundColor">#5D0061AE</Color>
+    <Color
+        x:Key="SelectedBorderColor">#0061AE</Color>
+
+    <SolidColorBrush
+        x:Key="ButtonBackgroundBrush"
+        Color="{StaticResource ButtonBackgroundColor}" />
+
+    <SolidColorBrush
+        x:Key="ButtonPressedBackgroundBrush"
+        Color="{StaticResource ButtonPressedBackgroundColor}" />
+
+    <SolidColorBrush
+        x:Key="ButtonDisableBackgroundBrush"
+        Color="{StaticResource ButtonDisableBackgroundColor}" />
+    <SolidColorBrush
+        x:Key="SelectedBackgroundBrush"
+        Color="{StaticResource SelectedBackgroundColor}" />
+    <SolidColorBrush
+        x:Key="SelectedBorderBrush"
+        Color="{StaticResource SelectedBorderColor}" />
+</ResourceDictionary>

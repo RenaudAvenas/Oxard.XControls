@@ -1,0 +1,45 @@
+<FlyoutPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:defaultstyles="http://oxard.com/themes"
+    x:Class="Oxard.Maui.TestApp.MainPage">
+
+    <FlyoutPage.Flyout>
+        <ContentPage
+            Title="Views">
+            <ListView
+                ItemSelected="ListViewItemSelected"
+                ItemsSource="{Binding Path=PageModels}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label
+                                Text="{Binding Path=Name}" />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ContentPage>
+    </FlyoutPage.Flyout>
+    <FlyoutPage.Detail>
+        <ContentPage
+            BackgroundColor="{StaticResource Key={x:Static defaultstyles:ColorKeys.ContentBackgroundColor}}">
+            <Grid
+                x:Name="Grid">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition
+                        Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <ContentView
+                    x:Name="CurrentView" />
+
+                <Button
+                    Grid.Row="1"
+                    Text="Destruction test"
+                    Clicked="ButtonOnClicked" />
+            </Grid>
+        </ContentPage>
+    </FlyoutPage.Detail>
+</FlyoutPage>

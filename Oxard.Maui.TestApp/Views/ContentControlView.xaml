@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:themes="http://oxard.com/themes"
+    xmlns:oxard="http://oxard.com/XControls"
+    xmlns:views="clr-namespace:Oxard.Maui.TestApp.Views"
+    x:Class="Oxard.Maui.TestApp.Views.ContentControlView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <themes:Colors />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style
+                TargetType="oxard:ContentControl">
+                <Setter
+                    Property="Background"
+                    Value="AliceBlue" />
+                <Setter
+                    Property="BorderThickness"
+                    Value="1" />
+                <Setter
+                    Property="BorderBrush"
+                    Value="Black" />
+                <Setter
+                    Property="ControlTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Grid>
+                                <Rectangle
+                                    Fill="{TemplateBinding Background}"
+                                    StrokeThickness="{TemplateBinding BorderThickness}"
+                                    Stroke="{TemplateBinding BorderBrush}" />
+                                <ContentPresenter
+                                    HorizontalOptions="{TemplateBinding HorizontalContentOptions}"
+                                    VerticalOptions="{TemplateBinding VerticalContentOptions}" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <views:ContentTemplateSelectorSample
+                x:Key="TemplateSelector">
+                <views:ContentTemplateSelectorSample.NullTemplate>
+                    <DataTemplate>
+                        <Label
+                            Text="Null" />
+                    </DataTemplate>
+                </views:ContentTemplateSelectorSample.NullTemplate>
+                <views:ContentTemplateSelectorSample.TrueTemplate>
+                    <DataTemplate>
+                        <Label
+                            Text="True" />
+                    </DataTemplate>
+                </views:ContentTemplateSelectorSample.TrueTemplate>
+                <views:ContentTemplateSelectorSample.FalseTemplate>
+                    <DataTemplate>
+                        <Label
+                            Text="False" />
+                    </DataTemplate>
+                </views:ContentTemplateSelectorSample.FalseTemplate>
+            </views:ContentTemplateSelectorSample>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Grid
+        RowDefinitions="*,*, Auto">
+        <oxard:ContentControl
+            HorizontalContentOptions="Center"
+            VerticalContentOptions="Center">
+            <Label
+                Text="Test" />
+        </oxard:ContentControl>
+        <oxard:ContentControl
+            Grid.Row="1"
+            ContentData="{Binding Path=Test}"
+            ContentTemplateSelector="{StaticResource TemplateSelector}"
+            HorizontalContentOptions="Center"
+            VerticalContentOptions="Center" />
+
+        <Button
+            Text="Change content"
+            Grid.Row="2"
+            Clicked="Button_Clicked" />
+    </Grid>
+</ContentView>
