@@ -20,16 +20,23 @@ namespace Oxard.TestApp.Views
             {
                 colorIndex = 1;
                 Resources["BackgroundLabel"] = Color.Aqua;
+                Resources["BackgroundPressed"] = Color.FromHex("99FFFF");
+                Resources["Foreground"] = Color.Black;
             }
             else if (colorIndex == 1)
             {
                 colorIndex = 2;
                 Resources["BackgroundLabel"] = Color.LightGray;
+                Resources["BackgroundPressed"] = Color.DarkGray;
+                Resources["Foreground"] = Color.FromHex("33FFFF");
+                Resources["Foreground"] = Color.Yellow;
             }
             else
             {
                 colorIndex = 0;
                 Resources["BackgroundLabel"] = Color.Blue;
+                Resources["BackgroundPressed"] = Color.DarkBlue;
+                Resources["Foreground"] = Color.White;
             }
         }
     }

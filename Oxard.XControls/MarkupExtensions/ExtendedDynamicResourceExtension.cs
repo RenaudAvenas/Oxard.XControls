@@ -1,20 +1,39 @@
 ﻿using System;
 using System.Collections;
-using System.ComponentModel;
+using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Oxard.XControls.MarkupExtensions
 {
     /// <summary>
+    /// Delegate used to create extended dynamic resource implementation.
+    /// </summary>
+    /// <param name="targetObject">The bindable object where apply a dynamic resource.</param>
+    /// <param name="container">The container which contains the ResourceDictionary where DynamicResource can be found.</param>
+    /// <param name="resourceKey">The dynamic resource key.</param>
+    /// <param name="targetedProperty">The target property to set with dynamic resource.</param>
+    /// <returns>The extended dynamic resource implementation.</returns>
+    public delegate IExtendedDynamicResourceImplementation CreateExtendedDynamicResource(object targetObject, Element container, string resourceKey, IProvideValueTarget provideValueTarget);
+
+    /// <summary>
     /// Adds DynamicResource management for BindableObject that are not VisualElement like Brush...
-    /// This extension provides a binding.
+    /// It works too with <see cref="Xamarin.Forms.Setter"/> on <see cref="Xamarin.Forms.Setter.Value"/> property
+    /// and with <see cref="Interactivity.Setter"/> on <see cref="Interactivity.Setter.Value"/> property
     /// </summary>
     [ContentProperty(nameof(Key))]
-    public class ExtendedDynamicResourceExtension : IMarkupExtension<BindingBase>
+    public class ExtendedDynamicResourceExtension : IMarkupExtension
     {
+        private static readonly Dictionary<Type, CreateExtendedDynamicResource> extensions = new Dictionary<Type, CreateExtendedDynamicResource>()
+        {
+            { typeof(BindableObject), (target, container, resourceKey, provideValueTarget) => new BindableObjectDynamicResource((BindableObject)target, container, resourceKey, provideValueTarget) },
+            { typeof(Setter),  (target, container, resourceKey, provideValueTarget) => new XFSetterDynamicResource((Setter)target, container, resourceKey, provideValueTarget) },
+            { typeof(Interactivity.Setter),  (target, container, resourceKey, provideValueTarget) => new OxardSetterDynamicResource((Interactivity.Setter)target, container, resourceKey, provideValueTarget) }
+        };
+
         /// <summary>
-        /// Get or set the key reference of dynamic resource
+        /// Get or set the key reference of dynamic resource.
         /// </summary>
         public string Key { get; set; }
 
@@ -32,10 +51,20 @@ namespace Oxard.XControls.MarkupExtensions
         public bool UseReflection { get; set; }
 
         /// <summary>
-        /// Provide the dynamic resource value
+        /// Register an extension to manage dynamic resource on specific type.
         /// </summary>
-        /// <param name="serviceProvider">The service provider</param>
-        /// <returns>The current value of dynamic resource if found; otherwise the default value</returns>
+        /// <param name="extendedType">Type to apply dynamic resource</param>
+        /// <param name="createExtendedDynamicResource">Method used to create the implementation.</param>
+        public static void RegisterExtension(Type extendedType, CreateExtendedDynamicResource createExtendedDynamicResource)
+        {
+            extensions[extendedType] = createExtendedDynamicResource;
+        }
+
+        /// <summary>
+        /// Provide the dynamic resource value.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <returns>The current value of dynamic resource if found; otherwise the default value.</returns>
         /// <exception cref="InvalidOperationException">Thrown if target is not BindableObject or Key property is null.</exception>
         public object ProvideValue(IServiceProvider serviceProvider)
         {
@@ -44,10 +73,10 @@ namespace Oxard.XControls.MarkupExtensions
 
             var provideValueTarget = serviceProvider.GetService<IProvideValueTarget>();
 
-            if (!(provideValueTarget.TargetObject is BindableObject))
-                throw new InvalidOperationException($"ElementDynamicResourceExtension must be applied to a BindableObject (current is {provideValueTarget.TargetObject})");
+            var createFunc = GetExtendedDynamicResource(provideValueTarget.TargetObject.GetType());
 
-            var bindableProperty = provideValueTarget.TargetProperty as BindableProperty;
+            if (createFunc == null)
+                throw new InvalidOperationException($"ElementDynamicResourceExtension is not supported for {provideValueTarget.TargetObject}.");
 
             if (UseReflection && Container == null)
             {
@@ -62,38 +91,20 @@ namespace Oxard.XControls.MarkupExtensions
                 }
             }
 
-            var associatedDynamicResource = new AssociatedDynamicResource(Container, this.Key, bindableProperty);
-
-            return new Binding(nameof(associatedDynamicResource.Value), source: associatedDynamicResource);
+            var extendedDynamicResource = createFunc(provideValueTarget.TargetObject, Container, this.Key, provideValueTarget);
+            ((IExtendedDynamicResourceCreateValueGetter)extendedDynamicResource).CreateValueGetter();
+            return extendedDynamicResource.Value;
         }
 
-        BindingBase IMarkupExtension<BindingBase>.ProvideValue(IServiceProvider serviceProvider)
+        private static CreateExtendedDynamicResource GetExtendedDynamicResource(Type targetObjectType)
         {
-            return (BindingBase)this.ProvideValue(serviceProvider);
-        }
-
-        private class AssociatedDynamicResource : INotifyPropertyChanged
-        {
-            private readonly BindableProperty dynamicResourceProperty;
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            public AssociatedDynamicResource(Element container, string resourceKey, BindableProperty targetedProperty)
+            foreach (var kvp in extensions)
             {
-                dynamicResourceProperty = BindableProperty.Create("DynamicResource", targetedProperty.ReturnType, typeof(AssociatedDynamicResource), targetedProperty.DefaultValue, propertyChanged: OnDynamicResourceChanged);
-                this.Value = targetedProperty.DefaultValue;
-
-                var realContainer = container ?? Application.Current;
-                realContainer.SetDynamicResource(dynamicResourceProperty, resourceKey); ;
+                if (kvp.Key.IsAssignableFrom(targetObjectType))
+                    return kvp.Value;
             }
 
-            public object Value { get; private set; }
-
-            private void OnDynamicResourceChanged(BindableObject bindable, object oldValue, object newValue)
-            {
-                Value = newValue;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Value)));
-            }
+            return null;
         }
     }
 }

@@ -3,17 +3,77 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:oxard="http://oxard.com/XControls"
-    x:Class="Oxard.TestApp.Views.DynamicResourceView">
+    x:Class="Oxard.TestApp.Views.DynamicResourceView"
+    x:Name="DynamicResourceViewRoot">
     <ContentView.Resources>
         <ResourceDictionary>
             <Color
                 x:Key="BackgroundLabel">Blue</Color>
+            <Color
+                x:Key="BackgroundPressed">DarkBlue</Color>
+            <Color
+                x:Key="Foreground">White</Color>
+
             <SolidColorBrush
                 x:Key="BackgroundLabelBrush"
                 Color="{DynamicResource BackgroundLabel}" />
             <SolidColorBrush
                 x:Key="OxardBackgroundLabelBrush"
                 Color="{oxard:ExtendedDynamicResourceExtension BackgroundLabel, UseReflection=True}" />
+            <SolidColorBrush
+                x:Key="OxardBackgroundPressedBrush"
+                Color="{oxard:ExtendedDynamicResourceExtension BackgroundPressed, UseReflection=True}" />
+
+            <Style
+                TargetType="oxard:Button"
+                x:Key="DynamicButton">
+                <Setter
+                    Property="oxard:DrawingBrush.AttachedBrush">
+                    <Setter.Value>
+                        <oxard:RectangleBrush
+                            CornerRadius="5"
+                            Fill="{oxard:ExtendedDynamicResource OxardBackgroundLabelBrush, Container={x:Reference DynamicResourceViewRoot}}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter
+                    Property="Foreground"
+                    Value="{DynamicResource Foreground}" />
+                <Setter
+                    Property="HeightRequest"
+                    Value="40" />
+                <Setter
+                    Property="ControlTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <ContentPresenter />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <!--<Setter
+                    Property="oxard:Interactivity.Triggers">
+                    <Setter.Value>
+                        <oxard:TriggerCollection>
+                            <oxard:Trigger
+                                Property="{x:Static oxard:Button.IsPressedProperty}"
+                                Value="True">
+                                <oxard:Setter
+                                    Property="{x:Static oxard:DrawingBrush.AttachedFillProperty}"
+                                    Value="{oxard:ExtendedDynamicResource OxardBackgroundPressedBrush, Container={x:Reference DynamicResourceViewRoot}}" />
+                            </oxard:Trigger>
+                        </oxard:TriggerCollection>
+                    </Setter.Value>
+                </Setter>-->
+                <Style.Triggers>
+                    <Trigger
+                        TargetType="oxard:Button"
+                        Property="IsPressed"
+                        Value="True">
+                        <Setter
+                            Property="oxard:DrawingBrush.AttachedFill"
+                            Value="{oxard:ExtendedDynamicResource OxardBackgroundPressedBrush, Container={x:Reference DynamicResourceViewRoot}}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </ContentView.Resources>
 
@@ -23,13 +83,20 @@
             <StackLayout
                 Spacing="10">
                 <Label
-                    TextColor="White"
+                    TextColor="{DynamicResource Foreground}"
                     Background="{StaticResource BackgroundLabelBrush}"
                     Text="Sample with xamarin dynamic resource" />
                 <Label
-                    TextColor="White"
+                    TextColor="{DynamicResource Foreground}"
                     Background="{StaticResource OxardBackgroundLabelBrush}"
                     Text="Sample with oxard dynamic resource" />
+                <oxard:Button
+                    x:Name="TestButton"
+                    Style="{StaticResource DynamicButton}">
+                    <Label
+                        TextColor="{Binding Foreground, Source={x:Reference TestButton}}"
+                        Text="Test button" />
+                </oxard:Button>
             </StackLayout>
 
             <Button
@@ -37,7 +104,7 @@
                 Grid.Row="2"
                 TextColor="White"
                 BackgroundColor="Gray"
-                Text="Change background color"
+                Text="Change colors"
                 Clicked="ChangeColorButton_Clicked" />
         </Grid>
     </ContentView.Content>
