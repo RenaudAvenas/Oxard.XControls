@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Shapes;
 
@@ -108,6 +109,11 @@ namespace Oxard.XControls.Graphics
         /// Event called when shape geometry changed
         /// </summary>
         public event EventHandler GeometryChanged;
+
+        /// <summary>
+        /// Event called when a sub property of current object impact native draws.
+        /// </summary>
+        public event PropertyChangedEventHandler SubPropertyChanged;
 
         /// <summary>
         /// Get or set the <see cref="Brush"/> used to fill the shape
@@ -410,9 +416,9 @@ namespace Oxard.XControls.Graphics
                 toDo(drawingBrush);
         }
 
-        private static void OnFillPropertyChanged(BindableObject bindable, object oldValue, object newValue) => (bindable as DrawingBrush).OnFillChanged();
+        private static void OnFillPropertyChanged(BindableObject bindable, object oldValue, object newValue) => (bindable as DrawingBrush).OnFillChanged((Brush)oldValue);
 
-        private static void OnStrokePropertyChanged(BindableObject bindable, object oldValue, object newValue) => (bindable as DrawingBrush).OnStrokeChanged();
+        private static void OnStrokePropertyChanged(BindableObject bindable, object oldValue, object newValue) => (bindable as DrawingBrush).OnStrokeChanged((Brush)oldValue);
 
         private static void OnStrokeThicknessPropertyChanged(BindableObject bindable, object oldValue, object newValue) => (bindable as DrawingBrush).OnStrokeThicknessChanged();
 
@@ -446,6 +452,11 @@ namespace Oxard.XControls.Graphics
             SetAttachedStroke(bindable, drawingBrush.Stroke);
             SetAttachedStrokeThickness(bindable, drawingBrush.StrokeThickness);
             SetAttachedStrokeDashArray(bindable, drawingBrush.StrokeDashArray);
+            SetAttachedStrokeDashOffset(bindable, drawingBrush.StrokeDashOffset);
+            SetAttachedStrokeLineCapProperty(bindable, drawingBrush.StrokeLineCap);
+            SetAttachedStrokeLineJoinProperty(bindable, drawingBrush.StrokeLineJoin);
+            SetAttachedStrokeMiterLimitProperty(bindable, drawingBrush.StrokeMiterLimit);
+            SetAttachedAspectProperty(bindable, drawingBrush.Aspect);
         }
 
         private static void OnAttachedFillPropertyChanged(BindableObject bindable, object oldValue, object newValue)
@@ -496,14 +507,26 @@ namespace Oxard.XControls.Graphics
         /// <summary>
         /// Called when <see cref="FillProperty"/> changed for this instance of <see cref="DrawingBrush"/>.
         /// </summary>
-        protected virtual void OnFillChanged()
-        { }
+        protected virtual void OnFillChanged(Brush oldValue)
+        {
+            if (oldValue != null)
+                oldValue.PropertyChanged -= OnFillPropertyChanged;
+
+            if (this.Fill != null)
+                this.Fill.PropertyChanged += OnFillPropertyChanged;
+        }
 
         /// <summary>
         /// Called when <see cref="StrokeProperty"/> changed for this instance of <see cref="DrawingBrush"/>.
         /// </summary>
-        protected virtual void OnStrokeChanged()
-        { }
+        protected virtual void OnStrokeChanged(Brush oldValue)
+        {
+            if (oldValue != null)
+                oldValue.PropertyChanged -= OnStrokePropertyChanged;
+
+            if (this.Stroke != null)
+                this.Stroke.PropertyChanged += OnStrokePropertyChanged;
+        }
 
         /// <summary>
         /// Called when <see cref="StrokeThicknessProperty"/> changed for this instance of <see cref="DrawingBrush"/>.
@@ -570,5 +593,24 @@ namespace Oxard.XControls.Graphics
         /// </summary>
         /// <returns>A new <see cref="DrawingBrush"/> that is a copy of this instance.</returns>
         protected abstract DrawingBrush CloneDrawingBrush();
+
+        /// <summary>
+        /// Called when wub property of current brush changed
+        /// </summary>
+        /// <param name="propertyName">Name of the property that has changed.</param>
+        protected void OnSubPropertyChanged(string propertyName)
+        {
+            SubPropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void OnFillPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnSubPropertyChanged(nameof(this.Fill));
+        }
+
+        private void OnStrokePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnSubPropertyChanged(nameof(this.Stroke));
+        }
     }
 }

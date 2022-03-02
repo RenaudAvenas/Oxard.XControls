@@ -29,22 +29,22 @@ namespace Oxard.XControls.Droid.Graphics
 
         protected float _density;
 
-        APath _path;
-        readonly RectF _pathFillBounds;
-        readonly RectF _pathStrokeBounds;
-        Brush _stroke;
-        Brush _fill;
+        private APath _path;
+        private readonly RectF _pathFillBounds;
+        private readonly RectF _pathStrokeBounds;
+        private Brush _stroke;
+        private Brush _fill;
 
-        Shader _strokeShader;
-        Shader _fillShader;
+        private Shader _strokeShader;
+        private Shader _fillShader;
 
-        float _strokeWidth;
-        float[] _strokeDash;
-        float _strokeDashOffset;
+        private float _strokeWidth;
+        private float[] _strokeDash;
+        private float _strokeDashOffset;
 
-        Stretch _aspect;
+        private Stretch _aspect;
 
-        AMatrix _transform;
+        private AMatrix _transform;
 
         public DrawingBrushDrawable(AView view, VisualElement element, DrawingBrush drawingBrush)
         {
@@ -64,6 +64,7 @@ namespace Oxard.XControls.Droid.Graphics
             this.element = element;
             this.drawingBrush = drawingBrush;
             this.drawingBrush.PropertyChanged += this.DrawingBrushOnPropertyChanged;
+            this.drawingBrush.SubPropertyChanged += this.DrawingBrushOnPropertyChanged;
             this.drawingBrush.GeometryChanged += this.DrawingBrushOnGeometryChanged;
 
             this.UpdateFill(this.drawingBrush.Fill);
@@ -249,9 +250,9 @@ namespace Oxard.XControls.Droid.Graphics
             if (disposing)
             {
                 this.drawingBrush.PropertyChanged -= this.DrawingBrushOnPropertyChanged;
+                this.drawingBrush.SubPropertyChanged -= this.DrawingBrushOnPropertyChanged;
                 this.drawingBrush.GeometryChanged -= this.DrawingBrushOnGeometryChanged;
             }
-
         }
 
         protected void DrawingBrushOnPropertyChanged(object sender, PropertyChangedEventArgs args)
@@ -320,7 +321,7 @@ namespace Oxard.XControls.Droid.Graphics
             UpdatePathStrokeBounds();
         }
 
-        AMatrix CreateMatrix()
+        private AMatrix CreateMatrix()
         {
             AMatrix matrix = new AMatrix();
 
@@ -336,12 +337,15 @@ namespace Oxard.XControls.Droid.Graphics
             {
                 case Stretch.None:
                     break;
+
                 case Stretch.Fill:
                     matrix.SetRectToRect(_pathFillBounds, drawableBounds, AMatrix.ScaleToFit.Fill);
                     break;
+
                 case Stretch.Uniform:
                     matrix.SetRectToRect(_pathFillBounds, drawableBounds, AMatrix.ScaleToFit.Center);
                     break;
+
                 case Stretch.UniformToFill:
                     float widthScale = drawableBounds.Width() / _pathFillBounds.Width();
                     float heightScale = drawableBounds.Height() / _pathFillBounds.Height();
@@ -356,7 +360,7 @@ namespace Oxard.XControls.Droid.Graphics
             return matrix;
         }
 
-        void UpdatePathStrokeBounds()
+        private void UpdatePathStrokeBounds()
         {
             if (_path != null)
             {
@@ -376,7 +380,7 @@ namespace Oxard.XControls.Droid.Graphics
             //Invalidate();
         }
 
-        LinearGradient CreateLinearGradient(LinearGradientBrush linearGradientBrush, RectF pathBounds)
+        private LinearGradient CreateLinearGradient(LinearGradientBrush linearGradientBrush, RectF pathBounds)
         {
             if (_path == null)
                 return null;
@@ -406,7 +410,7 @@ namespace Oxard.XControls.Droid.Graphics
             }
         }
 
-        RadialGradient CreateRadialGradient(RadialGradientBrush radialGradientBrush, RectF pathBounds)
+        private RadialGradient CreateRadialGradient(RadialGradientBrush radialGradientBrush, RectF pathBounds)
         {
             if (_path == null)
                 return null;
@@ -433,7 +437,7 @@ namespace Oxard.XControls.Droid.Graphics
                     tilemode);
             }
         }
-        
+
         private void DrawingBrushOnGeometryChanged(object sender, EventArgs e)
         {
             this.UpdateShape(this.drawingBrush.Geometry.ToAPath(this.view.Context));

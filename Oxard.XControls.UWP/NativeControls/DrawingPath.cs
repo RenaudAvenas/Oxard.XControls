@@ -36,6 +36,7 @@ namespace Oxard.XControls.UWP.NativeControls
             {
                 oldDrawable.GeometryChanged -= this.DrawableOnGeometryChanged;
                 oldDrawable.PropertyChanged -= DrawablePropertyChanged;
+                oldDrawable.SubPropertyChanged -= this.DrawablePropertyChanged;
             }
 
             if (this.Drawable == null)
@@ -54,6 +55,7 @@ namespace Oxard.XControls.UWP.NativeControls
 
             this.Drawable.GeometryChanged += this.DrawableOnGeometryChanged;
             this.Drawable.PropertyChanged += this.DrawablePropertyChanged;
+            this.Drawable.SubPropertyChanged += this.DrawablePropertyChanged;
         }
 
         private void DrawablePropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -91,9 +93,9 @@ namespace Oxard.XControls.UWP.NativeControls
             this.Data = this.Drawable.Geometry.ToWindows();
         }
 
-		private void UpdateAspect()
-		{
-			this.Stretch = this.Drawable.Aspect.ToWindows();
+        private void UpdateAspect()
+        {
+            this.Stretch = this.Drawable.Aspect.ToWindows();
 
             if (this.Stretch == Windows.UI.Xaml.Media.Stretch.Uniform)
             {
@@ -107,62 +109,62 @@ namespace Oxard.XControls.UWP.NativeControls
             }
         }
 
-		private void UpdateFill()
-		{
-			this.Fill = this.Drawable.Fill.ToBrush();
-		}
+        private void UpdateFill()
+        {
+            this.Fill = this.Drawable.Fill.ToBrush();
+        }
 
-		private void UpdateStroke()
-		{
-			this.Stroke = this.Drawable.Stroke.ToBrush();
-		}
+        private void UpdateStroke()
+        {
+            this.Stroke = this.Drawable.Stroke.ToBrush();
+        }
 
-		private void UpdateStrokeThickness()
-		{
-			this.StrokeThickness = this.Drawable.StrokeThickness;
-		}
+        private void UpdateStrokeThickness()
+        {
+            this.StrokeThickness = this.Drawable.StrokeThickness;
+        }
 
-		private void UpdateStrokeDashArray()
-		{
-			if (this.StrokeDashArray != null)
-				this.StrokeDashArray.Clear();
+        private void UpdateStrokeDashArray()
+        {
+            if (this.StrokeDashArray != null)
+                this.StrokeDashArray.Clear();
 
-			if (this.Drawable.StrokeDashArray != null && this.Drawable.StrokeDashArray.Count > 0)
-			{
-				if (this.StrokeDashArray == null)
-					this.StrokeDashArray = new WDoubleCollection();
+            if (this.Drawable.StrokeDashArray != null && this.Drawable.StrokeDashArray.Count > 0)
+            {
+                if (this.StrokeDashArray == null)
+                    this.StrokeDashArray = new WDoubleCollection();
 
-				double[] array = new double[this.Drawable.StrokeDashArray.Count];
-				this.Drawable.StrokeDashArray.CopyTo(array, 0);
+                double[] array = new double[this.Drawable.StrokeDashArray.Count];
+                this.Drawable.StrokeDashArray.CopyTo(array, 0);
 
-				foreach (double value in array)
-				{
-					this.StrokeDashArray.Add(value);
-				}
-			}
-		}
+                foreach (double value in array)
+                {
+                    this.StrokeDashArray.Add(value);
+                }
+            }
+        }
 
-		private void UpdateStrokeDashOffset()
-		{
-			this.StrokeDashOffset = this.Drawable.StrokeDashOffset;
-		}
+        private void UpdateStrokeDashOffset()
+        {
+            this.StrokeDashOffset = this.Drawable.StrokeDashOffset;
+        }
 
-		private void UpdateStrokeLineCap()
-		{
-			WPenLineCap wLineCap = this.Drawable.StrokeLineCap.ToWindows();
+        private void UpdateStrokeLineCap()
+        {
+            WPenLineCap wLineCap = this.Drawable.StrokeLineCap.ToWindows();
 
-			this.StrokeStartLineCap = wLineCap;
-			this.StrokeEndLineCap = wLineCap;
-		}
+            this.StrokeStartLineCap = wLineCap;
+            this.StrokeEndLineCap = wLineCap;
+        }
 
-		private void UpdateStrokeLineJoin()
-		{
-			this.StrokeLineJoin = this.Drawable.StrokeLineJoin.ToWindows();
-		}
+        private void UpdateStrokeLineJoin()
+        {
+            this.StrokeLineJoin = this.Drawable.StrokeLineJoin.ToWindows();
+        }
 
-		private void UpdateStrokeMiterLimit()
-		{
-			this.StrokeMiterLimit = this.Drawable.StrokeMiterLimit;
-		}
-	}
+        private void UpdateStrokeMiterLimit()
+        {
+            this.StrokeMiterLimit = this.Drawable.StrokeMiterLimit;
+        }
+    }
 }
