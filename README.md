@@ -18,6 +18,19 @@ using Oxard.XControls;
 
 [assembly:Preserve]
 ```
+
+## 4.7.24.42
+
+-DynamicResource
+
+Oxard dynamic resource can be applied to XF Setter and Oxard Setter. Oxard dynamic resource system can be improved with implementing ExtendedDynamicResourceImplementation and register implementation in the markup extension (ExtendedDynamicResourceExtension.RegisterExtension)
+
+-DrawableBrushes
+
+Drawable brushes take care about Fill and Stroke property change to redraw native drawable. In inherited class, call OnSubPropertyChanged method to force redraw for property.
+
+Bug fix : some properties were not cloned or not affected when using AttachedBrush (StrokeMiterLimit, StrokeDashOffset, ...).
+
 ## 4.7.23.41
 - DynamicResource
 
